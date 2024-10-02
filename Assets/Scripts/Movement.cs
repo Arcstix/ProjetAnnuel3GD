@@ -14,7 +14,6 @@ public class Movement : MonoBehaviour
 
     private CharacterController _controller;
     private Shooter _shooter;
-    private Vector3 _currentDirection;
     private float turnSmoothVelocity;
 
     private void Awake()

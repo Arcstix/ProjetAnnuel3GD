@@ -21,6 +21,7 @@ public class Shooter : MonoBehaviour
     [Header("Metrics section")]
     [SerializeField] private int _shootPower = 5;
     [SerializeField] private int _transportationSpeed = 5;
+    [SerializeField] private int _returnSpeed = 20;
     [SerializeField] private float _slowTimeScale = 0.2f;
 
     [Header("State section")]
@@ -29,17 +30,22 @@ public class Shooter : MonoBehaviour
     [SerializeField] private bool _isShooting = false;
     [SerializeField] private bool _hasShoot = false;
     [SerializeField] private bool _onTransportationState = false;
+    [SerializeField] private bool _isReturning = false;
     [SerializeField] private bool _isDead = false;
 
+    private GameplayManager _gameplayManager;
     private CharacterController _controller;
     private Projectile currentProjectile;
 
-    public int ShootPower { get => _shootPower; set => _shootPower = value; }
-    public int TransportationSpeed { get => _transportationSpeed; set => _transportationSpeed = value; }
-    public bool OnTransportationState { get => _onTransportationState; set => _onTransportationState = value; }
+    public int ShootPower { get => _shootPower; }
+    public int TransportationSpeed { get => _transportationSpeed; }
+    public bool OnTransportationState { get => _onTransportationState; }
+    public bool IsReturning { get => _isReturning; set => _isReturning = value; }
+    public int ReturnSpeed { get => _returnSpeed; }
 
     private void Awake()
     {
+        _gameplayManager = GetComponent<GameplayManager>();
         _controller = GetComponent<CharacterController>();
     }
 
@@ -47,34 +53,51 @@ public class Shooter : MonoBehaviour
     {
         Debug.DrawLine(_launchPosition.position, _target.position);
 
-        if(!_isDead && !_hasShoot && !_onTransportationState)
+        if (_gameplayManager.DefaultThrowBall)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (_isReturning) { return; }
+
+            if (!_isDead && !_hasShoot && !_onTransportationState)
             {
-                ShootProjectile();
-                return;
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    ShootProjectile();
+                    return;
+                }
+            }
+
+            if (_isShooting)
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    _isShooting = false;
+                    currentProjectile.StopMovement();
+                    return;
+                }
+            }
+
+            if (_hasShoot && !_isShooting && !_onTransportationState)
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    ResetAbility();
+                    _onTransportationState = true;
+                    return;
+                }
             }
         }
 
-        if (_isShooting)
+        if(currentProjectile != null)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (_hasShoot && !_onTransportationState && !currentProjectile.IsReturning)
             {
-                _isShooting = false;
-                currentProjectile.StopMovement();
-                return;
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    _isReturning = true;
+                    ReturnProjectile();
+                }
             }
-        }
-
-        if (_hasShoot && !_isShooting && !_onTransportationState)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                ResetAbility();
-                TransportationState(true);
-                return;
-            }
-        }
+        }       
 
         if (_onTransportationState)
         {
@@ -82,6 +105,14 @@ public class Shooter : MonoBehaviour
         }
     }
 
+    private void ReturnProjectile()
+    {
+        currentProjectile.ReturnToPlayer();
+    }
+
+    /// <summary>
+    /// Méthode utilisé quand on veut rejoindre un projectile
+    /// </summary>
     private void DoTransportation()
     {        
         Vector3 direction = (currentProjectile.transform.position - transform.position).normalized;
@@ -90,14 +121,9 @@ public class Shooter : MonoBehaviour
 
         if(distance < 0.5f)
         {
-            TransportationState(false);
+            _onTransportationState = false;
             Destroy(currentProjectile.gameObject);
         }
-    }
-
-    private void TransportationState(bool state)
-    {
-        _onTransportationState = state;
     }
 
     private void ShootProjectile()
@@ -118,6 +144,8 @@ public class Shooter : MonoBehaviour
     public void ResetAbility()
     {
         _hasShoot = false;
+        _isShooting = false;
+        _isReturning = false;
     }
 
     private void OnDrawGizmos()

@@ -8,7 +8,9 @@ public class Projectile : MonoBehaviour
     private Rigidbody _rb;
     private Shooter _shooterRef;
     private bool _hasCollide = false;
-    private Vector3 _directionRef;
+    private bool _isReturning = false;
+
+    public bool IsReturning { get => _isReturning; set => _isReturning = value; }
 
     private void GetRigidbody()
     {
@@ -18,7 +20,6 @@ public class Projectile : MonoBehaviour
     public void Init(bool useGravity, Shooter shooterRef, Vector3 direction)
     {
         _shooterRef = shooterRef;
-        _directionRef = direction;
         if(_rb == null)
         {
             GetRigidbody();
@@ -47,11 +48,34 @@ public class Projectile : MonoBehaviour
         _rb.velocity = direction * _shooterRef.ShootPower;
     }
 
+    public void ReturnToPlayer()
+    {
+        _isReturning = true;
+        GetComponent<Collider>().isTrigger = true;
+        Vector3 direction = ((_shooterRef.transform.position + new Vector3(0, 0.5f, 0)) - transform.position).normalized;
+        _rb.velocity = direction * _shooterRef.ReturnSpeed;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Platform"))
+        if (!_hasCollide && !_isReturning)
         {
-            ProjectileCollide();
+            if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Platform"))
+            {
+                ProjectileCollide();
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (_isReturning)
+        {
+            if (other.gameObject.CompareTag("Player"))
+            {
+                _shooterRef.ResetAbility();
+                Destroy(gameObject);
+            }
         }
     }
 
