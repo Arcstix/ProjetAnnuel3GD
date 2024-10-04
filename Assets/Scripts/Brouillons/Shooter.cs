@@ -8,9 +8,19 @@ using DG.Tweening;
 // envoie un projectile et est transporté jusqu'à la position du projectile
 public class Shooter : MonoBehaviour
 {
+    [Header("Default section")]
+    [SerializeField] private bool _defaultThrowBall = true;
+
+    [Header("Multiple Throw section")]
+    [SerializeField] private bool _multipleThrowMode = false;
+    [SerializeField] private int _maxNumberOfThrow = 3;
+
+    [Header("Spiderman section")]
+    [SerializeField] private bool _spidermanMode = false;
+
     [Header("Projectile section")]
     [SerializeField] private Projectile _projectilePrefab;
-    [SerializeField] private Transform _launchPosition;
+    [SerializeField] private Transform _launchTransform;
     [SerializeField] private Transform _target;
     [SerializeField] private bool _useGravity;
 
@@ -33,9 +43,10 @@ public class Shooter : MonoBehaviour
     [SerializeField] private bool _isReturning = false;
     [SerializeField] private bool _isDead = false;
 
-    private GameplayManager _gameplayManager;
     private CharacterController _controller;
-    private Projectile currentProjectile;
+    private Projectile currentProjectileShoot;
+    private List<Projectile> projectileShooted = new List<Projectile>();
+    private int currentNumberOfProjectileThrow = 0;
 
     public int ShootPower { get => _shootPower; }
     public int TransportationSpeed { get => _transportationSpeed; }
@@ -45,21 +56,22 @@ public class Shooter : MonoBehaviour
 
     private void Awake()
     {
-        _gameplayManager = GetComponent<GameplayManager>();
         _controller = GetComponent<CharacterController>();
     }
 
     private void Update()
     {
-        Debug.DrawLine(_launchPosition.position, _target.position);
+        Debug.DrawLine(_launchTransform.position, _target.position);
 
-        if (_gameplayManager.DefaultThrowBall)
+        if (_isDead) { return; }
+
+        if (_defaultThrowBall)
         {
             if (_isReturning) { return; }
 
-            if (!_isDead && !_hasShoot && !_onTransportationState)
+            if (!_hasShoot && !_onTransportationState)
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetMouseButtonDown(0))
                 {
                     ShootProjectile();
                     return;
@@ -68,17 +80,17 @@ public class Shooter : MonoBehaviour
 
             if (_isShooting)
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetMouseButtonDown(0))
                 {
                     _isShooting = false;
-                    currentProjectile.StopMovement();
+                    currentProjectileShoot.StopMovement();
                     return;
                 }
             }
 
             if (_hasShoot && !_isShooting && !_onTransportationState)
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetMouseButtonDown(0))
                 {
                     ResetAbility();
                     _onTransportationState = true;
@@ -87,9 +99,37 @@ public class Shooter : MonoBehaviour
             }
         }
 
-        if(currentProjectile != null)
+        if (_multipleThrowMode)
         {
-            if (_hasShoot && !_onTransportationState && !currentProjectile.IsReturning)
+            if(currentNumberOfProjectileThrow < _maxNumberOfThrow)
+            {
+                if(!_isShooting && !_onTransportationState)
+                {
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        ShootProjectile();
+                        projectileShooted.Add(currentProjectileShoot);
+                        return;
+                    }
+                }
+            }
+
+            if (_isShooting)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    _isShooting = false;
+                    currentProjectileShoot.StopMovement();
+                    return;
+                }
+            }
+
+
+        }
+
+        if(currentProjectileShoot != null)
+        {
+            if (_hasShoot && !_onTransportationState && !currentProjectileShoot.IsReturning)
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
@@ -97,7 +137,7 @@ public class Shooter : MonoBehaviour
                     ReturnProjectile();
                 }
             }
-        }       
+        }
 
         if (_onTransportationState)
         {
@@ -107,7 +147,7 @@ public class Shooter : MonoBehaviour
 
     private void ReturnProjectile()
     {
-        currentProjectile.ReturnToPlayer();
+        currentProjectileShoot.ReturnToPlayer();
     }
 
     /// <summary>
@@ -115,24 +155,23 @@ public class Shooter : MonoBehaviour
     /// </summary>
     private void DoTransportation()
     {        
-        Vector3 direction = (currentProjectile.transform.position - transform.position).normalized;
-        float distance = Vector3.Distance(transform.position, currentProjectile.transform.position);
+        Vector3 direction = (currentProjectileShoot.transform.position - transform.position).normalized;
+        float distance = Vector3.Distance(transform.position, currentProjectileShoot.transform.position);
         _controller.Move(direction * Mathf.Min(distance + 5, TransportationSpeed) * Time.deltaTime);
 
         if(distance < 0.5f)
         {
             _onTransportationState = false;
-            Destroy(currentProjectile.gameObject);
+            Destroy(currentProjectileShoot.gameObject);
         }
     }
 
     private void ShootProjectile()
     {
         ShootState();
-        currentProjectile = Instantiate(_projectilePrefab, _launchPosition.position, Quaternion.identity);
-        Vector3 direction = (_target.position - _launchPosition.position).normalized;
-        Debug.Log("Direction : " + direction);
-        currentProjectile.Init(_useGravity, this, direction);
+        currentProjectileShoot = Instantiate(_projectilePrefab, _launchTransform.position, Quaternion.identity);
+        Vector3 direction = (_target.position - _launchTransform.position).normalized;
+        currentProjectileShoot.Init(_useGravity, this, direction);
     }
 
     private void ShootState()
@@ -151,6 +190,6 @@ public class Shooter : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(_launchPosition.position, _target.position);
+        Gizmos.DrawLine(_launchTransform.position, _target.position);
     }
 }

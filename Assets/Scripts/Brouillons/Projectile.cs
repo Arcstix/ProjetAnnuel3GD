@@ -17,12 +17,18 @@ public class Projectile : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
     }
 
-    public void Init(bool useGravity, Shooter shooterRef, Vector3 direction)
+    public void Init(bool useGravity, Shooter shooterRef, Vector3 direction, Vector3 target = default)
     {
         _shooterRef = shooterRef;
         if(_rb == null)
         {
             GetRigidbody();
+        }
+
+        if(target != default)
+        {
+            MoveToTarget(target);
+            return;
         }
 
         _rb.useGravity = useGravity;
@@ -37,6 +43,10 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    private void MoveToTarget(Vector3 target)
+    {
+        _rb.velocity = target * _shooterRef.ShootPower;
+    }
 
     private void Throw(Vector3 direction)
     {
