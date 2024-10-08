@@ -23,13 +23,6 @@ public class PlayerMovementState : IState
     public PlayerMovementState(PlayerMovementStateMachine playerMovementStateMachine)
     {
         movementStateMachine = playerMovementStateMachine;
-
-        InitializeData();
-    }
-
-    private void InitializeData()
-    {
-
     }
 
     public virtual void Enter()

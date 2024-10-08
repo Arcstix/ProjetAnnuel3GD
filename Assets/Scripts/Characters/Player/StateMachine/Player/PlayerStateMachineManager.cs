@@ -13,6 +13,8 @@ public class PlayerStateMachineManager : MonoBehaviour
 
     private PlayerMovementStateMachine playerMovementStateMachine;
 
+    private PlayerAbilityStateMachine playerAbilityStateMachine;
+
     private void Awake()
     {
         Rigidbody = GetComponent<Rigidbody>();
