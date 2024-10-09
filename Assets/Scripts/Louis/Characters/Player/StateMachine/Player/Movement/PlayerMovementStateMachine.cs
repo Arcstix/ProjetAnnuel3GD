@@ -6,6 +6,8 @@ public class PlayerMovementStateMachine : StateMachine
 {
     public PlayerStateMachineManager PlayerStateMachine { get; }
 
+    public PlayerReusableStateData ReusableData { get; }
+
     public PlayerIdleState IdleState { get; }
 
     public PlayerRunningState RunningState { get; }
@@ -15,6 +17,7 @@ public class PlayerMovementStateMachine : StateMachine
     public PlayerMovementStateMachine(PlayerStateMachineManager playerStateMachineManager)
     {
         PlayerStateMachine = playerStateMachineManager;
+        ReusableData = new PlayerReusableStateData();
 
         IdleState = new PlayerIdleState(this);
         RunningState = new PlayerRunningState(this);

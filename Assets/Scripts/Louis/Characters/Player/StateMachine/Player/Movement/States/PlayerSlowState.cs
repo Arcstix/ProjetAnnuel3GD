@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerSlowState : PlayerMovementState
+public class PlayerSlowState : PlayerGroundedState
 {
     public PlayerSlowState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
     {
@@ -14,26 +14,7 @@ public class PlayerSlowState : PlayerMovementState
     {
         base.Enter();
 
-        speedModifier = 0.225f;
-    }
-
-    protected override void AddInputActionCallbacks()
-    {
-        base.AddInputActionCallbacks();
-
-        movementStateMachine.PlayerStateMachine.Input.PlayerActions.Movement.canceled += OnMovementCanceled;
-    }
-
-    protected override void RemoveInputActionCallbacks()
-    {
-        base.RemoveInputActionCallbacks();
-
-        movementStateMachine.PlayerStateMachine.Input.PlayerActions.Movement.canceled -= OnMovementCanceled;
-    }
-
-    private void OnMovementCanceled(InputAction.CallbackContext context)
-    {
-        movementStateMachine.ChangeState(movementStateMachine.IdleState);
+        movementStateMachine.ReusableData.MovementSpeedModifier = movementData.WalkData.SpeedModifier;
     }
 
     protected override void OnSlowStarted(InputAction.CallbackContext context)

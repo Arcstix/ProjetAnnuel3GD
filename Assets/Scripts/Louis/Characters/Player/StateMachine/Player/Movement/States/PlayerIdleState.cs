@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerIdleState : PlayerMovementState
+public class PlayerIdleState : PlayerGroundedState
 {
     public PlayerIdleState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
     {
@@ -14,7 +14,7 @@ public class PlayerIdleState : PlayerMovementState
     {
         base.Enter();
 
-        speedModifier = 0f;
+        movementStateMachine.ReusableData.MovementSpeedModifier = 0f;
 
         ResetVelocity();
     }
@@ -23,22 +23,11 @@ public class PlayerIdleState : PlayerMovementState
     {
         base.Tick();
 
-        if(movementInput == Vector2.zero)
+        if(movementStateMachine.ReusableData.MovementInput == Vector2.zero)
         {
             return;
         }
 
         OnMove();
-    }
-
-    private void OnMove()
-    {
-        if (shooldSlow)
-        {
-            movementStateMachine.ChangeState(movementStateMachine.SlowState);
-            return;
-        }
-
-        movementStateMachine.ChangeState(movementStateMachine.RunningState);
     }
 }
