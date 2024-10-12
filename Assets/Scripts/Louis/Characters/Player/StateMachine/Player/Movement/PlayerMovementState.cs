@@ -112,7 +112,7 @@ public class PlayerMovementState : IState
 
     protected float GetMovementSpeed()
     {
-        return movementData.BaseSpeed * movementStateMachine.ReusableData.MovementSpeedModifier;
+        return movementData.BaseSpeed * movementStateMachine.ReusableData.MovementSpeedModifier * movementStateMachine.ReusableData.MovementOnSlopeSpeedModifier;
     }
 
     protected Vector3 GetCurrentHorizontalVelocity()

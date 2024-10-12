@@ -4,17 +4,23 @@ using UnityEngine;
 
 public class PlayerAbilityStateMachine : StateMachine
 {
-    PlayerStateMachineManager PlayerStateMachine { get; }
+    public PlayerStateMachineManager StateMachine { get; }
 
-    PlayerAutoAbilityState AutoAbilityState { get; }
+    public PlayerShootState ShootState { get; }
 
-    PlayerTargetAbilityState TargetAbilityState { get; }
+    public PlayerStandbyState StandbyState { get; }
+
+    public PlayerTransportationState TransportationState { get; }
+
+    public PlayerCancelAbilityState CancelAbilityState { get; }
 
     public PlayerAbilityStateMachine(PlayerStateMachineManager playerStateMachine)
     {
-        PlayerStateMachine = playerStateMachine;
+        StateMachine = playerStateMachine;
 
-        AutoAbilityState = new PlayerAutoAbilityState(this);
-        TargetAbilityState = new PlayerTargetAbilityState(this);
+        ShootState = new PlayerShootState(this);
+        StandbyState = new PlayerStandbyState(this);
+        TransportationState = new PlayerTransportationState(this);
+        CancelAbilityState = new PlayerCancelAbilityState(this);
     }
 }

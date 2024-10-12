@@ -28,6 +28,15 @@ public class PlayerGroundedState : PlayerMovementState
 
         if(Physics.Raycast(downwardsRayFromCapsuleCenter, out RaycastHit hit, capsuleColliderUtility.SlopeData.DistanceGroundCheck, capsuleColliderUtility.LayerData.GroundLayer, QueryTriggerInteraction.Ignore))
         {
+            float groundAngle = Vector3.Angle(hit.normal, -downwardsRayFromCapsuleCenter.direction);
+
+            float floatSpeedModifier = SetSlopeSpeedModifierOnAngle(groundAngle);
+
+            if(floatSpeedModifier == 0f)
+            {
+                return;
+            }
+
             float distanceToGround = capsuleColliderUtility.CapsuleColliderData.ColliderCenterInLocalSpace.y * movementStateMachine.PlayerStateMachine.transform.localScale.y - hit.distance;
 
             Debug.Log(distanceToGround);
@@ -39,6 +48,15 @@ public class PlayerGroundedState : PlayerMovementState
 
             AddVerticalForce(distanceToGround, capsuleColliderUtility.SlopeData.StepReachForce);
         }
+    }
+
+    private float SetSlopeSpeedModifierOnAngle(float angle)
+    {
+        float slopeSpeedModifier = movementData.SlopeSpeedAngle.Evaluate(angle);
+
+        movementStateMachine.ReusableData.MovementOnSlopeSpeedModifier = slopeSpeedModifier;
+
+        return slopeSpeedModifier;
     }
 
     private void AddVerticalForce(float distanceToGround, float forceMultiplier = 10f)

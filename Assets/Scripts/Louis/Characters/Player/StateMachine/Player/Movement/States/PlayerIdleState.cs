@@ -23,7 +23,7 @@ public class PlayerIdleState : PlayerGroundedState
     {
         base.Tick();
 
-        if(movementStateMachine.ReusableData.MovementInput == Vector2.zero)
+        if(movementStateMachine.ReusableData.MovementInput == Vector2.zero || !movementStateMachine.PlayerStateMachine.CanMove)
         {
             return;
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,9 +18,13 @@ public class PlayerStateMachineManager : MonoBehaviour
 
     public Camera Camera { get; private set; }
 
+    public PlayerCameraManager playerCameraManager { get; private set; }
+
     private PlayerMovementStateMachine playerMovementStateMachine;
 
     private PlayerAbilityStateMachine playerAbilityStateMachine;
+
+    public bool CanMove { get; private set; } = true;
 
     private void Awake()
     {
@@ -31,6 +36,8 @@ public class PlayerStateMachineManager : MonoBehaviour
 
         playerMovementStateMachine = new PlayerMovementStateMachine(this);
         playerAbilityStateMachine = new PlayerAbilityStateMachine(this);
+
+        playerCameraManager = GetComponent<PlayerCameraManager>();
     }
 
     private void OnValidate()
@@ -42,6 +49,31 @@ public class PlayerStateMachineManager : MonoBehaviour
     private void Start()
     {
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.IdleState);
+
+        SetThirdPersonMode();       
+    }
+
+    private void OnEnable()
+    {
+        playerCameraManager.FirstCameraViewEvent += SetFirstPersonMode;
+        playerCameraManager.ThirdCameraViewEvent += SetThirdPersonMode;
+    }
+
+    private void OnDisable()
+    {
+        playerCameraManager.FirstCameraViewEvent -= SetFirstPersonMode;
+        playerCameraManager.ThirdCameraViewEvent -= SetThirdPersonMode;
+    }
+
+    private void SetFirstPersonMode()
+    {
+        CanMove = false;
+        playerMovementStateMachine.ChangeState(playerMovementStateMachine.IdleState);
+    }
+
+    private void SetThirdPersonMode()
+    {
+        CanMove = true;
     }
 
     private void Update()
@@ -66,6 +98,6 @@ public class PlayerStateMachineManager : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(CapsuleColliderUtility.CapsuleColliderData.Collider.center, CapsuleColliderUtility.CapsuleColliderData.Collider.center - new Vector3(0f, CapsuleColliderUtility.SlopeData.DistanceGroundCheck, 0f));
+        Gizmos.DrawLine(transform.position + CapsuleColliderUtility.CapsuleColliderData.Collider.center, transform.position + (CapsuleColliderUtility.CapsuleColliderData.Collider.center - new Vector3(0f, CapsuleColliderUtility.SlopeData.DistanceGroundCheck, 0f)));
     }
 }

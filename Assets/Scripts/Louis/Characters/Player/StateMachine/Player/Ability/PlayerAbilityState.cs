@@ -2,14 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerAbilityState : IState
 {
-    private PlayerAbilityStateMachine PlayerAbilityStateMachine;
+    protected PlayerAbilityStateMachine playerAbilityStateMachine;
 
     public PlayerAbilityState(PlayerAbilityStateMachine playerAbilityStateMachine)
     {
-        PlayerAbilityStateMachine = playerAbilityStateMachine;
+        this.playerAbilityStateMachine = playerAbilityStateMachine;
     }
 
     #region State Methods
@@ -41,6 +42,11 @@ public class PlayerAbilityState : IState
 
     #region Ability methods
     private void ReadAbilityInput()
+    {
+        playerAbilityStateMachine.StateMachine.Input.PlayerActions.Ability.started += TryAbility;
+    }
+
+    private void TryAbility(InputAction.CallbackContext context)
     {
         
     }

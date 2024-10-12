@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ public class PlayerInput : MonoBehaviour
 {
     public PlayerInputAction InputActions { get; private set; }
     public PlayerInputAction.PlayerActions PlayerActions { get; private set; }
+
+    public event Action InputActionInitialize;
 
     private void Awake()
     {
@@ -17,6 +20,7 @@ public class PlayerInput : MonoBehaviour
     private void OnEnable()
     {
         InputActions.Enable();
+        InputActionInitialize?.Invoke();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
