@@ -6,11 +6,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerAbilityState : IState
 {
-    protected PlayerAbilityStateMachine playerAbilityStateMachine;
+    protected PlayerAbilityStateMachine _playerAbilityStateMachine;
+    protected PlayerAbilityData _abilityData;
 
     public PlayerAbilityState(PlayerAbilityStateMachine playerAbilityStateMachine)
     {
-        this.playerAbilityStateMachine = playerAbilityStateMachine;
+        _playerAbilityStateMachine = playerAbilityStateMachine;
+        _abilityData = _playerAbilityStateMachine.StateMachine.PlayerSO.AbilityData;
     }
 
     #region State Methods
@@ -36,20 +38,39 @@ public class PlayerAbilityState : IState
 
     public virtual void HandleInput()
     {
-        ReadAbilityInput();
+        
     }
     #endregion
 
     #region Ability methods
-    private void ReadAbilityInput()
+
+    protected virtual void AddInputCallBack()
     {
-        playerAbilityStateMachine.StateMachine.Input.PlayerActions.Ability.started += TryAbility;
+        _playerAbilityStateMachine.StateMachine.Input.PlayerActions.Ability.started += TryAbility;
+    }
+
+    protected virtual void RemoveInputCallBack()
+    {
+        _playerAbilityStateMachine.StateMachine.Input.PlayerActions.Ability.started -= TryAbility;
     }
 
     private void TryAbility(InputAction.CallbackContext context)
     {
-        
+        if (_playerAbilityStateMachine.ReusableStateData.CanUseAbility)
+        {
+            if(_playerAbilityStateMachine.ReusableStateData.ProjectileRef == null)
+            {
+                _playerAbilityStateMachine.ChangeState(_playerAbilityStateMachine.ShootState);
+                return;
+            }
+            else
+            {
+                _playerAbilityStateMachine.ChangeState(_playerAbilityStateMachine.TransportationState);
+                return;
+            }
+        }
     }
+
     #endregion
 
 

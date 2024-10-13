@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStandbyState : PlayerAbilityState
+public class PlayerReadyAbilityState : PlayerAbilityState
 {
-    public PlayerStandbyState(PlayerAbilityStateMachine playerAbilityStateMachine) : base(playerAbilityStateMachine)
+    public PlayerReadyAbilityState(PlayerAbilityStateMachine playerAbilityStateMachine) : base(playerAbilityStateMachine)
     {
     }
 
@@ -12,9 +12,10 @@ public class PlayerStandbyState : PlayerAbilityState
     {
         base.Enter();
 
-        Debug.Log("Standby State");
+        Debug.Log("Ready State");
         AddInputCallBack();
         _playerAbilityStateMachine.ReusableStateData.CanUseAbility = true;
+        _playerAbilityStateMachine.ReusableStateData.ProjectileRef = null;
     }
 
     public override void Exit()

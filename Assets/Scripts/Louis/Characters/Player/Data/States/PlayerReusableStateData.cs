@@ -10,8 +10,8 @@ public class PlayerReusableStateData
     public float MovementSpeedModifier { get; set; } = 1f;
     public float MovementOnSlopeSpeedModifier { get; set; } = 1f;
     public bool ShouldWalk { get; set; }
-    public Projectile ProjectileRef { get; set; } 
-    public bool CanShoot { get; set; }
+    public ProjectileManager ProjectileRef { get; set; } 
+    public bool CanUseAbility { get; set; }
     public float CurrentTargetRotation { get; set; }
     public float TimeToReachTargetRotation { get; set; }
     public float DampedTargetRotationPassedTime { get; set; }

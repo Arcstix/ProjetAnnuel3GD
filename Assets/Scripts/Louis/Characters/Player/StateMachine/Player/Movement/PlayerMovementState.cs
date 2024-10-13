@@ -56,7 +56,6 @@ public class PlayerMovementState : IState
     {
         if(movementStateMachine.ReusableData.MovementInput == Vector2.zero || movementStateMachine.ReusableData.MovementSpeedModifier == 0f) { return; }
 
-        Debug.Log("Moving");
         Vector3 movementDirection = GetMovementDirection();
 
         float targetRotationYAngle = HandleRotation(movementDirection);

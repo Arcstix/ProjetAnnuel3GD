@@ -1870,8 +1870,8 @@ MonoBehaviour:
     m_InputAxisName: Mouse X
     m_InputAxisValue: 0
     m_InvertInput: 0
-    m_MinValue: 294.8312
-    m_MaxValue: 354.8312
+    m_MinValue: 34.1864
+    m_MaxValue: 94.1864
     m_Wrap: 0
     m_Recentering:
       m_enabled: 0
@@ -4118,6 +4118,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!4 &1439482262 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 433363378035888783, guid: 6ac0fab864f191a448bd3e50edbfc85b, type: 3}
+  m_PrefabInstance: {fileID: 5459682717200145602}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1467108214
 Mesh:
   m_ObjectHideFlags: 0
@@ -5649,8 +5654,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3677872697066084841, guid: 6ac0fab864f191a448bd3e50edbfc85b, type: 3}
       propertyPath: m_CameraDistance
-      value: 6
+      value: 5.800002
       objectReference: {fileID: 0}
+    - target: {fileID: 5866644595161259813, guid: 6ac0fab864f191a448bd3e50edbfc85b, type: 3}
+      propertyPath: <launcherTransform>k__BackingField
+      value: 
+      objectReference: {fileID: 1439482262}
     - target: {fileID: 6450793013985799727, guid: 6ac0fab864f191a448bd3e50edbfc85b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5697,7 +5706,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8145016216154430532, guid: 6ac0fab864f191a448bd3e50edbfc85b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.999999
+      value: -5.800002
       objectReference: {fileID: 0}
     - target: {fileID: 8855948780468648084, guid: 6ac0fab864f191a448bd3e50edbfc85b, type: 3}
       propertyPath: m_HorizontalAxis.m_MaxSpeed

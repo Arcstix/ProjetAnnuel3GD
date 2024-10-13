@@ -4,40 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerInput))]
-public class PlayerStateMachineManager : MonoBehaviour
+public class PlayerMovementManager : PlayerManager
 {
-    [field : Header("References")]
-    [field : SerializeField] public PlayerSO PlayerSO { get; private set; }
-
     [field : Header("Collider")]
     [field : SerializeField] public CapsuleColliderUtility CapsuleColliderUtility { get; private set; }
 
-    public Rigidbody Rigidbody { get; private set; }
-
-    public PlayerInput Input { get; private set; }
-
-    public Camera Camera { get; private set; }
-
-    public PlayerCameraManager playerCameraManager { get; private set; }
-
     private PlayerMovementStateMachine playerMovementStateMachine;
-
-    private PlayerAbilityStateMachine playerAbilityStateMachine;
 
     public bool CanMove { get; private set; } = true;
 
-    private void Awake()
+    protected override void Awake()
     {
-        Rigidbody = GetComponent<Rigidbody>();
-
-        Input = GetComponent<PlayerInput>();
-
-        Camera = Camera.main;
+        base.Awake();
 
         playerMovementStateMachine = new PlayerMovementStateMachine(this);
-        playerAbilityStateMachine = new PlayerAbilityStateMachine(this);
-
-        playerCameraManager = GetComponent<PlayerCameraManager>();
     }
 
     private void OnValidate()
@@ -50,9 +30,10 @@ public class PlayerStateMachineManager : MonoBehaviour
     {
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.IdleState);
 
-        SetThirdPersonMode();       
+        SetThirdPersonMode();
     }
 
+    
     private void OnEnable()
     {
         playerCameraManager.FirstCameraViewEvent += SetFirstPersonMode;
@@ -65,13 +46,13 @@ public class PlayerStateMachineManager : MonoBehaviour
         playerCameraManager.ThirdCameraViewEvent -= SetThirdPersonMode;
     }
 
-    private void SetFirstPersonMode()
+    protected void SetFirstPersonMode()
     {
         CanMove = false;
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.IdleState);
     }
 
-    private void SetThirdPersonMode()
+    protected void SetThirdPersonMode()
     {
         CanMove = true;
     }
@@ -81,17 +62,11 @@ public class PlayerStateMachineManager : MonoBehaviour
         playerMovementStateMachine.HandleInput();
 
         playerMovementStateMachine.Tick();
-
-        playerAbilityStateMachine.HandleInput();
-
-        playerAbilityStateMachine.Tick();
     }
 
     private void FixedUpdate()
     {
         playerMovementStateMachine.FixedTick();
-
-        playerAbilityStateMachine.FixedTick();
     }
 
 

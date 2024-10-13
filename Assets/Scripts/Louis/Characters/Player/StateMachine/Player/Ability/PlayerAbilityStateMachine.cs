@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class PlayerAbilityStateMachine : StateMachine
 {
-    public PlayerStateMachineManager StateMachine { get; }
+    public PlayerAbilityManager StateMachine { get; }
+
+    public PlayerReusableStateData ReusableStateData { get; }
+
+    public PlayerReadyAbilityState ReadyAbilityState { get; }
 
     public PlayerShootState ShootState { get; }
 
@@ -14,13 +18,18 @@ public class PlayerAbilityStateMachine : StateMachine
 
     public PlayerCancelAbilityState CancelAbilityState { get; }
 
-    public PlayerAbilityStateMachine(PlayerStateMachineManager playerStateMachine)
+    public PlayerReloadAbilityState ReloadAbilityState { get; }
+
+    public PlayerAbilityStateMachine(PlayerAbilityManager playerStateMachine)
     {
         StateMachine = playerStateMachine;
+        ReusableStateData = playerStateMachine.ReusableData;
 
+        ReadyAbilityState = new PlayerReadyAbilityState(this);
         ShootState = new PlayerShootState(this);
         StandbyState = new PlayerStandbyState(this);
         TransportationState = new PlayerTransportationState(this);
         CancelAbilityState = new PlayerCancelAbilityState(this);
+        ReloadAbilityState = new PlayerReloadAbilityState(this);
     }
 }

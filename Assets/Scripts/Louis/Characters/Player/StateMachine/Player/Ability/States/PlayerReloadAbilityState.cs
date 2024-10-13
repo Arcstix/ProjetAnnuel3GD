@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCancelAbilityState : PlayerAbilityState
+public class PlayerReloadAbilityState : PlayerAbilityState
 {
-    public PlayerCancelAbilityState(PlayerAbilityStateMachine playerAbilityStateMachine) : base(playerAbilityStateMachine)
+    public PlayerReloadAbilityState(PlayerAbilityStateMachine playerAbilityStateMachine) : base(playerAbilityStateMachine)
     {
     }
 
@@ -12,10 +12,10 @@ public class PlayerCancelAbilityState : PlayerAbilityState
     {
         base.Enter();
 
-        Debug.Log("Cancel State");
+        Debug.Log("Reload State");
         RemoveInputCallBack();
         _playerAbilityStateMachine.ReusableStateData.CanUseAbility = false;
         _playerAbilityStateMachine.ReusableStateData.ProjectileRef = null;
-        _playerAbilityStateMachine.ChangeState(_playerAbilityStateMachine.ReloadAbilityState);
+        _playerAbilityStateMachine.ChangeState(_playerAbilityStateMachine.ReadyAbilityState);
     }
 }

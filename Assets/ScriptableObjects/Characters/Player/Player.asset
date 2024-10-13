@@ -36,8 +36,8 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0
       - serializedVersion: 3
-        time: 55
-        value: 0.4
+        time: 40
+        value: 0.5
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 1
@@ -45,7 +45,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 75
+        time: 80
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -71,3 +71,86 @@ MonoBehaviour:
       <SpeedModifier>k__BackingField: 0.225
     <RunData>k__BackingField:
       <SpeedModifier>k__BackingField: 1
+  <AbilityData>k__BackingField:
+    <ShootData>k__BackingField:
+      <ProjectilePrefab>k__BackingField: {fileID: 5459054514740463612, guid: 257932a591c3925499028dfbe454ee48, type: 3}
+      <BaseSpeed>k__BackingField: 20
+      <SpeedModifier>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    <StandbyData>k__BackingField:
+      <MaxConnectionDistance>k__BackingField: 10
+      <TimeBeforeAbilityCancel>k__BackingField: 2
+    <TransportationData>k__BackingField:
+      <BaseSpeed>k__BackingField: 10
+      <SpeedModifier>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    <CancelAbilityData>k__BackingField:
+      <BaseSpeed>k__BackingField: 10
+      <SpeedModifier>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4

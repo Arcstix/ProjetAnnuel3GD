@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 2106107369917464754}
   - component: {fileID: 4414121805493071773}
   - component: {fileID: 8795447553768358215}
+  - component: {fileID: 5866644595161259813}
   m_Layer: 0
   m_Name: Player StateMachine
   m_TagString: Player
@@ -142,9 +143,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.25
-  m_Height: 0.775
+  m_Height: 0.875
   m_Direction: 1
-  m_Center: {x: 0, y: 0.6125, z: 0}
+  m_Center: {x: 0, y: 0.5625, z: 0}
 --- !u!54 &8784794389355598016
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -181,7 +182,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3157480567146185515}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06c59a8765e24754f92496a0f1ec90ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 271fb0a440ec7e9498f02e914dc10e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <PlayerSO>k__BackingField: {fileID: 11400000, guid: 54ff1ab850d69e945bc998b3cd03c27e, type: 2}
@@ -191,9 +192,9 @@ MonoBehaviour:
       <CenterY>k__BackingField: 0.5
       <Radius>k__BackingField: 0.25
     <SlopeData>k__BackingField:
-      <StepHeightPercentage>k__BackingField: 0.225
-      <DistanceGroundCheck>k__BackingField: 1
-      <StepReachForce>k__BackingField: 40
+      <StepHeightPercentage>k__BackingField: 0.125
+      <DistanceGroundCheck>k__BackingField: 1.25
+      <StepReachForce>k__BackingField: 20
     <LayerData>k__BackingField:
       <GroundLayer>k__BackingField:
         serializedVersion: 2
@@ -222,8 +223,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1833991966f3ffa408f7859761b223bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <CameraLimitFirstPOV>k__BackingField:
+    <MinHorizontalValue>k__BackingField: -30
+    <MaxHorizontalValue>k__BackingField: 30
   firstPersonCamera: {fileID: 2709406896148664236}
   thirdPersonCamera: {fileID: 3246289813163801318}
+--- !u!114 &5866644595161259813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3157480567146185515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab5976a3cfd31a4c8f24f37e288d2a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <PlayerSO>k__BackingField: {fileID: 11400000, guid: 54ff1ab850d69e945bc998b3cd03c27e, type: 2}
+  <LauncherTransform>k__BackingField: {fileID: 433363378035888783}
 --- !u!1 &4112246969226731427
 GameObject:
   m_ObjectHideFlags: 0

@@ -39,8 +39,6 @@ public class PlayerGroundedState : PlayerMovementState
 
             float distanceToGround = capsuleColliderUtility.CapsuleColliderData.ColliderCenterInLocalSpace.y * movementStateMachine.PlayerStateMachine.transform.localScale.y - hit.distance;
 
-            Debug.Log(distanceToGround);
-
             if (distanceToGround == 0f)
             {
                 return;
