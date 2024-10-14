@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//ce script est attaché à l aballe lancé et sert à poser les balises au cours de sa course
 public class BallTrajectory : MonoBehaviour
 {
     public string walkableLayer = "Walkable";  // Layer "Walkable"
@@ -13,20 +14,26 @@ public class BallTrajectory : MonoBehaviour
     [SerializeField] private GameObject balise;
     [SerializeField] private Transform poseBalise;
 
+    public ListBalise listBalises;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
     void Update()
     {
-        GameObject newBalise = Instantiate(balise, poseBalise.position, Quaternion.identity);
-
-        // Si la balise a un Rigidbody, désactiver sa physique pour qu'elle reste en place
-        Rigidbody rb = newBalise.GetComponent<Rigidbody>();
-        if (rb != null)
+        if (rb.isKinematic == false)
         {
-            rb.isKinematic = true; // Désactiver la physique (optionnel si tu veux qu'elle flotte)
-        }
+            timer += Time.deltaTime;
+
+            if (timer >= timerBalise)
+            {
+                timer = 0;
+                GameObject newBalise = Instantiate(balise, poseBalise.position, Quaternion.identity);
+                //add la balise instancier à la liste des balises
+                listBalises.listDesBalises.Add(newBalise);
+            }
+        }      
     }
 
     void OnCollisionEnter(Collision collision)
@@ -35,7 +42,12 @@ public class BallTrajectory : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer(walkableLayer))
         {
             // Arrêter la balle en désactivant la physique
-            //rb.isKinematic = true;
+            rb.isKinematic = true;
         }
+        //if (collision.gameObject.CompareTag("Player"))
+        //{
+        //    listDesBalises.listDesBalises.Clear();
+        //    Destroy(gameObject);
+        //}
     }
 }
