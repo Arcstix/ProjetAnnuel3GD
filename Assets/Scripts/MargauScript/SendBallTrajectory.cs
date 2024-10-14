@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //ce script sert au shoot et à suivre la balle
-public class SendBall : MonoBehaviour
+public class SendBallTrajectory : MonoBehaviour
 {
     public BallTrajectory ballPrefab; // Le prefab de votre balle
     public Transform shootPoint; // Le point d'origine du tir
     public float launchForce = 10f; // La force appliquée au projectile
 
-    [SerializeField] private bool hasShoot = false;
+    public bool hasShoot = false;
 
     public ListBalise listBalises;
     private int currentBaliseList = 0; // L'indice de la balise actuelle
@@ -17,6 +17,7 @@ public class SendBall : MonoBehaviour
     public float distanceThreshold; // La distance minimum pour considérer que le joueur a atteint une balise
 
     public bool onMoveToBall = false;
+    public PlayerMovement playerMovement;
 
     // Start is called before the first frame update
     void Start()
@@ -29,9 +30,11 @@ public class SendBall : MonoBehaviour
     {
         if (onMoveToBall)
         {
+            
             MoveToBall();
             return;
         }
+
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -55,6 +58,8 @@ public class SendBall : MonoBehaviour
         hasShoot = true;
         BallTrajectory newBall = Instantiate(ballPrefab, shootPoint.position, shootPoint.rotation);
         newBall.listBalises = listBalises;
+        newBall.sendBall = this;
+        listBalises.listDesBalises.Add(newBall.gameObject);
         Rigidbody rb = newBall.GetComponent<Rigidbody>();
         rb.AddForce(shootPoint.forward * launchForce, ForceMode.Impulse);
     }
@@ -81,9 +86,8 @@ public class SendBall : MonoBehaviour
             {
                 currentBaliseList++; // Passer à la balise suivante
                 Debug.Log("++1");
-
             }
-        }
+        }     
         else
         {
             onMoveToBall = false;

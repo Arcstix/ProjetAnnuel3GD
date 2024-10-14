@@ -2885,10 +2885,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player M
       objectReference: {fileID: 0}
-    - target: {fileID: 2186770939994934779, guid: c0b8d2152ba4b6546bb75ef6909acf54, type: 3}
-      propertyPath: listDesBalises.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2499482342938712880, guid: c0b8d2152ba4b6546bb75ef6909acf54, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.3246117
@@ -2931,12 +2927,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3992587458439407717, guid: c0b8d2152ba4b6546bb75ef6909acf54, type: 3}
       propertyPath: moveSpeed
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3992587458439407717, guid: c0b8d2152ba4b6546bb75ef6909acf54, type: 3}
       propertyPath: ballPrefab
       value: 
       objectReference: {fileID: 3762007164393280788, guid: d4869c11561c6dc4b8007b5cb331549b, type: 3}
+    - target: {fileID: 3992587458439407717, guid: c0b8d2152ba4b6546bb75ef6909acf54, type: 3}
+      propertyPath: launchForce
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3992587458439407717, guid: c0b8d2152ba4b6546bb75ef6909acf54, type: 3}
       propertyPath: listBalises
       value: 
@@ -2944,6 +2944,10 @@ PrefabInstance:
     - target: {fileID: 3992587458439407717, guid: c0b8d2152ba4b6546bb75ef6909acf54, type: 3}
       propertyPath: distanceThreshold
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7761727245012926105, guid: c0b8d2152ba4b6546bb75ef6909acf54, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.627
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

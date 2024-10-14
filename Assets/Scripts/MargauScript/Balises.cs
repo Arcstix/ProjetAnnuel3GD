@@ -19,15 +19,15 @@ public class Balises : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
         // Vérifie si l'objet en collision a le tag "Player"
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Balise touchée par le joueur");
             // Retire cet objet de la liste (s'il est présent)
             listBalise.listDesBalises.Remove(this.gameObject); // "gameObject" fait référence à l'objet auquel ce script est attaché
             Destroy(gameObject); // Détruire l'objet
         }
-
     }
 }

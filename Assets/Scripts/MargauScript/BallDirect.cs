@@ -2,39 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//ce script est attaché à l aballe lancé et sert à poser les balises au cours de sa course
-public class BallTrajectory : MonoBehaviour
+public class BallDirect : MonoBehaviour
 {
     public string walkableLayer = "Walkable";  // Layer "Walkable"
     private Rigidbody rb;
     //timer entre lequel il va placer une balise
     //list de balise qui s'ajoute au fur et à mesure 
-    [SerializeField] private float timer;
-    [SerializeField] private float timerBalise;
-    [SerializeField] private Balises balise;
-    [SerializeField] private Transform poseBalise;
-
+ 
     public ListBalise listBalises;
-    public SendBallTrajectory sendBall;
+    public SendBallDirect sendBallDirect;
     void Start()
-    {    
+    {
         rb = GetComponent<Rigidbody>();
     }
     void Update()
     {
-        if (rb.isKinematic == false)
-        {
-            timer += Time.deltaTime;
-
-            if (timer >= timerBalise)
-            {
-                timer = 0;
-                Balises newBalise = Instantiate(balise, poseBalise.position, Quaternion.identity);
-                newBalise.listBalise = listBalises;
-                //add la balise instancier à la liste des balises
-                listBalises.listDesBalises.Add(newBalise.gameObject);
-            }
-        }      
+        
     }
 
     void OnCollisionEnter(Collision collision)
@@ -51,8 +34,8 @@ public class BallTrajectory : MonoBehaviour
         // Vérifie si l'objet en collision a le tag "Player"
         if (other.gameObject.CompareTag("Player"))
         {
-            sendBall.hasShoot = false;
-            sendBall.onMoveToBall = false;
+            sendBallDirect.hasShoot = false;
+            sendBallDirect.onMoveToBall = false;
             Debug.Log("Balise touchée par le joueur");
             // Retire cet objet de la liste (s'il est présent)
             listBalises.listDesBalises.Remove(this.gameObject); // "gameObject" fait référence à l'objet auquel ce script est attaché

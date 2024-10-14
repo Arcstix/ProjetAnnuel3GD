@@ -10,14 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 2499482342938712880}
   - component: {fileID: 6018511714890664418}
-  - component: {fileID: 3992587458439407717}
+  - component: {fileID: 6749300902538695970}
   - component: {fileID: 3023111154456738198}
   - component: {fileID: 2186770939994934779}
   - component: {fileID: 8289769834507508928}
   - component: {fileID: 1645038684260006531}
   - component: {fileID: 2007294553290162149}
   m_Layer: 0
-  m_Name: Player M
+  m_Name: Player Direct
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1936407977158339939}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &3992587458439407717
+--- !u!114 &6749300902538695970
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,16 +57,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1936407977158339939}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77c4431209130624492ce9cb834fd0b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d90235f701ea2746900d1c2b1835bd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballPrefab: {fileID: 6639087800399953604, guid: d4869c11561c6dc4b8007b5cb331549b, type: 3}
+  ballPrefab: {fileID: 6253725882152620278, guid: c8a48a1b83712f74aab17595a6a3e3b7, type: 3}
   shootPoint: {fileID: 7761727245012926105}
-  launchForce: 50
-  currentBalise: 0
-  listBalises: {fileID: 0}
+  launchForce: 10
+  hasShoot: 0
+  listBalises: {fileID: 2186770939994934779}
   moveSpeed: 0
   distanceThreshold: 0
+  onMoveToBall: 0
 --- !u!114 &3023111154456738198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,7 +302,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5171458928794339785, guid: 88932b547d6b45148bbf48e897527bd5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.4763351
+      value: 0.627
       objectReference: {fileID: 0}
     - target: {fileID: 5171458928794339785, guid: 88932b547d6b45148bbf48e897527bd5, type: 3}
       propertyPath: m_LocalRotation.w
