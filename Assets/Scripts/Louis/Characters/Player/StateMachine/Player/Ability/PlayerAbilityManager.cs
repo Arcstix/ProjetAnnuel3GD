@@ -6,12 +6,22 @@ using UnityEngine;
 public class PlayerAbilityManager : PlayerManager
 {
     private PlayerAbilityStateMachine playerAbilityStateMachine;
+    private PlayerMovementManager playerMovementManager;
 
     [field: SerializeField] public Transform LauncherTransform { get; private set; }
+
+    public PlayerReusableStateData ReusableData { get; set; }
 
     protected override void Awake()
     {
         base.Awake();
+        playerMovementManager = GetComponent<PlayerMovementManager>();
+
+        if(ReusableData == null)
+        {
+            ReusableData = new PlayerReusableStateData();
+            playerMovementManager.ReusableData = ReusableData;
+        }
 
         playerAbilityStateMachine = new PlayerAbilityStateMachine(this);
     }

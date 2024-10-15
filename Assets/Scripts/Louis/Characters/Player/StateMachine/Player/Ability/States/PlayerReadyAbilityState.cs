@@ -12,7 +12,6 @@ public class PlayerReadyAbilityState : PlayerAbilityState
     {
         base.Enter();
 
-        Debug.Log("Ready State");
         AddInputCallBack();
         _playerAbilityStateMachine.ReusableStateData.CanUseAbility = true;
         _playerAbilityStateMachine.ReusableStateData.ProjectileRef = null;

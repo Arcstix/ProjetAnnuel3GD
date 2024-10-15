@@ -15,12 +15,8 @@ public class PlayerManager : MonoBehaviour
 
     public PlayerCameraManager playerCameraManager { get; private set; }
 
-    public PlayerReusableStateData ReusableData { get; set; }
-
     protected virtual void Awake()
     {
-        ReusableData = new PlayerReusableStateData();
-
         Input = GetComponent<PlayerInput>();
 
         Camera = Camera.main;

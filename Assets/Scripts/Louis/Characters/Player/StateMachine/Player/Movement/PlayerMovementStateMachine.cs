@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovementStateMachine : StateMachine
 {
-    public PlayerMovementManager PlayerStateMachine { get; }
+    public PlayerMovementManager MovementManager { get; }
 
     public PlayerReusableStateData ReusableData { get; }
 
@@ -16,7 +16,7 @@ public class PlayerMovementStateMachine : StateMachine
 
     public PlayerMovementStateMachine(PlayerMovementManager playerStateMachineManager)
     {
-        PlayerStateMachine = playerStateMachineManager;
+        MovementManager = playerStateMachineManager;
         ReusableData = playerStateMachineManager.ReusableData;
 
         IdleState = new PlayerIdleState(this);

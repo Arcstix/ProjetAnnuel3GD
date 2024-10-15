@@ -12,7 +12,7 @@ public class PlayerAbilityState : IState
     public PlayerAbilityState(PlayerAbilityStateMachine playerAbilityStateMachine)
     {
         _playerAbilityStateMachine = playerAbilityStateMachine;
-        _abilityData = _playerAbilityStateMachine.StateMachine.PlayerSO.AbilityData;
+        _abilityData = _playerAbilityStateMachine.AbilityManager.PlayerSO.AbilityData;
     }
 
     #region State Methods
@@ -46,12 +46,28 @@ public class PlayerAbilityState : IState
 
     protected virtual void AddInputCallBack()
     {
-        _playerAbilityStateMachine.StateMachine.Input.PlayerActions.Ability.started += TryAbility;
+        _playerAbilityStateMachine.AbilityManager.Input.PlayerActions.Ability.started += TryAbility;
     }
+
+    protected virtual void AddCancelInputCallBack()
+    {
+        _playerAbilityStateMachine.AbilityManager.Input.PlayerActions.CancelAbility.started += CancelAbility;
+    }
+
 
     protected virtual void RemoveInputCallBack()
     {
-        _playerAbilityStateMachine.StateMachine.Input.PlayerActions.Ability.started -= TryAbility;
+        _playerAbilityStateMachine.AbilityManager.Input.PlayerActions.Ability.started -= TryAbility;
+    }
+
+    protected virtual void RemoveCancelInputCallBack()
+    {
+        _playerAbilityStateMachine.AbilityManager.Input.PlayerActions.CancelAbility.started -= CancelAbility;
+    }
+
+    private void CancelAbility(InputAction.CallbackContext context)
+    {
+        _playerAbilityStateMachine.ChangeState(_playerAbilityStateMachine.CancelAbilityState);
     }
 
     private void TryAbility(InputAction.CallbackContext context)

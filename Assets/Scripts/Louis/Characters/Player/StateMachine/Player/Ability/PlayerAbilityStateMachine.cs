@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAbilityStateMachine : StateMachine
 {
-    public PlayerAbilityManager StateMachine { get; }
+    public PlayerAbilityManager AbilityManager { get; }
 
     public PlayerReusableStateData ReusableStateData { get; }
 
@@ -22,7 +22,7 @@ public class PlayerAbilityStateMachine : StateMachine
 
     public PlayerAbilityStateMachine(PlayerAbilityManager playerStateMachine)
     {
-        StateMachine = playerStateMachine;
+        AbilityManager = playerStateMachine;
         ReusableStateData = playerStateMachine.ReusableData;
 
         ReadyAbilityState = new PlayerReadyAbilityState(this);

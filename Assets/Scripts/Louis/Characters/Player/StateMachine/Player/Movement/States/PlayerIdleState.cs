@@ -13,7 +13,8 @@ public class PlayerIdleState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
-
+        Debug.Log("Idle State");
+        movementStateMachine.ReusableData.MovementInput = Vector2.zero;
         movementStateMachine.ReusableData.MovementSpeedModifier = 0f;
 
         ResetVelocity();
@@ -23,11 +24,14 @@ public class PlayerIdleState : PlayerGroundedState
     {
         base.Tick();
 
-        if(movementStateMachine.ReusableData.MovementInput == Vector2.zero || !movementStateMachine.PlayerStateMachine.CanMove)
+        if(movementStateMachine.ReusableData.MovementInput == Vector2.zero)
         {
             return;
         }
 
-        OnMove();
+        if (movementStateMachine.ReusableData.CanMove)
+        {
+            OnMove();
+        }        
     }
 }

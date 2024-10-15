@@ -10,12 +10,20 @@ public class PlayerMovementManager : PlayerManager
     [field : SerializeField] public CapsuleColliderUtility CapsuleColliderUtility { get; private set; }
 
     private PlayerMovementStateMachine playerMovementStateMachine;
+    private PlayerAbilityManager playerAbilityManager;
 
-    public bool CanMove { get; private set; } = true;
+    public PlayerReusableStateData ReusableData { get; set; }
 
     protected override void Awake()
     {
         base.Awake();
+        playerAbilityManager = GetComponent<PlayerAbilityManager>();
+
+        if(ReusableData == null)
+        {
+            ReusableData = new PlayerReusableStateData();
+            playerAbilityManager.ReusableData = ReusableData;
+        }
 
         playerMovementStateMachine = new PlayerMovementStateMachine(this);
     }
@@ -48,13 +56,13 @@ public class PlayerMovementManager : PlayerManager
 
     protected void SetFirstPersonMode()
     {
-        CanMove = false;
+        ReusableData.CanMove = false;
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.IdleState);
     }
 
     protected void SetThirdPersonMode()
     {
-        CanMove = true;
+        ReusableData.CanMove = true;
     }
 
     private void Update()

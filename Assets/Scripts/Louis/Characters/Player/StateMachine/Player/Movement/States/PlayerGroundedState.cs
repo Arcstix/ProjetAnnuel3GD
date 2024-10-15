@@ -10,7 +10,7 @@ public class PlayerGroundedState : PlayerMovementState
 
     public PlayerGroundedState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
     {
-        capsuleColliderUtility = movementStateMachine.PlayerStateMachine.CapsuleColliderUtility;
+        capsuleColliderUtility = movementStateMachine.MovementManager.CapsuleColliderUtility;
     }
 
     public override void FixedTick()
@@ -37,7 +37,7 @@ public class PlayerGroundedState : PlayerMovementState
                 return;
             }
 
-            float distanceToGround = capsuleColliderUtility.CapsuleColliderData.ColliderCenterInLocalSpace.y * movementStateMachine.PlayerStateMachine.transform.localScale.y - hit.distance;
+            float distanceToGround = capsuleColliderUtility.CapsuleColliderData.ColliderCenterInLocalSpace.y * movementStateMachine.MovementManager.transform.localScale.y - hit.distance;
 
             if (distanceToGround == 0f)
             {
@@ -63,21 +63,21 @@ public class PlayerGroundedState : PlayerMovementState
 
         Vector3 liftForce = new Vector3(0f, amountToLift, 0f);
 
-        movementStateMachine.PlayerStateMachine.Rigidbody.AddForce(liftForce, ForceMode.VelocityChange);
+        movementStateMachine.MovementManager.Rigidbody.AddForce(liftForce, ForceMode.VelocityChange);
     }
 
     protected override void AddInputActionCallbacks()
     {
         base.AddInputActionCallbacks();
 
-        movementStateMachine.PlayerStateMachine.Input.PlayerActions.Movement.canceled += OnMovementCanceled;
+        movementStateMachine.MovementManager.Input.PlayerActions.Movement.canceled += OnMovementCanceled;
     }
 
     protected override void RemoveInputActionCallbacks()
     {
         base.RemoveInputActionCallbacks();
 
-        movementStateMachine.PlayerStateMachine.Input.PlayerActions.Movement.canceled -= OnMovementCanceled;
+        movementStateMachine.MovementManager.Input.PlayerActions.Movement.canceled -= OnMovementCanceled;
     }
 
     protected virtual void OnMovementCanceled(InputAction.CallbackContext context)

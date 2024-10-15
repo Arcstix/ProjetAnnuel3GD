@@ -12,8 +12,8 @@ public class PlayerStandbyState : PlayerAbilityState
     {
         base.Enter();
 
-        Debug.Log("Standby State");
         AddInputCallBack();
+        AddCancelInputCallBack();
         _playerAbilityStateMachine.ReusableStateData.CanUseAbility = true;
     }
 
@@ -22,5 +22,6 @@ public class PlayerStandbyState : PlayerAbilityState
         base.Exit();
 
         RemoveInputCallBack();
+        RemoveCancelInputCallBack();
     }
 }

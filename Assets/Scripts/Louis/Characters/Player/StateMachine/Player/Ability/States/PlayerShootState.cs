@@ -12,9 +12,8 @@ public class PlayerShootState : PlayerAbilityState
     {
         base.Enter();
 
-        Debug.Log("Shoot State");
         RemoveInputCallBack();
         _playerAbilityStateMachine.ReusableStateData.CanUseAbility = false;
-        _playerAbilityStateMachine.StateMachine.UseAbility();
+        _playerAbilityStateMachine.AbilityManager.UseAbility();
     }
 }

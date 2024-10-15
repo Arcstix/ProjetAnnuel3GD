@@ -80,6 +80,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CancelAbility"",
+                    ""type"": ""Button"",
+                    ""id"": ""2b191055-e0f5-4ab1-8d00-2af2128a77fb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -192,6 +201,17 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""CameraToggle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6ed1284d-cd8a-4962-9d86-3d16c266dd78"",
+                    ""path"": ""<Keyboard>/#(E)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CancelAbility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -206,6 +226,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player_SlowToggle = m_Player.FindAction("SlowToggle", throwIfNotFound: true);
         m_Player_Ability = m_Player.FindAction("Ability", throwIfNotFound: true);
         m_Player_CameraToggle = m_Player.FindAction("CameraToggle", throwIfNotFound: true);
+        m_Player_CancelAbility = m_Player.FindAction("CancelAbility", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -273,6 +294,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SlowToggle;
     private readonly InputAction m_Player_Ability;
     private readonly InputAction m_Player_CameraToggle;
+    private readonly InputAction m_Player_CancelAbility;
     public struct PlayerActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -283,6 +305,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @SlowToggle => m_Wrapper.m_Player_SlowToggle;
         public InputAction @Ability => m_Wrapper.m_Player_Ability;
         public InputAction @CameraToggle => m_Wrapper.m_Player_CameraToggle;
+        public InputAction @CancelAbility => m_Wrapper.m_Player_CancelAbility;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -310,6 +333,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @CameraToggle.started += instance.OnCameraToggle;
             @CameraToggle.performed += instance.OnCameraToggle;
             @CameraToggle.canceled += instance.OnCameraToggle;
+            @CancelAbility.started += instance.OnCancelAbility;
+            @CancelAbility.performed += instance.OnCancelAbility;
+            @CancelAbility.canceled += instance.OnCancelAbility;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -332,6 +358,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @CameraToggle.started -= instance.OnCameraToggle;
             @CameraToggle.performed -= instance.OnCameraToggle;
             @CameraToggle.canceled -= instance.OnCameraToggle;
+            @CancelAbility.started -= instance.OnCancelAbility;
+            @CancelAbility.performed -= instance.OnCancelAbility;
+            @CancelAbility.canceled -= instance.OnCancelAbility;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -357,5 +386,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnSlowToggle(InputAction.CallbackContext context);
         void OnAbility(InputAction.CallbackContext context);
         void OnCameraToggle(InputAction.CallbackContext context);
+        void OnCancelAbility(InputAction.CallbackContext context);
     }
 }

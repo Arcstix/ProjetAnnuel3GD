@@ -12,10 +12,8 @@ public class PlayerCancelAbilityState : PlayerAbilityState
     {
         base.Enter();
 
-        Debug.Log("Cancel State");
         RemoveInputCallBack();
         _playerAbilityStateMachine.ReusableStateData.CanUseAbility = false;
-        _playerAbilityStateMachine.ReusableStateData.ProjectileRef = null;
-        _playerAbilityStateMachine.ChangeState(_playerAbilityStateMachine.ReloadAbilityState);
+        _playerAbilityStateMachine.ReusableStateData.ProjectileRef.ReturnToPlayer();
     }
 }

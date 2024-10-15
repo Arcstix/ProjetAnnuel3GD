@@ -12,6 +12,7 @@ public class PlayerReusableStateData
     public bool ShouldWalk { get; set; }
     public ProjectileManager ProjectileRef { get; set; } 
     public bool CanUseAbility { get; set; }
+    public bool CanMove { get; set; }
     public float CurrentTargetRotation { get; set; }
     public float TimeToReachTargetRotation { get; set; }
     public float DampedTargetRotationPassedTime { get; set; }

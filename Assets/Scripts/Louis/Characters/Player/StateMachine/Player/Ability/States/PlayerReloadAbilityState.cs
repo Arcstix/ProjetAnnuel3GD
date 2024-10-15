@@ -12,7 +12,6 @@ public class PlayerReloadAbilityState : PlayerAbilityState
     {
         base.Enter();
 
-        Debug.Log("Reload State");
         RemoveInputCallBack();
         _playerAbilityStateMachine.ReusableStateData.CanUseAbility = false;
         _playerAbilityStateMachine.ReusableStateData.ProjectileRef = null;

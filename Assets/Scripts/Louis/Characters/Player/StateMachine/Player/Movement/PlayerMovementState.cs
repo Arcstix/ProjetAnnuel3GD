@@ -15,7 +15,7 @@ public class PlayerMovementState : IState
     {
         movementStateMachine = playerMovementStateMachine;
 
-        movementData = playerMovementStateMachine.PlayerStateMachine.PlayerSO.GroundedData;
+        movementData = playerMovementStateMachine.MovementManager.PlayerSO.GroundedData;
     }
 
     public virtual void Enter()
@@ -31,17 +31,28 @@ public class PlayerMovementState : IState
 
     public virtual void Tick()
     {
-        
+        Debug.Log(movementStateMachine.ReusableData.CanMove);
+
+        if (!movementStateMachine.ReusableData.CanMove && movementStateMachine.currentState != movementStateMachine.IdleState)
+        {
+            movementStateMachine.ChangeState(movementStateMachine.IdleState);
+        }
     }
 
     public virtual void FixedTick()
     {
-        Move();
+        if (movementStateMachine.ReusableData.CanMove)
+        {
+            Move();
+        }
     }
 
     public virtual void HandleInput()
     {
-        ReadMovementInput();
+        if (movementStateMachine.ReusableData.CanMove)
+        {
+            ReadMovementInput();
+        }      
     }
 
     #endregion
@@ -49,7 +60,7 @@ public class PlayerMovementState : IState
     #region Main Methods
     private void ReadMovementInput()
     {
-        movementStateMachine.ReusableData.MovementInput = movementStateMachine.PlayerStateMachine.Input.PlayerActions.Movement.ReadValue<Vector2>();
+        movementStateMachine.ReusableData.MovementInput = movementStateMachine.MovementManager.Input.PlayerActions.Movement.ReadValue<Vector2>();
     }
 
     private void Move()
@@ -66,7 +77,7 @@ public class PlayerMovementState : IState
 
         Vector3 currentHorizontalVelocity = GetCurrentHorizontalVelocity();       
 
-        movementStateMachine.PlayerStateMachine.Rigidbody.AddForce(movementSpeed * targetRotationDirection - currentHorizontalVelocity, ForceMode.VelocityChange);
+        movementStateMachine.MovementManager.Rigidbody.AddForce(movementSpeed * targetRotationDirection - currentHorizontalVelocity, ForceMode.VelocityChange);
     }
 
     private float HandleRotation(Vector3 direction)
@@ -91,7 +102,7 @@ public class PlayerMovementState : IState
 
     private float AddCameraRotationToAngle(float directionAngle)
     {
-        directionAngle += movementStateMachine.PlayerStateMachine.Camera.transform.eulerAngles.y;
+        directionAngle += movementStateMachine.MovementManager.Camera.transform.eulerAngles.y;
 
         if (directionAngle > 360f)
         {
@@ -116,20 +127,20 @@ public class PlayerMovementState : IState
 
     protected Vector3 GetCurrentHorizontalVelocity()
     {
-        Vector3 playerHorizontalVelocity = movementStateMachine.PlayerStateMachine.Rigidbody.velocity;
+        Vector3 playerHorizontalVelocity = movementStateMachine.MovementManager.Rigidbody.velocity;
         playerHorizontalVelocity.y = 0f;
         return playerHorizontalVelocity;
     }
 
     protected Vector3 GetCurrentVerticalVelocity()
     {
-        Vector3 playerCurrentVerticalVelocity = new Vector3(0f, movementStateMachine.PlayerStateMachine.Rigidbody.velocity.y, 0f);
+        Vector3 playerCurrentVerticalVelocity = new Vector3(0f, movementStateMachine.MovementManager.Rigidbody.velocity.y, 0f);
         return playerCurrentVerticalVelocity;
     }
 
     protected void RotateTowardsTargetRotation(float directionAngle)
     {
-        float currentYAngle = movementStateMachine.PlayerStateMachine.transform.eulerAngles.y;
+        float currentYAngle = movementStateMachine.MovementManager.transform.eulerAngles.y;
 
         if(currentYAngle == movementStateMachine.ReusableData.CurrentTargetRotation)
         {
@@ -139,7 +150,7 @@ public class PlayerMovementState : IState
         float smoothYAngle = Mathf.SmoothDampAngle(currentYAngle, movementStateMachine.ReusableData.CurrentTargetRotation, ref movementStateMachine.ReusableData.TurnSmoothVelocity, movementStateMachine.ReusableData.TimeToReachTargetRotation - movementStateMachine.ReusableData.DampedTargetRotationPassedTime);
 
         movementStateMachine.ReusableData.DampedTargetRotationPassedTime += Time.deltaTime;
-        movementStateMachine.PlayerStateMachine.Rigidbody.MoveRotation(Quaternion.Euler(0f, smoothYAngle, 0f));
+        movementStateMachine.MovementManager.Rigidbody.MoveRotation(Quaternion.Euler(0f, smoothYAngle, 0f));
     }
 
     protected float UpdateTargetRotation(Vector3 direction, bool shouldConsiderCameraRotation = true)
@@ -173,17 +184,17 @@ public class PlayerMovementState : IState
 
     protected void ResetVelocity()
     {
-        movementStateMachine.PlayerStateMachine.Rigidbody.velocity = Vector3.zero;
+        movementStateMachine.MovementManager.Rigidbody.velocity = Vector3.zero;
     }
 
     protected virtual void AddInputActionCallbacks()
     {
-        movementStateMachine.PlayerStateMachine.Input.PlayerActions.SlowToggle.started += OnSlowStarted;
+        movementStateMachine.MovementManager.Input.PlayerActions.SlowToggle.started += OnSlowStarted;
     }
 
     protected virtual void RemoveInputActionCallbacks()
     {
-        movementStateMachine.PlayerStateMachine.Input.PlayerActions.SlowToggle.started -= OnSlowStarted;
+        movementStateMachine.MovementManager.Input.PlayerActions.SlowToggle.started -= OnSlowStarted;
     }
 
     #endregion
