@@ -44,14 +44,14 @@ public class PlayerMovementManager : PlayerManager
     
     private void OnEnable()
     {
-        playerCameraManager.FirstCameraViewEvent += SetFirstPersonMode;
-        playerCameraManager.ThirdCameraViewEvent += SetThirdPersonMode;
+        CameraManager.FirstCameraViewEvent += SetFirstPersonMode;
+        CameraManager.ThirdCameraViewEvent += SetThirdPersonMode;
     }
 
     private void OnDisable()
     {
-        playerCameraManager.FirstCameraViewEvent -= SetFirstPersonMode;
-        playerCameraManager.ThirdCameraViewEvent -= SetThirdPersonMode;
+        CameraManager.FirstCameraViewEvent -= SetFirstPersonMode;
+        CameraManager.ThirdCameraViewEvent -= SetThirdPersonMode;
     }
 
     protected void SetFirstPersonMode()

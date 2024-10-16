@@ -13,11 +13,13 @@ public class PlayerReusableStateData
     public ProjectileManager ProjectileRef { get; set; } 
     public bool CanUseAbility { get; set; }
     public bool CanMove { get; set; }
+    public bool OnTransportation { get; set; } = false;
     public float CurrentTargetRotation { get; set; }
     public float TimeToReachTargetRotation { get; set; }
     public float DampedTargetRotationPassedTime { get; set; }
 
     private float turnSmoothVelocity;
+    public bool InAir { get; set; }
 
     public ref float TurnSmoothVelocity 
     {
@@ -26,4 +28,5 @@ public class PlayerReusableStateData
             return ref turnSmoothVelocity;
         }
     }
+
 }

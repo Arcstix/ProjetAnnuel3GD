@@ -13,22 +13,22 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   <GroundedData>k__BackingField:
-    <BaseSpeed>k__BackingField: 5
+    <BaseSpeed>k__BackingField: 10
     <SlopeSpeedAngle>k__BackingField:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
         value: 1
-        inSlope: -0.016666668
-        outSlope: -0.016666668
+        inSlope: -0.006666668
+        outSlope: -0.006666668
         tangentMode: 34
         weightedMode: 2
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 15
-        value: 0.75
+        value: 0.9
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
@@ -37,6 +37,15 @@ MonoBehaviour:
         outWeight: 0
       - serializedVersion: 3
         time: 40
+        value: 0.7
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 1
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 60
         value: 0.5
         inSlope: Infinity
         outSlope: Infinity
@@ -74,7 +83,7 @@ MonoBehaviour:
   <AbilityData>k__BackingField:
     <ShootData>k__BackingField:
       <ProjectilePrefab>k__BackingField: {fileID: 5459054514740463612, guid: 257932a591c3925499028dfbe454ee48, type: 3}
-      <BaseSpeed>k__BackingField: 20
+      <BaseSpeed>k__BackingField: 10
       <SpeedModifier>k__BackingField:
         serializedVersion: 2
         m_Curve:
@@ -99,11 +108,12 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+      <MaxTravelDistance>k__BackingField: 99999
     <StandbyData>k__BackingField:
       <MaxConnectionDistance>k__BackingField: 10
       <TimeBeforeAbilityCancel>k__BackingField: 2
     <TransportationData>k__BackingField:
-      <BaseSpeed>k__BackingField: 10
+      <BaseSpeed>k__BackingField: 20
       <SpeedModifier>k__BackingField:
         serializedVersion: 2
         m_Curve:

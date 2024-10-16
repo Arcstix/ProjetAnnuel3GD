@@ -17,7 +17,10 @@ public class PlayerGroundedState : PlayerMovementState
     {
         base.FixedTick();
 
-        CheckDistanceToTheGround();
+        if (!movementStateMachine.ReusableData.OnTransportation)
+        {
+            CheckDistanceToTheGround();
+        }       
     }
 
     private void CheckDistanceToTheGround()
@@ -28,14 +31,8 @@ public class PlayerGroundedState : PlayerMovementState
 
         if(Physics.Raycast(downwardsRayFromCapsuleCenter, out RaycastHit hit, capsuleColliderUtility.SlopeData.DistanceGroundCheck, capsuleColliderUtility.LayerData.GroundLayer, QueryTriggerInteraction.Ignore))
         {
-            float groundAngle = Vector3.Angle(hit.normal, -downwardsRayFromCapsuleCenter.direction);
-
-            float floatSpeedModifier = SetSlopeSpeedModifierOnAngle(groundAngle);
-
-            if(floatSpeedModifier == 0f)
-            {
-                return;
-            }
+            movementStateMachine.ReusableData.InAir = false;
+            float groundAngle = Vector3.Angle(hit.normal, -downwardsRayFromCapsuleCenter.direction);         
 
             float distanceToGround = capsuleColliderUtility.CapsuleColliderData.ColliderCenterInLocalSpace.y * movementStateMachine.MovementManager.transform.localScale.y - hit.distance;
 
@@ -44,7 +41,18 @@ public class PlayerGroundedState : PlayerMovementState
                 return;
             }
 
+            float floatSpeedModifier = SetSlopeSpeedModifierOnAngle(groundAngle);
+
+            if (floatSpeedModifier == 0f)
+            {
+                return;
+            }
+
             AddVerticalForce(distanceToGround, capsuleColliderUtility.SlopeData.StepReachForce);
+        }
+        else
+        {
+            movementStateMachine.ReusableData.InAir = true;
         }
     }
 

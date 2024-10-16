@@ -10,7 +10,9 @@ public class PlayerCameraManager : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera firstPersonCamera;
     [SerializeField] private CinemachineVirtualCamera thirdPersonCamera;
 
-    private bool isFirstPerson = false;
+    [SerializeField] private Canvas CrossAirCanvas;
+
+    public bool IsFirstPerson { get; set; } = false;
     private CinemachinePOV cinemachineFirstPOV;
     private CinemachinePOV cinemachineThirdPOV;
 
@@ -46,11 +48,11 @@ public class PlayerCameraManager : MonoBehaviour
 
     private void ToggleCameraMode(InputAction.CallbackContext context)
     {
-        isFirstPerson = !isFirstPerson;
+        IsFirstPerson = !IsFirstPerson;
         Debug.Log("Change Camera Mode");
 
-        if (isFirstPerson)
-        {
+        if (IsFirstPerson)
+        {            
             SetFirstPersonOrientation();
             FirstPersonMode();
         }
@@ -59,7 +61,6 @@ public class PlayerCameraManager : MonoBehaviour
             SetThirdPersonOrientation();
             ThirdPersonMode();
         }
-        
     }
 
     /// <summary>
@@ -79,12 +80,14 @@ public class PlayerCameraManager : MonoBehaviour
 
     private void FirstPersonMode()
     {
+        CrossAirCanvas.gameObject.SetActive(true);
         firstPersonCamera.Priority = 1;
         thirdPersonCamera.Priority = 0;
         FirstCameraViewEvent?.Invoke();
     }
-    private void ThirdPersonMode()
+    public void ThirdPersonMode()
     {
+        CrossAirCanvas.gameObject.SetActive(false);
         firstPersonCamera.Priority = 0;
         thirdPersonCamera.Priority = 1;
         ThirdCameraViewEvent?.Invoke();

@@ -17,7 +17,10 @@ public class PlayerIdleState : PlayerGroundedState
         movementStateMachine.ReusableData.MovementInput = Vector2.zero;
         movementStateMachine.ReusableData.MovementSpeedModifier = 0f;
 
-        ResetVelocity();
+        if (!movementStateMachine.ReusableData.InAir)
+        {
+            ResetVelocity();
+        }        
     }
 
     public override void Tick()
@@ -29,9 +32,12 @@ public class PlayerIdleState : PlayerGroundedState
             return;
         }
 
-        if (movementStateMachine.ReusableData.CanMove)
+        if (movementStateMachine.ReusableData.CanMove && !movementStateMachine.ReusableData.InAir)
         {
             OnMove();
-        }        
+            return;
+        }
+
+        HandleRotation(GetMovementDirection());
     }
 }

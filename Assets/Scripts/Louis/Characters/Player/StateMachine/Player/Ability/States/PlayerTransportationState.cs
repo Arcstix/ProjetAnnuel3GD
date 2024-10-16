@@ -12,10 +12,11 @@ public class PlayerTransportationState : PlayerAbilityState
     public override void Enter()
     {
         base.Enter();
-
+        _playerAbilityStateMachine.AbilityManager.Rigidbody.useGravity = true;
+        _playerAbilityStateMachine.ReusableStateData.OnTransportation = true;
+        _playerAbilityStateMachine.AbilityManager.CameraManager.IsFirstPerson = false;
+        _playerAbilityStateMachine.AbilityManager.CameraManager.ThirdPersonMode();
         _playerAbilityStateMachine.ReusableStateData.CanMove = false;
-        Debug.Log("Transportation State");
-        Debug.Log(_playerAbilityStateMachine.ReusableStateData.CanMove);
         RemoveInputCallBack();
         _playerAbilityStateMachine.ReusableStateData.CanUseAbility = false;
     }
@@ -23,30 +24,34 @@ public class PlayerTransportationState : PlayerAbilityState
     public override void Exit()
     {
         base.Exit();
-
+        _playerAbilityStateMachine.ReusableStateData.OnTransportation = false;
+        _playerAbilityStateMachine.AbilityManager.Rigidbody.useGravity = true;
         _playerAbilityStateMachine.ReusableStateData.CanMove = true;
-        Debug.Log(_playerAbilityStateMachine.ReusableStateData.CanMove);
     }
 
     public override void FixedTick()
     {
         base.FixedTick();
 
-        float distance = Vector3.Distance(_playerAbilityStateMachine.AbilityManager.LauncherTransform.position, _playerAbilityStateMachine.ReusableStateData.ProjectileRef.transform.position);
+        //float distance = Vector3.Distance(_playerAbilityStateMachine.AbilityManager.LauncherTransform.position, _playerAbilityStateMachine.ReusableStateData.ProjectileRef.transform.position);
 
-        if(distance > 0.5f)
-        {
-            MoveToProjectile();
-            return;
-        }
+        //if(distance > 0.1f)
+        //{
+        MoveToProjectile();
+        //    return;
+        //}
 
-        _playerAbilityStateMachine.ChangeState(_playerAbilityStateMachine.ReloadAbilityState);
+        //_playerAbilityStateMachine.ChangeState(_playerAbilityStateMachine.ReloadAbilityState);
     }
 
     private void MoveToProjectile()
     {
-        Vector3 direction = (_playerAbilityStateMachine.ReusableStateData.ProjectileRef.transform.position - _playerAbilityStateMachine.AbilityManager.LauncherTransform.position).normalized;
-        //direction.y = 0;
+        Vector3 direction = (_playerAbilityStateMachine.ReusableStateData.ProjectileRef.transform.position - _playerAbilityStateMachine.AbilityManager.Rigidbody.worldCenterOfMass).normalized;
+
+        //float distanceRemain = Vector3.Distance(_playerAbilityStateMachine.AbilityManager.transform.position, _playerAbilityStateMachine.ReusableStateData.ProjectileRef.transform.position);
+
+
+        //float speedModifier = _abilityData.TransportationData.SpeedModifier.Evaluate(distanceRemain);
 
         _playerAbilityStateMachine.AbilityManager.Rigidbody.AddForce(direction * _abilityData.TransportationData.BaseSpeed - _playerAbilityStateMachine.AbilityManager.Rigidbody.velocity, ForceMode.VelocityChange);
     }

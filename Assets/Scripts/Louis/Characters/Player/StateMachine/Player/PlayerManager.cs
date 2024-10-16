@@ -13,7 +13,7 @@ public class PlayerManager : MonoBehaviour
 
     public PlayerInput Input { get; private set; }
 
-    public PlayerCameraManager playerCameraManager { get; private set; }
+    public PlayerCameraManager CameraManager { get; private set; }
 
     protected virtual void Awake()
     {
@@ -23,6 +23,6 @@ public class PlayerManager : MonoBehaviour
 
         Rigidbody = GetComponent<Rigidbody>();
 
-        playerCameraManager = GetComponent<PlayerCameraManager>();
+        CameraManager = GetComponent<PlayerCameraManager>();
     }
 }

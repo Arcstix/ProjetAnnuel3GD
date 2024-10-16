@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerAbilityManager : PlayerManager
 {
-    private PlayerAbilityStateMachine playerAbilityStateMachine;
+    public PlayerAbilityStateMachine playerAbilityStateMachine { get; private set; }
     private PlayerMovementManager playerMovementManager;
 
     [field: SerializeField] public Transform LauncherTransform { get; private set; }
@@ -45,9 +45,8 @@ public class PlayerAbilityManager : PlayerManager
 
     public void UseAbility()
     {
-        Debug.Log("Projectile instancier");
-        ProjectileManager projectile = Instantiate(PlayerSO.AbilityData.ShootData.ProjectilePrefab, LauncherTransform.position, Quaternion.identity);
-        projectile.Init(this, LauncherTransform.forward);
+        ProjectileManager projectile = Instantiate(PlayerSO.AbilityData.ShootData.ProjectilePrefab, LauncherTransform.position, Camera.transform.rotation);
+        projectile.Init(this, LauncherTransform.position, Camera.transform.forward);
         ReusableData.ProjectileRef = projectile;
         playerAbilityStateMachine.ChangeState(playerAbilityStateMachine.StandbyState);
     }

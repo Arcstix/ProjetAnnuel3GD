@@ -12,7 +12,10 @@ public class PlayerStandbyState : PlayerAbilityState
     {
         base.Enter();
 
-        AddInputCallBack();
+        if(_abilityData.ShootData.MaxTravelDistance > 100)
+        {
+            AddInputCallBack();
+        }
         AddCancelInputCallBack();
         _playerAbilityStateMachine.ReusableStateData.CanUseAbility = true;
     }
@@ -20,8 +23,10 @@ public class PlayerStandbyState : PlayerAbilityState
     public override void Exit()
     {
         base.Exit();
-
-        RemoveInputCallBack();
+        if (_abilityData.ShootData.MaxTravelDistance > 100)
+        {
+            RemoveInputCallBack();
+        } 
         RemoveCancelInputCallBack();
     }
 }

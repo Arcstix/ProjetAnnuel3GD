@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class ProjectileManager : MonoBehaviour
     private PlayerAbilityManager _playerRef;
     private PlayerAbilityData _abilityData;
     private Vector3 _direction;
+    private Vector3 _spawnPosition;
     private bool _hasCollide = false;
     private bool _isReturning = false;
 
@@ -18,12 +20,24 @@ public class ProjectileManager : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
     }
 
-    public void Init(PlayerAbilityManager playerRef, Vector3 direction, Vector3 target = default)
+    public void Init(PlayerAbilityManager playerRef, Vector3 spawnPosition ,Vector3 direction, Vector3 target = default)
     {
         GetRigidbody();
         _playerRef = playerRef;
         _abilityData = playerRef.PlayerSO.AbilityData;
         _direction = direction;
+        _spawnPosition = spawnPosition;
+    }
+
+    private void Update()
+    {
+        float distanceTravel = Vector3.Distance(_spawnPosition, transform.position);
+
+        if(distanceTravel >= _playerRef.PlayerSO.AbilityData.ShootData.MaxTravelDistance)
+        {
+            _hasCollide = true;
+            _playerRef.playerAbilityStateMachine.ChangeState(_playerRef.playerAbilityStateMachine.TransportationState);
+        }
     }
 
     private void FixedUpdate()
@@ -64,6 +78,15 @@ public class ProjectileManager : MonoBehaviour
             if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Platform"))
             {
                 ProjectileCollide();
+            }
+        }
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (_playerRef.ReusableData.OnTransportation)
+            {
+                _playerRef.CancelCallBack();
+                Destroy(gameObject);
             }
         }
     }

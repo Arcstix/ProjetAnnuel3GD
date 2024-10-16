@@ -80,7 +80,7 @@ public class PlayerMovementState : IState
         movementStateMachine.MovementManager.Rigidbody.AddForce(movementSpeed * targetRotationDirection - currentHorizontalVelocity, ForceMode.VelocityChange);
     }
 
-    private float HandleRotation(Vector3 direction)
+    public float HandleRotation(Vector3 direction)
     {
         float directionAngle = UpdateTargetRotation(direction);
 
@@ -160,7 +160,7 @@ public class PlayerMovementState : IState
         if (shouldConsiderCameraRotation)
         {
             directionAngle = AddCameraRotationToAngle(directionAngle);
-        }       
+        }
 
         if (directionAngle != movementStateMachine.ReusableData.CurrentTargetRotation)
         {

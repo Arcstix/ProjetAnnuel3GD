@@ -76,6 +76,8 @@ public class PlayerAbilityState : IState
         {
             if(_playerAbilityStateMachine.ReusableStateData.ProjectileRef == null)
             {
+                if (!_playerAbilityStateMachine.AbilityManager.CameraManager.IsFirstPerson) { return; }
+
                 _playerAbilityStateMachine.ChangeState(_playerAbilityStateMachine.ShootState);
                 return;
             }
