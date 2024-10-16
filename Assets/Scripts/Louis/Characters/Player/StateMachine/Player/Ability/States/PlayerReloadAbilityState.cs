@@ -14,7 +14,7 @@ public class PlayerReloadAbilityState : PlayerAbilityState
 
         RemoveInputCallBack();
         _playerAbilityStateMachine.ReusableStateData.CanUseAbility = false;
-        _playerAbilityStateMachine.ReusableStateData.ProjectileRef = null;
+        //_playerAbilityStateMachine.ReusableStateData.ProjectileRef = null;
         _playerAbilityStateMachine.ChangeState(_playerAbilityStateMachine.ReadyAbilityState);
     }
 }

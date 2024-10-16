@@ -43,6 +43,22 @@ public class PlayerAbilityManager : PlayerManager
         playerAbilityStateMachine.FixedTick();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(playerAbilityStateMachine.currentState == playerAbilityStateMachine.TransportationState)
+        {
+            if(collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Platform"))
+            {
+                playerAbilityStateMachine.ChangeState(playerAbilityStateMachine.ReloadAbilityState);
+                if(ReusableData.ProjectileRef != null)
+                {
+                    Debug.Log("Projectile détruit");
+                    Destroy(ReusableData.ProjectileRef.gameObject);
+                }
+            }
+        }
+    }
+
     public void UseAbility()
     {
         ProjectileManager projectile = Instantiate(PlayerSO.AbilityData.ShootData.ProjectilePrefab, LauncherTransform.position, Camera.transform.rotation);

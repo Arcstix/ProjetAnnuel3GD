@@ -33,15 +33,10 @@ public class PlayerTransportationState : PlayerAbilityState
     {
         base.FixedTick();
 
-        //float distance = Vector3.Distance(_playerAbilityStateMachine.AbilityManager.LauncherTransform.position, _playerAbilityStateMachine.ReusableStateData.ProjectileRef.transform.position);
-
-        //if(distance > 0.1f)
-        //{
-        MoveToProjectile();
-        //    return;
-        //}
-
-        //_playerAbilityStateMachine.ChangeState(_playerAbilityStateMachine.ReloadAbilityState);
+        if(_playerAbilityStateMachine.ReusableStateData.ProjectileRef != null)
+        {
+            MoveToProjectile();
+        }
     }
 
     private void MoveToProjectile()

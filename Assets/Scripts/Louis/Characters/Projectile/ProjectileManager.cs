@@ -48,16 +48,6 @@ public class ProjectileManager : MonoBehaviour
         }
     }
 
-    private void MoveToTarget(Vector3 target)
-    {
-        //_rb.velocity = target * _shooterRef.ShootPower;
-    }
-
-    private void Throw(Vector3 direction)
-    {
-        //_rb.AddForce(direction * _shooterRef.ShootPower, ForceMode.Impulse);
-    }
-
     private void Move()
     {
         _rb.AddForce(_direction * _abilityData.ShootData.BaseSpeed - _rb.velocity, ForceMode.VelocityChange);
@@ -78,6 +68,7 @@ public class ProjectileManager : MonoBehaviour
             if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Platform"))
             {
                 ProjectileCollide();
+                _playerRef.playerAbilityStateMachine.ChangeState(_playerRef.playerAbilityStateMachine.TransportationState);
             }
         }
 
