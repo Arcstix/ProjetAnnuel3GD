@@ -20,7 +20,7 @@ public class ProjectileManager : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
     }
 
-    public void Init(PlayerAbilityManager playerRef, Vector3 spawnPosition ,Vector3 direction, Vector3 target = default)
+    public void Init(PlayerAbilityManager playerRef, Vector3 spawnPosition, Vector3 direction, Vector3 target = default)
     {
         GetRigidbody();
         _playerRef = playerRef;

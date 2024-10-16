@@ -37,7 +37,8 @@ public class PlayerMovementManager : PlayerManager
     private void Start()
     {
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.IdleState);
-
+        CapsuleColliderUtility.Initialize(gameObject);
+        CapsuleColliderUtility.CalculateCapsuleColliderDimension();
         SetThirdPersonMode();
     }
 
@@ -76,7 +77,6 @@ public class PlayerMovementManager : PlayerManager
     {
         playerMovementStateMachine.FixedTick();
     }
-
 
     private void OnDrawGizmos()
     {

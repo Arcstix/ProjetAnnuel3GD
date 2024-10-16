@@ -7,20 +7,20 @@ using UnityEngine.InputSystem;
 public class PlayerMovementState : IState
 {
     protected PlayerMovementStateMachine movementStateMachine;
-
+    private CapsuleColliderUtility capsuleColliderUtility;
     protected PlayerGroundedData movementData;
 
     #region StateMachine Methods
     public PlayerMovementState(PlayerMovementStateMachine playerMovementStateMachine)
     {
         movementStateMachine = playerMovementStateMachine;
-
+        capsuleColliderUtility = movementStateMachine.MovementManager.CapsuleColliderUtility;
         movementData = playerMovementStateMachine.MovementManager.PlayerSO.GroundedData;
     }
 
     public virtual void Enter()
     {
-        AddInputActionCallbacks();
+        AddInputActionCallbacks();          
     }
 
 
@@ -41,7 +41,7 @@ public class PlayerMovementState : IState
 
     public virtual void FixedTick()
     {
-        if (movementStateMachine.ReusableData.CanMove)
+        if (movementStateMachine.ReusableData.CanMove && !movementStateMachine.ReusableData.InAir)
         {
             Move();
         }

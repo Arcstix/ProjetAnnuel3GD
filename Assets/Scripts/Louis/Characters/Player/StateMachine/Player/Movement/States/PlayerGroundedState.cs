@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,19 +17,19 @@ public class PlayerGroundedState : PlayerMovementState
         if (!movementStateMachine.ReusableData.OnTransportation)
         {
             CheckDistanceToTheGround();
-        }       
+        }
     }
 
-    private void CheckDistanceToTheGround()
+    protected void CheckDistanceToTheGround()
     {
         Vector3 capsuleColliderCenterInWorldSpace = capsuleColliderUtility.CapsuleColliderData.Collider.bounds.center;
 
         Ray downwardsRayFromCapsuleCenter = new Ray(capsuleColliderCenterInWorldSpace, Vector3.down);
 
-        if(Physics.Raycast(downwardsRayFromCapsuleCenter, out RaycastHit hit, capsuleColliderUtility.SlopeData.DistanceGroundCheck, capsuleColliderUtility.LayerData.GroundLayer, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(downwardsRayFromCapsuleCenter, out RaycastHit hit, capsuleColliderUtility.SlopeData.DistanceGroundCheck, capsuleColliderUtility.LayerData.GroundLayer, QueryTriggerInteraction.Ignore))
         {
             movementStateMachine.ReusableData.InAir = false;
-            float groundAngle = Vector3.Angle(hit.normal, -downwardsRayFromCapsuleCenter.direction);         
+            float groundAngle = Vector3.Angle(hit.normal, -downwardsRayFromCapsuleCenter.direction);
 
             float distanceToGround = capsuleColliderUtility.CapsuleColliderData.ColliderCenterInLocalSpace.y * movementStateMachine.MovementManager.transform.localScale.y - hit.distance;
 
@@ -53,10 +50,11 @@ public class PlayerGroundedState : PlayerMovementState
         else
         {
             movementStateMachine.ReusableData.InAir = true;
+            movementStateMachine.MovementManager.Rigidbody.AddForce(Physics.gravity * 3, ForceMode.Acceleration);
         }
     }
 
-    private float SetSlopeSpeedModifierOnAngle(float angle)
+    protected float SetSlopeSpeedModifierOnAngle(float angle)
     {
         float slopeSpeedModifier = movementData.SlopeSpeedAngle.Evaluate(angle);
 
@@ -65,7 +63,7 @@ public class PlayerGroundedState : PlayerMovementState
         return slopeSpeedModifier;
     }
 
-    private void AddVerticalForce(float distanceToGround, float forceMultiplier = 10f)
+    protected void AddVerticalForce(float distanceToGround, float forceMultiplier = 10f)
     {
         float amountToLift = distanceToGround * forceMultiplier - GetCurrentVerticalVelocity().y;
 
