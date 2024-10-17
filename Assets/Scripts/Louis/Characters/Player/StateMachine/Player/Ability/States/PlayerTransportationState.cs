@@ -48,6 +48,6 @@ public class PlayerTransportationState : PlayerAbilityState
 
         //float speedModifier = _abilityData.TransportationData.SpeedModifier.Evaluate(distanceRemain);
 
-        _playerAbilityStateMachine.AbilityManager.Rigidbody.AddForce(direction * _abilityData.TransportationData.BaseSpeed - _playerAbilityStateMachine.AbilityManager.Rigidbody.velocity, ForceMode.VelocityChange);
+        _playerAbilityStateMachine.AbilityManager.Rigidbody.AddForce(direction * metricsManager.CurrentPlayerSO.AbilityData.TransportationData.BaseSpeed - _playerAbilityStateMachine.AbilityManager.Rigidbody.velocity, ForceMode.VelocityChange);
     }
 }

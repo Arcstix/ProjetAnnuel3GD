@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerInput), typeof(PlayerMetricsManager), typeof(PlayerCameraManager))]
 public class PlayerManager : MonoBehaviour
 {
     [field: Header("References")]
-    [field: SerializeField] public PlayerSO PlayerSO { get; private set; }
+    public PlayerMetricsManager Metrics { get; private set; }
 
     public Rigidbody Rigidbody { get; private set; }
 
@@ -17,6 +18,8 @@ public class PlayerManager : MonoBehaviour
 
     protected virtual void Awake()
     {
+        Metrics = GetComponent<PlayerMetricsManager>();
+
         Input = GetComponent<PlayerInput>();
 
         Camera = Camera.main;

@@ -24,7 +24,7 @@ public class ProjectileManager : MonoBehaviour
     {
         GetRigidbody();
         _playerRef = playerRef;
-        _abilityData = playerRef.PlayerSO.AbilityData;
+        _abilityData = playerRef.Metrics.CurrentPlayerSO.AbilityData;
         _direction = direction;
         _spawnPosition = spawnPosition;
     }
@@ -33,7 +33,7 @@ public class ProjectileManager : MonoBehaviour
     {
         float distanceTravel = Vector3.Distance(_spawnPosition, transform.position);
 
-        if(distanceTravel >= _playerRef.PlayerSO.AbilityData.ShootData.MaxTravelDistance)
+        if(distanceTravel >= _playerRef.Metrics.CurrentPlayerSO.AbilityData.ShootData.MaxTravelDistance)
         {
             _hasCollide = true;
             _playerRef.playerAbilityStateMachine.ChangeState(_playerRef.playerAbilityStateMachine.TransportationState);

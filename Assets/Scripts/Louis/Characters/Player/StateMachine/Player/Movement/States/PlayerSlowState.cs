@@ -14,7 +14,7 @@ public class PlayerSlowState : PlayerGroundedState
     {
         base.Enter();
 
-        movementStateMachine.ReusableData.MovementSpeedModifier = movementData.WalkData.SpeedModifier;
+        movementStateMachine.ReusableData.MovementSpeedModifier = metricsManager.CurrentPlayerSO.GroundedData.WalkData.SpeedModifier;
     }
 
     protected override void OnSlowStarted(InputAction.CallbackContext context)

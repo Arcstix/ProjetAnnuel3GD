@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerInput))]
 public class PlayerMovementManager : PlayerManager
 {
     [field : Header("Collider")]

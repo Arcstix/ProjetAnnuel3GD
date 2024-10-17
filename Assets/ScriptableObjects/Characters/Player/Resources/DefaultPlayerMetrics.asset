@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b56aa3a78f68114c8075bea00d5ced9, type: 3}
-  m_Name: Player
+  m_Name: DefaultPlayerMetrics
   m_EditorClassIdentifier: 
+  <DataIdentifier>k__BackingField: 0
   <GroundedData>k__BackingField:
-    <BaseSpeed>k__BackingField: 10
+    <BaseSpeed>k__BackingField: 5
     <SlopeSpeedAngle>k__BackingField:
       serializedVersion: 2
       m_Curve:
@@ -108,7 +109,8 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      <MaxTravelDistance>k__BackingField: 99999
+      <UseAim>k__BackingField: 1
+      <MaxTravelDistance>k__BackingField: 7
     <StandbyData>k__BackingField:
       <MaxConnectionDistance>k__BackingField: 10
       <TimeBeforeAbilityCancel>k__BackingField: 2

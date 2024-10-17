@@ -8,14 +8,14 @@ public class PlayerMovementState : IState
 {
     protected PlayerMovementStateMachine movementStateMachine;
     private CapsuleColliderUtility capsuleColliderUtility;
-    protected PlayerGroundedData movementData;
+    protected PlayerMetricsManager metricsManager;
 
     #region StateMachine Methods
     public PlayerMovementState(PlayerMovementStateMachine playerMovementStateMachine)
     {
         movementStateMachine = playerMovementStateMachine;
         capsuleColliderUtility = movementStateMachine.MovementManager.CapsuleColliderUtility;
-        movementData = playerMovementStateMachine.MovementManager.PlayerSO.GroundedData;
+        metricsManager = playerMovementStateMachine.MovementManager.Metrics;
     }
 
     public virtual void Enter()
@@ -122,7 +122,7 @@ public class PlayerMovementState : IState
 
     protected float GetMovementSpeed()
     {
-        return movementData.BaseSpeed * movementStateMachine.ReusableData.MovementSpeedModifier * movementStateMachine.ReusableData.MovementOnSlopeSpeedModifier;
+        return metricsManager.CurrentPlayerSO.GroundedData.BaseSpeed * movementStateMachine.ReusableData.MovementSpeedModifier * movementStateMachine.ReusableData.MovementOnSlopeSpeedModifier;
     }
 
     protected Vector3 GetCurrentHorizontalVelocity()

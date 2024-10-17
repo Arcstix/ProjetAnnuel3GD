@@ -12,7 +12,7 @@ public class PlayerStandbyState : PlayerAbilityState
     {
         base.Enter();
 
-        if(_abilityData.ShootData.MaxTravelDistance > 100)
+        if(metricsManager.CurrentPlayerSO.AbilityData.ShootData.MaxTravelDistance > 100)
         {
             AddInputCallBack();
         }
@@ -23,7 +23,7 @@ public class PlayerStandbyState : PlayerAbilityState
     public override void Exit()
     {
         base.Exit();
-        if (_abilityData.ShootData.MaxTravelDistance > 100)
+        if (metricsManager.CurrentPlayerSO.AbilityData.ShootData.MaxTravelDistance > 100)
         {
             RemoveInputCallBack();
         } 

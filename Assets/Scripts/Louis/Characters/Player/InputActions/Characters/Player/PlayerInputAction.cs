@@ -89,6 +89,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchAbility"",
+                    ""type"": ""Button"",
+                    ""id"": ""c87b8402-16f8-4233-bed1-f040e519dd60"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -212,6 +221,17 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""CancelAbility"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b2ced4f-0bf1-4b83-83b6-65bb63aca2c8"",
+                    ""path"": ""<Keyboard>/#(R)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchAbility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -227,6 +247,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player_Ability = m_Player.FindAction("Ability", throwIfNotFound: true);
         m_Player_CameraToggle = m_Player.FindAction("CameraToggle", throwIfNotFound: true);
         m_Player_CancelAbility = m_Player.FindAction("CancelAbility", throwIfNotFound: true);
+        m_Player_SwitchAbility = m_Player.FindAction("SwitchAbility", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -295,6 +316,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Ability;
     private readonly InputAction m_Player_CameraToggle;
     private readonly InputAction m_Player_CancelAbility;
+    private readonly InputAction m_Player_SwitchAbility;
     public struct PlayerActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -306,6 +328,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Ability => m_Wrapper.m_Player_Ability;
         public InputAction @CameraToggle => m_Wrapper.m_Player_CameraToggle;
         public InputAction @CancelAbility => m_Wrapper.m_Player_CancelAbility;
+        public InputAction @SwitchAbility => m_Wrapper.m_Player_SwitchAbility;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -336,6 +359,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @CancelAbility.started += instance.OnCancelAbility;
             @CancelAbility.performed += instance.OnCancelAbility;
             @CancelAbility.canceled += instance.OnCancelAbility;
+            @SwitchAbility.started += instance.OnSwitchAbility;
+            @SwitchAbility.performed += instance.OnSwitchAbility;
+            @SwitchAbility.canceled += instance.OnSwitchAbility;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -361,6 +387,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @CancelAbility.started -= instance.OnCancelAbility;
             @CancelAbility.performed -= instance.OnCancelAbility;
             @CancelAbility.canceled -= instance.OnCancelAbility;
+            @SwitchAbility.started -= instance.OnSwitchAbility;
+            @SwitchAbility.performed -= instance.OnSwitchAbility;
+            @SwitchAbility.canceled -= instance.OnSwitchAbility;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -387,5 +416,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnAbility(InputAction.CallbackContext context);
         void OnCameraToggle(InputAction.CallbackContext context);
         void OnCancelAbility(InputAction.CallbackContext context);
+        void OnSwitchAbility(InputAction.CallbackContext context);
     }
 }

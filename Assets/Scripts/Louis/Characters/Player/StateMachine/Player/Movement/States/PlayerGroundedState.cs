@@ -56,7 +56,7 @@ public class PlayerGroundedState : PlayerMovementState
 
     protected float SetSlopeSpeedModifierOnAngle(float angle)
     {
-        float slopeSpeedModifier = movementData.SlopeSpeedAngle.Evaluate(angle);
+        float slopeSpeedModifier = metricsManager.CurrentPlayerSO.GroundedData.SlopeSpeedAngle.Evaluate(angle);
 
         movementStateMachine.ReusableData.MovementOnSlopeSpeedModifier = slopeSpeedModifier;
 

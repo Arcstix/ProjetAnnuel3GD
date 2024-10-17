@@ -61,7 +61,7 @@ public class PlayerAbilityManager : PlayerManager
 
     public void UseAbility()
     {
-        ProjectileManager projectile = Instantiate(PlayerSO.AbilityData.ShootData.ProjectilePrefab, LauncherTransform.position, Camera.transform.rotation);
+        ProjectileManager projectile = Instantiate(Metrics.CurrentPlayerSO.AbilityData.ShootData.ProjectilePrefab, LauncherTransform.position, Camera.transform.rotation);
         projectile.Init(this, LauncherTransform.position, Camera.transform.forward);
         ReusableData.ProjectileRef = projectile;
         playerAbilityStateMachine.ChangeState(playerAbilityStateMachine.StandbyState);

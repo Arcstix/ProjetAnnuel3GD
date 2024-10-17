@@ -7,12 +7,12 @@ using UnityEngine.InputSystem;
 public class PlayerAbilityState : IState
 {
     protected PlayerAbilityStateMachine _playerAbilityStateMachine;
-    protected PlayerAbilityData _abilityData;
+    protected PlayerMetricsManager metricsManager;
 
     public PlayerAbilityState(PlayerAbilityStateMachine playerAbilityStateMachine)
     {
         _playerAbilityStateMachine = playerAbilityStateMachine;
-        _abilityData = _playerAbilityStateMachine.AbilityManager.PlayerSO.AbilityData;
+        metricsManager = _playerAbilityStateMachine.AbilityManager.Metrics;
     }
 
     #region State Methods
@@ -76,7 +76,10 @@ public class PlayerAbilityState : IState
         {
             if(_playerAbilityStateMachine.ReusableStateData.ProjectileRef == null)
             {
-                if (!_playerAbilityStateMachine.AbilityManager.CameraManager.IsFirstPerson) { return; }
+                if (_playerAbilityStateMachine.AbilityManager.Metrics.CurrentPlayerSO.AbilityData.ShootData.UseAim)
+                {
+                    if (!_playerAbilityStateMachine.AbilityManager.CameraManager.IsFirstPerson) { return; }
+                }
 
                 _playerAbilityStateMachine.ChangeState(_playerAbilityStateMachine.ShootState);
                 return;

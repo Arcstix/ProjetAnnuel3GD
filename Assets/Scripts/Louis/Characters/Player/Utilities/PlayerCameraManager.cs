@@ -9,21 +9,27 @@ public class PlayerCameraManager : MonoBehaviour
 
     [SerializeField] private CinemachineVirtualCamera firstPersonCamera;
     [SerializeField] private CinemachineVirtualCamera thirdPersonCamera;
+    [SerializeField] private CinemachineVirtualCamera aimingThirdPersonCamera;
 
     [SerializeField] private Canvas CrossAirCanvas;
 
     public bool IsFirstPerson { get; set; } = false;
+    public bool IsAiming { get; set; } = false;
+    public PlayerInput Input { get; private set; }
+    public PlayerMetricsManager MetricsManager { get; private set; }
+
     private CinemachinePOV cinemachineFirstPOV;
     private CinemachinePOV cinemachineThirdPOV;
-
-    public PlayerInput Input { get; private set; }
+    private CinemachineVirtualCamera currentCamera;
 
     public event Action FirstCameraViewEvent;
     public event Action ThirdCameraViewEvent;
+    public event Action AimingCameraViewEvent;
 
     private void Awake()
     {
         Input = GetComponent<PlayerInput>();
+        MetricsManager = GetComponent<PlayerMetricsManager>();
         Input.InputActionInitialize += SubscriptionInput;
         cinemachineFirstPOV = firstPersonCamera.GetCinemachineComponent<CinemachinePOV>();
         cinemachineThirdPOV = thirdPersonCamera.GetCinemachineComponent<CinemachinePOV>();
@@ -37,7 +43,8 @@ public class PlayerCameraManager : MonoBehaviour
     private void Start()
     {
         firstPersonCamera.Priority = 0;
-        thirdPersonCamera.Priority = 1;        
+        thirdPersonCamera.Priority = 1;
+        currentCamera = thirdPersonCamera;
     }
 
     private void OnDisable()
@@ -48,19 +55,44 @@ public class PlayerCameraManager : MonoBehaviour
 
     private void ToggleCameraMode(InputAction.CallbackContext context)
     {
-        IsFirstPerson = !IsFirstPerson;
-        Debug.Log("Change Camera Mode");
+        if (MetricsManager.CurrentPlayerSO.AbilityData.ShootData.UseAim)
+        {
+            IsFirstPerson = !IsFirstPerson;
+            Debug.Log("Change Camera Mode");
 
-        if (IsFirstPerson)
-        {            
-            SetFirstPersonOrientation();
-            FirstPersonMode();
+            if (IsFirstPerson)
+            {
+                SetFirstPersonOrientation();
+                FirstPersonMode();
+            }
+            else
+            {
+                SetThirdPersonOrientation();
+                ThirdPersonMode();
+            }
         }
         else
         {
-            SetThirdPersonOrientation();
-            ThirdPersonMode();
+            IsAiming = !IsAiming;
+
+            if (IsAiming)
+            {
+                AimingMode();
+            }
+            else
+            {
+                ThirdPersonMode();
+            }
         }
+    }
+
+    private void AimingMode()
+    {
+        CrossAirCanvas.gameObject.SetActive(true);
+        currentCamera.Priority = 0;
+        aimingThirdPersonCamera.Priority = 1;
+        currentCamera = aimingThirdPersonCamera;
+        AimingCameraViewEvent?.Invoke();
     }
 
     /// <summary>
@@ -81,15 +113,17 @@ public class PlayerCameraManager : MonoBehaviour
     private void FirstPersonMode()
     {
         CrossAirCanvas.gameObject.SetActive(true);
+        currentCamera.Priority = 0;
         firstPersonCamera.Priority = 1;
-        thirdPersonCamera.Priority = 0;
+        currentCamera = firstPersonCamera;
         FirstCameraViewEvent?.Invoke();
     }
     public void ThirdPersonMode()
     {
         CrossAirCanvas.gameObject.SetActive(false);
-        firstPersonCamera.Priority = 0;
+        currentCamera.Priority = 0;
         thirdPersonCamera.Priority = 1;
+        currentCamera = thirdPersonCamera;
         ThirdCameraViewEvent?.Invoke();
     }
 }
