@@ -1513,9 +1513,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 541074545288126063, guid: ff100456fc98d7d479ef73ec66c73abb, type: 3}
+      propertyPath: defaultDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145003507725205215, guid: ff100456fc98d7d479ef73ec66c73abb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.661
+      objectReference: {fileID: 0}
     - target: {fileID: 1732760865019061004, guid: ff100456fc98d7d479ef73ec66c73abb, type: 3}
       propertyPath: m_Name
       value: Player No Aim Person Shooter
+      objectReference: {fileID: 0}
+    - target: {fileID: 2813951882849633868, guid: ff100456fc98d7d479ef73ec66c73abb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.661
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132944607750803944, guid: ff100456fc98d7d479ef73ec66c73abb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.053
+      objectReference: {fileID: 0}
+    - target: {fileID: 3393297912041155987, guid: ff100456fc98d7d479ef73ec66c73abb, type: 3}
+      propertyPath: m_HorizontalAxis.m_MaxValue
+      value: 304.4509
+      objectReference: {fileID: 0}
+    - target: {fileID: 3393297912041155987, guid: ff100456fc98d7d479ef73ec66c73abb, type: 3}
+      propertyPath: m_HorizontalAxis.m_MinValue
+      value: 244.4509
       objectReference: {fileID: 0}
     - target: {fileID: 3413064759245323201, guid: ff100456fc98d7d479ef73ec66c73abb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1556,6 +1580,18 @@ PrefabInstance:
     - target: {fileID: 3413064759245323201, guid: ff100456fc98d7d479ef73ec66c73abb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5376559355905120182, guid: ff100456fc98d7d479ef73ec66c73abb, type: 3}
+      propertyPath: m_CameraDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6930524594713134743, guid: ff100456fc98d7d479ef73ec66c73abb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.661
+      objectReference: {fileID: 0}
+    - target: {fileID: 6930524594713134743, guid: ff100456fc98d7d479ef73ec66c73abb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2969,7 +3005,7 @@ Transform:
   m_GameObject: {fileID: 1343503516}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.4, y: 0.7, z: -6}
+  m_LocalPosition: {x: 0.661, y: 0.7, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

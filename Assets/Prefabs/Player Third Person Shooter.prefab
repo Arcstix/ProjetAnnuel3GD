@@ -612,6 +612,7 @@ GameObject:
   - component: {fileID: 4107030500221720}
   - component: {fileID: 415770682461197313}
   - component: {fileID: 7556957535381773879}
+  - component: {fileID: 7310211455230455098}
   m_Layer: 0
   m_Name: Player StateMachine
   m_TagString: Player
@@ -699,7 +700,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 271fb0a440ec7e9498f02e914dc10e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <PlayerSO>k__BackingField: {fileID: 11400000, guid: 54ff1ab850d69e945bc998b3cd03c27e, type: 2}
   <CapsuleColliderUtility>k__BackingField:
     <DefaultColliderData>k__BackingField:
       <Height>k__BackingField: 1
@@ -742,6 +742,7 @@ MonoBehaviour:
     <MaxHorizontalValue>k__BackingField: 30
   firstPersonCamera: {fileID: 4468714192708405448}
   thirdPersonCamera: {fileID: 1271743964615574822}
+  aimingThirdPersonCamera: {fileID: 0}
   CrossAirCanvas: {fileID: 6508200038273804606}
 --- !u!114 &7556957535381773879
 MonoBehaviour:
@@ -755,8 +756,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab5976a3cfd31a4c8f24f37e288d2a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <PlayerSO>k__BackingField: {fileID: 11400000, guid: 54ff1ab850d69e945bc998b3cd03c27e, type: 2}
   <LauncherTransform>k__BackingField: {fileID: 2800221788799060418}
+--- !u!114 &7310211455230455098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4266467369048588076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a0b13edd55e034281e7085c96a164e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultPlayerSO: {fileID: 11400000, guid: 54ff1ab850d69e945bc998b3cd03c27e, type: 2}
+  playerSOs: []
 --- !u!1 &5052320687008667972
 GameObject:
   m_ObjectHideFlags: 0
