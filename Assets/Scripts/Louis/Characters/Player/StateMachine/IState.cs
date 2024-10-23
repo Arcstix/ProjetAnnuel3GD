@@ -8,6 +8,9 @@ public interface IState
 
     public void Exit();
 
+    /// <summary>
+    /// Method usefull for input that need to be read every frame
+    /// </summary>
     public void HandleInput();
 
     public void Tick();
