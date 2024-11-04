@@ -102,7 +102,11 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
+<<<<<<< Updated upstream
                     ""id"": ""a7691737-91f5-4f13-9064-2847f8285466"",
+=======
+                    ""id"": ""44ec42c2-cc3f-4e12-987d-fd785c608b06"",
+>>>>>>> Stashed changes
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -190,7 +194,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d8bd97ac-aeb7-4be5-91fb-f97fa3aad5c1"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/#(M)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -244,7 +248,11 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+<<<<<<< Updated upstream
                     ""id"": ""ac1f8f2b-7920-4123-b454-e46c2f279389"",
+=======
+                    ""id"": ""226d0694-b560-4f2b-8711-c67711f90d8d"",
+>>>>>>> Stashed changes
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
