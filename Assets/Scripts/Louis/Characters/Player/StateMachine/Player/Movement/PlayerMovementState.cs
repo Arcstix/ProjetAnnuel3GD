@@ -41,7 +41,7 @@ public class PlayerMovementState : IState
 
     public virtual void FixedTick()
     {
-        if (movementStateMachine.ReusableData.CanMove && !movementStateMachine.ReusableData.InAir)
+        if (movementStateMachine.ReusableData.CanMove)
         {
             Move();
         }

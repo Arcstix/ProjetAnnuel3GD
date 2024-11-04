@@ -20,7 +20,7 @@ public class PlayerIdleState : PlayerGroundedState
         if (!movementStateMachine.ReusableData.InAir)
         {
             ResetVelocity();
-        }        
+        }
     }
 
     public override void Tick()
@@ -32,7 +32,7 @@ public class PlayerIdleState : PlayerGroundedState
             return;
         }
 
-        if (movementStateMachine.ReusableData.CanMove && !movementStateMachine.ReusableData.InAir)
+        if (movementStateMachine.ReusableData.CanMove)
         {
             OnMove();
             return;

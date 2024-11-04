@@ -12,11 +12,17 @@ public class PlayerTransportationState : PlayerAbilityState
     public override void Enter()
     {
         base.Enter();
-        _playerAbilityStateMachine.AbilityManager.Rigidbody.useGravity = true;
+        //_playerAbilityStateMachine.AbilityManager.Rigidbody.useGravity = false;
         _playerAbilityStateMachine.ReusableStateData.OnTransportation = true;
-        _playerAbilityStateMachine.AbilityManager.CameraManager.IsFirstPerson = false;
-        _playerAbilityStateMachine.AbilityManager.CameraManager.ThirdPersonMode();
+
+        if(_playerAbilityStateMachine.AbilityManager.CameraManager != null)
+        {
+            _playerAbilityStateMachine.AbilityManager.CameraManager.IsFirstPerson = false;
+            _playerAbilityStateMachine.AbilityManager.CameraManager.ThirdPersonMode();
+        }
+        
         _playerAbilityStateMachine.ReusableStateData.CanMove = false;
+        
         RemoveInputCallBack();
         _playerAbilityStateMachine.ReusableStateData.CanUseAbility = false;
     }
@@ -25,7 +31,7 @@ public class PlayerTransportationState : PlayerAbilityState
     {
         base.Exit();
         _playerAbilityStateMachine.ReusableStateData.OnTransportation = false;
-        _playerAbilityStateMachine.AbilityManager.Rigidbody.useGravity = true;
+        //_playerAbilityStateMachine.AbilityManager.Rigidbody.useGravity = true;
         _playerAbilityStateMachine.ReusableStateData.CanMove = true;
     }
 

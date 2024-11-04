@@ -38,29 +38,39 @@ public class PlayerMovementManager : PlayerManager
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.IdleState);
         CapsuleColliderUtility.Initialize(gameObject);
         CapsuleColliderUtility.CalculateCapsuleColliderDimension();
-        SetThirdPersonMode();
+
+        if (CameraManager != null)
+        {
+            SetThirdPersonMode();
+        }
     }
 
     
     private void OnEnable()
     {
-        CameraManager.FirstCameraViewEvent += SetFirstPersonMode;
-        CameraManager.ThirdCameraViewEvent += SetThirdPersonMode;
+        if (CameraManager != null)
+        {
+            CameraManager.FirstCameraViewEvent += SetFirstPersonMode;
+            CameraManager.ThirdCameraViewEvent += SetThirdPersonMode;
+        }
     }
 
     private void OnDisable()
     {
-        CameraManager.FirstCameraViewEvent -= SetFirstPersonMode;
-        CameraManager.ThirdCameraViewEvent -= SetThirdPersonMode;
+        if (CameraManager != null)
+        {
+            CameraManager.FirstCameraViewEvent -= SetFirstPersonMode;
+            CameraManager.ThirdCameraViewEvent -= SetThirdPersonMode;
+        }
     }
 
-    protected void SetFirstPersonMode()
+    private void SetFirstPersonMode()
     {
         ReusableData.CanMove = false;
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.IdleState);
     }
 
-    protected void SetThirdPersonMode()
+    private void SetThirdPersonMode()
     {
         ReusableData.CanMove = true;
     }

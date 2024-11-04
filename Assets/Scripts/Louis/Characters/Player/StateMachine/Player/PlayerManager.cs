@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerInput), typeof(PlayerMetricsManager), typeof(PlayerCameraManager))]
+[RequireComponent(typeof(PlayerInput), typeof(PlayerMetricsManager))]
 public class PlayerManager : MonoBehaviour
 {
     [field: Header("References")]

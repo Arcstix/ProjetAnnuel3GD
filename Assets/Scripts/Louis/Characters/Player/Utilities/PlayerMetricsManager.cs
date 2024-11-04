@@ -35,11 +35,6 @@ public class PlayerMetricsManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        
-    }
-
     public void AddDurability(int abilityID, float durability)
     {
         abilityDictionary[abilityID] += durability;
