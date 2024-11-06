@@ -25,7 +25,7 @@ public class PlayerTransportationState : PlayerAbilityState
         
         RemoveInputCallBack();
         _playerAbilityStateMachine.ReusableStateData.CanUseAbility = false;
-        _playerAbilityStateMachine.AbilityManager.Input.PlayerActions.Jump.started += ChangeToPlayerJumpState;
+        //_playerAbilityStateMachine.AbilityManager.Input.PlayerActions.Jump.started += ChangeToPlayerJumpState;
     }
 
     public override void Exit()

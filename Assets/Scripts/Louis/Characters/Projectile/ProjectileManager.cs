@@ -31,26 +31,40 @@ public class ProjectileManager : MonoBehaviour
 
     private void Update()
     {
+        if (_abilityData.TransportationData.AutomaticTransportation)
+        {
+            if (CheckTravelDistance())
+            {
+                _hasCollide = true;
+                _playerRef.playerAbilityStateMachine.ChangeState(_playerRef.playerAbilityStateMachine.TransportationState);
+            }           
+        }
+    }
+
+    private bool CheckTravelDistance()
+    {
         float distanceTravel = Vector3.Distance(_spawnPosition, transform.position);
 
-        if(distanceTravel >= _playerRef.Metrics.CurrentPlayerSO.AbilityData.ShootData.MaxTravelDistance)
-        {
-            _hasCollide = true;
-            _playerRef.playerAbilityStateMachine.ChangeState(_playerRef.playerAbilityStateMachine.TransportationState);
-        }
+        return distanceTravel >= _playerRef.Metrics.CurrentPlayerSO.AbilityData.ShootData.MaxTravelDistance;
+        
     }
 
     private void FixedUpdate()
     {
         if (!_hasCollide)
         {
-            Move();
+            MoveWithoutGravity();
         }
     }
 
-    private void Move()
+    private void MoveWithoutGravity()
     {
         _rb.AddForce(_direction * _abilityData.ShootData.BaseSpeed - _rb.velocity, ForceMode.VelocityChange);
+    }
+
+    private void MoveWithGravity()
+    {
+        _rb.AddForce(_direction * _abilityData.ShootData.BaseSpeed + Physics.gravity - _rb.velocity, ForceMode.Acceleration);
     }
 
     public void ReturnToPlayer()

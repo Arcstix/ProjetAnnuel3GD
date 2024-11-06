@@ -14,7 +14,7 @@ public class PlayerReadyAbilityState : PlayerAbilityState
 
         AddInputCallBack();
         _playerAbilityStateMachine.ReusableStateData.CanUseAbility = true;
-        //_playerAbilityStateMachine.ReusableStateData.ProjectileRef = null;
+        _playerAbilityStateMachine.ReusableStateData.ProjectileRef = null;
     }
 
     public override void Exit()
