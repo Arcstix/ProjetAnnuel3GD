@@ -8,4 +8,8 @@ public class PlayerJumpState : PlayerAirState
     {
 
     }
+    public override void Enter()
+    {
+        SlowDown();
+    }
 }
