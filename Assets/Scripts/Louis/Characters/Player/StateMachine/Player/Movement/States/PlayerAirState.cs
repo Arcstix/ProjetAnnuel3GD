@@ -12,7 +12,7 @@ public class PlayerAirState : PlayerMovementState
     {
         if (movementStateMachine.ReusableData.InAir && !movementStateMachine.ReusableData.OnTransportation)
         {
-           //movementStateMachine.ReusableData.Stat
+            //movementStateMachine.MovementManager.Rigidbody.AddForce(movementStateMachine.MovementManager.Rigidbody.velocity.y * movementStateMachine.MovementManager.Rigidbody.GravityModifier); //trouver le chemin jusqu'à GroundedData qui a la modifier de gravité
         }
     }
 }
