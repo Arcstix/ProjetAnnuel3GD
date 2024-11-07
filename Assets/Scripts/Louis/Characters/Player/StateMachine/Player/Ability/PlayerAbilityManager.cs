@@ -16,31 +16,30 @@ public class PlayerAbilityManager : PlayerManager
     {
         base.Awake();
         playerMovementManager = GetComponent<PlayerMovementManager>();
+    }
 
-        if(ReusableData == null)
+    public void Init()
+    {
+        if (ReusableData == null)
         {
             ReusableData = new PlayerReusableStateData();
             playerMovementManager.ReusableData = ReusableData;
         }
 
         playerAbilityStateMachine = new PlayerAbilityStateMachine(this);
-    }
-
-    private void Start()
-    {
         playerAbilityStateMachine.ChangeState(playerAbilityStateMachine.ReadyAbilityState);
     }
 
     private void Update()
     {
-        playerAbilityStateMachine.HandleInput();
+        playerAbilityStateMachine?.HandleInput();
 
-        playerAbilityStateMachine.Tick();
+        playerAbilityStateMachine?.Tick();
     }
 
     private void FixedUpdate()
     {
-        playerAbilityStateMachine.FixedTick();
+        playerAbilityStateMachine?.FixedTick();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -57,6 +56,11 @@ public class PlayerAbilityManager : PlayerManager
                 }
             }
         }
+    }
+
+    public void ChangeMovementToJump()
+    {
+        
     }
 
     public void UseAbility()

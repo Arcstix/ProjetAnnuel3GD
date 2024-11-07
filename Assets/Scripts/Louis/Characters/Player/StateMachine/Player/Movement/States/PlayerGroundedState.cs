@@ -4,11 +4,18 @@ using UnityEngine.InputSystem;
 public class PlayerGroundedState : PlayerMovementState
 {
     private CapsuleColliderUtility capsuleColliderUtility;
+    private PlayerGroundedData groundedData;
 
     public PlayerGroundedState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
     {
         capsuleColliderUtility = movementStateMachine.MovementManager.CapsuleColliderUtility;
+        groundedData = movementStateMachine.MovementManager.Metrics.CurrentPlayerSO.GroundedData;
     }
+
+    //public PlayerGroundedData GetGroundedData()
+    //{
+    //    return ;
+    //}
 
     public override void FixedTick()
     {
@@ -28,6 +35,7 @@ public class PlayerGroundedState : PlayerMovementState
 
         if (Physics.Raycast(downwardsRayFromCapsuleCenter, out RaycastHit hit, capsuleColliderUtility.SlopeData.DistanceGroundCheck, capsuleColliderUtility.LayerData.GroundLayer, QueryTriggerInteraction.Ignore))
         {
+            movementStateMachine.ReusableData.CanMove = true;
             movementStateMachine.ReusableData.InAir = false;
             float groundAngle = Vector3.Angle(hit.normal, -downwardsRayFromCapsuleCenter.direction);
 
@@ -55,7 +63,7 @@ public class PlayerGroundedState : PlayerMovementState
 
             // !!! A METTRE DANS PLAYER AIR STATE
             //movementStateMachine.MovementManager.Metrics.CurrentPlayerSO.GroundedData.GravityModifier.Evaluate()
-            movementStateMachine.MovementManager.Rigidbody.AddForce(Physics.gravity * movementStateMachine.MovementManager.Metrics.CurrentPlayerSO.GroundedData.GravityMultiplier, ForceMode.Acceleration);
+            movementStateMachine.MovementManager.Rigidbody.AddForce(Physics.gravity * groundedData.GravityMultiplier, ForceMode.Acceleration);
         }
     }
 

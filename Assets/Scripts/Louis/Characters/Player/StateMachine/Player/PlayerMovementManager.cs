@@ -12,19 +12,24 @@ public class PlayerMovementManager : PlayerManager
     private PlayerAbilityManager playerAbilityManager;
 
     public PlayerReusableStateData ReusableData { get; set; }
+    public PlayerMovementStateMachine PlayerMovementStateMachine { get => playerMovementStateMachine; }
 
     protected override void Awake()
     {
         base.Awake();
         playerAbilityManager = GetComponent<PlayerAbilityManager>();
+    }
 
-        if(ReusableData == null)
+    public void Init()
+    {
+        if (ReusableData == null)
         {
             ReusableData = new PlayerReusableStateData();
             playerAbilityManager.ReusableData = ReusableData;
         }
 
         playerMovementStateMachine = new PlayerMovementStateMachine(this);
+        playerMovementStateMachine.ChangeState(playerMovementStateMachine.IdleState);
     }
 
     private void OnValidate()
@@ -34,8 +39,7 @@ public class PlayerMovementManager : PlayerManager
     }
 
     private void Start()
-    {
-        playerMovementStateMachine.ChangeState(playerMovementStateMachine.IdleState);
+    {        
         CapsuleColliderUtility.Initialize(gameObject);
         CapsuleColliderUtility.CalculateCapsuleColliderDimension();
 
@@ -77,14 +81,14 @@ public class PlayerMovementManager : PlayerManager
 
     private void Update()
     {
-        playerMovementStateMachine.HandleInput();
+        playerMovementStateMachine?.HandleInput();
 
-        playerMovementStateMachine.Tick();
+        playerMovementStateMachine?.Tick();
     }
 
     private void FixedUpdate()
     {
-        playerMovementStateMachine.FixedTick();
+        playerMovementStateMachine?.FixedTick();
     }
 
     private void OnDrawGizmos()

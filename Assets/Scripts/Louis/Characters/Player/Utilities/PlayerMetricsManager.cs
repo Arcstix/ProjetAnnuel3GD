@@ -14,15 +14,9 @@ public class PlayerMetricsManager : MonoBehaviour
 
     private Dictionary<int, float> abilityDictionary = new Dictionary<int, float>();
 
-    private void Start()
+    public void Init()
     {
         InitializeDictionary();
-
-        InitializePlayerMetrics();
-    }
-
-    private void InitializePlayerMetrics()
-    {
         CurrentPlayerSO = defaultPlayerSO;
         CurrentAbilityID = 0;
     }

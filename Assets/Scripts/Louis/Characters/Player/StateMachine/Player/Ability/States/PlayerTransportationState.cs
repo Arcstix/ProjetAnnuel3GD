@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerTransportationState : PlayerAbilityState
 {
@@ -25,7 +26,14 @@ public class PlayerTransportationState : PlayerAbilityState
         
         RemoveInputCallBack();
         _playerAbilityStateMachine.ReusableStateData.CanUseAbility = false;
-        //_playerAbilityStateMachine.AbilityManager.Input.PlayerActions.Jump.started += ChangeToPlayerJumpState; //change to ? demand� � Louis
+        _playerAbilityStateMachine.AbilityManager.Input.PlayerActions.Jump.started += ChangeToPlayerJumpState;
+        
+    }
+
+    private void ChangeToPlayerJumpState(InputAction.CallbackContext context)
+    {
+        _playerAbilityStateMachine.ChangeState(_playerAbilityStateMachine.ReloadAbilityState); // On sort de l'état transportation
+        // On ordonne de passer dans l'état jump dans la statemachine du movement
     }
 
     public override void Exit()
