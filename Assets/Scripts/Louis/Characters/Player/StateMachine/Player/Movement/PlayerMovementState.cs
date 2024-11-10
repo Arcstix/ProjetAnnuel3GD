@@ -33,7 +33,7 @@ public class PlayerMovementState : IState
     {
         Debug.Log(movementStateMachine.ReusableData.CanMove);
 
-        if (!movementStateMachine.ReusableData.CanMove && movementStateMachine.currentState != movementStateMachine.IdleState)
+        if (!movementStateMachine.ReusableData.CanMove && movementStateMachine.currentState != movementStateMachine.IdleState && !movementStateMachine.ReusableData.InAir)
         {
             movementStateMachine.ChangeState(movementStateMachine.IdleState);
         }

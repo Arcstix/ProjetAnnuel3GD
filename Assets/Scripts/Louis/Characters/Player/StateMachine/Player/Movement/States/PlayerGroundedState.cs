@@ -58,12 +58,7 @@ public class PlayerGroundedState : PlayerMovementState
         else
         {
             movementStateMachine.ReusableData.InAir = true;
-            //movementStateMachine.MovementManager.Rigidbody.AddForce(movementStateMachine.MovementManager.Rigidbody.velocity.y * )
-            //Debug.Log(movementStateMachine.MovementManager.Rigidbody.velocity);
-
-            // !!! A METTRE DANS PLAYER AIR STATE
-            //movementStateMachine.MovementManager.Metrics.CurrentPlayerSO.GroundedData.GravityModifier.Evaluate()
-            movementStateMachine.MovementManager.Rigidbody.AddForce(Physics.gravity * groundedData.GravityMultiplier, ForceMode.Acceleration);
+            movementStateMachine.MovementManager.Rigidbody.AddForce(Physics.gravity * movementStateMachine.MovementManager.Metrics.CurrentPlayerSO.GroundedData.GravityMultiplier, ForceMode.Acceleration);
         }
     }
 

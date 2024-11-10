@@ -14,6 +14,7 @@ public class PlayerReusableStateData
     public bool CanUseAbility { get; set; }
     public bool CanMove { get; set; }
     public bool OnTransportation { get; set; } = false;
+    public bool ShouldSlowDown { get; set; } = false;
     public float CurrentTargetRotation { get; set; }
     public float TimeToReachTargetRotation { get; set; }
     public float DampedTargetRotationPassedTime { get; set; }

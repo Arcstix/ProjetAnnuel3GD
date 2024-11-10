@@ -96,4 +96,9 @@ public class PlayerMovementManager : PlayerManager
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position + CapsuleColliderUtility.CapsuleColliderData.Collider.bounds.center, transform.position + (CapsuleColliderUtility.CapsuleColliderData.Collider.bounds.center - new Vector3(0f, CapsuleColliderUtility.SlopeData.DistanceGroundCheck, 0f)));
     }
+    
+    //public void ChangeToPlayerFallingState()
+    //{
+        
+    //}
 }

@@ -34,6 +34,7 @@ public class PlayerTransportationState : PlayerAbilityState
     {
         _playerAbilityStateMachine.ChangeState(_playerAbilityStateMachine.ReloadAbilityState); // On sort de l'état transportation
         // On ordonne de passer dans l'état jump dans la statemachine du movement
+
     }
 
     public override void Exit()
@@ -42,6 +43,7 @@ public class PlayerTransportationState : PlayerAbilityState
         _playerAbilityStateMachine.ReusableStateData.OnTransportation = false;
         //_playerAbilityStateMachine.AbilityManager.Rigidbody.useGravity = true;
         _playerAbilityStateMachine.ReusableStateData.CanMove = true;
+        _playerAbilityStateMachine.ReusableStateData.ShouldSlowDown = true;
     }
 
     public override void FixedTick()
@@ -65,4 +67,5 @@ public class PlayerTransportationState : PlayerAbilityState
 
         _playerAbilityStateMachine.AbilityManager.Rigidbody.AddForce(direction * metricsManager.CurrentPlayerSO.AbilityData.TransportationData.BaseSpeed - _playerAbilityStateMachine.AbilityManager.Rigidbody.velocity, ForceMode.VelocityChange);
     }
+
 }
