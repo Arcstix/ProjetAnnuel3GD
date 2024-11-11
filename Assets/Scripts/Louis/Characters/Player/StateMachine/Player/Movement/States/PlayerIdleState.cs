@@ -14,10 +14,10 @@ public class PlayerIdleState : PlayerGroundedState
     {
         base.Enter();
         Debug.Log("Idle State");
-        movementStateMachine.ReusableData.MovementInput = Vector2.zero;
-        movementStateMachine.ReusableData.MovementSpeedModifier = 0f;
+        reusableData.MovementInput = Vector2.zero;
+        reusableData.MovementSpeedModifier = 0f;
 
-        if (!movementStateMachine.ReusableData.InAir)
+        if (!reusableData.InAir)
         {
             ResetVelocity();
         }
@@ -27,12 +27,12 @@ public class PlayerIdleState : PlayerGroundedState
     {
         base.Tick();
 
-        if(movementStateMachine.ReusableData.MovementInput == Vector2.zero)
+        if(reusableData.MovementInput == Vector2.zero)
         {
             return;
         }
 
-        if (movementStateMachine.ReusableData.CanMove)
+        if (reusableData.CanMove && !reusableData.InAir)
         {
             OnMove();
             return;

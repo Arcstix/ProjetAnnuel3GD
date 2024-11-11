@@ -11,9 +11,9 @@ public class PlayerShootState : PlayerAbilityState
     public override void Enter()
     {
         base.Enter();
-
-        RemoveInputCallBack();
-        _playerAbilityStateMachine.ReusableStateData.CanUseAbility = false;
+        Debug.Log("Shoot");
+        RemoveInputShoot();
+        reusableData.CanUseAbility = false;
         _playerAbilityStateMachine.AbilityManager.UseAbility();
     }
 }

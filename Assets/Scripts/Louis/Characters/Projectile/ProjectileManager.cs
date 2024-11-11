@@ -37,7 +37,7 @@ public class ProjectileManager : MonoBehaviour
             {
                 _hasCollide = true;
                 _playerRef.playerAbilityStateMachine.ChangeState(_playerRef.playerAbilityStateMachine.TransportationState);
-            }           
+            }
         }
     }
 
@@ -45,15 +45,18 @@ public class ProjectileManager : MonoBehaviour
     {
         float distanceTravel = Vector3.Distance(_spawnPosition, transform.position);
 
-        return distanceTravel >= _playerRef.Metrics.CurrentPlayerSO.AbilityData.ShootData.MaxTravelDistance;
-        
+        return distanceTravel >= _playerRef.Metrics.CurrentPlayerSO.AbilityData.ShootData.MaxTravelDistance;        
     }
 
     private void FixedUpdate()
     {
-        if (!_hasCollide)
+        if (!_hasCollide && !CheckTravelDistance())
         {
             MoveWithoutGravity();
+        }
+        else if(!_hasCollide && CheckTravelDistance())
+        {
+            MoveWithGravity();
         }
     }
 
@@ -82,7 +85,7 @@ public class ProjectileManager : MonoBehaviour
             if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Platform"))
             {
                 ProjectileCollide();
-                _playerRef.playerAbilityStateMachine.ChangeState(_playerRef.playerAbilityStateMachine.TransportationState);
+                //_playerRef.playerAbilityStateMachine.ChangeState(_playerRef.playerAbilityStateMachine.TransportationState);
             }
         }
 

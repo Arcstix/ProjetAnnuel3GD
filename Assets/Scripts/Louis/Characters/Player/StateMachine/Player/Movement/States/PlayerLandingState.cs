@@ -11,15 +11,7 @@ public class PlayerLandingState : PlayerAirState
     public override void Enter()
     {
         base.Enter();
-     
+        Debug.Log("Landing");
+        movementStateMachine.ChangeState(movementStateMachine.IdleState);     
     }
-    public override void Tick()
-    {
-        base.Tick();
-    }
-    public override void Exit()
-    {
-        base.Exit();
-    }
-
 }

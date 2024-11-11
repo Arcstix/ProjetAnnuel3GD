@@ -13,7 +13,7 @@ public class PlayerRunningState : PlayerGroundedState
     {
         base.Enter();
         Debug.Log("Running State");
-        movementStateMachine.ReusableData.MovementSpeedModifier = metricsManager.CurrentPlayerSO.GroundedData.RunData.SpeedModifier;
+        reusableData.MovementSpeedModifier = metricsManager.CurrentPlayerSO.GroundedData.RunData.SpeedModifier;
     }
 
     protected override void OnSlowStarted(InputAction.CallbackContext context)

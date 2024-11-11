@@ -11,9 +11,9 @@ public class PlayerReloadAbilityState : PlayerAbilityState
     public override void Enter()
     {
         base.Enter();
-
-        RemoveInputCallBack();
-        _playerAbilityStateMachine.ReusableStateData.CanUseAbility = false;
+        Debug.Log("Reload");
+        RemoveInputShoot();
+        reusableData.CanUseAbility = false;
         //_playerAbilityStateMachine.ReusableStateData.ProjectileRef = null;
         _playerAbilityStateMachine.ChangeState(_playerAbilityStateMachine.ReadyAbilityState);
     }

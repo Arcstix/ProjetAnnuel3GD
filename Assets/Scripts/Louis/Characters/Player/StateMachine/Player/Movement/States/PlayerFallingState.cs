@@ -12,34 +12,50 @@ public class PlayerFallingState : PlayerAirState
     {
         base.Enter();
         Debug.Log("Falling");
-
+        Debug.Log("SlowDown : " + reusableData.ShouldSlowDown);
+        reusableData.MovementSpeedModifier = metricsManager.CurrentPlayerSO.GroundedData.RunData.SpeedModifier;
     }
+
+    public override void Exit()
+    {
+        ResetSlowDown();
+        base.Exit();
+    }
+
     public override void Tick()
     {
         base.Tick();
-        
-        if (movementStateMachine.ReusableData.ShouldSlowDown)
+
+        HandleRotation(GetMovementDirection());
+
+        if (reusableData.ShouldSlowDown)
         {
             SlowDown();
             timer += Time.deltaTime;
             if (timer >= 2)
             {
-                movementStateMachine.ReusableData.ShouldSlowDown = false;
-                timer = 0;
+                Debug.Log("Timer écoulé");
+                ResetSlowDown();
             }
         }
+        else
+        {
+            rigidbody.AddForce(Physics.gravity * groundedData.GravityMultiplier, ForceMode.Acceleration);
+        }
+
         if(!movementStateMachine.ReusableData.InAir)
         {
             movementStateMachine.ChangeState(movementStateMachine.LandingState);
         }
     }
 
-
-    public override void Exit()
+    /// <summary>
+    /// Reset le timer et le booléen SlowDown à false.
+    /// </summary>
+    private void ResetSlowDown()
     {
-        base.Exit();
+        movementStateMachine.ReusableData.ShouldSlowDown = false;
+        timer = 0;
     }
-
-    
 }
 

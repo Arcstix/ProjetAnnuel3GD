@@ -11,16 +11,15 @@ public class PlayerReadyAbilityState : PlayerAbilityState
     public override void Enter()
     {
         base.Enter();
-
-        AddInputCallBack();
-        _playerAbilityStateMachine.ReusableStateData.CanUseAbility = true;
-        _playerAbilityStateMachine.ReusableStateData.ProjectileRef = null;
+        Debug.Log("Ready");
+        AddInputAbility();
+        reusableData.CanUseAbility = true;
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        RemoveInputCallBack();
+        RemoveInputShoot();
     }
 }

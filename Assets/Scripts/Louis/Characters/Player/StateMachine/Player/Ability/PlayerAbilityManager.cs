@@ -12,6 +12,7 @@ public class PlayerAbilityManager : PlayerManager
 
     public PlayerReusableStateData ReusableData { get; set; }
 
+    public IState currentState;
     protected override void Awake()
     {
         base.Awake();
@@ -35,6 +36,11 @@ public class PlayerAbilityManager : PlayerManager
         playerAbilityStateMachine?.HandleInput();
 
         playerAbilityStateMachine?.Tick();
+
+        if(playerAbilityStateMachine != null)
+        {
+            currentState = playerAbilityStateMachine.currentState;
+        }
     }
 
     private void FixedUpdate()
@@ -51,7 +57,6 @@ public class PlayerAbilityManager : PlayerManager
                 playerAbilityStateMachine.ChangeState(playerAbilityStateMachine.ReloadAbilityState);
                 if(ReusableData.ProjectileRef != null)
                 {
-                    Debug.Log("Projectile détruit");
                     Destroy(ReusableData.ProjectileRef.gameObject);
                 }
             }

@@ -11,22 +11,22 @@ public class PlayerStandbyState : PlayerAbilityState
     public override void Enter()
     {
         base.Enter();
-
-        if(metricsManager.CurrentPlayerSO.AbilityData.ShootData.MaxTravelDistance > 100)
+        Debug.Log("Stanby");
+        if (!metricsManager.CurrentPlayerSO.AbilityData.TransportationData.AutomaticTransportation)
         {
-            AddInputCallBack();
+            AddInputAbility();
         }
-        AddCancelInputCallBack();
-        _playerAbilityStateMachine.ReusableStateData.CanUseAbility = true;
+        AddCancelInput();
+        reusableData.CanUseAbility = true;
     }
 
     public override void Exit()
     {
         base.Exit();
-        if (metricsManager.CurrentPlayerSO.AbilityData.ShootData.MaxTravelDistance > 100)
+        if (!metricsManager.CurrentPlayerSO.AbilityData.TransportationData.AutomaticTransportation)
         {
-            RemoveInputCallBack();
+            RemoveInputShoot();
         } 
-        RemoveCancelInputCallBack();
+        RemoveCancelInput();
     }
 }

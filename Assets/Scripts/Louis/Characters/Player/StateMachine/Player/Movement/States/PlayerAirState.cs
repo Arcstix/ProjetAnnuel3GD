@@ -2,31 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script utilisé quand le joueur est dans les airs
+/// </summary>
 public class PlayerAirState : PlayerMovementState
 {
     //créer des raccourcies pour les variables
+    protected CapsuleColliderUtility capsuleColliderUtility;
     protected PlayerGroundedData groundedData;
     protected float timer;
-    override public void Tick()
-    {
-        base.Tick();
-        Debug.Log("AirState");
-        if (movementStateMachine.ReusableData.InAir && movementStateMachine.currentState != movementStateMachine.FallingState && !movementStateMachine.ReusableData.OnTransportation)
-        {
-            movementStateMachine.ChangeState(movementStateMachine.FallingState);
-        }
-    }
+
     public PlayerAirState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
     {
         //faire le chemin ici comme ça = une fois
+        capsuleColliderUtility = movementStateMachine.MovementManager.CapsuleColliderUtility;
         groundedData = movementStateMachine.MovementManager.Metrics.CurrentPlayerSO.GroundedData;
     }
+
+    public override void FixedTick()
+    {
+        base.FixedTick();
+
+        if (!reusableData.OnTransportation)
+        {
+            CheckDistanceToTheGround();
+        }
+    }
+
+    protected void CheckDistanceToTheGround()
+    {
+        Vector3 capsuleColliderCenterInWorldSpace = capsuleColliderUtility.CapsuleColliderData.Collider.bounds.center;
+
+        Ray downwardsRayFromCapsuleCenter = new Ray(capsuleColliderCenterInWorldSpace, Vector3.down);
+
+        if (Physics.Raycast(downwardsRayFromCapsuleCenter, out RaycastHit hit, capsuleColliderUtility.SlopeData.DistanceGroundCheck, capsuleColliderUtility.LayerData.GroundLayer, QueryTriggerInteraction.Ignore))
+        {
+            reusableData.CanMove = true;
+            reusableData.InAir = false;
+        }
+        else
+        {
+            reusableData.InAir = true;
+        }
+    }
+
     public void SlowDown()
     {
-     
-         //ajouter une force pour ralentir le joueur avec une animation curve
-         movementStateMachine.MovementManager.Rigidbody.AddForce(new Vector3(0,movementStateMachine.MovementManager.Rigidbody.velocity.y * groundedData.GravityModifier.Evaluate(timer),0)); //trouver le chemin jusqu'à GroundedData qui a la modifier de gravité
-         Debug.Log("SlowDown");
-     
+        //ajouter une force pour ralentir le joueur avec une animation curve
+        rigidbody.AddForce(Physics.gravity * groundedData.GravityMultiplier * groundedData.GravityModifier.Evaluate(timer) - GetCurrentVerticalVelocity(), ForceMode.Acceleration);
     }
 }

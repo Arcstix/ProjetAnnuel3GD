@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerSlowState : PlayerGroundedState
+public class PlayerWalkState : PlayerGroundedState
 {
-    public PlayerSlowState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+    public PlayerWalkState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
     {
     }
 
@@ -14,7 +14,7 @@ public class PlayerSlowState : PlayerGroundedState
     {
         base.Enter();
 
-        movementStateMachine.ReusableData.MovementSpeedModifier = metricsManager.CurrentPlayerSO.GroundedData.WalkData.SpeedModifier;
+        reusableData.MovementSpeedModifier = metricsManager.CurrentPlayerSO.GroundedData.WalkData.SpeedModifier;
     }
 
     protected override void OnSlowStarted(InputAction.CallbackContext context)

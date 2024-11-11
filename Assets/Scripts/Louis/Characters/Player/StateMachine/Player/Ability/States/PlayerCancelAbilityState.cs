@@ -11,9 +11,14 @@ public class PlayerCancelAbilityState : PlayerAbilityState
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("Rappel Objet");
+        RemoveInputShoot();
+        reusableData.CanUseAbility = false;
+    }
 
-        RemoveInputCallBack();
-        _playerAbilityStateMachine.ReusableStateData.CanUseAbility = false;
-        _playerAbilityStateMachine.ReusableStateData.ProjectileRef.ReturnToPlayer();
+    public override void FixedTick()
+    {
+        base.FixedTick();
+        reusableData.ProjectileRef.ReturnToPlayer();
     }
 }

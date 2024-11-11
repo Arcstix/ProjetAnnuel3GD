@@ -6,13 +6,28 @@ using UnityEngine.InputSystem;
 
 public class PlayerAbilityState : IState
 {
+    // Mettre les variables "protected" pour que les States puissent y avoir accès.
     protected PlayerAbilityStateMachine _playerAbilityStateMachine;
     protected PlayerMetricsManager metricsManager;
+    protected PlayerInput input;
+    protected PlayerCameraManager cameraManager;
+    protected PlayerReusableStateData reusableData;
+    protected Rigidbody rigidbody;
 
+    // Sert à la création de raccourcie.
+    // ATTENTION AUX SCRIPTABLES OBJECTS QUI PEUVENT TOTALEMENT CHANGER COMME LE PLAYERSO !
     public PlayerAbilityState(PlayerAbilityStateMachine playerAbilityStateMachine)
     {
         _playerAbilityStateMachine = playerAbilityStateMachine;
         metricsManager = _playerAbilityStateMachine.AbilityManager.Metrics;
+        input = _playerAbilityStateMachine.AbilityManager.Input;
+        reusableData = _playerAbilityStateMachine.ReusableStateData;
+        rigidbody = _playerAbilityStateMachine.AbilityManager.Rigidbody;
+
+        if(_playerAbilityStateMachine.AbilityManager.CameraManager != null)
+        {
+            cameraManager = _playerAbilityStateMachine.AbilityManager.CameraManager;
+        }
     }
 
     #region State Methods
@@ -44,41 +59,60 @@ public class PlayerAbilityState : IState
 
     #region Ability methods
 
-    protected virtual void AddInputCallBack()
+    /// <summary>
+    /// On s'abonne à l'input qui sert à utiliser l'abilité.
+    /// </summary>
+    protected virtual void AddInputAbility()
     {
-        _playerAbilityStateMachine.AbilityManager.Input.PlayerActions.Ability.started += TryAbility;
+        input.PlayerActions.Ability.started += TryAbility;
     }
 
-    protected virtual void AddCancelInputCallBack()
+    /// <summary>
+    /// On se désabonne à l'input qui sert à shoot.
+    /// </summary>
+    protected virtual void RemoveInputShoot()
     {
-        _playerAbilityStateMachine.AbilityManager.Input.PlayerActions.CancelAbility.started += CancelAbility;
+        input.PlayerActions.Ability.started -= TryAbility;
     }
 
-
-    protected virtual void RemoveInputCallBack()
+    /// <summary>
+    /// On s'abonne à l'input qui sert à ramener l'objet.
+    /// </summary>
+    protected virtual void AddCancelInput()
     {
-        _playerAbilityStateMachine.AbilityManager.Input.PlayerActions.Ability.started -= TryAbility;
+        input.PlayerActions.CancelAbility.started += CancelAbility;
     }
 
-    protected virtual void RemoveCancelInputCallBack()
+    /// <summary>
+    /// On se désabonne à l'input qui sert à ramener l'objet.
+    /// </summary>
+    protected virtual void RemoveCancelInput()
     {
-        _playerAbilityStateMachine.AbilityManager.Input.PlayerActions.CancelAbility.started -= CancelAbility;
+        input.PlayerActions.CancelAbility.started -= CancelAbility;
     }
 
+    /// <summary>
+    /// Si le joueur appuie sur l'input CancelAbility alors qu'on est abonné on change d'état
+    /// </summary>
+    /// <param name="context"></param>
     private void CancelAbility(InputAction.CallbackContext context)
     {
         _playerAbilityStateMachine.ChangeState(_playerAbilityStateMachine.CancelAbilityState);
     }
 
+    /// <summary>
+    /// Méthode appelé quand le joueur est abonné à l'input Ability et appuie sur l'input
+    /// </summary>
+    /// <param name="context"></param>
     private void TryAbility(InputAction.CallbackContext context)
     {
-        if (_playerAbilityStateMachine.ReusableStateData.CanUseAbility)
+        if (reusableData.CanUseAbility)
         {
-            if(_playerAbilityStateMachine.ReusableStateData.ProjectileRef == null)
+            if(reusableData.ProjectileRef == null)
             {
-                if (_playerAbilityStateMachine.AbilityManager.Metrics.CurrentPlayerSO.AbilityData.ShootData.UseAim)
+                if (metricsManager.CurrentPlayerSO.AbilityData.ShootData.UseAim)
                 {
-                    if (!_playerAbilityStateMachine.AbilityManager.CameraManager.IsFirstPerson) { return; }
+                    if (cameraManager != null && !cameraManager.IsFirstPerson) { return; }
                 }
 
                 _playerAbilityStateMachine.ChangeState(_playerAbilityStateMachine.ShootState);

@@ -13,44 +13,48 @@ public class PlayerTransportationState : PlayerAbilityState
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("Transportation");
         //_playerAbilityStateMachine.AbilityManager.Rigidbody.useGravity = false;
-        _playerAbilityStateMachine.ReusableStateData.OnTransportation = true;
+        reusableData.OnTransportation = true;
 
-        if(_playerAbilityStateMachine.AbilityManager.CameraManager != null)
+        SetCameraToThirdPerson(); // Méthode utilisé seulement si on a un script CameraManager attaché
+
+        reusableData.CanMove = false;
+        RemoveInputShoot();
+        reusableData.CanUseAbility = false;
+        input.PlayerActions.Jump.started += ChangeToPlayerJumpState;
+
+    }
+
+    private void SetCameraToThirdPerson()
+    {
+        if (cameraManager != null)
         {
-            _playerAbilityStateMachine.AbilityManager.CameraManager.IsFirstPerson = false;
-            _playerAbilityStateMachine.AbilityManager.CameraManager.ThirdPersonMode();
+            cameraManager.IsFirstPerson = false;
+            cameraManager.ThirdPersonMode();
         }
-        
-        _playerAbilityStateMachine.ReusableStateData.CanMove = false;
-        
-        RemoveInputCallBack();
-        _playerAbilityStateMachine.ReusableStateData.CanUseAbility = false;
-        _playerAbilityStateMachine.AbilityManager.Input.PlayerActions.Jump.started += ChangeToPlayerJumpState;
-        
     }
 
     private void ChangeToPlayerJumpState(InputAction.CallbackContext context)
     {
         _playerAbilityStateMachine.ChangeState(_playerAbilityStateMachine.ReloadAbilityState); // On sort de l'état transportation
         // On ordonne de passer dans l'état jump dans la statemachine du movement
-
     }
 
     public override void Exit()
     {
         base.Exit();
-        _playerAbilityStateMachine.ReusableStateData.OnTransportation = false;
+        reusableData.OnTransportation = false;
         //_playerAbilityStateMachine.AbilityManager.Rigidbody.useGravity = true;
-        _playerAbilityStateMachine.ReusableStateData.CanMove = true;
-        _playerAbilityStateMachine.ReusableStateData.ShouldSlowDown = true;
+        reusableData.CanMove = true;
+        reusableData.ShouldSlowDown = true;
     }
 
     public override void FixedTick()
     {
         base.FixedTick();
 
-        if(_playerAbilityStateMachine.ReusableStateData.ProjectileRef != null)
+        if(reusableData.ProjectileRef != null)
         {
             MoveToProjectile();
         }
@@ -58,14 +62,14 @@ public class PlayerTransportationState : PlayerAbilityState
 
     private void MoveToProjectile()
     {
-        Vector3 direction = (_playerAbilityStateMachine.ReusableStateData.ProjectileRef.transform.position - _playerAbilityStateMachine.AbilityManager.Rigidbody.worldCenterOfMass).normalized;
+        Vector3 direction = (reusableData.ProjectileRef.transform.position - rigidbody.worldCenterOfMass).normalized;
 
         //float distanceRemain = Vector3.Distance(_playerAbilityStateMachine.AbilityManager.transform.position, _playerAbilityStateMachine.ReusableStateData.ProjectileRef.transform.position);
 
 
         //float speedModifier = _abilityData.TransportationData.SpeedModifier.Evaluate(distanceRemain);
 
-        _playerAbilityStateMachine.AbilityManager.Rigidbody.AddForce(direction * metricsManager.CurrentPlayerSO.AbilityData.TransportationData.BaseSpeed - _playerAbilityStateMachine.AbilityManager.Rigidbody.velocity, ForceMode.VelocityChange);
+        rigidbody.AddForce(direction * metricsManager.CurrentPlayerSO.AbilityData.TransportationData.BaseSpeed - rigidbody.velocity, ForceMode.VelocityChange);
     }
 
 }

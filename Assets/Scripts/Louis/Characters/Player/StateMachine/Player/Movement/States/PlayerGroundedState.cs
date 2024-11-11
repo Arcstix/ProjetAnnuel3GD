@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Script utilisé quand le joueur est dans une state lié au sol
+/// </summary>
 public class PlayerGroundedState : PlayerMovementState
 {
     private CapsuleColliderUtility capsuleColliderUtility;
@@ -12,14 +15,11 @@ public class PlayerGroundedState : PlayerMovementState
         groundedData = movementStateMachine.MovementManager.Metrics.CurrentPlayerSO.GroundedData;
     }
 
-    //public PlayerGroundedData GetGroundedData()
-    //{
-    //    return ;
-    //}
-
     public override void FixedTick()
     {
         base.FixedTick();
+
+        Debug.Log("Etat Transportation " + movementStateMachine.ReusableData.OnTransportation);
 
         if (!movementStateMachine.ReusableData.OnTransportation)
         {
@@ -35,8 +35,8 @@ public class PlayerGroundedState : PlayerMovementState
 
         if (Physics.Raycast(downwardsRayFromCapsuleCenter, out RaycastHit hit, capsuleColliderUtility.SlopeData.DistanceGroundCheck, capsuleColliderUtility.LayerData.GroundLayer, QueryTriggerInteraction.Ignore))
         {
-            movementStateMachine.ReusableData.CanMove = true;
-            movementStateMachine.ReusableData.InAir = false;
+            reusableData.CanMove = true;
+            reusableData.InAir = false;
             float groundAngle = Vector3.Angle(hit.normal, -downwardsRayFromCapsuleCenter.direction);
 
             float distanceToGround = capsuleColliderUtility.CapsuleColliderData.ColliderCenterInLocalSpace.y * movementStateMachine.MovementManager.transform.localScale.y - hit.distance;
@@ -57,16 +57,15 @@ public class PlayerGroundedState : PlayerMovementState
         }
         else
         {
-            movementStateMachine.ReusableData.InAir = true;
-            movementStateMachine.MovementManager.Rigidbody.AddForce(Physics.gravity * movementStateMachine.MovementManager.Metrics.CurrentPlayerSO.GroundedData.GravityMultiplier, ForceMode.Acceleration);
+            reusableData.InAir = true;
         }
     }
 
     protected float SetSlopeSpeedModifierOnAngle(float angle)
     {
-        float slopeSpeedModifier = metricsManager.CurrentPlayerSO.GroundedData.SlopeSpeedAngle.Evaluate(angle);
+        float slopeSpeedModifier = groundedData.SlopeSpeedAngle.Evaluate(angle);
 
-        movementStateMachine.ReusableData.MovementOnSlopeSpeedModifier = slopeSpeedModifier;
+        reusableData.MovementOnSlopeSpeedModifier = slopeSpeedModifier;
 
         return slopeSpeedModifier;
     }
@@ -77,26 +76,29 @@ public class PlayerGroundedState : PlayerMovementState
 
         Vector3 liftForce = new Vector3(0f, amountToLift, 0f);
 
-        movementStateMachine.MovementManager.Rigidbody.AddForce(liftForce, ForceMode.VelocityChange);
+        rigidbody.AddForce(liftForce, ForceMode.VelocityChange);
     }
 
-    protected override void AddInputActionCallbacks()
+    protected override void SubscribeInputAction()
     {
-        base.AddInputActionCallbacks();
+        base.SubscribeInputAction();
 
-        movementStateMachine.MovementManager.Input.PlayerActions.Movement.canceled += OnMovementCanceled;
+        input.PlayerActions.Movement.canceled += OnMovementCanceled;
     }
 
-    protected override void RemoveInputActionCallbacks()
+    protected override void UnsubscribeInputAction()
     {
-        base.RemoveInputActionCallbacks();
+        base.UnsubscribeInputAction();
 
-        movementStateMachine.MovementManager.Input.PlayerActions.Movement.canceled -= OnMovementCanceled;
+        input.PlayerActions.Movement.canceled -= OnMovementCanceled;
     }
 
     protected virtual void OnMovementCanceled(InputAction.CallbackContext context)
     {
-        movementStateMachine.ChangeState(movementStateMachine.IdleState);
+        if (!reusableData.InAir && movementStateMachine.currentState != movementStateMachine.IdleState)
+        {
+            movementStateMachine.ChangeState(movementStateMachine.IdleState);
+        }
     }
 
     /// <summary>
@@ -104,7 +106,7 @@ public class PlayerGroundedState : PlayerMovementState
     /// </summary>
     protected virtual void OnMove()
     {
-        if (movementStateMachine.ReusableData.ShouldWalk)
+        if (reusableData.ShouldWalk)
         {
             movementStateMachine.ChangeState(movementStateMachine.SlowState);
             return;
