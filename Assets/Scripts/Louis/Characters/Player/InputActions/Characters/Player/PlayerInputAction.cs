@@ -46,16 +46,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Zoom"",
-                    ""type"": ""Value"",
-                    ""id"": ""1ed233cd-6c1c-45ed-8b4d-f80af3ac905a"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": ""Clamp(min=-0.1,max=0.1),Invert"",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""SlowToggle"",
+                    ""name"": ""WalkToggle"",
                     ""type"": ""Button"",
                     ""id"": ""7fac0d22-402f-4679-b899-3db442abfc04"",
                     ""expectedControlType"": ""Button"",
@@ -64,7 +55,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Ability"",
+                    ""name"": ""Throw/RecallRight"",
                     ""type"": ""Button"",
                     ""id"": ""b424d459-e885-4d6d-8783-77cf0972ce52"",
                     ""expectedControlType"": ""Button"",
@@ -73,9 +64,27 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""CameraToggle"",
+                    ""name"": ""Throw/RecallLeft"",
                     ""type"": ""Button"",
-                    ""id"": ""ce194096-1956-4135-a950-66b61da22aae"",
+                    ""id"": ""8c22dd22-e0c0-40ec-b9d4-45bb885829f3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AttractionRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""33d9deac-5310-4f6c-80f2-d9b48e3e98aa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AttractionLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""312cac2c-cdc5-4c36-8152-ed9d476c1bd2"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -103,6 +112,24 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""44ec42c2-cc3f-4e12-987d-fd785c608b06"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""Value"",
+                    ""id"": ""1ed233cd-6c1c-45ed-8b4d-f80af3ac905a"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": ""Clamp(min=-0.1,max=0.1),Invert"",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""CameraToggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""ce194096-1956-4135-a950-66b61da22aae"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -167,6 +194,17 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""01ede8f5-3a25-489f-b637-a51d4d4a2c9c"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""8c13ca7e-e6ab-49a6-8319-48857f6c2cbb"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
@@ -178,12 +216,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d18ae059-0ca5-4409-8012-43e895847a83"",
-                    ""path"": ""<Mouse>/scroll/y"",
+                    ""id"": ""b7d7b27a-fe9c-40bc-bb87-ccc1e4112a14"",
+                    ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Zoom"",
+                    ""action"": ""FreeLook"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -194,29 +232,40 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SlowToggle"",
+                    ""action"": ""WalkToggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f5c2d149-e97c-4bcb-99e7-59ca68b689bb"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WalkToggle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""46a0eeee-fe28-4eb7-8728-e8da1780ba92"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Ability"",
+                    ""action"": ""Throw/RecallRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f7a40088-e463-48fb-8afc-6071ebc9ef29"",
-                    ""path"": ""<Keyboard>/#(A)"",
+                    ""id"": ""116877c3-1f77-4b0f-83be-d7b1c4d72732"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CameraToggle"",
+                    ""action"": ""Throw/RecallRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -244,12 +293,122 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""80b31d52-f2f9-4cf4-8e74-fbfada95b0cb"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchAbility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""226d0694-b560-4f2b-8711-c67711f90d8d"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""caf67bc2-a3d2-465d-bc25-ca67f867a716"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b64c54e8-0983-4c6e-a193-cc7ffb2520b2"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Throw/RecallLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""245487ae-857a-466f-8477-c2d7933074c1"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Throw/RecallLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5a164121-e92b-4397-ab8a-317b6b9fe071"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttractionRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b395b725-d16e-46d7-a437-5afb302f3e45"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttractionRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8e0f40ce-d59b-4230-a0f5-1442a0955b82"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttractionLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4ae72019-0c1a-4c3e-9c4d-1213e0582c6c"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttractionLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7a40088-e463-48fb-8afc-6071ebc9ef29"",
+                    ""path"": ""<Keyboard>/#(A)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraToggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d18ae059-0ca5-4409-8012-43e895847a83"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -262,13 +421,16 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_FreeLook = m_Player.FindAction("FreeLook", throwIfNotFound: true);
-        m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
-        m_Player_SlowToggle = m_Player.FindAction("SlowToggle", throwIfNotFound: true);
-        m_Player_Ability = m_Player.FindAction("Ability", throwIfNotFound: true);
-        m_Player_CameraToggle = m_Player.FindAction("CameraToggle", throwIfNotFound: true);
+        m_Player_WalkToggle = m_Player.FindAction("WalkToggle", throwIfNotFound: true);
+        m_Player_ThrowRecallRight = m_Player.FindAction("Throw/RecallRight", throwIfNotFound: true);
+        m_Player_ThrowRecallLeft = m_Player.FindAction("Throw/RecallLeft", throwIfNotFound: true);
+        m_Player_AttractionRight = m_Player.FindAction("AttractionRight", throwIfNotFound: true);
+        m_Player_AttractionLeft = m_Player.FindAction("AttractionLeft", throwIfNotFound: true);
         m_Player_CancelAbility = m_Player.FindAction("CancelAbility", throwIfNotFound: true);
         m_Player_SwitchAbility = m_Player.FindAction("SwitchAbility", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
+        m_Player_CameraToggle = m_Player.FindAction("CameraToggle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -332,26 +494,32 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_FreeLook;
-    private readonly InputAction m_Player_Zoom;
-    private readonly InputAction m_Player_SlowToggle;
-    private readonly InputAction m_Player_Ability;
-    private readonly InputAction m_Player_CameraToggle;
+    private readonly InputAction m_Player_WalkToggle;
+    private readonly InputAction m_Player_ThrowRecallRight;
+    private readonly InputAction m_Player_ThrowRecallLeft;
+    private readonly InputAction m_Player_AttractionRight;
+    private readonly InputAction m_Player_AttractionLeft;
     private readonly InputAction m_Player_CancelAbility;
     private readonly InputAction m_Player_SwitchAbility;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_Zoom;
+    private readonly InputAction m_Player_CameraToggle;
     public struct PlayerActions
     {
         private @PlayerInputAction m_Wrapper;
         public PlayerActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @FreeLook => m_Wrapper.m_Player_FreeLook;
-        public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
-        public InputAction @SlowToggle => m_Wrapper.m_Player_SlowToggle;
-        public InputAction @Ability => m_Wrapper.m_Player_Ability;
-        public InputAction @CameraToggle => m_Wrapper.m_Player_CameraToggle;
+        public InputAction @WalkToggle => m_Wrapper.m_Player_WalkToggle;
+        public InputAction @ThrowRecallRight => m_Wrapper.m_Player_ThrowRecallRight;
+        public InputAction @ThrowRecallLeft => m_Wrapper.m_Player_ThrowRecallLeft;
+        public InputAction @AttractionRight => m_Wrapper.m_Player_AttractionRight;
+        public InputAction @AttractionLeft => m_Wrapper.m_Player_AttractionLeft;
         public InputAction @CancelAbility => m_Wrapper.m_Player_CancelAbility;
         public InputAction @SwitchAbility => m_Wrapper.m_Player_SwitchAbility;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
+        public InputAction @CameraToggle => m_Wrapper.m_Player_CameraToggle;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -367,18 +535,21 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @FreeLook.started += instance.OnFreeLook;
             @FreeLook.performed += instance.OnFreeLook;
             @FreeLook.canceled += instance.OnFreeLook;
-            @Zoom.started += instance.OnZoom;
-            @Zoom.performed += instance.OnZoom;
-            @Zoom.canceled += instance.OnZoom;
-            @SlowToggle.started += instance.OnSlowToggle;
-            @SlowToggle.performed += instance.OnSlowToggle;
-            @SlowToggle.canceled += instance.OnSlowToggle;
-            @Ability.started += instance.OnAbility;
-            @Ability.performed += instance.OnAbility;
-            @Ability.canceled += instance.OnAbility;
-            @CameraToggle.started += instance.OnCameraToggle;
-            @CameraToggle.performed += instance.OnCameraToggle;
-            @CameraToggle.canceled += instance.OnCameraToggle;
+            @WalkToggle.started += instance.OnWalkToggle;
+            @WalkToggle.performed += instance.OnWalkToggle;
+            @WalkToggle.canceled += instance.OnWalkToggle;
+            @ThrowRecallRight.started += instance.OnThrowRecallRight;
+            @ThrowRecallRight.performed += instance.OnThrowRecallRight;
+            @ThrowRecallRight.canceled += instance.OnThrowRecallRight;
+            @ThrowRecallLeft.started += instance.OnThrowRecallLeft;
+            @ThrowRecallLeft.performed += instance.OnThrowRecallLeft;
+            @ThrowRecallLeft.canceled += instance.OnThrowRecallLeft;
+            @AttractionRight.started += instance.OnAttractionRight;
+            @AttractionRight.performed += instance.OnAttractionRight;
+            @AttractionRight.canceled += instance.OnAttractionRight;
+            @AttractionLeft.started += instance.OnAttractionLeft;
+            @AttractionLeft.performed += instance.OnAttractionLeft;
+            @AttractionLeft.canceled += instance.OnAttractionLeft;
             @CancelAbility.started += instance.OnCancelAbility;
             @CancelAbility.performed += instance.OnCancelAbility;
             @CancelAbility.canceled += instance.OnCancelAbility;
@@ -388,6 +559,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Zoom.started += instance.OnZoom;
+            @Zoom.performed += instance.OnZoom;
+            @Zoom.canceled += instance.OnZoom;
+            @CameraToggle.started += instance.OnCameraToggle;
+            @CameraToggle.performed += instance.OnCameraToggle;
+            @CameraToggle.canceled += instance.OnCameraToggle;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -398,18 +575,21 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @FreeLook.started -= instance.OnFreeLook;
             @FreeLook.performed -= instance.OnFreeLook;
             @FreeLook.canceled -= instance.OnFreeLook;
-            @Zoom.started -= instance.OnZoom;
-            @Zoom.performed -= instance.OnZoom;
-            @Zoom.canceled -= instance.OnZoom;
-            @SlowToggle.started -= instance.OnSlowToggle;
-            @SlowToggle.performed -= instance.OnSlowToggle;
-            @SlowToggle.canceled -= instance.OnSlowToggle;
-            @Ability.started -= instance.OnAbility;
-            @Ability.performed -= instance.OnAbility;
-            @Ability.canceled -= instance.OnAbility;
-            @CameraToggle.started -= instance.OnCameraToggle;
-            @CameraToggle.performed -= instance.OnCameraToggle;
-            @CameraToggle.canceled -= instance.OnCameraToggle;
+            @WalkToggle.started -= instance.OnWalkToggle;
+            @WalkToggle.performed -= instance.OnWalkToggle;
+            @WalkToggle.canceled -= instance.OnWalkToggle;
+            @ThrowRecallRight.started -= instance.OnThrowRecallRight;
+            @ThrowRecallRight.performed -= instance.OnThrowRecallRight;
+            @ThrowRecallRight.canceled -= instance.OnThrowRecallRight;
+            @ThrowRecallLeft.started -= instance.OnThrowRecallLeft;
+            @ThrowRecallLeft.performed -= instance.OnThrowRecallLeft;
+            @ThrowRecallLeft.canceled -= instance.OnThrowRecallLeft;
+            @AttractionRight.started -= instance.OnAttractionRight;
+            @AttractionRight.performed -= instance.OnAttractionRight;
+            @AttractionRight.canceled -= instance.OnAttractionRight;
+            @AttractionLeft.started -= instance.OnAttractionLeft;
+            @AttractionLeft.performed -= instance.OnAttractionLeft;
+            @AttractionLeft.canceled -= instance.OnAttractionLeft;
             @CancelAbility.started -= instance.OnCancelAbility;
             @CancelAbility.performed -= instance.OnCancelAbility;
             @CancelAbility.canceled -= instance.OnCancelAbility;
@@ -419,6 +599,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Zoom.started -= instance.OnZoom;
+            @Zoom.performed -= instance.OnZoom;
+            @Zoom.canceled -= instance.OnZoom;
+            @CameraToggle.started -= instance.OnCameraToggle;
+            @CameraToggle.performed -= instance.OnCameraToggle;
+            @CameraToggle.canceled -= instance.OnCameraToggle;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -440,12 +626,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnFreeLook(InputAction.CallbackContext context);
-        void OnZoom(InputAction.CallbackContext context);
-        void OnSlowToggle(InputAction.CallbackContext context);
-        void OnAbility(InputAction.CallbackContext context);
-        void OnCameraToggle(InputAction.CallbackContext context);
+        void OnWalkToggle(InputAction.CallbackContext context);
+        void OnThrowRecallRight(InputAction.CallbackContext context);
+        void OnThrowRecallLeft(InputAction.CallbackContext context);
+        void OnAttractionRight(InputAction.CallbackContext context);
+        void OnAttractionLeft(InputAction.CallbackContext context);
         void OnCancelAbility(InputAction.CallbackContext context);
         void OnSwitchAbility(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnZoom(InputAction.CallbackContext context);
+        void OnCameraToggle(InputAction.CallbackContext context);
     }
 }

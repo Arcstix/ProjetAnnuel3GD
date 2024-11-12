@@ -64,7 +64,7 @@ public class PlayerAbilityState : IState
     /// </summary>
     protected virtual void AddInputAbility()
     {
-        input.PlayerActions.Ability.started += TryAbility;
+        input.PlayerActions.ThrowRecallRight.started += TryAbility;
     }
 
     /// <summary>
@@ -72,7 +72,7 @@ public class PlayerAbilityState : IState
     /// </summary>
     protected virtual void RemoveInputShoot()
     {
-        input.PlayerActions.Ability.started -= TryAbility;
+        input.PlayerActions.ThrowRecallRight.started -= TryAbility;
     }
 
     /// <summary>

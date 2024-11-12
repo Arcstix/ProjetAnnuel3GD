@@ -228,12 +228,12 @@ public class PlayerMovementState : IState
 
     protected virtual void SubscribeInputAction()
     {
-        input.PlayerActions.SlowToggle.started += OnSlowStarted;
+        input.PlayerActions.WalkToggle.started += OnSlowStarted;
     }
 
     protected virtual void UnsubscribeInputAction()
     {
-        input.PlayerActions.SlowToggle.started -= OnSlowStarted;
+        input.PlayerActions.WalkToggle.started -= OnSlowStarted;
     }
 
     #endregion
