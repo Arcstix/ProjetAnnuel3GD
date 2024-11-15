@@ -6,9 +6,11 @@ public class PlayerAbilityStateMachine : StateMachine
 {
     public PlayerAbilityManager AbilityManager { get; }
 
+    public bool IsRight { get; }
+
     public PlayerReusableStateData ReusableStateData { get; }
 
-    public PlayerReadyAbilityState ReadyAbilityState { get; }
+    public PlayerReadyState ReadyState { get; }
 
     public PlayerShootState ShootState { get; }
 
@@ -16,20 +18,24 @@ public class PlayerAbilityStateMachine : StateMachine
 
     public PlayerTransportationState TransportationState { get; }
 
-    public PlayerCancelAbilityState CancelAbilityState { get; }
+    public PlayerRecallState RecallState { get; }
 
-    public PlayerReloadAbilityState ReloadAbilityState { get; }
+    public PlayerAttractionState AttractionState { get; }
 
-    public PlayerAbilityStateMachine(PlayerAbilityManager playerStateMachine)
+    public PlayerReloadState ReloadState { get; }
+
+    public PlayerAbilityStateMachine(PlayerAbilityManager playerStateMachine, bool isRight)
     {
         AbilityManager = playerStateMachine;
+        IsRight = isRight;
         ReusableStateData = playerStateMachine.ReusableData;
 
-        ReadyAbilityState = new PlayerReadyAbilityState(this);
+        ReadyState = new PlayerReadyState(this);
         ShootState = new PlayerShootState(this);
         StandbyState = new PlayerStandbyState(this);
         TransportationState = new PlayerTransportationState(this);
-        CancelAbilityState = new PlayerCancelAbilityState(this);
-        ReloadAbilityState = new PlayerReloadAbilityState(this);
+        RecallState = new PlayerRecallState(this);
+        AttractionState = new PlayerAttractionState(this);
+        ReloadState = new PlayerReloadState(this);
     }
 }

@@ -69,16 +69,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "CancelAbility",
-                    "type": "Button",
-                    "id": "2b191055-e0f5-4ab1-8d00-2af2128a77fb",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SwitchAbility",
+                    "name": "SwitchAttraction",
                     "type": "Button",
                     "id": "c87b8402-16f8-4233-bed1-f040e519dd60",
                     "expectedControlType": "Button",
@@ -249,23 +240,12 @@
                 },
                 {
                     "name": "",
-                    "id": "6ed1284d-cd8a-4962-9d86-3d16c266dd78",
-                    "path": "<Keyboard>/#(E)",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CancelAbility",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "0b2ced4f-0bf1-4b83-83b6-65bb63aca2c8",
                     "path": "<Keyboard>/#(R)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SwitchAbility",
+                    "action": "SwitchAttraction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -276,7 +256,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SwitchAbility",
+                    "action": "SwitchAttraction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -327,7 +307,7 @@
                 {
                     "name": "",
                     "id": "5a164121-e92b-4397-ab8a-317b6b9fe071",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/#(E)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -349,7 +329,7 @@
                 {
                     "name": "",
                     "id": "8e0f40ce-d59b-4230-a0f5-1442a0955b82",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/#(A)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

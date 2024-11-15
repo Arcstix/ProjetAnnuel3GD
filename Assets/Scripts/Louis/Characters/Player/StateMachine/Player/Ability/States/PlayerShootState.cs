@@ -12,8 +12,16 @@ public class PlayerShootState : PlayerAbilityState
     {
         base.Enter();
         Debug.Log("Shoot");
-        RemoveInputShoot();
-        reusableData.CanUseAbility = false;
-        _playerAbilityStateMachine.AbilityManager.UseAbility();
+
+        if (_stateMachine.IsRight)
+        {
+            _stateMachine.AbilityManager.UseAbility(_stateMachine.IsRight);
+            reusableData.CanUseRightAbility = false;
+        }
+        else
+        {
+            _stateMachine.AbilityManager.UseAbility(_stateMachine.IsRight);
+            reusableData.CanUseLeftAbility = false;
+        }
     }
 }

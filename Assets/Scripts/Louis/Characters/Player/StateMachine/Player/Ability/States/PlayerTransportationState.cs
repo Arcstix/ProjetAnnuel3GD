@@ -14,62 +14,95 @@ public class PlayerTransportationState : PlayerAbilityState
     {
         base.Enter();
         Debug.Log("Transportation");
-        //_playerAbilityStateMachine.AbilityManager.Rigidbody.useGravity = false;
-        reusableData.OnTransportation = true;
+
+        CheckTransportationType();
 
         SetCameraToThirdPerson(); // Méthode utilisé seulement si on a un script CameraManager attaché
 
-        reusableData.CanMove = false;
-        RemoveInputShoot();
-        reusableData.CanUseAbility = false;
-        input.PlayerActions.Jump.started += ChangeToPlayerJumpState;
-
-    }
-
-    private void SetCameraToThirdPerson()
-    {
-        if (cameraManager != null)
+        if (_stateMachine.IsRight)
         {
-            cameraManager.IsFirstPerson = false;
-            cameraManager.ThirdPersonMode();
+            input.PlayerActions.AttractionRight.canceled += HandleReload;
+            reusableData.CanUseRightAbility = false;
         }
-    }
-
-    private void ChangeToPlayerJumpState(InputAction.CallbackContext context)
-    {
-        _playerAbilityStateMachine.ChangeState(_playerAbilityStateMachine.ReloadAbilityState); // On sort de l'état transportation
-        // On ordonne de passer dans l'état jump dans la statemachine du movement
+        else
+        {
+            input.PlayerActions.AttractionLeft.canceled += HandleReload;
+            reusableData.CanUseLeftAbility = false;
+        }
     }
 
     public override void Exit()
     {
         base.Exit();
         reusableData.OnTransportation = false;
-        //_playerAbilityStateMachine.AbilityManager.Rigidbody.useGravity = true;
         reusableData.CanMove = true;
         reusableData.ShouldSlowDown = true;
+        input.PlayerActions.AttractionLeft.canceled -= HandleReload;
     }
 
     public override void FixedTick()
     {
         base.FixedTick();
 
-        if(reusableData.ProjectileRef != null)
+        if (_stateMachine.IsRight)
         {
-            MoveToProjectile();
+            if(reusableData.RightProjectileRef != null)
+            {
+                if (reusableData.LeftProjectileRef != null)
+                {
+                    RightMoveToLeft();
+                }
+                else
+                {
+                    MoveToProjectile();
+                }
+            }
+            else
+            {
+                _stateMachine.ChangeState(_stateMachine.ReloadState);
+            }
+        }
+        else
+        {
+            if(reusableData.LeftProjectileRef != null)
+            {
+                if (reusableData.RightProjectileRef != null)
+                {
+                    LeftMoveToRight();
+                }
+                else
+                {
+                    MoveToProjectile();
+                }
+            }
+            else
+            {
+                _stateMachine.ChangeState(_stateMachine.ReloadState);
+            }
+        }      
+    }
+
+    /// <summary>
+    /// Selon si l'autre Outil a été lancé ou non le comportement est différent 
+    /// et s'il n'a pas été lancé alors on sera en déplacement spécial.
+    /// </summary>
+    private void CheckTransportationType()
+    {
+        if (_stateMachine.IsRight)
+        {
+            if (reusableData.LeftProjectileRef == null)
+            {
+                reusableData.OnTransportation = true;
+                reusableData.CanMove = false;
+            }
+        }
+        else
+        {
+            if (reusableData.RightProjectileRef == null)
+            {
+                reusableData.OnTransportation = true;
+                reusableData.CanMove = false;
+            }
         }
     }
-
-    private void MoveToProjectile()
-    {
-        Vector3 direction = (reusableData.ProjectileRef.transform.position - rigidbody.worldCenterOfMass).normalized;
-
-        //float distanceRemain = Vector3.Distance(_playerAbilityStateMachine.AbilityManager.transform.position, _playerAbilityStateMachine.ReusableStateData.ProjectileRef.transform.position);
-
-
-        //float speedModifier = _abilityData.TransportationData.SpeedModifier.Evaluate(distanceRemain);
-
-        rigidbody.AddForce(direction * metricsManager.CurrentPlayerSO.AbilityData.TransportationData.BaseSpeed - rigidbody.velocity, ForceMode.VelocityChange);
-    }
-
 }

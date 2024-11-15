@@ -6,6 +6,7 @@ using UnityEngine;
 public class ProjectileManager : MonoBehaviour
 {
     private Rigidbody _rb;
+    private Collider collider;
     private PlayerAbilityManager _playerRef;
     private PlayerAbilityData _abilityData;
     private Vector3 _direction;
@@ -23,22 +24,11 @@ public class ProjectileManager : MonoBehaviour
     public void Init(PlayerAbilityManager playerRef, Vector3 spawnPosition, Vector3 direction, Vector3 target = default)
     {
         GetRigidbody();
+        collider = GetComponent<Collider>();
         _playerRef = playerRef;
         _abilityData = playerRef.Metrics.CurrentPlayerSO.AbilityData;
         _direction = direction;
         _spawnPosition = spawnPosition;
-    }
-
-    private void Update()
-    {
-        if (_abilityData.TransportationData.AutomaticTransportation)
-        {
-            if (CheckTravelDistance())
-            {
-                _hasCollide = true;
-                _playerRef.playerAbilityStateMachine.ChangeState(_playerRef.playerAbilityStateMachine.TransportationState);
-            }
-        }
     }
 
     private bool CheckTravelDistance()
@@ -70,12 +60,42 @@ public class ProjectileManager : MonoBehaviour
         _rb.AddForce(_direction * _abilityData.ShootData.BaseSpeed + Physics.gravity - _rb.velocity, ForceMode.Acceleration);
     }
 
+    public void MoveToPlayer()
+    {
+        collider.isTrigger = false;
+        _rb.useGravity = true;
+        Vector3 direction = ((_playerRef.transform.position + new Vector3(0, 0.5f, 0)) - transform.position).normalized;
+        _rb.AddForce(direction * _abilityData.TransportationData.BaseSpeed - _rb.velocity, ForceMode.VelocityChange);
+    }
+
+    public void MoveToDirection(Vector3 direction, Vector3 startPosition, Vector3 endPosition)
+    {
+        if(Vector3.Distance(startPosition, endPosition) > 0.4f)
+        {
+            collider.isTrigger = false;
+            _rb.useGravity = true;
+            _rb.AddForce(direction * _abilityData.TransportationData.BaseSpeed - _rb.velocity, ForceMode.VelocityChange);
+        }
+        else
+        {
+            Destroy(_playerRef.ReusableData.RightProjectileRef.gameObject);
+            Destroy(_playerRef.ReusableData.LeftProjectileRef.gameObject);
+        }
+    }
+
     public void ReturnToPlayer()
     {
-        _isReturning = true;
-        GetComponent<Collider>().isTrigger = true;
-        Vector3 direction = ((_playerRef.transform.position + new Vector3(0, 0.5f, 0)) - transform.position).normalized;
-        _rb.AddForce(direction * _abilityData.CancelAbilityData.BaseSpeed - _rb.velocity, ForceMode.VelocityChange);
+        if(Vector3.Distance(gameObject.transform.position, _playerRef.transform.position) > 0.1f)
+        {
+            _isReturning = true;
+            collider.isTrigger = true;
+            Vector3 direction = ((_playerRef.transform.position + new Vector3(0, 0.5f, 0)) - transform.position).normalized;
+            _rb.AddForce(direction * _abilityData.CancelAbilityData.BaseSpeed - _rb.velocity, ForceMode.VelocityChange);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -85,7 +105,6 @@ public class ProjectileManager : MonoBehaviour
             if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Platform"))
             {
                 ProjectileCollide();
-                //_playerRef.playerAbilityStateMachine.ChangeState(_playerRef.playerAbilityStateMachine.TransportationState);
             }
         }
 
@@ -93,7 +112,6 @@ public class ProjectileManager : MonoBehaviour
         {
             if (_playerRef.ReusableData.OnTransportation)
             {
-                _playerRef.CancelCallBack();
                 Destroy(gameObject);
             }
         }
@@ -103,7 +121,6 @@ public class ProjectileManager : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            _playerRef.CancelCallBack();
             Destroy(gameObject);
         }
     }
@@ -113,7 +130,7 @@ public class ProjectileManager : MonoBehaviour
         _hasCollide = true;
         _rb.useGravity = false;
         _rb.velocity = Vector3.zero;
-        GetComponent<Collider>().isTrigger = true;
+        collider.isTrigger = true;
     }
 
     public void StopMovement()

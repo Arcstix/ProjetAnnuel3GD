@@ -26,7 +26,7 @@ public class AIManager : MonoBehaviour
             if (collision.gameObject.CompareTag("Player"))
             {
                 PlayerAbilityManager abilityManager = collision.gameObject.GetComponent<PlayerAbilityManager>();
-                if (abilityManager.playerAbilityStateMachine.currentState == abilityManager.playerAbilityStateMachine.TransportationState)
+                if (abilityManager.playerRightAbilityStateMachine.currentState == abilityManager.playerRightAbilityStateMachine.TransportationState)
                 {
                     aiStateMachine.ChangeState(aiStateMachine.DeadState);
                     abilityManager.GetComponent<PlayerMetricsManager>().AddDurability(AbilityID, Durability);

@@ -91,16 +91,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""CancelAbility"",
-                    ""type"": ""Button"",
-                    ""id"": ""2b191055-e0f5-4ab1-8d00-2af2128a77fb"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SwitchAbility"",
+                    ""name"": ""SwitchAttraction"",
                     ""type"": ""Button"",
                     ""id"": ""c87b8402-16f8-4233-bed1-f040e519dd60"",
                     ""expectedControlType"": ""Button"",
@@ -271,23 +262,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""6ed1284d-cd8a-4962-9d86-3d16c266dd78"",
-                    ""path"": ""<Keyboard>/#(E)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CancelAbility"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""0b2ced4f-0bf1-4b83-83b6-65bb63aca2c8"",
                     ""path"": ""<Keyboard>/#(R)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SwitchAbility"",
+                    ""action"": ""SwitchAttraction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -298,7 +278,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SwitchAbility"",
+                    ""action"": ""SwitchAttraction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -349,7 +329,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5a164121-e92b-4397-ab8a-317b6b9fe071"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/#(E)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -371,7 +351,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8e0f40ce-d59b-4230-a0f5-1442a0955b82"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/#(A)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -426,8 +406,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player_ThrowRecallLeft = m_Player.FindAction("Throw/RecallLeft", throwIfNotFound: true);
         m_Player_AttractionRight = m_Player.FindAction("AttractionRight", throwIfNotFound: true);
         m_Player_AttractionLeft = m_Player.FindAction("AttractionLeft", throwIfNotFound: true);
-        m_Player_CancelAbility = m_Player.FindAction("CancelAbility", throwIfNotFound: true);
-        m_Player_SwitchAbility = m_Player.FindAction("SwitchAbility", throwIfNotFound: true);
+        m_Player_SwitchAttraction = m_Player.FindAction("SwitchAttraction", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
         m_Player_CameraToggle = m_Player.FindAction("CameraToggle", throwIfNotFound: true);
@@ -499,8 +478,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ThrowRecallLeft;
     private readonly InputAction m_Player_AttractionRight;
     private readonly InputAction m_Player_AttractionLeft;
-    private readonly InputAction m_Player_CancelAbility;
-    private readonly InputAction m_Player_SwitchAbility;
+    private readonly InputAction m_Player_SwitchAttraction;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Zoom;
     private readonly InputAction m_Player_CameraToggle;
@@ -515,8 +493,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @ThrowRecallLeft => m_Wrapper.m_Player_ThrowRecallLeft;
         public InputAction @AttractionRight => m_Wrapper.m_Player_AttractionRight;
         public InputAction @AttractionLeft => m_Wrapper.m_Player_AttractionLeft;
-        public InputAction @CancelAbility => m_Wrapper.m_Player_CancelAbility;
-        public InputAction @SwitchAbility => m_Wrapper.m_Player_SwitchAbility;
+        public InputAction @SwitchAttraction => m_Wrapper.m_Player_SwitchAttraction;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
         public InputAction @CameraToggle => m_Wrapper.m_Player_CameraToggle;
@@ -550,12 +527,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @AttractionLeft.started += instance.OnAttractionLeft;
             @AttractionLeft.performed += instance.OnAttractionLeft;
             @AttractionLeft.canceled += instance.OnAttractionLeft;
-            @CancelAbility.started += instance.OnCancelAbility;
-            @CancelAbility.performed += instance.OnCancelAbility;
-            @CancelAbility.canceled += instance.OnCancelAbility;
-            @SwitchAbility.started += instance.OnSwitchAbility;
-            @SwitchAbility.performed += instance.OnSwitchAbility;
-            @SwitchAbility.canceled += instance.OnSwitchAbility;
+            @SwitchAttraction.started += instance.OnSwitchAttraction;
+            @SwitchAttraction.performed += instance.OnSwitchAttraction;
+            @SwitchAttraction.canceled += instance.OnSwitchAttraction;
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
@@ -590,12 +564,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @AttractionLeft.started -= instance.OnAttractionLeft;
             @AttractionLeft.performed -= instance.OnAttractionLeft;
             @AttractionLeft.canceled -= instance.OnAttractionLeft;
-            @CancelAbility.started -= instance.OnCancelAbility;
-            @CancelAbility.performed -= instance.OnCancelAbility;
-            @CancelAbility.canceled -= instance.OnCancelAbility;
-            @SwitchAbility.started -= instance.OnSwitchAbility;
-            @SwitchAbility.performed -= instance.OnSwitchAbility;
-            @SwitchAbility.canceled -= instance.OnSwitchAbility;
+            @SwitchAttraction.started -= instance.OnSwitchAttraction;
+            @SwitchAttraction.performed -= instance.OnSwitchAttraction;
+            @SwitchAttraction.canceled -= instance.OnSwitchAttraction;
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
@@ -631,8 +602,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnThrowRecallLeft(InputAction.CallbackContext context);
         void OnAttractionRight(InputAction.CallbackContext context);
         void OnAttractionLeft(InputAction.CallbackContext context);
-        void OnCancelAbility(InputAction.CallbackContext context);
-        void OnSwitchAbility(InputAction.CallbackContext context);
+        void OnSwitchAttraction(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
         void OnCameraToggle(InputAction.CallbackContext context);

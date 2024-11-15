@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerAbilityState : IState
 {
     // Mettre les variables "protected" pour que les States puissent y avoir accès.
-    protected PlayerAbilityStateMachine _playerAbilityStateMachine;
+    protected PlayerAbilityStateMachine _stateMachine;
     protected PlayerMetricsManager metricsManager;
     protected PlayerInput input;
     protected PlayerCameraManager cameraManager;
@@ -18,15 +18,15 @@ public class PlayerAbilityState : IState
     // ATTENTION AUX SCRIPTABLES OBJECTS QUI PEUVENT TOTALEMENT CHANGER COMME LE PLAYERSO !
     public PlayerAbilityState(PlayerAbilityStateMachine playerAbilityStateMachine)
     {
-        _playerAbilityStateMachine = playerAbilityStateMachine;
-        metricsManager = _playerAbilityStateMachine.AbilityManager.Metrics;
-        input = _playerAbilityStateMachine.AbilityManager.Input;
-        reusableData = _playerAbilityStateMachine.ReusableStateData;
-        rigidbody = _playerAbilityStateMachine.AbilityManager.Rigidbody;
+        _stateMachine = playerAbilityStateMachine;
+        metricsManager = _stateMachine.AbilityManager.Metrics;
+        input = _stateMachine.AbilityManager.Input;
+        reusableData = _stateMachine.ReusableStateData;
+        rigidbody = _stateMachine.AbilityManager.Rigidbody;
 
-        if(_playerAbilityStateMachine.AbilityManager.CameraManager != null)
+        if(_stateMachine.AbilityManager.CameraManager != null)
         {
-            cameraManager = _playerAbilityStateMachine.AbilityManager.CameraManager;
+            cameraManager = _stateMachine.AbilityManager.CameraManager;
         }
     }
 
@@ -57,73 +57,82 @@ public class PlayerAbilityState : IState
     }
     #endregion
 
+    #region Input method
+
+    /// <summary>
+    /// On s'abonne à l'input qui sert à Shoot et Recall l'objet de droite
+    /// </summary>
+    protected virtual void AddInputRightThrowRecall()
+    {
+        input.PlayerActions.ThrowRecallRight.started += HandleRightThrowRecall;
+    }
+
+    /// <summary>
+    /// On s'abonne à l'input qui sert à Shoot et Recall l'objet de gauche
+    /// </summary>
+    protected virtual void AddInputLeftThrowRecall()
+    {
+        input.PlayerActions.ThrowRecallLeft.started += HandleLeftThrowRecall;
+    }
+
+    /// <summary>
+    /// On se désabonne à l'input qui sert à shoot et recall l'objet de droite
+    /// </summary>
+    protected virtual void RemoveInputRightThrowRecall()
+    {
+        input.PlayerActions.ThrowRecallRight.started -= HandleRightThrowRecall;
+    }
+
+    /// <summary>
+    /// On se désabonne à l'input qui sert à shoot et recall l'objet de gauche
+    /// </summary>
+    protected virtual void RemoveInputLeftThrowRecall()
+    {
+        input.PlayerActions.ThrowRecallLeft.started -= HandleLeftThrowRecall;
+    }
+
+    #endregion
+
     #region Ability methods
-
-    /// <summary>
-    /// On s'abonne à l'input qui sert à utiliser l'abilité.
-    /// </summary>
-    protected virtual void AddInputAbility()
-    {
-        input.PlayerActions.ThrowRecallRight.started += TryAbility;
-    }
-
-    /// <summary>
-    /// On se désabonne à l'input qui sert à shoot.
-    /// </summary>
-    protected virtual void RemoveInputShoot()
-    {
-        input.PlayerActions.ThrowRecallRight.started -= TryAbility;
-    }
-
-    /// <summary>
-    /// On s'abonne à l'input qui sert à ramener l'objet.
-    /// </summary>
-    protected virtual void AddCancelInput()
-    {
-        input.PlayerActions.CancelAbility.started += CancelAbility;
-    }
-
-    /// <summary>
-    /// On se désabonne à l'input qui sert à ramener l'objet.
-    /// </summary>
-    protected virtual void RemoveCancelInput()
-    {
-        input.PlayerActions.CancelAbility.started -= CancelAbility;
-    }
-
-    /// <summary>
-    /// Si le joueur appuie sur l'input CancelAbility alors qu'on est abonné on change d'état
-    /// </summary>
-    /// <param name="context"></param>
-    private void CancelAbility(InputAction.CallbackContext context)
-    {
-        _playerAbilityStateMachine.ChangeState(_playerAbilityStateMachine.CancelAbilityState);
-    }
 
     /// <summary>
     /// Méthode appelé quand le joueur est abonné à l'input Ability et appuie sur l'input
     /// </summary>
     /// <param name="context"></param>
-    private void TryAbility(InputAction.CallbackContext context)
+    protected void HandleRightThrowRecall(InputAction.CallbackContext context)
     {
-        if (reusableData.CanUseAbility)
+        if (reusableData.CanUseRightAbility)
         {
-            if(reusableData.ProjectileRef == null)
+            if(reusableData.RightProjectileRef == null)
             {
-                if (metricsManager.CurrentPlayerSO.AbilityData.ShootData.UseAim)
-                {
-                    if (cameraManager != null && !cameraManager.IsFirstPerson) { return; }
-                }
-
-                _playerAbilityStateMachine.ChangeState(_playerAbilityStateMachine.ShootState);
-                return;
+                _stateMachine.ChangeState(_stateMachine.ShootState);
             }
             else
             {
-                _playerAbilityStateMachine.ChangeState(_playerAbilityStateMachine.TransportationState);
-                return;
+                _stateMachine.ChangeState(_stateMachine.RecallState);
             }
         }
+    }
+
+
+    protected void HandleLeftThrowRecall(InputAction.CallbackContext context)
+    {
+        if (reusableData.CanUseLeftAbility)
+        {
+            if (reusableData.LeftProjectileRef == null)
+            {
+                _stateMachine.ChangeState(_stateMachine.ShootState);
+            }
+            else
+            {
+                _stateMachine.ChangeState(_stateMachine.RecallState);
+            }
+        }
+    }
+
+    protected void HandleReload(InputAction.CallbackContext context)
+    {
+        _stateMachine.ChangeState(_stateMachine.ReloadState);
     }
 
     #endregion
@@ -131,5 +140,43 @@ public class PlayerAbilityState : IState
 
     #region Reusable methods
 
+    protected void SetCameraToThirdPerson()
+    {
+        if (cameraManager != null)
+        {
+            cameraManager.IsFirstPerson = false;
+            cameraManager.ThirdPersonMode();
+        }
+    }
+
+    protected void MoveToProjectile()
+    {
+        Vector3 direction = new Vector3();
+
+        if (_stateMachine.IsRight)
+        {
+            direction = (reusableData.RightProjectileRef.transform.position - rigidbody.worldCenterOfMass).normalized;
+        }
+        else
+        {
+            direction = (reusableData.LeftProjectileRef.transform.position - rigidbody.worldCenterOfMass).normalized;
+        }
+
+        rigidbody.AddForce(direction * metricsManager.CurrentPlayerSO.AbilityData.TransportationData.BaseSpeed - rigidbody.velocity, ForceMode.VelocityChange);
+    }
+
+    protected void LeftMoveToRight()
+    {
+        Vector3 direction = (reusableData.RightProjectileRef.transform.position - reusableData.LeftProjectileRef.transform.position).normalized;
+
+        reusableData.LeftProjectileRef.MoveToDirection(direction, reusableData.RightProjectileRef.transform.position, reusableData.LeftProjectileRef.transform.position);
+    }
+
+    protected void RightMoveToLeft()
+    {
+        Vector3 direction = (reusableData.LeftProjectileRef.transform.position - reusableData.RightProjectileRef.transform.position).normalized;
+
+        reusableData.RightProjectileRef.MoveToDirection(direction, reusableData.LeftProjectileRef.transform.position, reusableData.RightProjectileRef.transform.position);
+    }
     #endregion
 }

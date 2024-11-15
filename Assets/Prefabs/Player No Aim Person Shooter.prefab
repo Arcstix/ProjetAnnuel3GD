@@ -122,6 +122,11 @@ MonoBehaviour:
   maximumDistance: 6
   smoothing: 4
   zoomSensitivity: 1
+  controllerVerticalSpeed: 4
+  controllerHorizontalSpeed: 1
+  mouseVerticalSpeed: 0.05
+  mouseHorizontalSpeed: 0.2
+  useController: 0
 --- !u!114 &1985777805305630788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1224,7 +1229,7 @@ Transform:
   m_GameObject: {fileID: 6481386503688849719}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.4, y: 1, z: -4}
+  m_LocalPosition: {x: 0.4, y: 1, z: -3.999999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1317,6 +1322,11 @@ MonoBehaviour:
   maximumDistance: 6
   smoothing: 4
   zoomSensitivity: 1
+  controllerVerticalSpeed: 4
+  controllerHorizontalSpeed: 1
+  mouseVerticalSpeed: 0.05
+  mouseHorizontalSpeed: 0.2
+  useController: 1
 --- !u!114 &3867562493735304446
 MonoBehaviour:
   m_ObjectHideFlags: 0
