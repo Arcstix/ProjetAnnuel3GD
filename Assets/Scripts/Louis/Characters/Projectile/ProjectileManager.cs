@@ -78,6 +78,10 @@ public class ProjectileManager : MonoBehaviour
         }
         else
         {
+            if (gameObject.transform.childCount > 0)
+            {
+                RemoveChildObject();
+            }
             Destroy(_playerRef.ReusableData.RightProjectileRef.gameObject);
             Destroy(_playerRef.ReusableData.LeftProjectileRef.gameObject);
         }
@@ -94,6 +98,10 @@ public class ProjectileManager : MonoBehaviour
         }
         else
         {
+            if (gameObject.transform.childCount > 0)
+            {
+                RemoveChildObject();
+            }
             Destroy(gameObject);
         }
     }
@@ -102,9 +110,13 @@ public class ProjectileManager : MonoBehaviour
     {
         if (!_hasCollide && !_isReturning)
         {
-            if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Platform"))
+            if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("Movable"))
             {
                 ProjectileCollide();
+                if (collision.gameObject.CompareTag("Movable"))
+                {
+                    SetParent(collision.gameObject);
+                }              
             }
         }
 
@@ -112,15 +124,36 @@ public class ProjectileManager : MonoBehaviour
         {
             if (_playerRef.ReusableData.OnTransportation)
             {
+                if(gameObject.transform.childCount > 0)
+                {
+                    RemoveChildObject();
+                }
                 Destroy(gameObject);
             }
         }
+    }
+
+    private void RemoveChildObject()
+    {
+        foreach (Transform child in gameObject.transform)
+        {
+            child.transform.parent = null;
+        }
+    }
+
+    private void SetParent(GameObject objectCollide)
+    {
+        objectCollide.transform.parent = gameObject.transform;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            if (gameObject.transform.childCount > 0)
+            {
+                RemoveChildObject();
+            }
             Destroy(gameObject);
         }
     }
