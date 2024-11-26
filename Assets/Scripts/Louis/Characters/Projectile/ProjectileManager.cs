@@ -89,7 +89,11 @@ public class ProjectileManager : MonoBehaviour
 
     public void ReturnToPlayer()
     {
-        if(Vector3.Distance(gameObject.transform.position, _playerRef.transform.position) > 0.1f)
+        if (gameObject.transform.childCount > 0)
+        {
+            RemoveChildObject();
+        }
+        if (Vector3.Distance(gameObject.transform.position, _playerRef.transform.position) > 0.1f)
         {
             _isReturning = true;
             collider.isTrigger = true;
@@ -122,7 +126,7 @@ public class ProjectileManager : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (_playerRef.ReusableData.OnTransportation)
+            if (_playerRef.ReusableData.OnTransportation || _playerRef.ReusableData.OnLeftAttraction || _playerRef.ReusableData.OnRightAttraction)
             {
                 if(gameObject.transform.childCount > 0)
                 {
