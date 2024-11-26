@@ -418,7 +418,7 @@ Camera:
     height: 1
   near clip plane: 0.12
   far clip plane: 5000
-  field of view: 60.000004
+  field of view: 90
   orthographic: 0
   orthographic size: 10
   m_Depth: 0
@@ -563,7 +563,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6564595994638737766, guid: ba238a7f900c8614398e7fdca07a6b8d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6564595994638737766, guid: ba238a7f900c8614398e7fdca07a6b8d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -667,6 +667,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2807098570480261118, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
+      propertyPath: isFirstPerson
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2807098570480261118, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
+      propertyPath: useController
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2807098570480261118, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
+      propertyPath: defaultDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2807098570480261118, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
+      propertyPath: mouseVerticalSpeed
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3243463397769389402, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -707,9 +723,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3378459044418692473, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
+      propertyPath: m_Drag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4877599084475598331, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
+      propertyPath: m_Lens.FieldOfView
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 5134782586386577274, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
       propertyPath: m_Name
       value: Player No Aim 1er person
+      objectReference: {fileID: 0}
+    - target: {fileID: 5858854210596684738, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
+      propertyPath: m_VerticalAxis.m_MaxSpeed
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5858854210596684738, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
+      propertyPath: m_HorizontalAxis.m_MaxSpeed
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7457238829929539697, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

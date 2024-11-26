@@ -29,17 +29,11 @@ public class PlayerAbilityManager : PlayerManager
             playerMovementManager.ReusableData = ReusableData;
         }
 
-        AddInputSwitchAttraction();
         // On Initialise les 2 States Machines pour chacun des objets
         playerRightAbilityStateMachine = new PlayerAbilityStateMachine(this, true);
         playerRightAbilityStateMachine.ChangeState(playerRightAbilityStateMachine.ReadyState);
         playerLeftAbilityStateMachine = new PlayerAbilityStateMachine(this, false);
         playerLeftAbilityStateMachine.ChangeState(playerLeftAbilityStateMachine.ReadyState);
-    }
-
-    private void OnDisable()
-    {
-        RemoveInputSwitchAttraction();
     }
 
     private void Update()
@@ -101,40 +95,22 @@ public class PlayerAbilityManager : PlayerManager
 
     public void UseAbility(bool isRight)
     {
-        ProjectileManager projectile = Instantiate(Metrics.CurrentPlayerSO.AbilityData.ShootData.ProjectilePrefab, LauncherTransform.position, Camera.transform.rotation);
-        projectile.Init(this, LauncherTransform.position, Camera.transform.forward);
+        
 
         if (isRight)
         {
+            ProjectileManager projectile = Instantiate(Metrics.CurrentPlayerSO.AbilityData.ShootData.ProjectileRightPrefab, LauncherTransform.position, Camera.transform.rotation);
+            projectile.Init(this, LauncherTransform.position, Camera.transform.forward);
             ReusableData.RightProjectileRef = projectile;
             playerRightAbilityStateMachine.ChangeState(playerRightAbilityStateMachine.StandbyState);
         }
         else
         {
+            ProjectileManager projectile = Instantiate(Metrics.CurrentPlayerSO.AbilityData.ShootData.ProjectileLeftPrefab, LauncherTransform.position, Camera.transform.rotation);
+            projectile.Init(this, LauncherTransform.position, Camera.transform.forward);
             ReusableData.LeftProjectileRef = projectile;
             playerLeftAbilityStateMachine.ChangeState(playerLeftAbilityStateMachine.StandbyState);
         }
-    }
-
-    /// <summary>
-    /// On s'abonne à l'input qui sert de changement d'attraction
-    /// </summary>
-    private void AddInputSwitchAttraction()
-    {
-        Input.PlayerActions.SwitchAttraction.started += SwitchMode;
-    }
-
-    /// <summary>
-    /// On se désabonne à l'input qui sert de changement d'attraction
-    /// </summary>
-    private void RemoveInputSwitchAttraction()
-    {
-        Input.PlayerActions.SwitchAttraction.started -= SwitchMode;
-    }
-
-    private void SwitchMode(InputAction.CallbackContext context)
-    {
-        ReusableData.TransportationMode = !ReusableData.TransportationMode;
     }
 
     public void CancelCallBack()

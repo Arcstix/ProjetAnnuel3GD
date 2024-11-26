@@ -15,15 +15,19 @@ public class PlayerStandbyState : PlayerAbilityState
         base.Enter();
         Debug.Log("Stanby");
 
+
+
         if (_stateMachine.IsRight)
         {
-            input.PlayerActions.AttractionRight.started += HandleAttraction;
+            input.PlayerActions.AttractionRight.started += ActivateRight;
+            input.PlayerActions.AttractionLeft.started += ActivateLeft;
             input.PlayerActions.ThrowRecallRight.started += HandleRecall;
             reusableData.CanUseRightAbility = true;
         }
         else
         {
-            input.PlayerActions.AttractionLeft.started += HandleAttraction;
+            input.PlayerActions.AttractionLeft.started += ActivateLeft;
+            input.PlayerActions.AttractionRight.started += ActivateRight;
             input.PlayerActions.ThrowRecallLeft.started += HandleRecall;
             reusableData.CanUseLeftAbility = true;
         }   
@@ -34,28 +38,26 @@ public class PlayerStandbyState : PlayerAbilityState
         base.Exit();
         if (_stateMachine.IsRight)
         {
-            input.PlayerActions.AttractionRight.started -= HandleAttraction;
+            input.PlayerActions.AttractionRight.started -= ActivateRight;
             input.PlayerActions.ThrowRecallRight.started -= HandleRecall;
             reusableData.CanUseRightAbility = false;
         }
         else
         {
-            input.PlayerActions.AttractionLeft.started -= HandleAttraction;
+            input.PlayerActions.AttractionLeft.started -= ActivateRight;
             input.PlayerActions.ThrowRecallLeft.started -= HandleRecall;
             reusableData.CanUseLeftAbility = false;
         }
     }
 
-    protected void HandleAttraction(InputAction.CallbackContext context)
+    protected void ActivateRight(InputAction.CallbackContext context)
     {
-        if (reusableData.TransportationMode)
-        {
-            _stateMachine.ChangeState(_stateMachine.TransportationState);
-        }
-        else
-        {
-            _stateMachine.ChangeState(_stateMachine.AttractionState);
-        }
+        _stateMachine.ChangeState(_stateMachine.TransportationState);
+    }
+
+    private void ActivateLeft(InputAction.CallbackContext context)
+    {
+
     }
 
     private void HandleRecall(InputAction.CallbackContext context)

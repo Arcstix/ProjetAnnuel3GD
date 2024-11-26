@@ -15,7 +15,7 @@ public class CameraSettings : MonoBehaviour
 
     [SerializeField] [Range(0f, 10f)] private float controllerVerticalSpeed = 4f;
     [SerializeField] [Range(0f, 10f)] private float controllerHorizontalSpeed = 1f;
-    [SerializeField] [Range(0f, 0.2f)] private float mouseVerticalSpeed = 0.05f;
+    [SerializeField] [Range(0f, 0.5f)] private float mouseVerticalSpeed = 0.05f;
     [SerializeField] [Range(0f, 0.5f)] private float mouseHorizontalSpeed = 0.2f;
 
     [SerializeField] private bool useController = false;
