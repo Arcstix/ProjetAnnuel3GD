@@ -19,6 +19,7 @@ public class CameraSettings : MonoBehaviour
     [SerializeField] [Range(0f, 0.5f)] private float mouseHorizontalSpeed = 0.2f;
 
     [SerializeField] private bool useController = false;
+    [SerializeField] private bool isFirstPerson = false;
 
     private CinemachineFramingTransposer framingTransposer;
     private CinemachineInputProvider inputProvider;
@@ -56,7 +57,10 @@ public class CameraSettings : MonoBehaviour
 
     private void Update()
     {
-        Zoom();
+        if (!isFirstPerson)
+        {
+            Zoom();
+        }        
     }
 
     private void Zoom()
