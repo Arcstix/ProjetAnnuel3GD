@@ -79,6 +79,7 @@ public class PlayerAbilityManager : PlayerManager
                 if(collision.collider.TryGetComponent<DestructibleEntity>(out DestructibleEntity destructible))
                 {
                     destructible.DestructionEvent();
+                    return;
                 }
                 playerRightAbilityStateMachine.ChangeState(playerRightAbilityStateMachine.ReloadState);
             }
@@ -91,6 +92,7 @@ public class PlayerAbilityManager : PlayerManager
                 if (collision.collider.TryGetComponent<DestructibleEntity>(out DestructibleEntity destructible))
                 {
                     destructible.DestructionEvent();
+                    return;
                 }
                 playerLeftAbilityStateMachine.ChangeState(playerLeftAbilityStateMachine.ReloadState);
             }
