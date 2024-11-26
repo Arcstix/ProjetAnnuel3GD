@@ -76,6 +76,10 @@ public class PlayerAbilityManager : PlayerManager
         {
             if(collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Platform"))
             {
+                if(collision.collider.TryGetComponent<DestructibleEntity>(out DestructibleEntity destructible))
+                {
+                    destructible.DestructionEvent();
+                }
                 playerRightAbilityStateMachine.ChangeState(playerRightAbilityStateMachine.ReloadState);
             }
         }
@@ -84,6 +88,10 @@ public class PlayerAbilityManager : PlayerManager
         {
             if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Platform"))
             {
+                if (collision.collider.TryGetComponent<DestructibleEntity>(out DestructibleEntity destructible))
+                {
+                    destructible.DestructionEvent();
+                }
                 playerLeftAbilityStateMachine.ChangeState(playerLeftAbilityStateMachine.ReloadState);
             }
         }
