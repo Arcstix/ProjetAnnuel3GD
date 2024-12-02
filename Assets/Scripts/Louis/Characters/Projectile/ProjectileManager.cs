@@ -6,7 +6,7 @@ using UnityEngine;
 public class ProjectileManager : MonoBehaviour
 {
     private Rigidbody _rb;
-    private Collider collider;
+    private Collider projectileCollider;
     private PlayerAbilityManager _playerRef;
     private PlayerAbilityData _abilityData;
     private Vector3 _direction;
@@ -24,7 +24,7 @@ public class ProjectileManager : MonoBehaviour
     public void Init(PlayerAbilityManager playerRef, Vector3 spawnPosition, Vector3 direction, Vector3 target = default)
     {
         GetRigidbody();
-        collider = GetComponent<Collider>();
+        projectileCollider = GetComponent<Collider>();
         _playerRef = playerRef;
         _abilityData = playerRef.Metrics.CurrentPlayerSO.AbilityData;
         _direction = direction;
@@ -62,7 +62,7 @@ public class ProjectileManager : MonoBehaviour
 
     public void MoveToPlayer()
     {
-        collider.isTrigger = false;
+        projectileCollider.isTrigger = false;
         _rb.useGravity = true;
         Vector3 direction = ((_playerRef.transform.position + new Vector3(0, 0.5f, 0)) - transform.position).normalized;
         _rb.AddForce(direction * _abilityData.TransportationData.BaseSpeed - _rb.velocity, ForceMode.VelocityChange);
@@ -72,7 +72,7 @@ public class ProjectileManager : MonoBehaviour
     {
         if(Vector3.Distance(startPosition, endPosition) > 0.4f)
         {
-            collider.isTrigger = false;
+            projectileCollider.isTrigger = false;
             _rb.useGravity = true;
             _rb.AddForce(direction * _abilityData.TransportationData.BaseSpeed - _rb.velocity, ForceMode.VelocityChange);
         }
@@ -96,7 +96,7 @@ public class ProjectileManager : MonoBehaviour
         if (Vector3.Distance(gameObject.transform.position, _playerRef.transform.position) > 0.1f)
         {
             _isReturning = true;
-            collider.isTrigger = true;
+            projectileCollider.isTrigger = true;
             Vector3 direction = ((_playerRef.transform.position + new Vector3(0, 0.5f, 0)) - transform.position).normalized;
             _rb.AddForce(direction * _abilityData.CancelAbilityData.BaseSpeed - _rb.velocity, ForceMode.VelocityChange);
         }
@@ -167,7 +167,7 @@ public class ProjectileManager : MonoBehaviour
         _hasCollide = true;
         _rb.useGravity = false;
         _rb.velocity = Vector3.zero;
-        collider.isTrigger = true;
+        projectileCollider.isTrigger = true;
     }
 
     public void StopMovement()

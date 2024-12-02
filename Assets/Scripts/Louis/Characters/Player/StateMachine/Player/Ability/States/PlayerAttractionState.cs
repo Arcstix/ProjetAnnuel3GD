@@ -17,12 +17,14 @@ public class PlayerAttractionState : PlayerAbilityState
         if (_stateMachine.IsRight)
         {
             input.PlayerActions.AttractionRight.canceled += HandleReload;
+            input.PlayerActions.AttractionLeft.canceled += HandleReload;
             reusableData.OnRightAttraction = true;
             reusableData.CanUseRightAbility = false;
         }
         else
         {
             input.PlayerActions.AttractionLeft.canceled += HandleReload;
+            input.PlayerActions.AttractionRight.canceled += HandleReload;
             reusableData.OnLeftAttraction = true;
             reusableData.CanUseLeftAbility = false;
         }

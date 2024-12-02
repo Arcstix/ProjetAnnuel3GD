@@ -22,10 +22,12 @@ public class PlayerTransportationState : PlayerAbilityState
         if (_stateMachine.IsRight)
         {
             input.PlayerActions.AttractionRight.canceled += HandleReload;
+            input.PlayerActions.AttractionLeft.canceled += HandleReload;
             reusableData.CanUseRightAbility = false;
         }
         else
         {
+            input.PlayerActions.AttractionRight.canceled += HandleReload;
             input.PlayerActions.AttractionLeft.canceled += HandleReload;
             reusableData.CanUseLeftAbility = false;
         }
@@ -104,5 +106,6 @@ public class PlayerTransportationState : PlayerAbilityState
                 reusableData.CanMove = false;
             }
         }
+        reusableData.OnTransportation = true;
     }
 }

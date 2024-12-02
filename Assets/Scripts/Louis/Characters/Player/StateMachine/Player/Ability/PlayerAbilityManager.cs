@@ -95,8 +95,6 @@ public class PlayerAbilityManager : PlayerManager
 
     public void UseAbility(bool isRight)
     {
-        
-
         if (isRight)
         {
             ProjectileManager projectile = Instantiate(Metrics.CurrentPlayerSO.AbilityData.ShootData.ProjectileRightPrefab, LauncherTransform.position, Camera.transform.rotation);
