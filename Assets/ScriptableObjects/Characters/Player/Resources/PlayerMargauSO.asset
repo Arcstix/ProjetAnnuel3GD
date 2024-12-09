@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b56aa3a78f68114c8075bea00d5ced9, type: 3}
-  m_Name: DefaultPlayerMetrics
+  m_Name: PlayerMargauSO
   m_EditorClassIdentifier: 
   <DataIdentifier>k__BackingField: 0
   <GroundedData>k__BackingField:
@@ -133,6 +133,15 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
+          time: 0.3732668
+          value: 0.1705195
+          inSlope: 1.4525213
+          outSlope: 1.4525213
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.13662095
+          outWeight: 0.0316342
+        - serializedVersion: 3
           time: 1
           value: 1
           inSlope: 0
@@ -145,12 +154,12 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
       <UseAim>k__BackingField: 0
-      <MaxTravelDistance>k__BackingField: 18
+      <MaxTravelDistance>k__BackingField: 15
     <StandbyData>k__BackingField:
       <MaxConnectionDistance>k__BackingField: 60
       <TimeBeforeAbilityCancel>k__BackingField: 3
     <TransportationData>k__BackingField:
-      <BaseSpeed>k__BackingField: 14
+      <BaseSpeed>k__BackingField: 18
       <SpeedModifier>k__BackingField:
         serializedVersion: 2
         m_Curve:
