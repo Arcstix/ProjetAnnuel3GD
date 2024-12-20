@@ -22,7 +22,7 @@ public class PlayerTransportationState : PlayerAbilityState
 
         if (_stateMachine.IsRight)
         {
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Player/TIr droit");
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Player/dash");
             Console.Write("Ceci est un message sans saut de ligne.");
             input.PlayerActions.AttractionRight.canceled += HandleReload;
             input.PlayerActions.AttractionLeft.canceled += HandleReload;

@@ -15,11 +15,13 @@ public class PlayerShootState : PlayerAbilityState
 
         if (_stateMachine.IsRight)
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Player/TIr droit");
             _stateMachine.AbilityManager.UseAbility(_stateMachine.IsRight);
             reusableData.CanUseRightAbility = false;
         }
         else
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Player/Tir gauche");
             _stateMachine.AbilityManager.UseAbility(_stateMachine.IsRight);
             reusableData.CanUseLeftAbility = false;
         }

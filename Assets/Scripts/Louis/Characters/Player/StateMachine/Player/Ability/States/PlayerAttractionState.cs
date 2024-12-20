@@ -45,7 +45,7 @@ public class PlayerAttractionState : PlayerAbilityState
             {
                 if (reusableData.LeftProjectileRef == null)
                 {
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/Player/TIr droit");
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Player/dash");
                     Console.Write("Ceci est un message sans saut de ligne.");
                     reusableData.RightProjectileRef.MoveToPlayer();
                 }
