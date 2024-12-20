@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using FMODUnity;
 
 public class PlayerTransportationState : PlayerAbilityState
 {
@@ -21,6 +22,8 @@ public class PlayerTransportationState : PlayerAbilityState
 
         if (_stateMachine.IsRight)
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Player/TIr droit");
+            Console.Write("Ceci est un message sans saut de ligne.");
             input.PlayerActions.AttractionRight.canceled += HandleReload;
             input.PlayerActions.AttractionLeft.canceled += HandleReload;
             reusableData.CanUseRightAbility = false;
