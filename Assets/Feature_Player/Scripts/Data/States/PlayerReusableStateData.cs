@@ -11,6 +11,7 @@ public class PlayerReusableStateData
     public float MovementOnSlopeSpeedModifier { get; set; } = 1f;
     public bool ShouldWalk { get; set; }
     public bool CanMove { get; set; }
+    public Vector3 InstancePosition { get; set; }
     public Transform RightProjectile { get; set; }
     public Transform LeftProjectile { get; set; }
     public bool OnTransportation { get; set; } = false;

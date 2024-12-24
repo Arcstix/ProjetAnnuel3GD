@@ -146,8 +146,32 @@ public class AbilityState : IState
             _stateMachine.ChangeState(_stateMachine.RecallState);
         }
     }
+
+    protected void HandleRightShootRecall()
+    {
+        if (reusableData.RightProjectile == null)
+        {
+            _stateMachine.ChangeState(_stateMachine.ShootState);
+        }
+        else
+        {
+            _stateMachine.ChangeState(_stateMachine.RecallState);
+        }
+    }
     
     private void HandleLeftShootRecall(InputAction.CallbackContext context)
+    {
+        if (reusableData.LeftProjectile == null)
+        {
+            _stateMachine.ChangeState(_stateMachine.ShootState);
+        }
+        else
+        {
+            _stateMachine.ChangeState(_stateMachine.RecallState);
+        }
+    }
+
+    protected void HandleLeftShootRecall()
     {
         if (reusableData.LeftProjectile == null)
         {
@@ -170,8 +194,32 @@ public class AbilityState : IState
             _stateMachine.ChangeState(_stateMachine.TransportState);
         }
     }
+    
+    protected void HandleLeftAttraction()
+    {
+        if (reusableData.LeftProjectile == null)
+        {
+            return;
+        }
+        else
+        {
+            _stateMachine.ChangeState(_stateMachine.TransportState);
+        }
+    }
 
     private void HandleRightAttraction(InputAction.CallbackContext context)
+    {
+        if (reusableData.RightProjectile == null)
+        {
+            return;
+        }
+        else
+        {
+            _stateMachine.ChangeState(_stateMachine.TransportState);
+        }
+    }
+    
+    protected void HandleRightAttraction()
     {
         if (reusableData.RightProjectile == null)
         {

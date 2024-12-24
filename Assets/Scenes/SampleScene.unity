@@ -604,8 +604,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5134782586386577274, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
       propertyPath: m_Name
-      value: Player No Aim 1er person
+      value: Player Aim 1er person
       objectReference: {fileID: 0}
+    - target: {fileID: 8139018201912062604, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
+      propertyPath: launcherTransform
+      value: 
+      objectReference: {fileID: 2029653713}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -623,7 +627,7 @@ GameObject:
   - component: {fileID: 1951251153}
   - component: {fileID: 1951251152}
   - component: {fileID: 1951251151}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -671,7 +675,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 602cbbf11cf510248b54d6286e6302eb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -716,6 +720,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &2029653713 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3611042673973577853, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
+  m_PrefabInstance: {fileID: 1392284040}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -7,7 +7,24 @@ public class AbilityTransportState : AbilityState
     public AbilityTransportState(AbilityStateMachine abilityStateMachine) : base(abilityStateMachine)
     {
     }
-    
+
+    public override void Enter()
+    {
+        base.Enter();
+
+        if (reusableData.LeftProjectile == null)
+        {
+            _stateMachine.ChangeState(_stateMachine.IdleState);
+            return;
+        }
+
+        if (reusableData.RightProjectile == null)
+        {
+            _stateMachine.ChangeState(_stateMachine.IdleState);
+            return;
+        }
+    }
+
     #region Transport Methods
     
     protected void MoveToProjectile()
