@@ -42,11 +42,6 @@ public class PlayerMovementManager : PlayerManager, I_Initializer
     {        
         CapsuleColliderUtility.Initialize(gameObject);
         CapsuleColliderUtility.CalculateCapsuleColliderDimension();
-
-        if (CameraManager != null)
-        {
-            SetThirdPersonMode();
-        }
     }
 
     private void SetFirstPersonMode()

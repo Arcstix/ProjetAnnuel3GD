@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// S'occupe de mettre à jour les paramètre de la caméra 
+// S'occupe de mettre ï¿½ jour les paramï¿½tre de la camï¿½ra 
 public class PlayerCameraManager : MonoBehaviour, I_Initializer
 {
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
@@ -19,7 +19,7 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
     public void Init()
     {
         metricsManager = GetComponent<PlayerMetricsManager>();
-        framingTransposer = metricsManager.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();
+        //framingTransposer = metricsManager.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();
         inputProvider = metricsManager.GetComponent<CinemachineInputProvider>();
         SetCameraMetrics();
     }
@@ -33,7 +33,7 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
 
     private void Update()
     {
-        Zoom();
+        //Zoom();
     }
 
     private void Zoom()

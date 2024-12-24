@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Script utilisé quand le joueur est dans les airs
+/// Script utilisï¿½ quand le joueur est dans les airs
 /// </summary>
 public class PlayerAirState : PlayerMovementState
 {
-    //créer des raccourcies pour les variables
+    //crï¿½er des raccourcies pour les variables
     protected CapsuleColliderUtility capsuleColliderUtility;
-    protected PlayerGroundedData groundedData;
+    protected GroundedData groundedData;
     protected float timer;
 
     public PlayerAirState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
     {
-        //faire le chemin ici comme ça = une fois
+        //faire le chemin ici comme ï¿½a = une fois
         capsuleColliderUtility = movementStateMachine.MovementManager.CapsuleColliderUtility;
         groundedData = movementStateMachine.MovementManager.Metrics.CurrentPlayerSO.GroundedData;
     }

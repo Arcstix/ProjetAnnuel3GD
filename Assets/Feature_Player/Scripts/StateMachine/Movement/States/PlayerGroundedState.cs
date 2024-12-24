@@ -2,12 +2,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// Script utilisé quand le joueur est dans une state lié au sol
+/// Script utilisï¿½ quand le joueur est dans une state liï¿½ au sol
 /// </summary>
 public class PlayerGroundedState : PlayerMovementState
 {
     private CapsuleColliderUtility capsuleColliderUtility;
-    private PlayerGroundedData groundedData;
+    private GroundedData groundedData;
 
     public PlayerGroundedState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
     {

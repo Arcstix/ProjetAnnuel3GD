@@ -3,18 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerAbilityManager : PlayerManager, I_Initializer
 {
-    public PlayerAbilityStateMachine playerRightAbilityStateMachine { get; private set; }
-    public PlayerAbilityStateMachine playerLeftAbilityStateMachine { get; private set; }
+    [SerializeField] public Transform launcherTransform;
+    
     private PlayerMovementManager playerMovementManager;
+    private AbilityStateMachine abilityStateMachine;
 
-    [field: SerializeField] public Transform LauncherTransform { get; private set; }
-
+    public AbilityStateMachine AbilityStateMachine { get => abilityStateMachine; private set => abilityStateMachine = value; }
     public PlayerReusableStateData ReusableData { get; set; }
 
     public IState currentState;
+    
     protected override void Awake()
     {
         base.Awake();
@@ -28,40 +30,26 @@ public class PlayerAbilityManager : PlayerManager, I_Initializer
             ReusableData = new PlayerReusableStateData();
             playerMovementManager.ReusableData = ReusableData;
         }
-
-        // On Initialise les 2 States Machines pour chacun des objets
-        playerRightAbilityStateMachine = new PlayerAbilityStateMachine(this, true);
-        //playerRightAbilityStateMachine.ChangeState(playerRightAbilityStateMachine.ReadyState);
-        playerLeftAbilityStateMachine = new PlayerAbilityStateMachine(this, false);
-        //playerLeftAbilityStateMachine.ChangeState(playerLeftAbilityStateMachine.ReadyState);
+        
+        abilityStateMachine = new AbilityStateMachine(this);
+        abilityStateMachine.ChangeState(abilityStateMachine.IdleState);
     }
 
     private void Update()
     {
-        playerRightAbilityStateMachine?.HandleInput();
+        abilityStateMachine?.HandleInput();
 
-        playerRightAbilityStateMachine?.Tick();
+        abilityStateMachine?.Tick();
 
-        if(playerRightAbilityStateMachine != null)
+        if(abilityStateMachine != null)
         {
-            currentState = playerRightAbilityStateMachine.currentState;
-        }
-
-        playerLeftAbilityStateMachine?.HandleInput();
-
-        playerLeftAbilityStateMachine?.Tick();
-
-        if (playerLeftAbilityStateMachine != null)
-        {
-            currentState = playerLeftAbilityStateMachine.currentState;
+            currentState = abilityStateMachine.currentState;
         }
     }
 
     private void FixedUpdate()
     {
-        playerRightAbilityStateMachine?.FixedTick();
-
-        playerLeftAbilityStateMachine?.FixedTick();
+        abilityStateMachine?.FixedTick();
     }
 
     public void UseAbility(bool isRight)

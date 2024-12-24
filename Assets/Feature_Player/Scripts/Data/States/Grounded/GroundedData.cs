@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class PlayerGroundedData
+public class GroundedData
 {
     [field: SerializeField] [field: Range(0f, 25f)] public float BaseSpeed { get; private set; }
     [field: SerializeField] public float GravityMultiplier { get; private set; }
