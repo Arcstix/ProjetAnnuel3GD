@@ -15,9 +15,9 @@ public class AbilityRecallState : AbilityState
         if (reusableData.LeftInput)
         {
             reusableData.LeftObject.transform.position = Vector3.Lerp(reusableData.LeftObject.transform.position,
-                _stateMachine.AbilityManager.launcherTransform.position, Time.deltaTime * 10f);
+                leftLauncher.position, Time.deltaTime * metricsManager.CurrentPlayerSO.AbilityData.RecallSpeed);
 
-            if (Vector3.Distance(reusableData.LeftObject.transform.position, _stateMachine.AbilityManager.launcherTransform.position) < 0.1f)
+            if (Vector3.Distance(reusableData.LeftObject.transform.position, leftLauncher.position) < 0.1f)
             {
                 _stateMachine.ChangeState(_stateMachine.IdleState);
             }
@@ -26,9 +26,9 @@ public class AbilityRecallState : AbilityState
         if (reusableData.RightInput)
         {
             reusableData.RightObject.transform.position = Vector3.Lerp(reusableData.RightObject.transform.position,
-                _stateMachine.AbilityManager.launcherTransform.position, Time.deltaTime * 10f);
+                rightLauncher.position, Time.deltaTime * metricsManager.CurrentPlayerSO.AbilityData.RecallSpeed);
 
-            if (Vector3.Distance(reusableData.RightObject.transform.position, _stateMachine.AbilityManager.launcherTransform.position) < 0.1f)
+            if (Vector3.Distance(reusableData.RightObject.transform.position, rightLauncher.position) < 0.1f)
             {
                 _stateMachine.ChangeState(_stateMachine.IdleState);
             }
@@ -43,12 +43,14 @@ public class AbilityRecallState : AbilityState
         {
             GameObject.Destroy(reusableData.LeftObject);
             reusableData.LeftObject = null;
+            leftLauncher.GetComponent<MeshRenderer>().enabled = true;
         }
 
         if (reusableData.RightInput)
         {
             GameObject.Destroy(reusableData.RightObject);
             reusableData.RightObject = null;
+            rightLauncher.GetComponent<MeshRenderer>().enabled = true;
         }
         
         reusableData.LeftInput = false;

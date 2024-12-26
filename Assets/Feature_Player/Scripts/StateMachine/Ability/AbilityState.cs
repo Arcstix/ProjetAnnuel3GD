@@ -13,6 +13,9 @@ public class AbilityState : IState
     protected PlayerCameraManager cameraManager;
     protected PlayerReusableStateData reusableData;
     protected Rigidbody rigidbody;
+    
+    protected Transform rightLauncher;
+    protected Transform leftLauncher;
 
     // Sert � la cr�ation de raccourcie.
     // ATTENTION AUX SCRIPTABLES OBJECTS QUI PEUVENT TOTALEMENT CHANGER COMME LE PLAYERSO !
@@ -28,6 +31,9 @@ public class AbilityState : IState
         {
             cameraManager = _stateMachine.AbilityManager.CameraManager;
         }
+        
+        rightLauncher = _stateMachine.AbilityManager.RightLauncherTransform;
+        leftLauncher = _stateMachine.AbilityManager.LeftLauncherTransform;
     }
 
     #region State Methods

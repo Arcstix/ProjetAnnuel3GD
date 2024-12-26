@@ -3,11 +3,11 @@
 public class AbilityShootState : AbilityState
 {
     private Transform playerTransform;
-    private Transform launchTransform;
+
+    private Vector3 aimEndPosition;
     public AbilityShootState(AbilityStateMachine abilityStateMachine) : base(abilityStateMachine)
     {
         playerTransform = _stateMachine.AbilityManager.transform;
-        launchTransform = _stateMachine.AbilityManager.launcherTransform;
     }
 
     public override void Enter()
@@ -18,15 +18,24 @@ public class AbilityShootState : AbilityState
         
         if (reusableData.LeftInput)
         {
-            reusableData.LeftObject = InstantiateBall(reusableData.LeftObject, metricsManager.CurrentPlayerSO.AbilityData.LeftBall);
-            Debug.Log(reusableData.LeftObject);
+            leftLauncher.GetComponent<MeshRenderer>().enabled = false;
+            reusableData.LeftObject = InstantiateBall(reusableData.LeftObject, metricsManager.CurrentPlayerSO.AbilityData.LeftBall, leftLauncher.position);
         }
         
 
         if (reusableData.RightInput)
         {
-            reusableData.RightObject = InstantiateBall(reusableData.RightObject, metricsManager.CurrentPlayerSO.AbilityData.RightBall);
-            Debug.Log(reusableData.RightObject);
+            rightLauncher.GetComponent<MeshRenderer>().enabled = false;
+            reusableData.RightObject = InstantiateBall(reusableData.RightObject, metricsManager.CurrentPlayerSO.AbilityData.RightBall, rightLauncher.position);
+        }
+
+        if (reusableData.InstancePosition != Vector3.zero)
+        {
+            aimEndPosition = reusableData.InstancePosition;
+        }
+        else
+        {
+            RaycastCheck();
         }
     }
 
@@ -34,61 +43,29 @@ public class AbilityShootState : AbilityState
     {
         base.Tick();
 
+        Debug.Log("position : " + reusableData.InstancePosition);
+        
         if (reusableData.LeftInput)
         {
-            if (reusableData.InstancePosition != Vector3.zero)
-            {
-                reusableData.LeftObject.transform.position = Vector3.Lerp(reusableData.LeftObject.transform.position,
-                    reusableData.InstancePosition, Time.deltaTime * 10f);
+            reusableData.LeftObject.transform.position = Vector3.Lerp(reusableData.LeftObject.transform.position,
+                aimEndPosition, Time.deltaTime * metricsManager.CurrentPlayerSO.AbilityData.ShootSpeed);
 
-                if (Vector3.Distance(reusableData.LeftObject.transform.position, reusableData.InstancePosition) < 0.1f)
-                {
-                    _stateMachine.ChangeState(_stateMachine.IdleState);
-                }
-            }
-            else
+            if (Vector3.Distance(reusableData.LeftObject.transform.position, aimEndPosition) < 0.1f)
             {
-                Ray aimRay = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-                Vector3 aimEndPosition = aimRay.origin + aimRay.direction * metricsManager.CurrentPlayerSO.AbilityData.AimDistance;
-                
-                reusableData.LeftObject.transform.position = Vector3.Lerp(reusableData.LeftObject.transform.position,
-                    aimEndPosition, Time.deltaTime * 10f);
-
-                if (Vector3.Distance(reusableData.LeftObject.transform.position, aimEndPosition) < 0.1f)
-                {
-                    _stateMachine.ChangeState(_stateMachine.IdleState);
-                }
+                _stateMachine.ChangeState(_stateMachine.IdleState);
             }
         }
         
         if (reusableData.RightInput)
         {
-            if (reusableData.InstancePosition != Vector3.zero)
-            {
-                reusableData.RightObject.transform.position = Vector3.Lerp(reusableData.RightObject.transform.position,
-                    reusableData.InstancePosition, Time.deltaTime * 10f);
+            reusableData.RightObject.transform.position = Vector3.Lerp(reusableData.RightObject.transform.position,
+                aimEndPosition, Time.deltaTime * metricsManager.CurrentPlayerSO.AbilityData.ShootSpeed);
 
-                if (Vector3.Distance(reusableData.RightObject.transform.position, reusableData.InstancePosition) < 0.1f)
-                {
-                    _stateMachine.ChangeState(_stateMachine.IdleState);
-                }
-            }
-            else
+            if (Vector3.Distance(reusableData.RightObject.transform.position, aimEndPosition) < 0.1f)
             {
-                Ray aimRay = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-                Vector3 aimEndPosition = aimRay.origin + aimRay.direction * metricsManager.CurrentPlayerSO.AbilityData.AimDistance;
-                
-                reusableData.RightObject.transform.position = Vector3.Lerp(reusableData.RightObject.transform.position,
-                    aimEndPosition, Time.deltaTime * 10f);
-
-                if (Vector3.Distance(reusableData.RightObject.transform.position, aimEndPosition) < 0.1f)
-                {
-                    _stateMachine.ChangeState(_stateMachine.IdleState);
-                }
+                _stateMachine.ChangeState(_stateMachine.IdleState);
             }
         }
-
-        
     }
 
     public override void Exit()
@@ -99,26 +76,44 @@ public class AbilityShootState : AbilityState
         reusableData.RightInput = false;
     }
     
-    private GameObject InstantiateBall(GameObject newInstance, GameObject refObject)
+    private void RaycastCheck()
     {
-        if (CheckWalls())
+        Ray aimRay = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        RaycastHit aimHit;
+        aimEndPosition = aimRay.origin + aimRay.direction * metricsManager.CurrentPlayerSO.AbilityData.AimDistance;
+        
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out aimHit,
+                metricsManager.CurrentPlayerSO.AbilityData.AimDistance, LayerMask.GetMask("Interactable")))
+        {
+            aimEndPosition = aimHit.point;
+        }
+        else if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out aimHit,
+                     metricsManager.CurrentPlayerSO.AbilityData.AimDistance, ~LayerMask.GetMask("Interactable")))
+        {
+            aimEndPosition = aimHit.point + aimHit.normal * 0.25f;
+        }
+    }
+    
+    private GameObject InstantiateBall(GameObject newInstance, GameObject refObject, Vector3 defaultPosition)
+    {
+        if (CheckWalls(defaultPosition))
         {
             newInstance = GameObject.Instantiate(refObject,
-                reusableData.InstancePosition, Quaternion.identity);
+                aimEndPosition, Quaternion.identity);
         }
         else
         {
             newInstance = GameObject.Instantiate(refObject,
-                launchTransform.position, Quaternion.identity);
+                defaultPosition, Quaternion.identity);
         }
         
         return newInstance;
     }
     
     // Check si on est contre un objet
-    private bool CheckWalls()
+    private bool CheckWalls(Vector3 defaultPosition)
     {
-        float distance = Vector3.Distance(launchTransform.position, playerTransform.position);
+        float distance = Vector3.Distance(defaultPosition, playerTransform.position);
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit,
                 distance))
         {

@@ -3,15 +3,29 @@ using UnityEngine.InputSystem;
 
 public class AbilityAimState : AbilityState
 {
-    private Transform playerTransform;
     private GameObject aimObject;
     private Vector3 velocityRef;
     public AbilityAimState(AbilityStateMachine abilityStateMachine) : base(abilityStateMachine)
     {
-        playerTransform = metricsManager.gameObject.transform;
+        
     }
     
     #region StateMachine
+
+    public override void Enter()
+    {
+        base.Enter();
+
+        if (reusableData.RightInput)
+        {
+            rightLauncher.localPosition = Vector3.Lerp(rightLauncher.localPosition, rightLauncher.localPosition + metricsManager.CurrentPlayerSO.AbilityData.AimBallOffset, 0.5f);
+        }
+
+        if (reusableData.LeftInput)
+        {
+            leftLauncher.localPosition = Vector3.Lerp(leftLauncher.localPosition, leftLauncher.localPosition + metricsManager.CurrentPlayerSO.AbilityData.AimBallOffset, 0.5f);
+        }
+    }
 
     public override void Tick()
     {
@@ -47,6 +61,17 @@ public class AbilityAimState : AbilityState
     {
         base.Exit();
         GameObject.Destroy(aimObject);
+        
+        if (reusableData.RightInput)
+        {
+            rightLauncher.localPosition = Vector3.Lerp(rightLauncher.localPosition, rightLauncher.localPosition - metricsManager.CurrentPlayerSO.AbilityData.AimBallOffset, 0.5f);
+        }
+
+        if (reusableData.LeftInput)
+        {
+            leftLauncher.localPosition = Vector3.Lerp(leftLauncher.localPosition, leftLauncher.localPosition - metricsManager.CurrentPlayerSO.AbilityData.AimBallOffset, 0.5f);
+        }
+
     }
     #endregion
     
