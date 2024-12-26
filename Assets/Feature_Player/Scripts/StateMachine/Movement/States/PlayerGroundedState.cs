@@ -19,8 +19,6 @@ public class PlayerGroundedState : PlayerMovementState
     {
         base.FixedTick();
 
-        Debug.Log("Etat Transportation " + movementStateMachine.ReusableData.OnTransportation);
-
         if (!movementStateMachine.ReusableData.OnTransportation)
         {
             CheckDistanceToTheGround();

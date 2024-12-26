@@ -51,14 +51,4 @@ public class PlayerAbilityManager : PlayerManager, I_Initializer
     {
         abilityStateMachine?.FixedTick();
     }
-
-    public void UseAbility(bool isRight)
-    {
-        
-    }
-
-    public void CancelCallBack()
-    {
-        //playerRightAbilityStateMachine.ChangeState(playerRightAbilityStateMachine.ReloadState);
-    }
 }

@@ -11,8 +11,6 @@ public class PlayerFallingState : PlayerAirState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Falling");
-        Debug.Log("SlowDown : " + reusableData.ShouldSlowDown);
         reusableData.MovementSpeedModifier = metricsManager.CurrentPlayerSO.GroundedData.RunData.SpeedModifier;
     }
 
@@ -34,7 +32,6 @@ public class PlayerFallingState : PlayerAirState
             timer += Time.deltaTime;
             if (timer >= 2)
             {
-                Debug.Log("Timer écoulé");
                 ResetSlowDown();
             }
         }
@@ -50,7 +47,7 @@ public class PlayerFallingState : PlayerAirState
     }
 
     /// <summary>
-    /// Reset le timer et le booléen SlowDown à false.
+    /// Reset le timer et le boolï¿½en SlowDown ï¿½ false.
     /// </summary>
     private void ResetSlowDown()
     {

@@ -12,13 +12,13 @@ public class AbilityTransportState : AbilityState
     {
         base.Enter();
 
-        if (reusableData.LeftProjectile == null)
+        if (reusableData.LeftObject == null)
         {
             _stateMachine.ChangeState(_stateMachine.IdleState);
             return;
         }
 
-        if (reusableData.RightProjectile == null)
+        if (reusableData.RightObject == null)
         {
             _stateMachine.ChangeState(_stateMachine.IdleState);
             return;

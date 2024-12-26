@@ -7,22 +7,43 @@ public class AbilityIdleState : AbilityState
     {
     }
 
-    public override void Enter()
+    public override void HandleInput()
     {
-        base.Enter();
-        
-        AddInputRightThrowRecall();
-        AddInputLeftThrowRecall();
-        AddInputLeftAttraction();
-        AddInputRightAttraction();
-    }
+        base.HandleInput();
 
-    public override void Exit()
-    {
-        base.Exit();
-        RemoveInputRightThrowRecall();
-        RemoveInputLeftThrowRecall();
-        RemoveInputRightAttraction();
-        RemoveInputLeftAttraction();
+        if (input.PlayerActions.ThrowRecallRight.WasPerformedThisFrame())
+        {
+            HandleRightAimState();
+            return;
+        }
+
+        if (input.PlayerActions.ThrowRecallLeft.WasPerformedThisFrame())
+        {
+            HandleLeftAimState();
+            return;
+        }
+
+        if (input.PlayerActions.ThrowRecallRight.WasReleasedThisFrame())
+        {
+            HandleRightShootRecall();
+            return;
+        }
+
+        if (input.PlayerActions.ThrowRecallLeft.WasReleasedThisFrame())
+        {
+            HandleLeftShootRecall();
+            return;
+        }
+
+        if (input.PlayerActions.AttractionRight.WasPerformedThisFrame())
+        {
+            HandleRightAttraction();
+            return;
+        }
+
+        if (input.PlayerActions.AttractionLeft.WasPerformedThisFrame())
+        {
+            HandleLeftAttraction();
+        }
     }
 }

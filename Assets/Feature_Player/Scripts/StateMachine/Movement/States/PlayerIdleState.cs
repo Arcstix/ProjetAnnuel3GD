@@ -13,7 +13,6 @@ public class PlayerIdleState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Idle State");
         reusableData.MovementInput = Vector2.zero;
         reusableData.MovementSpeedModifier = 0f;
 

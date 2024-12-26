@@ -11,7 +11,6 @@ public class PlayerLandingState : PlayerAirState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Landing");
         movementStateMachine.ChangeState(movementStateMachine.IdleState);     
     }
 }

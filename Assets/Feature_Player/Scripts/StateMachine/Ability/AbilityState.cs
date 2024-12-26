@@ -56,112 +56,26 @@ public class AbilityState : IState
         
     }
     #endregion
-
-    #region Input method
-
-    #region ThrowRecall
-
-    /// <summary>
-    /// On s'abonne � l'input qui sert � Shoot et Recall l'objet de droite
-    /// </summary>
-    protected virtual void AddInputRightThrowRecall()
-    {
-        input.PlayerActions.ThrowRecallRight.performed += HandleAimState;
-        input.PlayerActions.ThrowRecallRight.canceled += HandleRightShootRecall;
-    }
-
-    /// <summary>
-    /// On s'abonne � l'input qui sert � Shoot et Recall l'objet de gauche
-    /// </summary>
-    protected virtual void AddInputLeftThrowRecall()
-    {
-        input.PlayerActions.ThrowRecallLeft.performed += HandleAimState;
-        input.PlayerActions.ThrowRecallLeft.canceled += HandleLeftShootRecall;
-    }
     
-    /// <summary>
-    /// On se d�sabonne � l'input qui sert � shoot et recall l'objet de droite
-    /// </summary>
-    protected virtual void RemoveInputRightThrowRecall()
-    {
-        input.PlayerActions.ThrowRecallRight.performed -= HandleAimState;
-        input.PlayerActions.ThrowRecallRight.canceled -= HandleRightShootRecall;
-    }
-
-    /// <summary>
-    /// On se d�sabonne � l'input qui sert � shoot et recall l'objet de gauche
-    /// </summary>
-    protected virtual void RemoveInputLeftThrowRecall()
-    {
-        input.PlayerActions.ThrowRecallLeft.performed -= HandleAimState;
-        input.PlayerActions.ThrowRecallRight.canceled -= HandleLeftShootRecall;
-    }
-    #endregion
-
-    #region Attraction
-
-    protected virtual void AddInputRightAttraction()
-    {
-        input.PlayerActions.AttractionRight.started += HandleRightAttraction;
-    }
-
-    protected virtual void AddInputLeftAttraction()
-    {
-        input.PlayerActions.AttractionLeft.started += HandleLeftAttraction;
-    }
-    
-    protected virtual void RemoveInputRightAttraction()
-    {
-        input.PlayerActions.AttractionRight.started -= HandleRightAttraction;
-    }
-
-    protected virtual void RemoveInputLeftAttraction()
-    {
-        input.PlayerActions.AttractionLeft.started -= HandleLeftAttraction;
-    }
-
-    #endregion
-    
-    #endregion
 
     #region Ability methods
-
-    /// <summary>
-    /// M�thode appel� quand le joueur est abonn� � l'input Ability et appuie sur l'input
-    /// </summary>
-    /// <param name="context"></param>
-    protected void HandleAimState(InputAction.CallbackContext context)
+    
+    protected void HandleRightAimState()
     {
+        reusableData.RightInput = true;
         _stateMachine.ChangeState(_stateMachine.AimState);
     }
     
-    private void HandleRightShootRecall(InputAction.CallbackContext context)
+    protected void HandleLeftAimState()
     {
-        if (reusableData.RightProjectile == null)
-        {
-            _stateMachine.ChangeState(_stateMachine.ShootState);
-        }
-        else
-        {
-            _stateMachine.ChangeState(_stateMachine.RecallState);
-        }
+        reusableData.LeftInput = true;
+        _stateMachine.ChangeState(_stateMachine.AimState);
     }
 
     protected void HandleRightShootRecall()
     {
-        if (reusableData.RightProjectile == null)
-        {
-            _stateMachine.ChangeState(_stateMachine.ShootState);
-        }
-        else
-        {
-            _stateMachine.ChangeState(_stateMachine.RecallState);
-        }
-    }
-    
-    private void HandleLeftShootRecall(InputAction.CallbackContext context)
-    {
-        if (reusableData.LeftProjectile == null)
+        reusableData.RightInput = true;
+        if (reusableData.RightObject == null)
         {
             _stateMachine.ChangeState(_stateMachine.ShootState);
         }
@@ -173,7 +87,8 @@ public class AbilityState : IState
 
     protected void HandleLeftShootRecall()
     {
-        if (reusableData.LeftProjectile == null)
+        reusableData.LeftInput = true;
+        if (reusableData.LeftObject == null)
         {
             _stateMachine.ChangeState(_stateMachine.ShootState);
         }
@@ -183,33 +98,9 @@ public class AbilityState : IState
         }
     }
     
-    private void HandleLeftAttraction(InputAction.CallbackContext obj)
-    {
-        if (reusableData.LeftProjectile == null)
-        {
-            return;
-        }
-        else
-        {
-            _stateMachine.ChangeState(_stateMachine.TransportState);
-        }
-    }
-    
     protected void HandleLeftAttraction()
     {
-        if (reusableData.LeftProjectile == null)
-        {
-            return;
-        }
-        else
-        {
-            _stateMachine.ChangeState(_stateMachine.TransportState);
-        }
-    }
-
-    private void HandleRightAttraction(InputAction.CallbackContext context)
-    {
-        if (reusableData.RightProjectile == null)
+        if (reusableData.LeftObject == null)
         {
             return;
         }
@@ -221,7 +112,7 @@ public class AbilityState : IState
     
     protected void HandleRightAttraction()
     {
-        if (reusableData.RightProjectile == null)
+        if (reusableData.RightObject == null)
         {
             return;
         }

@@ -12,8 +12,11 @@ public class PlayerReusableStateData
     public bool ShouldWalk { get; set; }
     public bool CanMove { get; set; }
     public Vector3 InstancePosition { get; set; }
-    public Transform RightProjectile { get; set; }
-    public Transform LeftProjectile { get; set; }
+    public bool RightInput { get; set; } = false;
+    public bool LeftInput { get; set; } = false;
+    public GameObject ObjectAimed { get; set; }
+    public GameObject RightObject { get; set; }
+    public GameObject LeftObject { get; set; }
     public bool OnTransportation { get; set; } = false;
     public bool ShouldSlowDown { get; set; } = false;
     public float CurrentTargetRotation { get; set; }
