@@ -15,7 +15,7 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
     private Rigidbody playerRb;
     private PlayerSO currentPlayerSO;
 
-    public void Init()
+    public void Init(PlayerReusableStateData reusableStateData)
     {
         //InitializeDictionary();
         playerRb = GetComponent<Rigidbody>();

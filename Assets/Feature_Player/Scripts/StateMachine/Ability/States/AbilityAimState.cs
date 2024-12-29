@@ -15,7 +15,9 @@ public class AbilityAimState : AbilityState
     public override void Enter()
     {
         base.Enter();
-
+        
+        // TODO : Mettre dans un AnimationManager
+        
         if (reusableData.RightInput)
         {
             rightLauncher.localPosition = Vector3.Lerp(rightLauncher.localPosition, rightLauncher.localPosition + metricsManager.CurrentPlayerSO.AbilityData.AimBallOffset, 0.5f);
@@ -61,6 +63,18 @@ public class AbilityAimState : AbilityState
     {
         base.Exit();
         GameObject.Destroy(aimObject);
+
+        if (reusableData.ObjectAimed != null)
+        {
+            if (reusableData.RightInput)
+            {
+                reusableData.RightParent = reusableData.ObjectAimed;
+            }
+            else
+            {
+                reusableData.LeftParent = reusableData.ObjectAimed;
+            }
+        }
         
         if (reusableData.RightInput)
         {
@@ -93,7 +107,7 @@ public class AbilityAimState : AbilityState
         // Si le Raycast touche un objet non intéragissable le visuel se trouve à un offset de l'objet (non planté)
         // Si le Raycast ne touche rien le visuel se trouve au bout du Raycast
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out aimHit,
-                metricsManager.CurrentPlayerSO.AbilityData.AimDistance, LayerMask.GetMask("Interactable")))
+                metricsManager.CurrentPlayerSO.AbilityData.AimDistance, LayerMask.GetMask("Interactable"), QueryTriggerInteraction.Ignore))
         {
             aimObject.GetComponent<MeshRenderer>().material.color = Color.green;
             aimObject.transform.position = Vector3.Lerp(aimObject.transform.position, aimHit.point, Time.deltaTime * smoothSpeed);

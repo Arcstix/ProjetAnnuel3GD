@@ -11,12 +11,10 @@ public class AbilityRecallState : AbilityState
     {
         base.Tick();
         
-        // TODO : Method qui récupère la balle 
         if (reusableData.LeftInput)
         {
-            reusableData.LeftObject.transform.position = Vector3.Lerp(reusableData.LeftObject.transform.position,
-                leftLauncher.position, Time.deltaTime * metricsManager.CurrentPlayerSO.AbilityData.RecallSpeed);
-
+            reusableData.LeftObject.SetNewInfo(leftLauncher.position, metricsManager.CurrentPlayerSO.AbilityData.RecallSpeed, null);
+            
             if (Vector3.Distance(reusableData.LeftObject.transform.position, leftLauncher.position) < 0.1f)
             {
                 _stateMachine.ChangeState(_stateMachine.IdleState);
@@ -25,9 +23,8 @@ public class AbilityRecallState : AbilityState
         
         if (reusableData.RightInput)
         {
-            reusableData.RightObject.transform.position = Vector3.Lerp(reusableData.RightObject.transform.position,
-                rightLauncher.position, Time.deltaTime * metricsManager.CurrentPlayerSO.AbilityData.RecallSpeed);
-
+            reusableData.RightObject.SetNewInfo(rightLauncher.position, metricsManager.CurrentPlayerSO.AbilityData.RecallSpeed, null);
+            
             if (Vector3.Distance(reusableData.RightObject.transform.position, rightLauncher.position) < 0.1f)
             {
                 _stateMachine.ChangeState(_stateMachine.IdleState);
@@ -41,15 +38,17 @@ public class AbilityRecallState : AbilityState
 
         if (reusableData.LeftInput)
         {
-            GameObject.Destroy(reusableData.LeftObject);
+            GameObject.Destroy(reusableData.LeftObject.gameObject);
             reusableData.LeftObject = null;
+            reusableData.LeftParent = null;
             leftLauncher.GetComponent<MeshRenderer>().enabled = true;
         }
 
         if (reusableData.RightInput)
         {
-            GameObject.Destroy(reusableData.RightObject);
+            GameObject.Destroy(reusableData.RightObject.gameObject);
             reusableData.RightObject = null;
+            reusableData.RightParent = null;
             rightLauncher.GetComponent<MeshRenderer>().enabled = true;
         }
         

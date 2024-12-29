@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class PlayerMovementState : IState
 {
-    protected PlayerMovementStateMachine movementStateMachine;
+    protected PlayerMovementStateMachine stateMachine;
     protected PlayerMetricsManager metricsManager;
     protected PlayerInput input;
     protected PlayerCameraManager cameraManager;
@@ -21,18 +21,18 @@ public class PlayerMovementState : IState
     /// <summary>
     /// Un constructeur poss�dant des raccourcies utiles pour le code. ATTENTION A NE PAS SPECIFIER DES COMPOSANTS SUSCEPTIBLE DE CHANGER
     /// </summary>
-    /// <param name="playerMovementStateMachine"></param>
-    public PlayerMovementState(PlayerMovementStateMachine playerMovementStateMachine)
+    /// <param name="playerStateMachine"></param>
+    public PlayerMovementState(PlayerMovementStateMachine playerStateMachine)
     {
-        movementStateMachine = playerMovementStateMachine;
-        metricsManager = playerMovementStateMachine.MovementManager.Metrics;
-        input = movementStateMachine.MovementManager.Input;
-        reusableData = movementStateMachine.ReusableData;
-        rigidbody = movementStateMachine.MovementManager.Rb;
+        stateMachine = playerStateMachine;
+        metricsManager = playerStateMachine.MovementManager.Metrics;
+        input = stateMachine.MovementManager.Input;
+        reusableData = stateMachine.ReusableData;
+        rigidbody = stateMachine.MovementManager.Rb;
 
-        if (movementStateMachine.MovementManager.CameraManager != null)
+        if (stateMachine.MovementManager.CameraManager != null)
         {
-            cameraManager = movementStateMachine.MovementManager.CameraManager;
+            cameraManager = stateMachine.MovementManager.CameraManager;
         }
     }
 
@@ -49,38 +49,12 @@ public class PlayerMovementState : IState
 
     public virtual void Tick()
     {
-        if (reusableData.InAir)
-        {
-            if (!reusableData.OnTransportation)
-            {
-                if (movementStateMachine.currentState != movementStateMachine.FallingState)
-                {
-                    movementStateMachine.ChangeState(movementStateMachine.FallingState);
-                    return;
-                }
-            }
-            else
-            {
-                if(movementStateMachine.currentState != movementStateMachine.IdleState)
-                {
-                    movementStateMachine.ChangeState(movementStateMachine.IdleState);
-                    return;
-                }
-            }
-        }
-        else
-        {
-            if(reusableData.OnTransportation || !reusableData.CanMove && movementStateMachine.currentState != movementStateMachine.IdleState)
-            {
-                movementStateMachine.ChangeState(movementStateMachine.IdleState);
-                return;
-            }
-        }
+        
     }
 
     public virtual void FixedTick()
     {
-        if (reusableData.CanMove)
+        if (reusableData.CanMove && !reusableData.OnTransportation)
         {
             Move();
         }
@@ -88,7 +62,7 @@ public class PlayerMovementState : IState
 
     public virtual void HandleInput()
     {
-        if (reusableData.CanMove)
+        if (reusableData.CanMove && !reusableData.OnTransportation)
         {
             ReadMovementInput();
         }
@@ -141,7 +115,7 @@ public class PlayerMovementState : IState
 
     private float AddCameraRotationToAngle(float directionAngle)
     {
-        directionAngle += movementStateMachine.MovementManager.Cam.transform.eulerAngles.y;
+        directionAngle += stateMachine.MovementManager.Cam.transform.eulerAngles.y;
 
         if (directionAngle > 360f)
         {
@@ -179,7 +153,7 @@ public class PlayerMovementState : IState
 
     protected void RotateTowardsTargetRotation(float directionAngle)
     {
-        float currentYAngle = movementStateMachine.MovementManager.transform.eulerAngles.y;
+        float currentYAngle = stateMachine.MovementManager.transform.eulerAngles.y;
 
         if(currentYAngle == reusableData.CurrentTargetRotation)
         {

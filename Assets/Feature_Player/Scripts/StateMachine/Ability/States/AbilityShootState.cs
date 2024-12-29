@@ -3,8 +3,8 @@
 public class AbilityShootState : AbilityState
 {
     private Transform playerTransform;
-
     private Vector3 aimEndPosition;
+    
     public AbilityShootState(AbilityStateMachine abilityStateMachine) : base(abilityStateMachine)
     {
         playerTransform = _stateMachine.AbilityManager.transform;
@@ -14,21 +14,6 @@ public class AbilityShootState : AbilityState
     {
         base.Enter();
         
-        // TODO : Method Shoot mettre la balle à l'endroit désigné et si pas d'endroit désigné tiré un Raycast
-        
-        if (reusableData.LeftInput)
-        {
-            leftLauncher.GetComponent<MeshRenderer>().enabled = false;
-            reusableData.LeftObject = InstantiateBall(reusableData.LeftObject, metricsManager.CurrentPlayerSO.AbilityData.LeftBall, leftLauncher.position);
-        }
-        
-
-        if (reusableData.RightInput)
-        {
-            rightLauncher.GetComponent<MeshRenderer>().enabled = false;
-            reusableData.RightObject = InstantiateBall(reusableData.RightObject, metricsManager.CurrentPlayerSO.AbilityData.RightBall, rightLauncher.position);
-        }
-
         if (reusableData.InstancePosition != Vector3.zero)
         {
             aimEndPosition = reusableData.InstancePosition;
@@ -37,35 +22,23 @@ public class AbilityShootState : AbilityState
         {
             RaycastCheck();
         }
-    }
-
-    public override void Tick()
-    {
-        base.Tick();
-
-        Debug.Log("position : " + reusableData.InstancePosition);
         
         if (reusableData.LeftInput)
         {
-            reusableData.LeftObject.transform.position = Vector3.Lerp(reusableData.LeftObject.transform.position,
-                aimEndPosition, Time.deltaTime * metricsManager.CurrentPlayerSO.AbilityData.ShootSpeed);
-
-            if (Vector3.Distance(reusableData.LeftObject.transform.position, aimEndPosition) < 0.1f)
-            {
-                _stateMachine.ChangeState(_stateMachine.IdleState);
-            }
+            leftLauncher.GetComponent<MeshRenderer>().enabled = false;
+            reusableData.LeftObject = InstantiateBall(reusableData.LeftObject, metricsManager.CurrentPlayerSO.AbilityData.LeftBall, leftLauncher.position);
+            reusableData.LeftObject.InitializeBall(metricsManager.CurrentPlayerSO.AbilityData.ShootSpeed, aimEndPosition, reusableData.LeftParent);
         }
         
+
         if (reusableData.RightInput)
         {
-            reusableData.RightObject.transform.position = Vector3.Lerp(reusableData.RightObject.transform.position,
-                aimEndPosition, Time.deltaTime * metricsManager.CurrentPlayerSO.AbilityData.ShootSpeed);
-
-            if (Vector3.Distance(reusableData.RightObject.transform.position, aimEndPosition) < 0.1f)
-            {
-                _stateMachine.ChangeState(_stateMachine.IdleState);
-            }
+            rightLauncher.GetComponent<MeshRenderer>().enabled = false;
+            reusableData.RightObject = InstantiateBall(reusableData.RightObject, metricsManager.CurrentPlayerSO.AbilityData.RightBall, rightLauncher.position);
+            reusableData.RightObject.InitializeBall(metricsManager.CurrentPlayerSO.AbilityData.ShootSpeed, aimEndPosition, reusableData.RightParent);
         }
+        
+        _stateMachine.ChangeState(_stateMachine.IdleState);
     }
 
     public override void Exit()
@@ -83,9 +56,17 @@ public class AbilityShootState : AbilityState
         aimEndPosition = aimRay.origin + aimRay.direction * metricsManager.CurrentPlayerSO.AbilityData.AimDistance;
         
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out aimHit,
-                metricsManager.CurrentPlayerSO.AbilityData.AimDistance, LayerMask.GetMask("Interactable")))
+                metricsManager.CurrentPlayerSO.AbilityData.AimDistance, LayerMask.GetMask("Interactable"), QueryTriggerInteraction.Ignore))
         {
             aimEndPosition = aimHit.point;
+            if (reusableData.LeftInput)
+            {
+                reusableData.LeftParent = aimHit.transform.gameObject;
+            }
+            else
+            {
+                reusableData.RightParent = aimHit.transform.gameObject;
+            }
         }
         else if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out aimHit,
                      metricsManager.CurrentPlayerSO.AbilityData.AimDistance, ~LayerMask.GetMask("Interactable")))
@@ -94,7 +75,7 @@ public class AbilityShootState : AbilityState
         }
     }
     
-    private GameObject InstantiateBall(GameObject newInstance, GameObject refObject, Vector3 defaultPosition)
+    private BallManager InstantiateBall(BallManager newInstance, BallManager refObject, Vector3 defaultPosition)
     {
         if (CheckWalls(defaultPosition))
         {

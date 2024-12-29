@@ -104,21 +104,9 @@ public class AbilityState : IState
         }
     }
     
-    protected void HandleLeftAttraction()
+    protected void HandleAttraction()
     {
-        if (reusableData.LeftObject == null)
-        {
-            return;
-        }
-        else
-        {
-            _stateMachine.ChangeState(_stateMachine.TransportState);
-        }
-    }
-    
-    protected void HandleRightAttraction()
-    {
-        if (reusableData.RightObject == null)
+        if (reusableData.LeftObject == null && reusableData.RightObject == null)
         {
             return;
         }

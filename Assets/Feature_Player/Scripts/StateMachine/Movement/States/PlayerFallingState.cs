@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerFallingState : PlayerAirState
 {
-    public PlayerFallingState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+    public PlayerFallingState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
     {
     }
 
@@ -22,27 +22,25 @@ public class PlayerFallingState : PlayerAirState
 
     public override void Tick()
     {
-        base.Tick();
-
         HandleRotation(GetMovementDirection());
 
-        if (reusableData.ShouldSlowDown)
-        {
-            SlowDown();
-            timer += Time.deltaTime;
-            if (timer >= 2)
-            {
-                ResetSlowDown();
-            }
-        }
-        else
-        {
-            rigidbody.AddForce(Physics.gravity * groundedData.GravityMultiplier, ForceMode.Acceleration);
-        }
+        // if (reusableData.ShouldSlowDown)
+        // {
+        //     SlowDown();
+        //     timer += Time.deltaTime;
+        //     if (timer >= 2)
+        //     {
+        //         ResetSlowDown();
+        //     }
+        // }
+        // else
+        // {
+        // }
+        rigidbody.AddForce(Physics.gravity * groundedData.GravityMultiplier - GetCurrentVerticalVelocity(), ForceMode.Acceleration);
 
-        if(!movementStateMachine.ReusableData.InAir)
+        if(!stateMachine.ReusableData.InAir)
         {
-            movementStateMachine.ChangeState(movementStateMachine.LandingState);
+            stateMachine.ChangeState(stateMachine.LandingState);
         }
     }
 
@@ -51,7 +49,7 @@ public class PlayerFallingState : PlayerAirState
     /// </summary>
     private void ResetSlowDown()
     {
-        movementStateMachine.ReusableData.ShouldSlowDown = false;
+        stateMachine.ReusableData.ShouldSlowDown = false;
         timer = 0;
     }
 }

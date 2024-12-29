@@ -9,17 +9,17 @@ public class PlayerGroundedState : PlayerMovementState
     private CapsuleColliderUtility capsuleColliderUtility;
     private GroundedData groundedData;
 
-    public PlayerGroundedState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+    public PlayerGroundedState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
     {
-        capsuleColliderUtility = movementStateMachine.MovementManager.CapsuleColliderUtility;
-        groundedData = movementStateMachine.MovementManager.Metrics.CurrentPlayerSO.GroundedData;
+        capsuleColliderUtility = stateMachine.MovementManager.CapsuleColliderUtility;
+        groundedData = stateMachine.MovementManager.Metrics.CurrentPlayerSO.GroundedData;
     }
 
     public override void FixedTick()
     {
         base.FixedTick();
 
-        if (!movementStateMachine.ReusableData.OnTransportation)
+        if (!stateMachine.ReusableData.OnTransportation)
         {
             CheckDistanceToTheGround();
         }
@@ -37,7 +37,7 @@ public class PlayerGroundedState : PlayerMovementState
             reusableData.InAir = false;
             float groundAngle = Vector3.Angle(hit.normal, -downwardsRayFromCapsuleCenter.direction);
 
-            float distanceToGround = capsuleColliderUtility.CapsuleColliderData.ColliderCenterInLocalSpace.y * movementStateMachine.MovementManager.transform.localScale.y - hit.distance;
+            float distanceToGround = capsuleColliderUtility.CapsuleColliderData.ColliderCenterInLocalSpace.y * stateMachine.MovementManager.transform.localScale.y - hit.distance;
 
             if (distanceToGround == 0f)
             {
@@ -77,28 +77,6 @@ public class PlayerGroundedState : PlayerMovementState
         rigidbody.AddForce(liftForce, ForceMode.VelocityChange);
     }
 
-    protected override void SubscribeInputAction()
-    {
-        base.SubscribeInputAction();
-
-        input.PlayerActions.Movement.canceled += OnMovementCanceled;
-    }
-
-    protected override void UnsubscribeInputAction()
-    {
-        base.UnsubscribeInputAction();
-
-        input.PlayerActions.Movement.canceled -= OnMovementCanceled;
-    }
-
-    protected virtual void OnMovementCanceled(InputAction.CallbackContext context)
-    {
-        if (!reusableData.InAir && movementStateMachine.currentState != movementStateMachine.IdleState)
-        {
-            movementStateMachine.ChangeState(movementStateMachine.IdleState);
-        }
-    }
-
     /// <summary>
     /// Method use when the player change to a moving state
     /// </summary>
@@ -106,10 +84,10 @@ public class PlayerGroundedState : PlayerMovementState
     {
         if (reusableData.ShouldWalk)
         {
-            movementStateMachine.ChangeState(movementStateMachine.SlowState);
+            stateMachine.ChangeState(stateMachine.SlowState);
             return;
         }
 
-        movementStateMachine.ChangeState(movementStateMachine.RunningState);
+        stateMachine.ChangeState(stateMachine.RunningState);
     }
 }

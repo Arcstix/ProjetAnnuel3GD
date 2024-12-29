@@ -15,8 +15,10 @@ public class PlayerReusableStateData
     public bool RightInput { get; set; } = false;
     public bool LeftInput { get; set; } = false;
     public GameObject ObjectAimed { get; set; }
-    public GameObject RightObject { get; set; }
-    public GameObject LeftObject { get; set; }
+    public GameObject RightParent { get; set; }
+    public GameObject LeftParent { get; set; }
+    public BallManager RightObject { get; set; }
+    public BallManager LeftObject { get; set; }
     public bool OnTransportation { get; set; } = false;
     public bool ShouldSlowDown { get; set; } = false;
     public float CurrentTargetRotation { get; set; }
@@ -33,5 +35,4 @@ public class PlayerReusableStateData
             return ref turnSmoothVelocity;
         }
     }
-
 }

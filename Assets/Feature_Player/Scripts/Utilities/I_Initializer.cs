@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface I_Initializer
 {
-    public void Init();
+    public void Init(PlayerReusableStateData reusableStateData);
 }

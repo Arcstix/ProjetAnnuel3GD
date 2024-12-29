@@ -12,9 +12,11 @@ public class PlayerAbilityManager : PlayerManager, I_Initializer
     
     private PlayerMovementManager playerMovementManager;
     private AbilityStateMachine abilityStateMachine;
+    private PlayerReusableStateData reusableData;
+
+    public PlayerReusableStateData ReusableData { get => reusableData; set => reusableData = value; }
 
     public AbilityStateMachine AbilityStateMachine { get => abilityStateMachine; private set => abilityStateMachine = value; }
-    public PlayerReusableStateData ReusableData { get; set; }
     public Transform RightLauncherTransform { get => rightLauncherTransform; set => rightLauncherTransform = value; }
     
     public Transform LeftLauncherTransform { get => leftLauncherTransform; set => leftLauncherTransform = value; }
@@ -27,13 +29,9 @@ public class PlayerAbilityManager : PlayerManager, I_Initializer
         playerMovementManager = GetComponent<PlayerMovementManager>();
     }
 
-    public void Init()
+    public void Init(PlayerReusableStateData reusableStateData)
     {
-        if (ReusableData == null)
-        {
-            ReusableData = new PlayerReusableStateData();
-            playerMovementManager.ReusableData = ReusableData;
-        }
+        reusableData = reusableStateData;
         
         abilityStateMachine = new AbilityStateMachine(this);
         abilityStateMachine.ChangeState(abilityStateMachine.IdleState);

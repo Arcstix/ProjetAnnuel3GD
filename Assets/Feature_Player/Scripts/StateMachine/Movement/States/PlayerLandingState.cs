@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PlayerLandingState : PlayerAirState
 {
-    public PlayerLandingState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+    public PlayerLandingState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
     {
     }
 
     public override void Enter()
     {
         base.Enter();
-        movementStateMachine.ChangeState(movementStateMachine.IdleState);     
+        stateMachine.ChangeState(stateMachine.IdleState);     
     }
 }

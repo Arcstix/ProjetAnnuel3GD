@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerInitializer : MonoBehaviour
 {
+    private PlayerReusableStateData reusableStateData;
+    
     private PlayerMovementManager movementManager;
     private PlayerAbilityManager abilityManager;
     private PlayerMetricsManager metricsManager;
@@ -12,6 +14,8 @@ public class PlayerInitializer : MonoBehaviour
 
     private void Awake()
     {
+        reusableStateData = new PlayerReusableStateData();
+        
         movementManager = GetComponent<PlayerMovementManager>();
         abilityManager = GetComponent<PlayerAbilityManager>();
         metricsManager = GetComponent<PlayerMetricsManager>();
@@ -28,17 +32,17 @@ public class PlayerInitializer : MonoBehaviour
 
     private void InitCamera()
     {
-        cameraManager.Init();
+        cameraManager.Init(reusableStateData);
     }
 
     public void InitMovement()
     {
-        movementManager.Init();
+        movementManager.Init(reusableStateData);
     }
 
     public void InitAbility()
     {
-        abilityManager.Init();
+        abilityManager.Init(reusableStateData);
     }
 
     public void InitInput()
@@ -48,6 +52,6 @@ public class PlayerInitializer : MonoBehaviour
 
     public void InitMetrics()
     {
-        metricsManager.Init();
+        metricsManager.Init(reusableStateData);
     }
 }

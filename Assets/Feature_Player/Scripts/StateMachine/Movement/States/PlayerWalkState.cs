@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerWalkState : PlayerGroundedState
 {
-    public PlayerWalkState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+    public PlayerWalkState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
     {
     }
 
@@ -21,6 +21,6 @@ public class PlayerWalkState : PlayerGroundedState
     {
         base.OnSlowStarted(context);
 
-        movementStateMachine.ChangeState(movementStateMachine.RunningState);
+        stateMachine.ChangeState(stateMachine.RunningState);
     }
 }

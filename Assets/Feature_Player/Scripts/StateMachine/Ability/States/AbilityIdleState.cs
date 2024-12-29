@@ -37,13 +37,12 @@ public class AbilityIdleState : AbilityState
 
         if (input.PlayerActions.AttractionRight.WasPerformedThisFrame())
         {
-            HandleRightAttraction();
-            return;
+            HandleAttraction();
         }
 
         if (input.PlayerActions.AttractionLeft.WasPerformedThisFrame())
         {
-            HandleLeftAttraction();
+            HandleAttraction();
         }
     }
 }

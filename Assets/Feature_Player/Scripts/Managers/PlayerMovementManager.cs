@@ -10,8 +10,10 @@ public class PlayerMovementManager : PlayerManager, I_Initializer
 
     private PlayerMovementStateMachine playerMovementStateMachine;
     private PlayerAbilityManager playerAbilityManager;
+    private PlayerReusableStateData reusableData;
 
-    public PlayerReusableStateData ReusableData { get; set; }
+    public PlayerReusableStateData ReusableData { get => reusableData; set => reusableData = value; }
+
     public PlayerMovementStateMachine PlayerMovementStateMachine { get => playerMovementStateMachine; }
 
     protected override void Awake()
@@ -20,13 +22,9 @@ public class PlayerMovementManager : PlayerManager, I_Initializer
         playerAbilityManager = GetComponent<PlayerAbilityManager>();
     }
 
-    public void Init()
+    public void Init(PlayerReusableStateData reusableStateData)
     {
-        if (ReusableData == null)
-        {
-            ReusableData = new PlayerReusableStateData();
-            playerAbilityManager.ReusableData = ReusableData;
-        }
+        reusableData = reusableStateData;
 
         playerMovementStateMachine = new PlayerMovementStateMachine(this);
         playerMovementStateMachine.ChangeState(playerMovementStateMachine.IdleState);

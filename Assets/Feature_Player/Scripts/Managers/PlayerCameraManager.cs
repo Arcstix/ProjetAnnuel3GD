@@ -16,7 +16,7 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
     private float currentTargetDistance;
     private PlayerCameraData cameraData;
 
-    public void Init()
+    public void Init(PlayerReusableStateData reusableStateData)
     {
         metricsManager = GetComponent<PlayerMetricsManager>();
         //framingTransposer = metricsManager.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();

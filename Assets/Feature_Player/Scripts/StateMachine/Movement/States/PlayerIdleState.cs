@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerIdleState : PlayerGroundedState
 {
-    public PlayerIdleState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+    public PlayerIdleState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
     {
 
     }
@@ -15,28 +15,30 @@ public class PlayerIdleState : PlayerGroundedState
         base.Enter();
         reusableData.MovementInput = Vector2.zero;
         reusableData.MovementSpeedModifier = 0f;
-
-        if (!reusableData.InAir)
-        {
-            ResetVelocity();
-        }
     }
 
     public override void Tick()
     {
-        base.Tick();
-
-        if(reusableData.MovementInput == Vector2.zero)
+        HandleRotation(GetMovementDirection());
+        
+        if (!reusableData.InAir && !reusableData.OnTransportation)
         {
+            ResetVelocity();
+        }
+
+        if (reusableData.InAir && !reusableData.OnTransportation)
+        {
+            // Change to Falling State
+            stateMachine.ChangeState(stateMachine.FallingState);
             return;
         }
 
-        if (reusableData.CanMove && !reusableData.InAir)
+        if (reusableData.CanMove && !reusableData.InAir && !reusableData.OnTransportation && reusableData.MovementInput != Vector2.zero)
         {
+            // Change to Running State
             OnMove();
             return;
         }
 
-        HandleRotation(GetMovementDirection());
     }
 }

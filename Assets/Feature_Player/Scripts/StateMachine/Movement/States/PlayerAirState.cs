@@ -12,11 +12,11 @@ public class PlayerAirState : PlayerMovementState
     protected GroundedData groundedData;
     protected float timer;
 
-    public PlayerAirState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+    public PlayerAirState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
     {
         //faire le chemin ici comme �a = une fois
-        capsuleColliderUtility = movementStateMachine.MovementManager.CapsuleColliderUtility;
-        groundedData = movementStateMachine.MovementManager.Metrics.CurrentPlayerSO.GroundedData;
+        capsuleColliderUtility = stateMachine.MovementManager.CapsuleColliderUtility;
+        groundedData = stateMachine.MovementManager.Metrics.CurrentPlayerSO.GroundedData;
     }
 
     public override void FixedTick()
@@ -49,6 +49,6 @@ public class PlayerAirState : PlayerMovementState
     public void SlowDown()
     {
         //ajouter une force pour ralentir le joueur avec une animation curve
-        rigidbody.AddForce(Physics.gravity * groundedData.GravityMultiplier * groundedData.GravityModifier.Evaluate(timer) - GetCurrentVerticalVelocity(), ForceMode.Acceleration);
+        rigidbody.AddForce(Physics.gravity * (groundedData.GravityMultiplier * groundedData.GravityModifier.Evaluate(timer)) - GetCurrentVerticalVelocity(), ForceMode.Acceleration);
     }
 }
