@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 6564595994638737766}
   - component: {fileID: 2582929508396752150}
   - component: {fileID: 8738885683953562533}
+  - component: {fileID: 8732096265880619621}
   - component: {fileID: 8948948777584053122}
-  - component: {fileID: 2740461849595481527}
+  - component: {fileID: 2960569670822012716}
   m_Layer: 6
   m_Name: Destructible Object
   m_TagString: Platform
@@ -30,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -63,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f3b69dbdd724a6844a56cf8713c236ea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,6 +86,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8732096265880619621
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4538472656160009515}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4, y: 4, z: 3.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &8948948777584053122
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -106,7 +128,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.5600004, y: 2.5600007, z: 2.4999998}
   m_Center: {x: 0, y: 0, z: -0.000000059604638}
---- !u!114 &2740461849595481527
+--- !u!114 &2960569670822012716
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,6 +137,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4538472656160009515}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ba1b060e8ff02740aa8bfafe81671d6, type: 3}
+  m_Script: {fileID: 11500000, guid: 03f1ec10e068493fab043506cbcd78c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionType: 3

@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 559541838382193915}
   - component: {fileID: 8461096055574652712}
   - component: {fileID: 4216994834890891098}
-  m_Layer: 6
+  - component: {fileID: 2290788686791808648}
+  m_Layer: 3
   m_Name: Cube (1)
-  m_TagString: Movable
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2c88e5e743f112e4193a941a95a6435f, type: 2}
+  - {fileID: 2100000, guid: 0d16b948d08596f43baecf002540648a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -105,6 +106,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2290788686791808648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207550640608188517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f1ec10e068493fab043506cbcd78c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionType: 0
 --- !u!1 &1740552349550738016
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,9 +131,10 @@ GameObject:
   - component: {fileID: 4118550085860218948}
   - component: {fileID: 1510299375007356665}
   - component: {fileID: 7972506742255252812}
-  m_Layer: 6
+  - component: {fileID: 2412516519107137907}
+  m_Layer: 3
   m_Name: Cube (8)
-  m_TagString: Movable
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,7 +182,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2c88e5e743f112e4193a941a95a6435f, type: 2}
+  - {fileID: 2100000, guid: 0d16b948d08596f43baecf002540648a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -210,6 +225,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2412516519107137907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740552349550738016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f1ec10e068493fab043506cbcd78c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionType: 0
 --- !u!1 &1928711495227595189
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,9 +250,10 @@ GameObject:
   - component: {fileID: 7306460094868566742}
   - component: {fileID: 7484484761006859634}
   - component: {fileID: 1844274255712882637}
-  m_Layer: 6
+  - component: {fileID: 8449197921106243801}
+  m_Layer: 3
   m_Name: Cube (6)
-  m_TagString: Movable
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -272,7 +301,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2c88e5e743f112e4193a941a95a6435f, type: 2}
+  - {fileID: 2100000, guid: 0d16b948d08596f43baecf002540648a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -315,6 +344,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8449197921106243801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928711495227595189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f1ec10e068493fab043506cbcd78c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionType: 0
 --- !u!1 &2214594744703171711
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,9 +369,10 @@ GameObject:
   - component: {fileID: 1671282314810378676}
   - component: {fileID: 2538192150731813652}
   - component: {fileID: 3968984238664233629}
-  m_Layer: 6
+  - component: {fileID: 2243273658701668667}
+  m_Layer: 3
   m_Name: Cube (7)
-  m_TagString: Movable
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -377,7 +420,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2c88e5e743f112e4193a941a95a6435f, type: 2}
+  - {fileID: 2100000, guid: 0d16b948d08596f43baecf002540648a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -420,6 +463,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2243273658701668667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2214594744703171711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f1ec10e068493fab043506cbcd78c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionType: 0
 --- !u!1 &2938689176966579289
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,9 +488,10 @@ GameObject:
   - component: {fileID: 8692791376862293746}
   - component: {fileID: 6391446170505985386}
   - component: {fileID: 3294979062261360004}
-  m_Layer: 6
+  - component: {fileID: 1468270365113080840}
+  m_Layer: 3
   m_Name: Cube (5)
-  m_TagString: Movable
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -482,7 +539,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2c88e5e743f112e4193a941a95a6435f, type: 2}
+  - {fileID: 2100000, guid: 0d16b948d08596f43baecf002540648a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -525,6 +582,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1468270365113080840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2938689176966579289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f1ec10e068493fab043506cbcd78c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionType: 0
 --- !u!1 &3125158345999930265
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,9 +607,10 @@ GameObject:
   - component: {fileID: 9073022856874684040}
   - component: {fileID: 4990426242006911800}
   - component: {fileID: 4257960474862722618}
-  m_Layer: 6
+  - component: {fileID: 4604390090569052203}
+  m_Layer: 3
   m_Name: Cube (2)
-  m_TagString: Movable
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -587,7 +658,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2c88e5e743f112e4193a941a95a6435f, type: 2}
+  - {fileID: 2100000, guid: 0d16b948d08596f43baecf002540648a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -630,6 +701,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4604390090569052203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3125158345999930265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f1ec10e068493fab043506cbcd78c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionType: 0
 --- !u!1 &5999308239566293029
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,9 +726,10 @@ GameObject:
   - component: {fileID: 6318829932455307755}
   - component: {fileID: 9181276333607315965}
   - component: {fileID: 94328960197835651}
-  m_Layer: 6
+  - component: {fileID: 9182076886818153424}
+  m_Layer: 3
   m_Name: Cube (4)
-  m_TagString: Movable
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -692,7 +777,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2c88e5e743f112e4193a941a95a6435f, type: 2}
+  - {fileID: 2100000, guid: 0d16b948d08596f43baecf002540648a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -735,6 +820,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9182076886818153424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5999308239566293029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f1ec10e068493fab043506cbcd78c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionType: 0
 --- !u!1 &6916437905820348975
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,9 +845,10 @@ GameObject:
   - component: {fileID: 5183862766872470499}
   - component: {fileID: 1708265979760652380}
   - component: {fileID: 6379465230127401114}
-  m_Layer: 6
+  - component: {fileID: 2344068243628092164}
+  m_Layer: 3
   m_Name: Cube (3)
-  m_TagString: Movable
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -797,7 +896,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2c88e5e743f112e4193a941a95a6435f, type: 2}
+  - {fileID: 2100000, guid: 0d16b948d08596f43baecf002540648a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -840,6 +939,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2344068243628092164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6916437905820348975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f1ec10e068493fab043506cbcd78c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionType: 0
 --- !u!1 &7491666995880755922
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,9 +1005,10 @@ GameObject:
   - component: {fileID: 5412164877732562613}
   - component: {fileID: 8882533703063786201}
   - component: {fileID: 5330335197824941563}
-  m_Layer: 6
+  - component: {fileID: 7690950018160063646}
+  m_Layer: 3
   m_Name: Cube (9)
-  m_TagString: Movable
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -943,7 +1056,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2c88e5e743f112e4193a941a95a6435f, type: 2}
+  - {fileID: 2100000, guid: 0d16b948d08596f43baecf002540648a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -986,6 +1099,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7690950018160063646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7782731611767421773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f1ec10e068493fab043506cbcd78c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionType: 0
 --- !u!1 &7875085518902270183
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,9 +1124,10 @@ GameObject:
   - component: {fileID: 4280666603149849907}
   - component: {fileID: 1180140457378604468}
   - component: {fileID: 5702098587439247054}
-  m_Layer: 6
+  - component: {fileID: 7332572744491016775}
+  m_Layer: 3
   m_Name: Cube
-  m_TagString: Movable
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1048,7 +1175,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2c88e5e743f112e4193a941a95a6435f, type: 2}
+  - {fileID: 2100000, guid: 0d16b948d08596f43baecf002540648a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1091,3 +1218,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7332572744491016775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7875085518902270183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f1ec10e068493fab043506cbcd78c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionType: 0
