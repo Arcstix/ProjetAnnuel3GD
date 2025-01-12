@@ -1,29 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RespawnDestructible : DestructibleState
 {
-    [SerializeField] private float timer; 
-    [SerializeField] private float timeToIdle;
     public override void Enter(GameObject gameObject)
     {
-        //GetComponent<MeshRenderer>().enabled = true;
-    }
+        Debug.Log("Cube respawn");
 
-    public override void Tick(GameObject gameObject)
-    {
-        //animation
-        timer += Time.deltaTime;
-        if (timer >= timeToIdle)
+        // Réactivation du mesh
+        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+        if (meshRenderer != null)
         {
-            timer = 0; //timer à zéro
-            GetComponent<StateMachineDestructible>().ChangeState(GetComponent<IdleDestructible>()); //changer d'état
+            meshRenderer.enabled = true;
         }
+
+        // Réactivation du collider
+        Collider collider = GetComponent<Collider>();
+        if (collider != null)
+        {
+            collider.enabled = true;
+        }
+
+        // Réinitialisation du Rigidbody
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = false;
+        }
+
+        // Retour à l'état Idle
+        GetComponent<StateMachineDestructible>().ChangeState(GetComponent<IdleDestructible>());
     }
 
-    public override void Exit(GameObject gameObject)
-    {
-        GetComponent<MeshRenderer>().enabled = true;
-    }
+    public override void Tick(GameObject gameObject) { }
+
+    public override void Exit(GameObject gameObject) { }
 }
