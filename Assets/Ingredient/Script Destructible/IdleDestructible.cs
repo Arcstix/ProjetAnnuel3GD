@@ -5,6 +5,8 @@ using UnityEngine;
 public class IdleDestructible : DestructibleState
 {
     [SerializeField] private float speedDestructible;
+    [SerializeField] private float speedAjout;
+
     public override void Enter(GameObject gameObject)
     {
         Debug.Log("de retour en idle");
@@ -35,6 +37,8 @@ public class IdleDestructible : DestructibleState
                 // Vérifier si la vitesse est au-dessus ou en dessous du seuil
                 if (playerSpeed >= speedDestructible)
                 {
+                    playerRigidbody.AddForce(playerRigidbody.velocity.normalized * speedAjout, ForceMode.Impulse);
+                    Debug.Log("vitesse ajouter" + playerRigidbody.velocity.magnitude);
                     GetComponent<StateMachineDestructible>().ChangeState(GetComponent<DestroyDestructible>());
                 }
                 else if (playerSpeed <= -speedDestructible)

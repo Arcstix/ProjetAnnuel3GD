@@ -5,30 +5,30 @@ public class RespawnDestructible : DestructibleState
     public override void Enter(GameObject gameObject)
     {
         Debug.Log("Cube respawn");
-
-        // Réactivation du mesh
-        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
-        if (meshRenderer != null)
+        
+        // Désactiver tous les Colliders attachés à cet objet et à ses enfants
+        Collider[] colliders = gameObject.GetComponentsInChildren<Collider>();
+        foreach (Collider collider in colliders)
+        {
+            collider.enabled = true;
+        }
+        
+        // Désactiver tous les MeshRenderers attachés à cet objet et à ses enfants
+        MeshRenderer[] meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>();
+        foreach (MeshRenderer meshRenderer in meshRenderers)
         {
             meshRenderer.enabled = true;
         }
 
-        // Réactivation du collider
-        Collider collider = GetComponent<Collider>();
-        if (collider != null)
+        // Désactiver tous les Rigidbodies attachés à cet objet et à ses enfants
+        Rigidbody[] rigidbodies = gameObject.GetComponentsInChildren<Rigidbody>();
+        foreach (Rigidbody rigidbody in rigidbodies)
         {
-            collider.enabled = true;
+            rigidbody.isKinematic = false; // Rendre le Rigidbody kinematic
+            rigidbody.detectCollisions = true; // Désactiver les collisions
         }
 
-        // Réinitialisation du Rigidbody
-        Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            rb.isKinematic = false;
-        }
-
+   
         // Retour à l'état Idle
         GetComponent<StateMachineDestructible>().ChangeState(GetComponent<IdleDestructible>());
     }

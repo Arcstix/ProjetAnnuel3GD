@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 7105826815152364876}
   - component: {fileID: 3980228766552478803}
   - component: {fileID: 2162196966299251806}
+  - component: {fileID: 6195644324897187595}
   - component: {fileID: 952845734322960797}
   m_Layer: 0
-  m_Name: Obstacle
+  m_Name: Obstacle No Gravity
   m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 5645842784575399540}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.4, y: 2.56, z: -2.56}
+  m_LocalPosition: {x: 3.8400002, y: 3.84, z: 6.3999996}
   m_LocalScale: {x: 1, y: 2.305, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -136,6 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedDestructible: 5
+  speedAjout: 100
 --- !u!114 &2162196966299251806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,6 +152,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 0
   timeToRespawn: 10
+--- !u!114 &6195644324897187595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5645842784575399540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49f7e1745ae7f3d4b80d8e5700dc4edc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  miniCubePrefab: {fileID: 5215544548902395427, guid: 342296ee97cdf8841ace9c4cf7e815e0, type: 3}
+  numberOfMiniCubes: 10
+  explosionForce: 5
+  explosionRadius: 0.5
+  miniCubeLifetime: 2
 --- !u!114 &952845734322960797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,5 +181,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb0665f4da2be3646a2c210d764e11b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 0
-  timeToIdle: 2
