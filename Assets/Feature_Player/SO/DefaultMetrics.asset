@@ -70,6 +70,8 @@ MonoBehaviour:
       <SpeedModifier>k__BackingField: 0.225
     <RunData>k__BackingField:
       <SpeedModifier>k__BackingField: 1
+  <FallingData>k__BackingField:
+    <SpeedModifier>k__BackingField: 0.5
   <AbilityData>k__BackingField:
     <AimDistance>k__BackingField: 10
     <AimBallOffset>k__BackingField: {x: 0, y: 0, z: 0.3}
@@ -137,5 +139,5 @@ MonoBehaviour:
     MaximumDistance: 6
     ZoomSmoothing: 4
     ZoomSensitivity: 1
-    ControllerVerticalSpeed: 4
-    ControllerHorizontalSpeed: 4
+    ControllerVerticalSpeed: 0.2
+    ControllerHorizontalSpeed: 0.2

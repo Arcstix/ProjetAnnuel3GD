@@ -1,4 +1,8 @@
-﻿using UnityEditor;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Tool_LD.Script;
+using UnityEditor;
 using UnityEngine;
 
 namespace Tool_LD.Editor
@@ -7,7 +11,14 @@ namespace Tool_LD.Editor
     {
         private SelectionWindow selectionWindow;
         private int selectedIndex = 0; // Index of selected item
-        private readonly string[] options = new string[] { "Option 1", "Option 2", "Option 3" };
+        
+        private Vector2 scrollPosition; // For scrolling
+        private const int CellSize = 100; // Cell size (width and height)
+        private const int Padding = 5;  // Spacing between cells
+
+        private Palette[] palettes;
+        private List<string> optionsList;
+        private string paletteName = "";
         
         [MenuItem("Tool/PaletteWindow")]
         private static void ShowWindow()
@@ -28,6 +39,18 @@ namespace Tool_LD.Editor
             
             // Separator
             GUILayout.Box("", GUILayout.ExpandWidth(true), GUILayout.Height(2));
+            
+            // Displays the list in a scrollable area
+            scrollPosition = GUILayout.BeginScrollView(scrollPosition);
+            
+            DisplayPrefabs(palettes[selectedIndex]);
+            
+            GUILayout.EndScrollView();
+        }
+
+        private void OnEnable()
+        {
+            LoadAllPalettes();
         }
 
         private void CreateDropDown()
@@ -35,7 +58,19 @@ namespace Tool_LD.Editor
             // Show the dropdown
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
-            selectedIndex = EditorGUILayout.Popup(selectedIndex, options);
+            if (UpdateOptions().ToArray().Length <= 0)
+            {
+                EditorGUILayout.LabelField("No Palette present in the project");
+            }
+            else
+            {
+                selectedIndex = EditorGUILayout.Popup(selectedIndex, UpdateOptions().ToArray());
+                if (selectionWindow != null)
+                {
+                    selectionWindow.UpdateSelectedPalette(palettes[selectedIndex]);
+                }
+            }
+            
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
         }
@@ -43,16 +78,19 @@ namespace Tool_LD.Editor
         private void CreateButton()
         {
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("New Palette"))
+            
+            paletteName = EditorGUILayout.TextField(paletteName);
+            
+            if (GUILayout.Button("New Palette") && !string.IsNullOrWhiteSpace(paletteName))
             {
                 // Create new Palette Scriptable Object 
+                CreateNewPalette();
+                
+                // Show the popup with updated options (palette)
+                selectedIndex = EditorGUILayout.Popup(ArrayUtility.IndexOf(UpdateOptions().ToArray(), paletteName), UpdateOptions().ToArray());
+                
                 // Open the prefab selection window if not already open
                 CreateNewWindow();
-            }
-
-            if (GUILayout.Button("Save Palette"))
-            {
-                // Update the list in the selected palette SO
             }
 
             if (GUILayout.Button("Edit Palette"))
@@ -68,6 +106,98 @@ namespace Tool_LD.Editor
             selectionWindow = GetWindow<SelectionWindow>();
             selectionWindow.titleContent = new GUIContent("Selection Window");
             selectionWindow.Show();
+        }
+
+        private void LoadAllPalettes()
+        {
+            LoadAllAssetsOfType<Palette>(out palettes);
+        }
+        
+        private void LoadAllAssetsOfType<T>(out T[] assets) where T : Palette
+        {
+            string[] guids = AssetDatabase.FindAssets("t:"+typeof(T));
+            assets = new T[guids.Length];
+
+            for (int i = 0; i < guids.Length; i++)
+            {
+                string assetPath = AssetDatabase.GUIDToAssetPath(guids[i]);
+                assets[i] = AssetDatabase.LoadAssetAtPath<T>(assetPath);
+            }
+        }
+        
+        private List<string> UpdateOptions()
+        {
+            // Load all palettes in case the user destroy a palette
+            LoadAllPalettes();
+            optionsList = new List<string>();
+            
+            // Add all SO palette name to the option list for the dropdown
+            foreach (var palette in palettes)
+            {
+                optionsList.Add(palette.name);
+            }
+
+            return optionsList;
+        }
+
+        private void CreateNewPalette()
+        {
+            // Créer un nouvel objet Palette
+            Palette newPaletteData = ScriptableObject.CreateInstance<Palette>();
+            
+            // Enregistrer le nouvel objet dans le projet
+            AssetDatabase.CreateAsset(newPaletteData, "Assets/Tool_LD/SO Palette/" + paletteName + ".asset");
+            AssetDatabase.SaveAssets();
+
+            // Recharger les Palettes pour afficher le nouveau
+            LoadAllPalettes();
+        }
+        
+        private void DisplayPrefabs(Palette palette)
+        {
+            // Determines the number of columns according to the width of the window
+            int columns = Mathf.Max(1, (int)(position.width / (CellSize + Padding)));
+            
+            int rowCount = Mathf.CeilToInt((float)palette.listOfPrefabPath.Count / columns);
+
+            for (int row = 0; row < rowCount; row++)
+            {
+                GUILayout.BeginHorizontal();
+
+                for (int col = 0; col < columns; col++)
+                {
+                    int index = row * columns + col;
+                    if (index >= palette.listOfPrefabPath.Count)
+                        break;
+                        
+                    string path = palette.listOfPrefabPath[index];
+                    GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                        
+                    GUILayout.BeginVertical(GUILayout.Width(CellSize), GUILayout.Height(CellSize));
+                        
+                    // Displays the prefab preview (AssetPreview)
+                    Texture2D previewTexture = AssetPreview.GetAssetPreview(prefab);
+                    if (previewTexture != null)
+                    {
+                        if (GUILayout.Button(previewTexture, GUILayout.Width(64), GUILayout.Height(64)))
+                        {
+                            // Remove from the SO list.
+                            palette.listOfPrefabPath.Remove(path);
+                            Selection.activeGameObject = prefab;
+                        }
+                    }
+                    else
+                    {
+                        if (GUILayout.Button("Pas d'aperçu", GUILayout.Width(64), GUILayout.Height(64)))
+                        {
+                            palette.listOfPrefabPath.Remove(path);
+                            Selection.activeGameObject = prefab;
+                        }
+                    }
+                    GUILayout.EndVertical();
+                }
+                GUILayout.EndHorizontal();
+            }
         }
     }
 }

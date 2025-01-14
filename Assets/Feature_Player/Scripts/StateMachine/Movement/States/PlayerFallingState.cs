@@ -11,7 +11,7 @@ public class PlayerFallingState : PlayerAirState
     public override void Enter()
     {
         base.Enter();
-        reusableData.MovementSpeedModifier = metricsManager.CurrentPlayerSO.GroundedData.RunData.SpeedModifier;
+        reusableData.MovementSpeedModifier = metricsManager.CurrentPlayerSO.FallingData.SpeedModifier;
     }
 
     public override void Exit()
