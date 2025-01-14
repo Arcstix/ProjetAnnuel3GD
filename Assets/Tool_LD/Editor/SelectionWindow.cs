@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Tool_LD.Script;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ namespace Tool_LD.Editor
         private Vector2 scrollPosition; // For scrolling
         private const int CellSize = 100; // Cell size (width and height)
         private const int Padding = 5;  // Spacing between cells
+
+        private Palette activePalette;
         
         private void OnGUI()
         {
@@ -71,6 +74,7 @@ namespace Tool_LD.Editor
                         if (GUILayout.Button(previewTexture, GUILayout.Width(64), GUILayout.Height(64)))
                         {
                             // Ajoute à la liste dans le scriptable object.
+                            activePalette.listOfPrefabPath.Add(path);
                             Selection.activeGameObject = prefab;
                         }
                     }
@@ -79,6 +83,7 @@ namespace Tool_LD.Editor
                         if (GUILayout.Button("Pas d'aperçu", GUILayout.Width(64), GUILayout.Height(64)))
                         {
                             // Ajoute à la liste dans le scriptable object.
+                            activePalette.listOfPrefabPath.Add(path);
                             Selection.activeGameObject = prefab;
                         }
                     }
@@ -86,6 +91,11 @@ namespace Tool_LD.Editor
                 }
                 GUILayout.EndHorizontal();
             }
+        }
+
+        public void UpdateSelectedPalette(Palette palette)
+        {
+            activePalette = palette;
         }
     }
 }
