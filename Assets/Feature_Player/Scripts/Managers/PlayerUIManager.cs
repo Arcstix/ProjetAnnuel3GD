@@ -24,6 +24,7 @@ public class PlayerUIManager : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody>();
         input = GetComponent<PlayerInput>();
+        abilityManager = GetComponent<PlayerAbilityManager>();
     }
 
     private void Update()
@@ -32,28 +33,28 @@ public class PlayerUIManager : MonoBehaviour
         {
             speedText.text = "Speed : " + playerRb.velocity.magnitude.ToString("F2");
         }
-        
+
         // TODO : L'update de la position doit être réalisé à part car on sort de la State quand la charge est finit
-        
-        // if (input.PlayerActions.AttractionLeft.IsPressed() && abilityManager.ReusableData.LeftObject != null)
-        // {
-        //     IncreaseLeftCharge();
-        // }
-        //
-        // if (input.PlayerActions.AttractionRight.IsPressed() && abilityManager.ReusableData.RightObject != null)
-        // {
-        //     IncreaseRightCharge();
-        // }
-        //
-        // if (!input.PlayerActions.AttractionLeft.IsPressed() && abilityManager.ReusableData.LeftObject != null)
-        // {
-        //     DecreaseLeftCharge();
-        // }
-        //
-        // if (!input.PlayerActions.AttractionRight.IsPressed() && abilityManager.ReusableData.RightObject != null)
-        // {
-        //     DecreaseRightCharge();
-        // }
+
+        if (input.PlayerActions.AttractionLeft.IsPressed() && abilityManager.ReusableData.LeftObject != null)
+        {
+            IncreaseLeftCharge();
+        }
+
+        if (input.PlayerActions.AttractionRight.IsPressed() && abilityManager.ReusableData.RightObject != null)
+        {
+            IncreaseRightCharge();
+        }
+
+        if (!input.PlayerActions.AttractionLeft.IsPressed() && abilityManager.ReusableData.LeftObject != null)
+        {
+            DecreaseLeftCharge();
+        }
+
+        if (!input.PlayerActions.AttractionRight.IsPressed() && abilityManager.ReusableData.RightObject != null)
+        {
+            DecreaseRightCharge();
+        }
     }
     
     private void IncreaseLeftCharge()
