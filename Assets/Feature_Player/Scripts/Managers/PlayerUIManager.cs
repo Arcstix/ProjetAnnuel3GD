@@ -36,25 +36,30 @@ public class PlayerUIManager : MonoBehaviour
 
         // TODO : L'update de la position doit être réalisé à part car on sort de la State quand la charge est finit
 
-        if (input.PlayerActions.AttractionLeft.IsPressed() && abilityManager.ReusableData.LeftObject != null)
+        if (abilityManager.ReusableData.OnTransportation)
         {
-            IncreaseLeftCharge();
+            
         }
-
-        if (input.PlayerActions.AttractionRight.IsPressed() && abilityManager.ReusableData.RightObject != null)
-        {
-            IncreaseRightCharge();
-        }
-
-        if (!input.PlayerActions.AttractionLeft.IsPressed() && abilityManager.ReusableData.LeftObject != null)
-        {
-            DecreaseLeftCharge();
-        }
-
-        if (!input.PlayerActions.AttractionRight.IsPressed() && abilityManager.ReusableData.RightObject != null)
-        {
-            DecreaseRightCharge();
-        }
+        
+        // if (input.PlayerActions.AttractionLeft.IsPressed() && abilityManager.ReusableData.LeftObject != null)
+        // {
+        //     IncreaseLeftCharge();
+        // }
+        //
+        // if (input.PlayerActions.AttractionRight.IsPressed() && abilityManager.ReusableData.RightObject != null)
+        // {
+        //     IncreaseRightCharge();
+        // }
+        //
+        // if (!input.PlayerActions.AttractionLeft.IsPressed() && abilityManager.ReusableData.LeftObject != null)
+        // {
+        //     DecreaseLeftCharge();
+        // }
+        //
+        // if (!input.PlayerActions.AttractionRight.IsPressed() && abilityManager.ReusableData.RightObject != null)
+        // {
+        //     DecreaseRightCharge();
+        // }
     }
     
     private void IncreaseLeftCharge()

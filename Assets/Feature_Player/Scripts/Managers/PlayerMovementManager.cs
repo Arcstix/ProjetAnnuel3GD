@@ -9,18 +9,11 @@ public class PlayerMovementManager : PlayerManager, I_Initializer
     [field : SerializeField] public CapsuleColliderUtility CapsuleColliderUtility { get; private set; }
 
     private PlayerMovementStateMachine playerMovementStateMachine;
-    private PlayerAbilityManager playerAbilityManager;
     private PlayerReusableStateData reusableData;
 
     public PlayerReusableStateData ReusableData { get => reusableData; set => reusableData = value; }
 
     public PlayerMovementStateMachine PlayerMovementStateMachine { get => playerMovementStateMachine; }
-
-    protected override void Awake()
-    {
-        base.Awake();
-        playerAbilityManager = GetComponent<PlayerAbilityManager>();
-    }
 
     public void Init(PlayerReusableStateData reusableStateData)
     {

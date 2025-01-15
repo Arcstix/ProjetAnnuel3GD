@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Tool_LD.Script;
 using UnityEditor;
 using UnityEngine;
@@ -10,7 +9,7 @@ namespace Tool_LD.Editor
     public class PaletteWindow : EditorWindow
     {
         private SelectionWindow selectionWindow;
-        private int selectedIndex = 0; // Index of selected item
+        private int selectedIndex; // Index of selected item
         
         private Vector2 scrollPosition; // For scrolling
         private const int CellSize = 100; // Cell size (width and height)
@@ -19,6 +18,10 @@ namespace Tool_LD.Editor
         private Palette[] palettes;
         private List<string> optionsList;
         private string paletteName = "";
+        private string selectedPrefab;
+
+        private GameObject previewObject;
+        private bool brushActive;
         
         [MenuItem("Tool/PaletteWindow")]
         private static void ShowWindow()
@@ -42,8 +45,11 @@ namespace Tool_LD.Editor
             
             // Displays the list in a scrollable area
             scrollPosition = GUILayout.BeginScrollView(scrollPosition);
-            
-            DisplayPrefabs(palettes[selectedIndex]);
+
+            if (palettes.Length > 0)
+            {
+                DisplayPrefabs(palettes[selectedIndex]);
+            }
             
             GUILayout.EndScrollView();
         }
@@ -99,6 +105,23 @@ namespace Tool_LD.Editor
                 CreateNewWindow();
             }
             GUILayout.EndHorizontal();
+
+            if (brushActive)
+            {
+                if (GUILayout.Button("Disable Brush"))
+                {
+                    brushActive = false;
+                    DestroyImmediate(previewObject);
+                }
+            }
+            else
+            {
+                if (GUILayout.Button("Enable Brush"))
+                {
+                    brushActive = true;
+                }
+            }
+            
         }
 
         private void CreateNewWindow()
@@ -110,7 +133,7 @@ namespace Tool_LD.Editor
 
         private void LoadAllPalettes()
         {
-            LoadAllAssetsOfType<Palette>(out palettes);
+            LoadAllAssetsOfType(out palettes);
         }
         
         private void LoadAllAssetsOfType<T>(out T[] assets) where T : Palette
@@ -181,23 +204,121 @@ namespace Tool_LD.Editor
                     {
                         if (GUILayout.Button(previewTexture, GUILayout.Width(64), GUILayout.Height(64)))
                         {
-                            // Remove from the SO list.
-                            palette.listOfPrefabPath.Remove(path);
-                            Selection.activeGameObject = prefab;
+                            if (selectionWindow != null)
+                            {
+                                // Remove from the SO list.
+                                palette.listOfPrefabPath.Remove(path);
+                            }
+                            else
+                            {
+                                selectedPrefab = path;
+                                SceneView.duringSceneGui -= OnSceneGUI; // Retirer les anciens écouteurs
+                                DestroyImmediate(previewObject);
+                                SceneView.duringSceneGui += OnSceneGUI;
+                            }
                         }
                     }
                     else
                     {
                         if (GUILayout.Button("Pas d'aperçu", GUILayout.Width(64), GUILayout.Height(64)))
                         {
-                            palette.listOfPrefabPath.Remove(path);
-                            Selection.activeGameObject = prefab;
+                            if (selectionWindow != null)
+                            {
+                                palette.listOfPrefabPath.Remove(path);
+                            }
+                            else
+                            {
+                                selectedPrefab = path;
+                                SceneView.duringSceneGui -= OnSceneGUI; // Retirer les anciens écouteurs
+                                DestroyImmediate(previewObject);
+                                SceneView.duringSceneGui += OnSceneGUI;
+                            }
                         }
                     }
                     GUILayout.EndVertical();
                 }
                 GUILayout.EndHorizontal();
             }
+        }
+        
+        private void OnSceneGUI(SceneView sceneView)
+        {
+            // Si un prefab est sélectionné
+            if (!string.IsNullOrWhiteSpace(selectedPrefab) && brushActive)
+            {
+                Event e = Event.current;
+                
+                Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
+
+                if (Physics.Raycast(ray, out RaycastHit previewHit, Mathf.Infinity, ~LayerMask.NameToLayer("Ignore Raycast"), QueryTriggerInteraction.Ignore))
+                {
+                    if (previewObject == null || previewObject.name !=
+                        AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab).name + "(Clone)")
+                    {
+                        previewObject = Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab), previewHit.point, Quaternion.identity);
+                        previewObject.layer = LayerMask.NameToLayer("Ignore Raycast"); // Ignorer par le Raycast
+                        foreach (Transform child in previewObject.transform)
+                        {
+                            child.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+                        }
+                    }
+                    
+                    previewObject.transform.position = previewHit.point;
+                }
+                else
+                {
+                    Vector3 spawnPosition = ray.origin + ray.direction * 5f;
+                    if (previewObject != null)
+                    {
+                        Debug.Log("spawnPos");
+                        previewObject.transform.position = spawnPosition;
+                    }
+                    else
+                    {
+                        previewObject = Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab), spawnPosition, Quaternion.identity);
+                        previewObject.layer = LayerMask.NameToLayer("Ignore Raycast"); // Ignorer par le Raycast
+                        foreach (Transform child in previewObject.transform)
+                        {
+                            child.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+                        }
+                    }
+                }
+                
+                // Vérifier si l'utilisateur clique dans la scène
+                if (e.type == EventType.MouseDown && e.button == 0)
+                {
+                    // DestroyPreview Object and replace by the good prefab
+                    DestroyImmediate(previewObject);
+                    if (Physics.Raycast(ray, out RaycastHit hit))
+                    {
+                        if (hit.collider.gameObject.name == AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab).name + "(Clone)")
+                        {
+                            DestroyImmediate(hit.collider.gameObject);
+                        }
+                        else
+                        {
+                            // Instancier le prefab sur la surface cliquée
+                            Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab), hit.point, Quaternion.identity);
+                        }
+                    }
+                    else
+                    {
+                        // Si pas de surface, on le met à une distance par défaut
+                        Vector3 spawnPosition = ray.origin + ray.direction * 10f; // 10 unités devant la caméra
+                        
+                        // Instancier le prefab sur la surface cliquée
+                        Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab), spawnPosition, Quaternion.identity);
+                    }
+
+                    // Marquer l'événement comme utilisé
+                    e.Use();
+                }
+            }
+        }
+
+        private void OnDisable()
+        {
+            SceneView.duringSceneGui -= OnSceneGUI;
         }
     }
 }
