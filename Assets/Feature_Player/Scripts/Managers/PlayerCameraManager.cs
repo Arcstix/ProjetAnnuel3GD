@@ -53,4 +53,14 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
 
         framingTransposer.m_CameraDistance = lerpedZoomValue;
     }
+
+    public void SetBaseFOV()
+    {
+        virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(virtualCamera.m_Lens.FieldOfView, metricsManager.CurrentPlayerSO.CameraData.BaseFOV, 0.1f);
+    }
+    
+    public void SetTransportFOV()
+    {
+        virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(virtualCamera.m_Lens.FieldOfView, metricsManager.CurrentPlayerSO.CameraData.TransportFOV, 0.1f);
+    }
 }

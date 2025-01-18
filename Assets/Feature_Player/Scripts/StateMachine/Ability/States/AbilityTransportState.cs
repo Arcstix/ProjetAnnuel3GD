@@ -47,6 +47,7 @@ public class AbilityTransportState : AbilityState
             if (reusableData.RightObject == null)
             {
                 MovePlayer();
+                cameraManager.SetTransportFOV();
             }
             else
             {
@@ -59,6 +60,7 @@ public class AbilityTransportState : AbilityState
             if (reusableData.LeftObject == null)
             {
                 MovePlayer();
+                cameraManager.SetTransportFOV();
             }
             else
             {
@@ -80,6 +82,7 @@ public class AbilityTransportState : AbilityState
     public override void Exit()
     {
         base.Exit();
+        cameraManager.SetBaseFOV();
         _stateMachine.AbilityManager.GetComponent<InteractionManager>().Activate(false);
         if (reusableData.LeftObject != null)
         {
