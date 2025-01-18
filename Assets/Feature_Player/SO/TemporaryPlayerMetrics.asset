@@ -12,9 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b56aa3a78f68114c8075bea00d5ced9, type: 3}
   m_Name: TemporaryPlayerMetrics
   m_EditorClassIdentifier: 
-  <DataIdentifier>k__BackingField: 1
+  <Drag>k__BackingField: 1
   <GroundedData>k__BackingField:
     <BaseSpeed>k__BackingField: 10
+    <GravityMultiplier>k__BackingField: 0
+    <GravityModifier>k__BackingField:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     <SlopeSpeedAngle>k__BackingField:
       serializedVersion: 2
       m_Curve:
@@ -81,88 +88,29 @@ MonoBehaviour:
       <SpeedModifier>k__BackingField: 0.225
     <RunData>k__BackingField:
       <SpeedModifier>k__BackingField: 1
+  <FallingData>k__BackingField:
+    <SpeedModifier>k__BackingField: 1.01
   <AbilityData>k__BackingField:
-    <ShootData>k__BackingField:
-      <ProjectilePrefab>k__BackingField: {fileID: 5459054514740463612, guid: 257932a591c3925499028dfbe454ee48, type: 3}
-      <BaseSpeed>k__BackingField: 10
-      <SpeedModifier>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <UseAim>k__BackingField: 0
-      <MaxTravelDistance>k__BackingField: 3
-    <StandbyData>k__BackingField:
-      <MaxConnectionDistance>k__BackingField: 10
-      <TimeBeforeAbilityCancel>k__BackingField: 2
-    <TransportationData>k__BackingField:
-      <BaseSpeed>k__BackingField: 20
-      <SpeedModifier>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-    <CancelAbilityData>k__BackingField:
-      <BaseSpeed>k__BackingField: 10
-      <SpeedModifier>k__BackingField:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
+    <AimDistance>k__BackingField: 5
+    <AimBallOffset>k__BackingField: {x: 0, y: 0, z: 0.2}
+    <AimBall>k__BackingField: {fileID: 0}
+    <AimSpeed>k__BackingField: 50
+    <ShootSpeed>k__BackingField: 50
+    <RightBall>k__BackingField: {fileID: 0}
+    <LeftBall>k__BackingField: {fileID: 0}
+    <RecallSpeed>k__BackingField: 50
+    <TransportSpeed>k__BackingField: 10
+    <TransportCurve>k__BackingField:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  <CameraData>k__BackingField:
+    DefaultDistance: 6
+    MinimumDistance: 1
+    MaximumDistance: 6
+    ZoomSmoothing: 4
+    ZoomSensitivity: 1
+    ControllerVerticalSpeed: 4
+    ControllerHorizontalSpeed: 4

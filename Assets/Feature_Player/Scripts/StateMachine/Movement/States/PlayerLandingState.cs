@@ -10,6 +10,7 @@ public class PlayerLandingState : PlayerAirState
 
     public override void Enter()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/activation droit");
         base.Enter();
         stateMachine.ChangeState(stateMachine.IdleState);     
     }

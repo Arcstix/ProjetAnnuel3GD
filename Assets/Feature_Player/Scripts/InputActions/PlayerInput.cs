@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class PlayerInput : MonoBehaviour
 
     private void OnEnable()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Weapon/ShootV1");
         InputActions.Enable();
         InputActionInitialize?.Invoke();
         Cursor.lockState = CursorLockMode.Locked;

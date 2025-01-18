@@ -13,7 +13,7 @@ public class AbilityShootState : AbilityState
     public override void Enter()
     {
         base.Enter();
-        
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/activation droit");
         if (reusableData.InstancePosition != Vector3.zero)
         {
             aimEndPosition = reusableData.InstancePosition;
@@ -25,6 +25,7 @@ public class AbilityShootState : AbilityState
         
         if (reusableData.LeftInput)
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Player/activation droit");
             leftLauncher.GetComponent<MeshRenderer>().enabled = false;
             reusableData.LeftObject = InstantiateBall(reusableData.LeftObject, metricsManager.CurrentPlayerSO.AbilityData.LeftBall, leftLauncher.position);
             reusableData.LeftObject.InitializeBall(metricsManager.CurrentPlayerSO.AbilityData.ShootSpeed, aimEndPosition, reusableData.LeftParent);
@@ -33,6 +34,7 @@ public class AbilityShootState : AbilityState
 
         if (reusableData.RightInput)
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Player/activation droit");
             rightLauncher.GetComponent<MeshRenderer>().enabled = false;
             reusableData.RightObject = InstantiateBall(reusableData.RightObject, metricsManager.CurrentPlayerSO.AbilityData.RightBall, rightLauncher.position);
             reusableData.RightObject.InitializeBall(metricsManager.CurrentPlayerSO.AbilityData.ShootSpeed, aimEndPosition, reusableData.RightParent);

@@ -57,6 +57,7 @@ public class SimpleMovementEntity : MonoBehaviour
     {
         if(Vector3.Distance(transform.position, waypoint) > 0.2f)
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Weapon/ShootV1");
             Vector3 direction = (waypoint - transform.position).normalized;
 
             rb.velocity = direction * speed;
