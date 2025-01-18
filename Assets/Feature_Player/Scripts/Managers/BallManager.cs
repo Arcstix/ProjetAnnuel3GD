@@ -40,6 +40,7 @@ public class BallManager : MonoBehaviour
         if (Vector3.Distance(transform.position, _endPos) > 0.1f)
         {
             // Played when Shoot and Recall
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Weapon/ShootV1");
             if (_futurParent != null)
             {
                 if (transform.parent == _futurParent.transform)

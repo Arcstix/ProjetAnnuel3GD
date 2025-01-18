@@ -4,18 +4,24 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Wall
+  - Platform
+  - Projectile
+  - Movable
   - Interactable
   - Ground
+  - Obstcale
+  - Destructible
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Ground
+  - Interactable
   - Water
   - UI
-  - Interactable
-  - 
-  - 
+  - Walkable
+  - Post process
+  - Preview
   - 
   - 
   - 
@@ -42,4 +48,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 3854564455
     locked: 0

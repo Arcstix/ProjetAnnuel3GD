@@ -199,7 +199,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""id"": ""8c13ca7e-e6ab-49a6-8319-48857f6c2cbb"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""DeltaTimeScale"",
                     ""groups"": """",
                     ""action"": ""FreeLook"",
                     ""isComposite"": false,
