@@ -11,6 +11,7 @@ public class PlayerFallingState : PlayerAirState
     public override void Enter()
     {
         base.Enter();
+        timer = 0;
         reusableData.MovementSpeedModifier = metricsManager.CurrentPlayerSO.FallingData.SpeedModifier;
     }
 
@@ -23,20 +24,24 @@ public class PlayerFallingState : PlayerAirState
     public override void Tick()
     {
         HandleRotation(GetMovementDirection());
+        
+        timer += Time.deltaTime;
+        GroundedData groundedData = metricsManager.CurrentPlayerSO.GroundedData;
+        
+        if (timer <= groundedData.GravityModifier.keys[groundedData.GravityModifier.length - 1].time)
+        {
+            SlowDown();
+            
+        }
+        else
+        {
+            rigidbody.AddForce(Physics.gravity * groundedData.GravityMultiplier - GetCurrentVerticalVelocity(), ForceMode.Acceleration);
+        }
 
-        // if (reusableData.ShouldSlowDown)
-        // {
-        //     SlowDown();
-        //     timer += Time.deltaTime;
-        //     if (timer >= 2)
-        //     {
-        //         ResetSlowDown();
-        //     }
-        // }
-        // else
-        // {
-        // }
-        rigidbody.AddForce(Physics.gravity * groundedData.GravityMultiplier - GetCurrentVerticalVelocity(), ForceMode.Acceleration);
+        if (reusableData.OnTransportation)
+        {
+            stateMachine.ChangeState(stateMachine.IdleState);
+        }
 
         if(!stateMachine.ReusableData.InAir)
         {
