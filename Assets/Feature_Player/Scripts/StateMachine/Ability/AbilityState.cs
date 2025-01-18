@@ -49,7 +49,10 @@ public class AbilityState : IState
 
     public virtual void Tick()
     {
-        
+        if (!reusableData.OnTransportation)
+        {
+            cameraManager.SetBaseFOV();
+        }
     }
 
     public virtual void FixedTick()
