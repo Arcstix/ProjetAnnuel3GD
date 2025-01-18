@@ -10,7 +10,6 @@ public class PlayerAbilityManager : PlayerManager, I_Initializer
     [SerializeField] private Transform rightLauncherTransform;
     [SerializeField] private Transform leftLauncherTransform;
     
-    private PlayerMovementManager playerMovementManager;
     private AbilityStateMachine abilityStateMachine;
     private PlayerReusableStateData reusableData;
 
@@ -22,12 +21,6 @@ public class PlayerAbilityManager : PlayerManager, I_Initializer
     public Transform LeftLauncherTransform { get => leftLauncherTransform; set => leftLauncherTransform = value; }
 
     public IState currentState;
-    
-    protected override void Awake()
-    {
-        base.Awake();
-        playerMovementManager = GetComponent<PlayerMovementManager>();
-    }
 
     public void Init(PlayerReusableStateData reusableStateData)
     {

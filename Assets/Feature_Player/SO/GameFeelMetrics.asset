@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b56aa3a78f68114c8075bea00d5ced9, type: 3}
+  m_Name: GameFeelMetrics
+  m_EditorClassIdentifier: 
+  <Drag>k__BackingField: 1
+  <GroundedData>k__BackingField:
+    <BaseSpeed>k__BackingField: 6
+    <GravityMultiplier>k__BackingField: 1
+    <GravityModifier>k__BackingField:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    <SlopeSpeedAngle>k__BackingField:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.0016746521
+        value: 1.0037651
+        inSlope: -0.00025745342
+        outSlope: -0.00025745342
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.1466468
+      - serializedVersion: 3
+        time: 50.189617
+        value: 0.9989557
+        inSlope: -0.00021294759
+        outSlope: -0.00021294759
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 90.3409
+        value: -0.0014190674
+        inSlope: -0.031647563
+        outSlope: -0.031647563
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.08275872
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    <BaseRotationData>k__BackingField:
+      <TargetRotationReachTime>k__BackingField: 0.1
+    <WalkData>k__BackingField:
+      <SpeedModifier>k__BackingField: 0.225
+    <RunData>k__BackingField:
+      <SpeedModifier>k__BackingField: 1
+  <FallingData>k__BackingField:
+    <SpeedModifier>k__BackingField: 1
+  <AbilityData>k__BackingField:
+    <AimDistance>k__BackingField: 10
+    <AimBallOffset>k__BackingField: {x: 0, y: 0, z: 0.3}
+    <AimBall>k__BackingField: {fileID: 3528749689593508597, guid: e502b963a1b09bb488a269b0e1cff83f, type: 3}
+    <AimSpeed>k__BackingField: 50
+    <ShootSpeed>k__BackingField: 10
+    <RightBall>k__BackingField: {fileID: 6414293944630104308, guid: d4266097bb5598149947c81bfeac1dac, type: 3}
+    <LeftBall>k__BackingField: {fileID: 8985292475141258581, guid: 5edd0d58c6fb4214989ea10faea7db68, type: 3}
+    <RecallSpeed>k__BackingField: 50
+    <TransportSpeed>k__BackingField: 40
+    <TransportCurve>k__BackingField:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0.017126428
+        outSlope: 0.017126428
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 1
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0.5
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  <CameraData>k__BackingField:
+    DefaultDistance: 6
+    MinimumDistance: 1
+    MaximumDistance: 6
+    ZoomSmoothing: 4
+    ZoomSensitivity: 1
+    ControllerVerticalSpeed: 4
+    ControllerHorizontalSpeed: 4
