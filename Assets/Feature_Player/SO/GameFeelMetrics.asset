@@ -12,49 +12,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b56aa3a78f68114c8075bea00d5ced9, type: 3}
   m_Name: GameFeelMetrics
   m_EditorClassIdentifier: 
-  <Drag>k__BackingField: 1
+  <Drag>k__BackingField: 0
   <GroundedData>k__BackingField:
     <BaseSpeed>k__BackingField: 6
-    <GravityMultiplier>k__BackingField: 1
+    <GravityMultiplier>k__BackingField: 2
     <GravityModifier>k__BackingField:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0.04382918
-        outSlope: 0.04382918
+        inSlope: -0.010332484
+        outSlope: -0.010332484
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.09246595
+        outWeight: 1
       - serializedVersion: 3
-        time: 1.0202742
-        value: 0.02150684
-        inSlope: 0.042754155
-        outSlope: 0.042754155
+        time: 1.5293925
+        value: 0.99818367
+        inSlope: 0.00899074
+        outSlope: 0.00899074
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.20494175
+        outWeight: 0.36043933
       - serializedVersion: 3
-        time: 1.6984303
-        value: 0.25113994
-        inSlope: 1.0707802
-        outSlope: 1.0707802
+        time: 2.8442986
+        value: 0.9984494
+        inSlope: 0.008678868
+        outSlope: 0.008678868
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.17843175
+        inWeight: 0.41577697
         outWeight: 0.5608474
-      - serializedVersion: 3
-        time: 2
-        value: 1
-        inSlope: 4.4630165
-        outSlope: 4.4630165
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.0154162645
-        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -64,29 +55,20 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0.0016746521
         value: 1.0037651
-        inSlope: -0.00025745342
-        outSlope: -0.00025745342
+        inSlope: -0.93663174
+        outSlope: -0.93663174
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.1466468
+        outWeight: 0
       - serializedVersion: 3
-        time: 50.189617
-        value: 0.9989557
-        inSlope: -0.00021294759
-        outSlope: -0.00021294759
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 90.3409
-        value: -0.0014190674
-        inSlope: -0.031647563
-        outSlope: -0.031647563
+        time: 1.0033569
+        value: 0.008010864
+        inSlope: -0.9687518
+        outSlope: -0.9687518
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.08275872
+        inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -103,40 +85,67 @@ MonoBehaviour:
     <AimDistance>k__BackingField: 10
     <AimBallOffset>k__BackingField: {x: 0, y: 0, z: 0.3}
     <AimBall>k__BackingField: {fileID: 3528749689593508597, guid: e502b963a1b09bb488a269b0e1cff83f, type: 3}
-    <AimSpeed>k__BackingField: 50
+    <AimSpeed>k__BackingField: 20
     <ShootSpeed>k__BackingField: 10
     <RightBall>k__BackingField: {fileID: 6414293944630104308, guid: d4266097bb5598149947c81bfeac1dac, type: 3}
     <LeftBall>k__BackingField: {fileID: 8985292475141258581, guid: 5edd0d58c6fb4214989ea10faea7db68, type: 3}
-    <RecallSpeed>k__BackingField: 50
+    <RecallSpeed>k__BackingField: 60
     <DistanceToEndRecall>k__BackingField: 0.2
-    <TransportSpeed>k__BackingField: 40
+    <TransportSpeed>k__BackingField: 20
     <TransportCurve>k__BackingField:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0.017126428
-        outSlope: 0.017126428
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 1
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0.5
+        time: 0.0704422
+        value: 0.887619
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
+      - serializedVersion: 3
+        time: 0.76251674
+        value: 0.81507057
+        inSlope: -1.2581352
+        outSlope: -1.2581352
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.09662121
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.8516729
+        value: 0.57020336
+        inSlope: -2.6165946
+        outSlope: -2.6165946
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.08674857
+        outWeight: 0.6570146
+      - serializedVersion: 3
+        time: 0.9188106
+        value: 0.34542397
+        inSlope: -3.5101607
+        outSlope: -3.5101607
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.51598036
+        outWeight: 0.32278344
+      - serializedVersion: 3
+        time: 0.974866
+        value: 0.011834972
+        inSlope: -3.1782548
+        outSlope: -3.1782548
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.053724077
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
   <CameraData>k__BackingField:
     BaseFOV: 80
-    TransportFOV: 110
+    TransportFOV: 100
     DefaultDistance: 6
     MinimumDistance: 1
     MaximumDistance: 6
