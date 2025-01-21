@@ -15,13 +15,13 @@ MonoBehaviour:
   <Drag>k__BackingField: 1
   <GroundedData>k__BackingField:
     <BaseSpeed>k__BackingField: 6
-    <GravityMultiplier>k__BackingField: 1
+    <GravityMultiplier>k__BackingField: 0.5
     <GravityModifier>k__BackingField:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0
+        time: -0.012706757
+        value: 0.108062744
         inSlope: -0.010332484
         outSlope: -0.010332484
         tangentMode: 0
@@ -29,8 +29,8 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 1
       - serializedVersion: 3
-        time: 0.20972884
-        value: 0.9958393
+        time: 0.25339675
+        value: 0.9813609
         inSlope: 0.00899074
         outSlope: 0.00899074
         tangentMode: 0
@@ -116,7 +116,7 @@ MonoBehaviour:
     <RunData>k__BackingField:
       <SpeedModifier>k__BackingField: 1
   <FallingData>k__BackingField:
-    <SpeedModifier>k__BackingField: 0.5
+    <SpeedModifier>k__BackingField: 1.57
   <AbilityData>k__BackingField:
     <AimDistance>k__BackingField: 10
     <AimBallOffset>k__BackingField: {x: 0, y: 0, z: 0.3}
