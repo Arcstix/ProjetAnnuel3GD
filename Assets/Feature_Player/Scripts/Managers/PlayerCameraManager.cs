@@ -10,6 +10,7 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
 
     private PlayerMetricsManager metricsManager;
+    private PlayerAbilityManager abilityManager;
     private CinemachineFramingTransposer framingTransposer;
     private CinemachineInputProvider inputProvider;
 
@@ -19,6 +20,9 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
     public void Init(PlayerReusableStateData reusableStateData)
     {
         metricsManager = GetComponent<PlayerMetricsManager>();
+        abilityManager = GetComponent<PlayerAbilityManager>();
+        abilityManager.AbilityStateMachine.TransportState.SpeedModifierEvent += SetTransportFOV;
+        abilityManager.AbilityStateMachine.IdleState.ExitTransportation += SetBaseFOV;
         //framingTransposer = metricsManager.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();
         inputProvider = metricsManager.GetComponent<CinemachineInputProvider>();
         SetCameraMetrics();
@@ -36,31 +40,32 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
         //Zoom();
     }
 
-    private void Zoom()
+    // private void Zoom()
+    // {
+    //     float zoomValue = inputProvider.GetAxisValue(2) * metricsManager.CurrentPlayerSO.CameraData.ZoomSensitivity;
+    //
+    //     currentTargetDistance = Mathf.Clamp(currentTargetDistance + zoomValue, cameraData.MinimumDistance, cameraData.MaximumDistance);
+    //
+    //     float currentDistance = framingTransposer.m_CameraDistance;
+    //
+    //     if (currentDistance == currentTargetDistance)
+    //     {
+    //         return;
+    //     }
+    //
+    //     float lerpedZoomValue = Mathf.Lerp(currentDistance, currentTargetDistance, cameraData.ZoomSmoothing * Time.deltaTime);
+    //
+    //     framingTransposer.m_CameraDistance = lerpedZoomValue;
+    // }
+
+    private void SetBaseFOV()
     {
-        float zoomValue = inputProvider.GetAxisValue(2) * metricsManager.CurrentPlayerSO.CameraData.ZoomSensitivity;
-
-        currentTargetDistance = Mathf.Clamp(currentTargetDistance + zoomValue, cameraData.MinimumDistance, cameraData.MaximumDistance);
-
-        float currentDistance = framingTransposer.m_CameraDistance;
-
-        if (currentDistance == currentTargetDistance)
-        {
-            return;
-        }
-
-        float lerpedZoomValue = Mathf.Lerp(currentDistance, currentTargetDistance, cameraData.ZoomSmoothing * Time.deltaTime);
-
-        framingTransposer.m_CameraDistance = lerpedZoomValue;
-    }
-
-    public void SetBaseFOV()
-    {
-        virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(virtualCamera.m_Lens.FieldOfView, metricsManager.CurrentPlayerSO.CameraData.BaseFOV, 0.1f);
+        virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(virtualCamera.m_Lens.FieldOfView,
+            metricsManager.CurrentPlayerSO.CameraData.BaseFOV, metricsManager.CurrentPlayerSO.CameraData.SmoothingFactorBaseFOV);
     }
     
-    public void SetTransportFOV()
+    private void SetTransportFOV(float time)
     {
-        virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(virtualCamera.m_Lens.FieldOfView, metricsManager.CurrentPlayerSO.CameraData.TransportFOV, 0.1f);
+        virtualCamera.m_Lens.FieldOfView = metricsManager.CurrentPlayerSO.CameraData.TransitionBaseTransportFOV.Evaluate(time);
     }
 }

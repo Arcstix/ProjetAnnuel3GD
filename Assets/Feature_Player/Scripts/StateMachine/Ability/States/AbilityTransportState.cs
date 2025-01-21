@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,9 @@ public class AbilityTransportState : AbilityState
 {
     private Vector3 refVelocity;
     private Vector3 startPosition;
+    private float timer;
+    
+    public event Action<float> SpeedModifierEvent;
     
     public AbilityTransportState(AbilityStateMachine abilityStateMachine) : base(abilityStateMachine)
     {
@@ -18,7 +22,7 @@ public class AbilityTransportState : AbilityState
         // TODO : On doit savoir quel type de transport cela va être 
         // TODO : Si les 2 objets ne sont pas null on peut se déplacer 
         // TODO : On ne peut pas se déplacer si c'est le player qui est attiré
-
+        timer = 0;
         if (CheckPlayerTransportState())
         {
             startPosition = _stateMachine.AbilityManager.transform.position;
@@ -47,7 +51,6 @@ public class AbilityTransportState : AbilityState
             if (reusableData.RightObject == null)
             {
                 MovePlayer();
-                cameraManager.SetTransportFOV();
             }
             else
             {
@@ -60,7 +63,6 @@ public class AbilityTransportState : AbilityState
             if (reusableData.LeftObject == null)
             {
                 MovePlayer();
-                cameraManager.SetTransportFOV();
             }
             else
             {
@@ -82,7 +84,6 @@ public class AbilityTransportState : AbilityState
     public override void Exit()
     {
         base.Exit();
-        cameraManager.SetBaseFOV();
         _stateMachine.AbilityManager.GetComponent<InteractionManager>().Activate(false);
         if (reusableData.LeftObject != null)
         {
@@ -278,7 +279,9 @@ public class AbilityTransportState : AbilityState
 
         float currentSpeedMultiplier =
             metricsManager.CurrentPlayerSO.AbilityData.TransportCurve.Evaluate(currentPercentageDistance);
-
+        
+        SpeedModifierEvent?.Invoke(currentPercentageDistance);
+        
         if (currentSpeedMultiplier < 0.1f)
         {
             currentSpeedMultiplier = 0.1f;

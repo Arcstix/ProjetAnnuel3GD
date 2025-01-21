@@ -25,9 +25,9 @@ public class PlayerInitializer : MonoBehaviour
     private void Start()
     {
         InitMetrics();
-        InitCamera();
-        InitMovement();
         InitAbility();
+        InitMovement();
+        InitCamera();
     }
 
     private void InitCamera()

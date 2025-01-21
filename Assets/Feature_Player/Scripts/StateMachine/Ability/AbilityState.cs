@@ -10,12 +10,13 @@ public class AbilityState : IState
     protected AbilityStateMachine _stateMachine;
     protected PlayerMetricsManager metricsManager;
     protected PlayerInput input;
-    protected PlayerCameraManager cameraManager;
     protected PlayerReusableStateData reusableData;
     protected Rigidbody rigidbody;
     
     protected Transform rightLauncher;
     protected Transform leftLauncher;
+
+    public event Action ExitTransportation;
 
     // Sert � la cr�ation de raccourcie.
     // ATTENTION AUX SCRIPTABLES OBJECTS QUI PEUVENT TOTALEMENT CHANGER COMME LE PLAYERSO !
@@ -26,11 +27,6 @@ public class AbilityState : IState
         input = _stateMachine.AbilityManager.Input;
         reusableData = _stateMachine.ReusableStateData;
         rigidbody = _stateMachine.AbilityManager.Rb;
-
-        if(_stateMachine.AbilityManager.CameraManager != null)
-        {
-            cameraManager = _stateMachine.AbilityManager.CameraManager;
-        }
         
         rightLauncher = _stateMachine.AbilityManager.RightLauncherTransform;
         leftLauncher = _stateMachine.AbilityManager.LeftLauncherTransform;
@@ -39,7 +35,6 @@ public class AbilityState : IState
     #region State Methods
     public virtual void Enter()
     {
-        
     }
 
     public virtual void Exit()
@@ -51,7 +46,7 @@ public class AbilityState : IState
     {
         if (!reusableData.OnTransportation)
         {
-            cameraManager.SetBaseFOV();
+            ExitTransportation?.Invoke();
         }
     }
 

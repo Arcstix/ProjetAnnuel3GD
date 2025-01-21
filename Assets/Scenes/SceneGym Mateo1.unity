@@ -96,8 +96,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 65ccc92e01b07f74e897e2344cab73c7, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: efc06c11ba86c544b9f1d10597623d33, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2674,6 +2674,37 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &288416393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 288416394}
+  m_Layer: 0
+  m_Name: Player Spawn
+  m_TagString: Spawn
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &288416394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288416393}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &298220191
 Mesh:
   m_ObjectHideFlags: 0
@@ -6186,24 +6217,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &1651573681 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5134782586386577274, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
-  m_PrefabInstance: {fileID: 80867446}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1651573683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1651573681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attenuationObject: {fileID: 0}
 --- !u!43 &1671655989
 Mesh:
   m_ObjectHideFlags: 0
@@ -8458,8 +8471,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1512334656}
+  - {fileID: 288416394}
   - {fileID: 143968612}
-  - {fileID: 80867446}
   - {fileID: 49972810}
   - {fileID: 4476692190328896126}
   - {fileID: 121138007}

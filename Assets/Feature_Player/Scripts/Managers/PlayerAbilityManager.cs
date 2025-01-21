@@ -20,8 +20,6 @@ public class PlayerAbilityManager : PlayerManager, I_Initializer
     
     public Transform LeftLauncherTransform { get => leftLauncherTransform; set => leftLauncherTransform = value; }
 
-    public IState currentState;
-
     public void Init(PlayerReusableStateData reusableStateData)
     {
         reusableData = reusableStateData;
@@ -35,11 +33,6 @@ public class PlayerAbilityManager : PlayerManager, I_Initializer
         abilityStateMachine?.HandleInput();
 
         abilityStateMachine?.Tick();
-
-        if(abilityStateMachine != null)
-        {
-            currentState = abilityStateMachine.currentState;
-        }
     }
 
     private void FixedUpdate()
