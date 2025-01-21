@@ -10,6 +10,7 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
 
     private PlayerMetricsManager metricsManager;
+    private PlayerAbilityManager abilityManager;
     private CinemachineFramingTransposer framingTransposer;
     private CinemachineInputProvider inputProvider;
 
@@ -19,6 +20,9 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
     public void Init(PlayerReusableStateData reusableStateData)
     {
         metricsManager = GetComponent<PlayerMetricsManager>();
+        abilityManager = GetComponent<PlayerAbilityManager>();
+        abilityManager.AbilityStateMachine.TransportState.SpeedModifierEvent += SetTransportFOV;
+        abilityManager.AbilityStateMachine.IdleState.ExitTransportation += SetBaseFOV;
         //framingTransposer = metricsManager.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();
         inputProvider = metricsManager.GetComponent<CinemachineInputProvider>();
         SetCameraMetrics();
@@ -54,13 +58,14 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
         framingTransposer.m_CameraDistance = lerpedZoomValue;
     }
 
-    public void SetBaseFOV()
+    private void SetBaseFOV()
     {
-        virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(virtualCamera.m_Lens.FieldOfView, metricsManager.CurrentPlayerSO.CameraData.BaseFOV, 0.1f);
+        virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(virtualCamera.m_Lens.FieldOfView,
+            metricsManager.CurrentPlayerSO.CameraData.BaseFOV, 0.05f);
     }
     
-    public void SetTransportFOV()
+    private void SetTransportFOV(float time)
     {
-        virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(virtualCamera.m_Lens.FieldOfView, metricsManager.CurrentPlayerSO.CameraData.TransportFOV, 0.1f);
+        virtualCamera.m_Lens.FieldOfView = metricsManager.CurrentPlayerSO.CameraData.TransitionTransportBaseFOV.Evaluate(time);
     }
 }

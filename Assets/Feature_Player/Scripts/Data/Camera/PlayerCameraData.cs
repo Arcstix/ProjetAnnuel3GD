@@ -8,6 +8,8 @@ public class PlayerCameraData
 {
     [field: SerializeField] public float BaseFOV = 60f;
     [field: SerializeField] public float TransportFOV = 110f;
+    [field: SerializeField] public AnimationCurve TransitionBaseTransportFOV;
+    [field: SerializeField] public AnimationCurve TransitionTransportBaseFOV;
     [field: SerializeField] [Range(0f, 10f)] public float DefaultDistance = 6f;
     [field: SerializeField] [Range(0f, 10f)] public float MinimumDistance = 1f;
     [field: SerializeField] [Range(0f, 10f)] public float MaximumDistance = 6f;

@@ -30,4 +30,16 @@ public class PlayerInput : MonoBehaviour
     {
         InputActions.Disable();
     }
+    
+    
+    
+    public void DisableInput()
+    {
+        InputActions.Disable();
+    }
+
+    public void EnableInput()
+    {
+        InputActions.Enable();
+    }
 }
