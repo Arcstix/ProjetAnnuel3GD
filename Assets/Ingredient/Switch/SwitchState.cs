@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public abstract class DestructibleState : MonoBehaviour
+public abstract class SwitchState : MonoBehaviour
 {
     public abstract void Enter(GameObject gameObject);
     public abstract void Tick(GameObject gameObject);
     public abstract void Exit(GameObject gameObject);
-  
 }
