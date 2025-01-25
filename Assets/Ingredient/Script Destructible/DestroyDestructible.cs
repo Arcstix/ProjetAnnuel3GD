@@ -34,17 +34,6 @@ public class DestroyDestructible : DestructibleState
         }
 
         Debug.Log("Tous les composants désactivés sur : " + gameObject.name);
-
-        // Appelle la méthode Explode du script CubeExplosion attaché
-        CubeExplosion explosionScript = GetComponent<CubeExplosion>();
-        if (explosionScript != null)
-        {
-            explosionScript.Explode();
-        }
-        else
-        {
-            Debug.LogWarning("CubeExplosion script is missing on this GameObject!");
-        }
     }
 
     public override void Tick(GameObject gameObject)

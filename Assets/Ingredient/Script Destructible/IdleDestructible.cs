@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class IdleDestructible : DestructibleState
     [SerializeField] private float speedDestructible;
     [SerializeField] private float speedAjout;
 
+    public event Action<Vector3> DestructionEvent;
+    
     public override void Enter(GameObject gameObject)
     {
         Debug.Log("de retour en idle");
@@ -39,6 +42,7 @@ public class IdleDestructible : DestructibleState
                 {
                     playerRigidbody.AddForce(playerRigidbody.velocity.normalized * speedAjout, ForceMode.Impulse);
                     Debug.Log("vitesse ajouter" + playerRigidbody.velocity.magnitude);
+                    DestructionEvent?.Invoke(playerRigidbody.velocity.normalized);
                     GetComponent<StateMachineDestructible>().ChangeState(GetComponent<DestroyDestructible>());
                 }
                 else if (playerSpeed <= -speedDestructible)
