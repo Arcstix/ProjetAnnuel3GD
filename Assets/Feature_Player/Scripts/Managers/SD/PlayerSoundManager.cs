@@ -4,17 +4,6 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void tirDroit()
     {
@@ -70,33 +59,5 @@ public class SoundManager : MonoBehaviour
         //  !!! JE DEVRAI SUREMENT LE FAIRE MOI MEME CELUI CI !!!  Son qui s'activee qaund le joueur entre en collision avec quelque chose
     }
 
- //INGREDIENTS 
-
-    public void blocCassablePortal()
-    {
-        //  Son lorsequ'on casse l'igrédient portail
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Ingredients/Bloc cassable (portal)");
-    }
-
-    public void blocCassableViolet()
-    {
-        //  Son qui s'activee orsequ'on casse un bloc violet
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Ingredients/Bloc cassable (violet)");
-    }
-    public void interrupteur()
-    {
-        //  Son qui s'activee lorseque l'interrupteur s'active
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Ingredients/Interrupteur");
-    }
-
-    public void Collision()
-    {
-        //  !!! JE DEVRAI SUREMENT LE FAIRE MOI MEME CELUI CI !!! Son qui s'active lorsequ'on fait entrer en collision un objet déplacable. 
-    }
-    public void porte()
-    {
-        //  Son qui s'activee lorse que la porte s'ouvre
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Ingredients/Porte");
-    }
 
 }
