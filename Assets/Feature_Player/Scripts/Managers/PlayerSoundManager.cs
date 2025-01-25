@@ -57,4 +57,34 @@ public class SoundManager : MonoBehaviour
         //  Son qui s'activee à la fin du gravity freeze
     }
 
+    public void collision()
+    {
+        //  !!! JE DEVRAI SUREMENT LE FAIRE MOI MEME CELUI CI !!!  Son qui s'activee qaund le joueur entre en collision avec quelque chose 
+    }
+
+ //INGREDIENTS 
+
+    public void blocCassablePortal()
+    {
+        //  Son lorsequ'on casse l'igrédient portail
+    }
+
+    public void blocCassableViolet()
+    {
+        //  Son qui s'activee orsequ'on casse un bloc violet
+    }
+    public void interrupteur()
+    {
+        //  Son qui s'activee lorseque l'interrupteur s'active
+    }
+
+    public void Collision()
+    {
+        //  !!! JE DEVRAI SUREMENT LE FAIRE MOI MEME CELUI CI !!! Son qui s'active lorsequ'on fait entrer en collision un objet déplacable. 
+    }
+    public void porte()
+    {
+        //  Son qui s'activee lorse que la porte s'ouvre
+    }
+
 }
