@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{945d0af4-d981-48fd-90e7-074b32f628d2}">
+		<property name="color">
+			<value>Blue</value>
+		</property>
 		<property name="name">
 			<value>Chute</value>
 		</property>
@@ -60,7 +63,7 @@
 	<object class="MarkerTrack" id="{62f99db0-007b-42ac-8a47-b14b9bd7b168}" />
 	<object class="GroupTrack" id="{25f95067-32b2-48eb-90d7-68f4d797ac6f}">
 		<relationship name="modules">
-			<destination>{47620f63-f449-4fe5-bb7f-5762a0ad368f}</destination>
+			<destination>{38d1d94b-9a39-4c7a-a75a-d8d498255f03}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{55e6704d-df31-4ba4-a096-008bc095af76}</destination>
@@ -68,7 +71,7 @@
 	</object>
 	<object class="Timeline" id="{4b5b8f21-3085-40b6-867a-ab3ec9a4d468}">
 		<relationship name="modules">
-			<destination>{47620f63-f449-4fe5-bb7f-5762a0ad368f}</destination>
+			<destination>{38d1d94b-9a39-4c7a-a75a-d8d498255f03}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{e75a15c0-2fc2-451c-9428-38be2e20a3c0}">
@@ -88,15 +91,12 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{de0fe756-c086-4d06-97fa-9abc29ffcc55}" />
-	<object class="SingleSound" id="{47620f63-f449-4fe5-bb7f-5762a0ad368f}">
+	<object class="SingleSound" id="{38d1d94b-9a39-4c7a-a75a-d8d498255f03}">
 		<property name="length">
-			<value>0.72763205436851741</value>
-		</property>
-		<property name="timelockedOffset">
-			<value>0.135497947454844</value>
+			<value>6.9830839002267577</value>
 		</property>
 		<relationship name="audioFile">
-			<destination>{e54e9aed-3ad3-4336-8e5f-d330601f90e2}</destination>
+			<destination>{c8f1e5fe-ec9c-45a0-ab7f-ec51c582b730}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{55e6704d-df31-4ba4-a096-008bc095af76}">

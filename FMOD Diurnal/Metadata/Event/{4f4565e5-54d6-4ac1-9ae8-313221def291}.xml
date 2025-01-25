@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{4f4565e5-54d6-4ac1-9ae8-313221def291}">
+		<property name="color">
+			<value>Blue</value>
+		</property>
 		<property name="name">
 			<value>projectile collision</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{ac8e13df-23cd-4981-8d8c-ea11054ea4d3}</destination>
@@ -59,11 +62,18 @@
 	<object class="EventAutomatableProperties" id="{01b626ec-f919-44ed-b9d1-ea1bb4967436}" />
 	<object class="MarkerTrack" id="{8bd04fab-8724-4c8e-bb03-a2eb92acea4c}" />
 	<object class="GroupTrack" id="{ecd7ee3b-94d6-4c1b-83b0-79b22f377ac5}">
+		<relationship name="modules">
+			<destination>{80a9c9e8-e085-4c45-8df5-8d8598199ce2}</destination>
+		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{02eace7d-b6a8-4a7f-bd78-eb2da5c6e5e2}</destination>
 		</relationship>
 	</object>
-	<object class="Timeline" id="{544f4ddc-c5ab-45d3-9d9b-e752a7cb4e62}" />
+	<object class="Timeline" id="{544f4ddc-c5ab-45d3-9d9b-e752a7cb4e62}">
+		<relationship name="modules">
+			<destination>{80a9c9e8-e085-4c45-8df5-8d8598199ce2}</destination>
+		</relationship>
+	</object>
 	<object class="EventMixerMaster" id="{8d63760b-9231-4805-a881-dff635416512}">
 		<relationship name="effectChain">
 			<destination>{6b4ec8ad-2981-48f2-920d-1b40e0bc7851}</destination>
@@ -81,6 +91,14 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{add54a9a-1a5b-4e30-9f36-bb981e707f8e}" />
+	<object class="SingleSound" id="{80a9c9e8-e085-4c45-8df5-8d8598199ce2}">
+		<property name="length">
+			<value>1.1010290093048714</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{51f197ba-3ac6-4094-b669-6fd5c6c41542}</destination>
+		</relationship>
+	</object>
 	<object class="EventMixerGroup" id="{02eace7d-b6a8-4a7f-bd78-eb2da5c6e5e2}">
 		<property name="name">
 			<value>Audio 1</value>
