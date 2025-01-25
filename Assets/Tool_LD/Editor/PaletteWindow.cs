@@ -8,6 +8,13 @@ namespace Tool_LD.Editor
 {
     public class PaletteWindow : EditorWindow
     {
+        public enum Rotation
+        {
+            X,
+            Y,
+            Z
+        }
+        
         private SelectionWindow selectionWindow;
         private int selectedIndex; // Index of selected item
         
@@ -22,6 +29,9 @@ namespace Tool_LD.Editor
 
         private GameObject previewObject;
         private bool brushActive;
+        
+        private Rotation currentRotation = Rotation.X;
+        private float rotationSpeed = 1f;
         
         [MenuItem("Tool/PaletteWindow")]
         private static void ShowWindow()
@@ -195,7 +205,7 @@ namespace Tool_LD.Editor
                         
                     string path = palette.listOfPrefabPath[index];
                     GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-                        
+                    
                     GUILayout.BeginVertical(GUILayout.Width(CellSize), GUILayout.Height(CellSize));
                         
                     // Displays the prefab preview (AssetPreview)
@@ -207,7 +217,10 @@ namespace Tool_LD.Editor
                             if (selectionWindow != null)
                             {
                                 // Remove from the SO list.
+                                EditorUtility.SetDirty(palette);
                                 palette.listOfPrefabPath.Remove(path);
+                                AssetDatabase.SaveAssets();
+                                AssetDatabase.Refresh();
                             }
                             else
                             {
@@ -224,7 +237,10 @@ namespace Tool_LD.Editor
                         {
                             if (selectionWindow != null)
                             {
+                                EditorUtility.SetDirty(palette);
                                 palette.listOfPrefabPath.Remove(path);
+                                AssetDatabase.SaveAssets();
+                                AssetDatabase.Refresh();
                             }
                             else
                             {
@@ -235,6 +251,9 @@ namespace Tool_LD.Editor
                             }
                         }
                     }
+                    
+                    GUILayout.Label(prefab.name, GUILayout.ExpandWidth(true));
+                    
                     GUILayout.EndVertical();
                 }
                 GUILayout.EndHorizontal();
@@ -248,9 +267,11 @@ namespace Tool_LD.Editor
             {
                 Event e = Event.current;
                 
+                UpdateCurrentRotationAxe(e);
+                
                 Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
 
-                if (Physics.Raycast(ray, out RaycastHit previewHit, Mathf.Infinity, ~LayerMask.NameToLayer("Ignore Raycast"), QueryTriggerInteraction.Ignore))
+                if (Physics.Raycast(ray, out RaycastHit previewHit, Mathf.Infinity, ~LayerMask.GetMask("Ignore Raycast"), QueryTriggerInteraction.Ignore))
                 {
                     if (previewObject == null || previewObject.name !=
                         AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab).name + "(Clone)")
@@ -267,10 +288,9 @@ namespace Tool_LD.Editor
                 }
                 else
                 {
-                    Vector3 spawnPosition = ray.origin + ray.direction * 5f;
+                    Vector3 spawnPosition = ray.origin + ray.direction * 20f;
                     if (previewObject != null)
                     {
-                        Debug.Log("spawnPos");
                         previewObject.transform.position = spawnPosition;
                     }
                     else
@@ -283,36 +303,82 @@ namespace Tool_LD.Editor
                         }
                     }
                 }
-                
+
+                RotationPreview(e);
+
                 // Vérifier si l'utilisateur clique dans la scène
                 if (e.type == EventType.MouseDown && e.button == 0)
                 {
                     // DestroyPreview Object and replace by the good prefab
+                    Vector3 previewPosition = previewObject.transform.position;
+                    Quaternion previewRotation = previewObject.transform.rotation;
                     DestroyImmediate(previewObject);
-                    if (Physics.Raycast(ray, out RaycastHit hit))
+                    if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, ~LayerMask.GetMask("Ignore Raycast")))
                     {
-                        if (hit.collider.gameObject.name == AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab).name + "(Clone)")
+                        if (hit.collider.gameObject.transform.parent != null && hit.collider.gameObject.transform.parent.name == AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab).name + "(Clone)")
                         {
-                            DestroyImmediate(hit.collider.gameObject);
+                            DestroyImmediate(hit.collider.gameObject.transform.parent.gameObject);
                         }
                         else
                         {
                             // Instancier le prefab sur la surface cliquée
-                            Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab), hit.point, Quaternion.identity);
+                            Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab), previewPosition, previewRotation);
                         }
                     }
                     else
                     {
-                        // Si pas de surface, on le met à une distance par défaut
-                        Vector3 spawnPosition = ray.origin + ray.direction * 10f; // 10 unités devant la caméra
-                        
                         // Instancier le prefab sur la surface cliquée
-                        Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab), spawnPosition, Quaternion.identity);
+                        Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab), previewPosition, previewRotation);
                     }
 
                     // Marquer l'événement comme utilisé
                     e.Use();
                 }
+            }
+        }
+
+        private void RotationPreview(Event e)
+        {
+            if (e.type == EventType.ScrollWheel)
+            {
+                // Calcule la rotation en fonction de la direction de la molette
+                float delta = e.delta.y * rotationSpeed;
+                switch (currentRotation)
+                {
+                    case Rotation.X:
+                        previewObject.transform.Rotate(Vector3.right, -delta, Space.World);
+                        break;
+                    case Rotation.Y:
+                        previewObject.transform.Rotate(Vector3.up, -delta, Space.World);
+                        break;
+                    case Rotation.Z:
+                        previewObject.transform.Rotate(Vector3.forward, -delta, Space.World);
+                        break;
+                }
+                e.Use();
+            }
+        }
+
+        private void UpdateCurrentRotationAxe(Event e)
+        {
+            if (e.type == EventType.KeyDown && e.keyCode == KeyCode.X)
+            {
+                currentRotation = Rotation.X;
+                e.Use();
+            }
+                
+            if (e.type == EventType.KeyDown && e.keyCode == KeyCode.Y)
+            {
+                currentRotation = Rotation.Y;
+                Debug.Log(currentRotation);
+                e.Use();
+            }
+                
+            if (e.type == EventType.KeyDown && e.keyCode == KeyCode.Z)
+            {
+                Debug.Log(currentRotation);
+                currentRotation = Rotation.Z;
+                e.Use();
             }
         }
 
