@@ -8,6 +8,10 @@ public class AbilityTransportState : AbilityState
     private Vector3 refVelocity;
     private Vector3 startPosition;
     private float timer;
+
+    public event Action OnRightActivation;
+    public event Action OnLeftActivation;
+    public event Action OnDash;
     
     public event Action<float> SpeedModifierEvent;
     
@@ -18,14 +22,31 @@ public class AbilityTransportState : AbilityState
     public override void Enter()
     {
         base.Enter();
-        
-        // TODO : On doit savoir quel type de transport cela va être 
-        // TODO : Si les 2 objets ne sont pas null on peut se déplacer 
-        // TODO : On ne peut pas se déplacer si c'est le player qui est attiré
+
         timer = 0;
         if (CheckPlayerTransportState())
         {
             startPosition = _stateMachine.AbilityManager.transform.position;
+        }
+
+        if (input.PlayerActions.AttractionLeft.IsPressed())
+        {
+            OnLeftActivation?.Invoke();
+            if (reusableData.RightObject == null)
+            {
+                // Player Move
+                OnDash?.Invoke();
+            }
+        }
+        
+        if (input.PlayerActions.AttractionRight.IsPressed())
+        {
+            OnRightActivation?.Invoke();
+            if (reusableData.LeftObject == null)
+            {
+                // Player Move
+                OnDash?.Invoke();
+            }
         }
     }
 

@@ -1,12 +1,32 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 public class AbilityRecallState : AbilityState
 {
+    public event Action OnRightRecall;
+    public event Action OnLeftRecall;
+    
+    
     public AbilityRecallState(AbilityStateMachine abilityStateMachine) : base(abilityStateMachine)
     {
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+
+        if (reusableData.LeftInput)
+        {
+            OnLeftRecall?.Invoke();
+        }
+
+        if (reusableData.RightInput)
+        {
+            OnRightRecall?.Invoke();
+        }
+    }
+    
     public override void Tick()
     {
         base.Tick();
