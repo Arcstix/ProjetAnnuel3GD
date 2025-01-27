@@ -8,19 +8,19 @@ public class PlayerMovementManager : PlayerManager, I_Initializer
     [field : Header("Collider")]
     [field : SerializeField] public CapsuleColliderUtility CapsuleColliderUtility { get; private set; }
 
-    private PlayerMovementStateMachine playerMovementStateMachine;
+    private PlayerMovementStateMachine movementStateMachine;
     private PlayerReusableStateData reusableData;
 
     public PlayerReusableStateData ReusableData { get => reusableData; set => reusableData = value; }
 
-    public PlayerMovementStateMachine PlayerMovementStateMachine { get => playerMovementStateMachine; }
+    public PlayerMovementStateMachine MovementStateMachine { get => movementStateMachine; }
 
     public void Init(PlayerReusableStateData reusableStateData)
     {
         reusableData = reusableStateData;
 
-        playerMovementStateMachine = new PlayerMovementStateMachine(this);
-        playerMovementStateMachine.ChangeState(playerMovementStateMachine.IdleState);
+        movementStateMachine = new PlayerMovementStateMachine(this);
+        movementStateMachine.ChangeState(movementStateMachine.IdleState);
     }
 
     private void OnValidate()
@@ -38,7 +38,7 @@ public class PlayerMovementManager : PlayerManager, I_Initializer
     private void SetFirstPersonMode()
     {
         ReusableData.CanMove = false;
-        playerMovementStateMachine.ChangeState(playerMovementStateMachine.IdleState);
+        movementStateMachine.ChangeState(movementStateMachine.IdleState);
     }
 
     private void SetThirdPersonMode()
@@ -48,14 +48,14 @@ public class PlayerMovementManager : PlayerManager, I_Initializer
 
     private void Update()
     {
-        playerMovementStateMachine?.HandleInput();
+        movementStateMachine?.HandleInput();
 
-        playerMovementStateMachine?.Tick();
+        movementStateMachine?.Tick();
     }
 
     private void FixedUpdate()
     {
-        playerMovementStateMachine?.FixedTick();
+        movementStateMachine?.FixedTick();
     }
 
     private void OnDrawGizmos()

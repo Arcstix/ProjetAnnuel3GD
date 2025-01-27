@@ -1041,6 +1041,7 @@ GameObject:
   - component: {fileID: 4548011690224911424}
   - component: {fileID: 6352340799900980117}
   - component: {fileID: 3617158300554477519}
+  - component: {fileID: 3460094687107355123}
   m_Layer: 0
   m_Name: Player StateMachine
   m_TagString: Player
@@ -1255,6 +1256,18 @@ MonoBehaviour:
   leftChargeObject: {fileID: 1985852991558439325}
   rightCharge: {fileID: 2886185048630971234}
   leftCharge: {fileID: 6326660628692591634}
+--- !u!114 &3460094687107355123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5070103808724584987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff55e7d58069f424795236f18a382adb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5134782586386577274
 GameObject:
   m_ObjectHideFlags: 0
@@ -1953,7 +1966,7 @@ Transform:
   m_GameObject: {fileID: 9138152823317935278}
   serializedVersion: 2
   m_LocalRotation: {x: 0.44725806, y: -0.5478556, z: 0.44809565, w: 0.54683155}
-  m_LocalPosition: {x: 0.001, y: 0.626, z: 0}
+  m_LocalPosition: {x: 0.001, y: 0.86599994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1994,7 +2007,7 @@ Camera:
     height: 1
   near clip plane: 0.12
   far clip plane: 5000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
