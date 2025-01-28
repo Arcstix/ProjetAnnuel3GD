@@ -90,7 +90,7 @@ public class PlayerMovementState : IState
 
         Vector3 currentHorizontalVelocity = GetCurrentHorizontalVelocity();       
 
-        rigidbody.AddForce(movementSpeed * targetRotationDirection - currentHorizontalVelocity, ForceMode.VelocityChange);
+        rigidbody.AddForce(targetRotationDirection * (movementSpeed * metricsManager.ExternForce) - currentHorizontalVelocity, ForceMode.VelocityChange);
     }
 
     public float HandleRotation(Vector3 direction)
