@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IngredientPorteSoundManager : MonoBehaviour
+public class I_PorteSoundManager : MonoBehaviour
 {
     public void porte()
     {

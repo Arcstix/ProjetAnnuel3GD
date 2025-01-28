@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IngredientPortalSoundManager : MonoBehaviour
+public class I_PortalSoundManager : MonoBehaviour
 {
     public void blocCassablePortal()
     {

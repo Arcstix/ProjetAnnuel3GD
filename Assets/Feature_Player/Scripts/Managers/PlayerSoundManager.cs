@@ -92,8 +92,15 @@ public class PlayerSoundManager : MonoBehaviour, I_Initializer
         FMODUnity.RuntimeManager.PlayOneShot("event:/Player/Chute");
     }
 
-    public void Collision()
+    public void PlayerCollision()
     {
-        //  !!! JE DEVRAI SUREMENT LE FAIRE MOI MEME CELUI CI !!!  Son qui s'activee qaund le joueur entre en collision avec quelque chose
+        // Son qui s'active lorseque le joueur touche le sol. 
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/player collision");
+    }
+
+    public void ProjectileCollision()
+    {
+        // Son qui s'active lorseque le projectile touche un objet/ingrédient/mur/sol... (quelque chose). 
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/projectile collision");
     }
 }

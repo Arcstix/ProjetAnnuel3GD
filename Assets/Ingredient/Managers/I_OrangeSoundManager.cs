@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IngredientOrangeSoundManager : MonoBehaviour
+public class I_OrangeSoundManager : MonoBehaviour
 {
-    public void Collision()
+    public void CollisionOrangeIngredient()
     {
-        //  !!! JE DEVRAI SUREMENT LE FAIRE MOI MEME CELUI CI !!! Son qui s'active lorsequ'on fait entrer en collision un objet déplacable. 
+        // Son qui s'active lorsequ'on fait entrer en collision un objet déplacable 
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/player collision");
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IngredientVioletSoundManager : MonoBehaviour
+public class I_VioletSoundManager : MonoBehaviour
 {
     public void blocCassableViolet()
     {
