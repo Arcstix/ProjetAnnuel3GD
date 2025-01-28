@@ -267,7 +267,7 @@ public class AbilityTransportState : AbilityState
 
             float currentSpeed = CalculateSpeed(reusableData.RightObject.transform.position);
             
-            _stateMachine.AbilityManager.Rb.velocity = direction * currentSpeed;
+            _stateMachine.AbilityManager.Rb.velocity = direction * (currentSpeed * metricsManager.ExternForce);
         }
         else
         {
@@ -308,6 +308,6 @@ public class AbilityTransportState : AbilityState
             currentSpeedMultiplier = 0.1f;
         }
         
-        return  currentSpeedMultiplier * metricsManager.CurrentPlayerSO.AbilityData.TransportSpeed;
+        return  currentSpeedMultiplier * metricsManager.CurrentPlayerSO.AbilityData.TransportPlayerSpeed;
     }
 }

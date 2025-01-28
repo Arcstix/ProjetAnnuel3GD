@@ -3,15 +3,17 @@ using UnityEngine;
 
 public class BallManager : MonoBehaviour
 {
-    private float _speed;
+    private float _ballSpeed;
+    private float _transportObjectSpeed;
     private Vector3 _endPos;
     private GameObject _futurParent; // if the ball will be a child of an object interactable
     private bool _canBeActivate = false;
     private Vector3 refVelocity;
     
-    public void InitializeBall(float speed, Vector3 endPos, GameObject futurParent)
+    public void InitializeBall(float ballSpeed, float transportObjectSpeed, Vector3 endPos, GameObject futurParent)
     {
-        _speed = speed;
+        _ballSpeed = ballSpeed;
+        _transportObjectSpeed = transportObjectSpeed;
         _endPos = endPos;
         _futurParent = futurParent;
         _canBeActivate = false;
@@ -20,7 +22,7 @@ public class BallManager : MonoBehaviour
     public void SetNewInfo(Vector3 endPos, float speed, GameObject futurParent)
     {
         _endPos = endPos;
-        _speed = speed;
+        _ballSpeed = speed;
         _futurParent = futurParent;
         _canBeActivate = false;
     }
@@ -48,7 +50,7 @@ public class BallManager : MonoBehaviour
                     transform.SetParent(null);
                 }
             }
-            transform.position = Vector3.Lerp(transform.position, _endPos, Time.deltaTime * _speed);
+            transform.position = Vector3.Lerp(transform.position, _endPos, Time.unscaledDeltaTime * _ballSpeed);
         }
         else
         {
@@ -81,6 +83,6 @@ public class BallManager : MonoBehaviour
             rb.drag = 2;
             rb.useGravity = false;
         }
-        objectToMove.GetComponent<Rigidbody>().AddForce(direction * _speed, ForceMode.Acceleration);
+        objectToMove.GetComponent<Rigidbody>().AddForce(direction * _transportObjectSpeed, ForceMode.Acceleration);
     }
 }

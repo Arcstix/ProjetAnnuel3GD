@@ -4,15 +4,21 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerSoundManager : MonoBehaviour, I_Initializer
+public class PlayerSoundManager : MonoBehaviour
 {
     private PlayerAbilityManager abilityManager;
     private PlayerMovementManager movementManager;
-    
-    public void Init(PlayerReusableStateData reusableStateData)
+
+    private void Awake()
     {
         abilityManager = GetComponent<PlayerAbilityManager>();
+        movementManager = GetComponent<PlayerMovementManager>();
+        abilityManager.OnAbilityStarted += InitAbility;
+        movementManager.OnMovementStarted += InitMovement;
+    }
 
+    public void InitAbility()
+    {
         abilityManager.AbilityStateMachine.ShootState.OnRightShoot += RightShoot;
         abilityManager.AbilityStateMachine.ShootState.OnLeftShoot += LeftShoot;
         abilityManager.AbilityStateMachine.RecallState.OnRightRecall += RightRecall;
@@ -20,9 +26,10 @@ public class PlayerSoundManager : MonoBehaviour, I_Initializer
         abilityManager.AbilityStateMachine.TransportState.OnRightActivation += RightActivation;
         abilityManager.AbilityStateMachine.TransportState.OnLeftActivation += LeftActivation;
         abilityManager.AbilityStateMachine.TransportState.OnDash += Dash;
-        
-        movementManager = GetComponent<PlayerMovementManager>();
+    }
 
+    public void InitMovement()
+    {
         movementManager.MovementStateMachine.FallingState.OnGravityFreeze += GravityFreeze;
         movementManager.MovementStateMachine.FallingState.OnGravityUnFreeze += Falling;
     }

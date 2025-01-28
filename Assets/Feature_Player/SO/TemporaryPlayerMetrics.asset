@@ -99,7 +99,9 @@ MonoBehaviour:
     <RightBall>k__BackingField: {fileID: 0}
     <LeftBall>k__BackingField: {fileID: 0}
     <RecallSpeed>k__BackingField: 50
-    <TransportSpeed>k__BackingField: 10
+    <DistanceToEndRecall>k__BackingField: 0.2
+    <TransportPlayerSpeed>k__BackingField: 20
+    <TransportObjectSpeed>k__BackingField: 30
     <TransportCurve>k__BackingField:
       serializedVersion: 2
       m_Curve: []
@@ -107,10 +109,13 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   <CameraData>k__BackingField:
-    DefaultDistance: 6
-    MinimumDistance: 1
-    MaximumDistance: 6
-    ZoomSmoothing: 4
-    ZoomSensitivity: 1
+    BaseFOV: 60
+    SmoothingFactorBaseFOV: 0.05
+    TransitionBaseTransportFOV:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     ControllerVerticalSpeed: 4
     ControllerHorizontalSpeed: 4
