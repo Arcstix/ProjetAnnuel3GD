@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Tool_LD.Script;
 using UnityEditor;
 using UnityEngine;
@@ -8,6 +7,13 @@ namespace Tool_LD.Editor
 {
     public class PaletteWindow : EditorWindow
     {
+        private enum Rotation
+        {
+            X,
+            Y,
+            Z
+        }
+        
         private SelectionWindow selectionWindow;
         private int selectedIndex; // Index of selected item
         
@@ -21,7 +27,14 @@ namespace Tool_LD.Editor
         private string selectedPrefab;
 
         private GameObject previewObject;
-        private bool brushActive;
+        private bool brushPreviewActive;
+        private bool brushSuppressActive;
+        
+        private Rotation currentRotation = Rotation.X;
+        private float rotationSpeed = 15f;
+        private Quaternion previewRotation = Quaternion.identity;
+        Vector3 axis = Vector3.right;
+        Color currentColor = Color.white;
         
         [MenuItem("Tool/PaletteWindow")]
         private static void ShowWindow()
@@ -34,7 +47,13 @@ namespace Tool_LD.Editor
         private void OnGUI()
         {
             GUILayout.Space(10);
+            
+            GUILayout.BeginHorizontal();
             CreateDropDown();
+            GUILayout.Space(10);
+            SuppressPaletteButton();
+            GUILayout.EndHorizontal();
+            
             GUILayout.Space(10);
 
             CreateButton();
@@ -52,13 +71,39 @@ namespace Tool_LD.Editor
             }
             
             GUILayout.EndScrollView();
+
+            if (brushPreviewActive)
+            {
+                Event e = Event.current;
+                UpdateCurrentRotationAxe(e);
+            }
         }
 
-        private void OnEnable()
+        private void SuppressPaletteButton()
         {
+            Color defaultColor = GUI.backgroundColor;
+            GUI.backgroundColor = Color.red;
+            if (GUILayout.Button("Suppress Palette"))
+            {
+                // Show a Display Dialogue to make sure the user want to suppress the active palette
+                bool confirmed = EditorUtility.DisplayDialog("Suppress Active Palette", "Are you sure you want to suppress the active palette ?", "Yes", "No");
+
+                if (confirmed)
+                {
+                    SuppressActivePalette();
+                }
+            }
+            GUI.backgroundColor = defaultColor;
+        }
+
+        private void SuppressActivePalette()
+        {
+            string path = AssetDatabase.GetAssetPath(palettes[selectedIndex]);
+            AssetDatabase.DeleteAsset(path);
+            selectedIndex = Mathf.Max(0, selectedIndex - 1);
             LoadAllPalettes();
         }
-
+        
         private void CreateDropDown()
         {
             // Show the dropdown
@@ -105,23 +150,55 @@ namespace Tool_LD.Editor
                 CreateNewWindow();
             }
             GUILayout.EndHorizontal();
-
-            if (brushActive)
+            
+            GUILayout.Space(10);
+            
+            if (brushPreviewActive)
             {
-                if (GUILayout.Button("Disable Brush"))
+                if (GUILayout.Button("Disable Preview Brush"))
                 {
-                    brushActive = false;
+                    // Quit Preview Mode
+                    brushPreviewActive = false;
                     DestroyImmediate(previewObject);
                 }
             }
             else
             {
-                if (GUILayout.Button("Enable Brush"))
+                if (GUILayout.Button("Enable Preview Brush"))
                 {
-                    brushActive = true;
+                    // Enter Preview Mode
+                    brushPreviewActive = true;
+                    brushSuppressActive = false;
                 }
             }
             
+            GUILayout.Space(10);
+            
+            if (brushSuppressActive)
+            {
+                if (GUILayout.Button("Disable Suppress Brush"))
+                {
+                    // Quit Suppress Mode
+                    brushSuppressActive = false;
+                }
+            }
+            else
+            {
+                if (GUILayout.Button("Enable Suppress Brush"))
+                {
+                    // Enter Suppress Mode
+                    brushSuppressActive = true;
+                    if (brushPreviewActive)
+                    {
+                        brushPreviewActive = false;
+                        if (previewObject != null)
+                        {
+                            DestroyImmediate(previewObject);
+                        }
+                    }
+                    
+                }
+            }
         }
 
         private void CreateNewWindow()
@@ -195,7 +272,7 @@ namespace Tool_LD.Editor
                         
                     string path = palette.listOfPrefabPath[index];
                     GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-                        
+                    
                     GUILayout.BeginVertical(GUILayout.Width(CellSize), GUILayout.Height(CellSize));
                         
                     // Displays the prefab preview (AssetPreview)
@@ -207,14 +284,20 @@ namespace Tool_LD.Editor
                             if (selectionWindow != null)
                             {
                                 // Remove from the SO list.
+                                EditorUtility.SetDirty(palette);
                                 palette.listOfPrefabPath.Remove(path);
+                                AssetDatabase.SaveAssets();
+                                AssetDatabase.Refresh();
                             }
                             else
                             {
                                 selectedPrefab = path;
-                                SceneView.duringSceneGui -= OnSceneGUI; // Retirer les anciens écouteurs
                                 DestroyImmediate(previewObject);
-                                SceneView.duringSceneGui += OnSceneGUI;
+
+                                if (!brushPreviewActive && !brushSuppressActive)
+                                {
+                                    ReplaceObject(prefab);
+                                }
                             }
                         }
                     }
@@ -224,98 +307,259 @@ namespace Tool_LD.Editor
                         {
                             if (selectionWindow != null)
                             {
+                                EditorUtility.SetDirty(palette);
                                 palette.listOfPrefabPath.Remove(path);
+                                AssetDatabase.SaveAssets();
+                                AssetDatabase.Refresh();
                             }
                             else
                             {
                                 selectedPrefab = path;
-                                SceneView.duringSceneGui -= OnSceneGUI; // Retirer les anciens écouteurs
                                 DestroyImmediate(previewObject);
-                                SceneView.duringSceneGui += OnSceneGUI;
+                                
+                                if (!brushPreviewActive && !brushSuppressActive)
+                                {
+                                    ReplaceObject(prefab);
+                                }
                             }
                         }
                     }
+                    GUILayout.Label(prefab.name, GUILayout.ExpandWidth(true));
+                    
                     GUILayout.EndVertical();
                 }
                 GUILayout.EndHorizontal();
             }
         }
-        
+
+        private void ReplaceObject(GameObject prefab)
+        {
+            if (Selection.activeGameObject == null) return;
+            
+            GameObject activeObject = Selection.activeGameObject;
+            if (activeObject.activeInHierarchy)
+            {
+                // Give the new Prefab the position and rotation of the old one to replace
+                GameObject newPrefab = Instantiate(prefab, activeObject.transform.position, activeObject.transform.rotation);
+                Undo.RegisterCreatedObjectUndo(newPrefab, "New Object");
+                // Delete the one to replace 
+                Undo.DestroyObjectImmediate(activeObject);
+            }
+        }
+
         private void OnSceneGUI(SceneView sceneView)
         {
-            // Si un prefab est sélectionné
-            if (!string.IsNullOrWhiteSpace(selectedPrefab) && brushActive)
+            // Si un prefab est sélectionné et que l'on est en Preview Mode
+            if (!string.IsNullOrWhiteSpace(selectedPrefab) && brushPreviewActive && !brushSuppressActive)
             {
-                Event e = Event.current;
-                
-                Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
+                PreviewMode();
+            }
 
-                if (Physics.Raycast(ray, out RaycastHit previewHit, Mathf.Infinity, ~LayerMask.NameToLayer("Ignore Raycast"), QueryTriggerInteraction.Ignore))
-                {
-                    if (previewObject == null || previewObject.name !=
-                        AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab).name + "(Clone)")
-                    {
-                        previewObject = Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab), previewHit.point, Quaternion.identity);
-                        previewObject.layer = LayerMask.NameToLayer("Ignore Raycast"); // Ignorer par le Raycast
-                        foreach (Transform child in previewObject.transform)
-                        {
-                            child.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
-                        }
-                    }
-                    
-                    previewObject.transform.position = previewHit.point;
-                }
-                else
-                {
-                    Vector3 spawnPosition = ray.origin + ray.direction * 5f;
-                    if (previewObject != null)
-                    {
-                        Debug.Log("spawnPos");
-                        previewObject.transform.position = spawnPosition;
-                    }
-                    else
-                    {
-                        previewObject = Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab), spawnPosition, Quaternion.identity);
-                        previewObject.layer = LayerMask.NameToLayer("Ignore Raycast"); // Ignorer par le Raycast
-                        foreach (Transform child in previewObject.transform)
-                        {
-                            child.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
-                        }
-                    }
-                }
+            if (brushSuppressActive && !brushPreviewActive)
+            {
+                SuppressMode();
+            }
+        }
+
+        private void SuppressMode()
+        {
+            Event e = Event.current;
+            
+            Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
                 
-                // Vérifier si l'utilisateur clique dans la scène
+            //Shoot Raycast for detecting object in the scene
+            if (Physics.Raycast(ray, out RaycastHit objectHit, Mathf.Infinity, ~LayerMask.GetMask("Ignore Raycast"), QueryTriggerInteraction.Collide))
+            {
+                // TODO : Make visible what we hit
+                ShowObjectHit(objectHit.collider.gameObject);
+                
+                // Check if user click in the scene
                 if (e.type == EventType.MouseDown && e.button == 0)
                 {
-                    // DestroyPreview Object and replace by the good prefab
-                    DestroyImmediate(previewObject);
-                    if (Physics.Raycast(ray, out RaycastHit hit))
-                    {
-                        if (hit.collider.gameObject.name == AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab).name + "(Clone)")
-                        {
-                            DestroyImmediate(hit.collider.gameObject);
-                        }
-                        else
-                        {
-                            // Instancier le prefab sur la surface cliquée
-                            Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab), hit.point, Quaternion.identity);
-                        }
-                    }
-                    else
-                    {
-                        // Si pas de surface, on le met à une distance par défaut
-                        Vector3 spawnPosition = ray.origin + ray.direction * 10f; // 10 unités devant la caméra
-                        
-                        // Instancier le prefab sur la surface cliquée
-                        Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab), spawnPosition, Quaternion.identity);
-                    }
-
-                    // Marquer l'événement comme utilisé
+                    // Destroy GameObject hit by the Raycast
+                    Undo.DestroyObjectImmediate(objectHit.collider.gameObject.transform.parent != null
+                        ? objectHit.collider.gameObject.transform.parent.gameObject
+                        : objectHit.collider.gameObject);
                     e.Use();
                 }
             }
         }
 
+        private void ShowObjectHit(GameObject objectHit)
+        {
+            GameObject[] objectsHit;
+            // Check if the object hit is a child of an object
+            if (objectHit.transform.parent != null)
+            {
+                objectsHit = new GameObject[objectHit.transform.parent.childCount];
+                for (int i = 0; i < objectsHit.Length; i++)
+                {
+                    objectsHit[i] = objectHit.transform.parent.GetChild(i).gameObject;
+                }
+            }
+            else if(objectHit.transform.childCount > 0)
+            {
+                // In this case the raycast hit the parent and he has child object
+                objectsHit = new GameObject[objectHit.transform.childCount];
+                for (int i = 0; i < objectsHit.Length; i++)
+                {
+                    objectsHit[i] = objectHit.transform.GetChild(i).gameObject;
+                }
+            }
+            else
+            {
+                // In this case the Raycast hit an object without parent and child
+                objectsHit = new GameObject[1];
+                objectsHit[0] = objectHit.gameObject;
+            }
+            
+            Color color = Color.red;
+            Handles.DrawOutline(objectsHit, color, color, 0.5f);
+        }
+
+        private void PreviewMode()
+        {
+            Event e = Event.current;
+                
+            RotationPreview(e);
+                
+            UpdateCurrentRotationAxe(e);
+                
+            Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
+                
+            //Shoot Raycast for the position of the preview object and set a Layer to ignore himself
+            if (Physics.Raycast(ray, out RaycastHit previewHit, Mathf.Infinity, ~LayerMask.GetMask("Ignore Raycast"), QueryTriggerInteraction.Collide))
+            {
+                // In case we don't have preview Object showing in scene 
+                if (previewObject == null || previewObject.name !=
+                    AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab).name + "(Clone)")
+                {
+                    previewObject = Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab), previewHit.point, previewRotation);
+                    previewObject.layer = LayerMask.NameToLayer("Ignore Raycast"); // Ignorer par le Raycast
+                    foreach (Transform child in previewObject.transform)
+                    {
+                        child.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+                    }
+                }
+                    
+                previewObject.transform.position = previewHit.point;
+            }
+            else
+            {
+                // In case the Raycast hit nothing 
+                Vector3 spawnPosition = ray.origin + ray.direction * 10f;
+                    
+                if (previewObject == null || previewObject.name !=
+                    AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab).name + "(Clone)")
+                {
+                    previewObject = Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab), spawnPosition, previewRotation);
+                    previewObject.layer = LayerMask.NameToLayer("Ignore Raycast"); // Ignorer par le Raycast
+                    foreach (Transform child in previewObject.transform)
+                    {
+                        child.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+                    }
+                }
+                else
+                {
+                    previewObject.transform.position = spawnPosition;
+                }
+            }
+
+            // Check if user click in the scene
+            if (e.type == EventType.MouseDown && e.button == 0)
+            {
+                // DestroyPreview Object and replace by the good prefab (with good Layer...)
+                Vector3 previewPosition = previewObject.transform.position;
+                previewRotation = previewObject.transform.rotation;
+                DestroyImmediate(previewObject);
+                GameObject newPrefab = Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(selectedPrefab), previewPosition, previewRotation);
+                Undo.RegisterCreatedObjectUndo(newPrefab, "new Prefab");
+                e.Use();
+            }
+        }
+
+        private void RotationPreview(Event e)
+        {
+            // Ensure previewObject exists before doing anything
+            if (previewObject == null)
+                return; 
+            
+            if (e.type == EventType.ScrollWheel && e.button != 1)
+            {
+                // Calculate the rotation
+                float delta = e.delta.y * rotationSpeed;
+                
+                switch (currentRotation)
+                {
+                    case Rotation.X:
+                        previewObject.transform.Rotate(Vector3.right, -delta, Space.World);
+                        axis = Vector3.right;
+                        currentColor = Color.red;
+                        AssetDatabase.SaveAssets();
+                        AssetDatabase.Refresh();
+                        break;
+                    case Rotation.Y:
+                        previewObject.transform.Rotate(Vector3.up, -delta, Space.World);
+                        axis = Vector3.up;
+                        currentColor = Color.green;
+                        AssetDatabase.SaveAssets();
+                        AssetDatabase.Refresh();
+                        break;
+                    case Rotation.Z:
+                        previewObject.transform.Rotate(Vector3.forward, -delta, Space.World);
+                        axis = Vector3.forward;
+                        currentColor = Color.blue;
+                        AssetDatabase.SaveAssets();
+                        AssetDatabase.Refresh();
+                        break;
+                }
+                e.Use();
+            }
+            DrawRotationHandle();
+        }
+
+        private void DrawRotationHandle()
+        {
+            // Calculate dynamic radius for the handle
+            float radius = HandleUtility.GetHandleSize(previewObject.transform.position) * 1f;
+            Handles.color = currentColor;    
+            // Draw the handle
+            Handles.DrawWireDisc(previewObject.transform.position, axis, radius, 10f);
+            SceneView.RepaintAll();
+        }
+
+        private void UpdateCurrentRotationAxe(Event e)
+        {
+            if (e.type == EventType.KeyDown && e.keyCode == KeyCode.L)
+            {
+                currentRotation = Rotation.X;
+                axis = Vector3.right;
+                currentColor = Color.red;
+                e.Use();
+            }
+                
+            if (e.type == EventType.KeyDown && e.keyCode == KeyCode.P)
+            {
+                currentRotation = Rotation.Y;
+                axis = Vector3.up;
+                currentColor = Color.green;
+                e.Use();
+            }
+                
+            if (e.type == EventType.KeyDown && e.keyCode == KeyCode.M)
+            {
+                currentRotation = Rotation.Z;
+                axis = Vector3.forward;
+                currentColor = Color.blue;
+                e.Use();
+            }
+        }
+
+        private void OnEnable()
+        {
+            SceneView.duringSceneGui += OnSceneGUI;
+            LoadAllPalettes();
+        }
         private void OnDisable()
         {
             SceneView.duringSceneGui -= OnSceneGUI;

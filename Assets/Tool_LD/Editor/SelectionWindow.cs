@@ -74,7 +74,10 @@ namespace Tool_LD.Editor
                         if (GUILayout.Button(previewTexture, GUILayout.Width(64), GUILayout.Height(64)))
                         {
                             // Ajoute à la liste dans le scriptable object.
+                            EditorUtility.SetDirty(activePalette);
                             activePalette.listOfPrefabPath.Add(path);
+                            AssetDatabase.SaveAssets();
+                            AssetDatabase.Refresh();
                             Selection.activeGameObject = prefab;
                         }
                     }
@@ -83,10 +86,14 @@ namespace Tool_LD.Editor
                         if (GUILayout.Button("Pas d'aperçu", GUILayout.Width(64), GUILayout.Height(64)))
                         {
                             // Ajoute à la liste dans le scriptable object.
+                            EditorUtility.SetDirty(activePalette);
                             activePalette.listOfPrefabPath.Add(path);
+                            AssetDatabase.SaveAssets();
+                            AssetDatabase.Refresh();
                             Selection.activeGameObject = prefab;
                         }
                     }
+                    GUILayout.Label(prefab.name, GUILayout.ExpandWidth(true));
                     GUILayout.EndVertical();
                 }
                 GUILayout.EndHorizontal();
