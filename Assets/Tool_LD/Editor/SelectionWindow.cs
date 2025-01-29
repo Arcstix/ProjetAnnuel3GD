@@ -93,6 +93,7 @@ namespace Tool_LD.Editor
                             Selection.activeGameObject = prefab;
                         }
                     }
+                    GUILayout.Label(prefab.name, GUILayout.ExpandWidth(true));
                     GUILayout.EndVertical();
                 }
                 GUILayout.EndHorizontal();
