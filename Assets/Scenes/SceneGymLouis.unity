@@ -7733,6 +7733,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 637429594}
+    - target: {fileID: 6690493287609884384, guid: 836721a9c5a7ca84d91083577ce53826, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6701766453752253443, guid: 836721a9c5a7ca84d91083577ce53826, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -7946,7 +7950,12 @@ PrefabInstance:
       value: 1696
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8509319887111353886, guid: 836721a9c5a7ca84d91083577ce53826, type: 3}
+    - {fileID: 6347486232844267597, guid: 836721a9c5a7ca84d91083577ce53826, type: 3}
+    - {fileID: 7517275955979993376, guid: 836721a9c5a7ca84d91083577ce53826, type: 3}
+    - {fileID: 6982459834062589475, guid: 836721a9c5a7ca84d91083577ce53826, type: 3}
+    - {fileID: 4610858229753177943, guid: 836721a9c5a7ca84d91083577ce53826, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 836721a9c5a7ca84d91083577ce53826, type: 3}
@@ -15002,6 +15011,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 13400000, guid: a7aae10e8d81d1341a512fbbd8d8672d, type: 2}
+    - target: {fileID: 2699454639497336482, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2807098570480261118, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
       propertyPath: isFirstPerson
       value: 1
@@ -15024,7 +15037,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3243463397769389402, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.259
       objectReference: {fileID: 0}
     - target: {fileID: 3243463397769389402, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -15062,6 +15075,10 @@ PrefabInstance:
       propertyPath: m_Drag
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3668788458043126165, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3713565932544967185, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
       propertyPath: field of view
       value: 80.00007
@@ -15074,9 +15091,17 @@ PrefabInstance:
       propertyPath: defaultPlayerSO
       value: 
       objectReference: {fileID: 11400000, guid: 3b5ad5f66e777f847b9e58da2f8daa80, type: 2}
+    - target: {fileID: 4857364995283575163, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4877599084475598331, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
       propertyPath: m_Lens.FieldOfView
       value: 80.00007
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070103808724584987, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5134782586386577274, guid: 3ef22e1cac81712439230337ec97198d, type: 3}
       propertyPath: m_Name

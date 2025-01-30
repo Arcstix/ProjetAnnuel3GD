@@ -10,21 +10,36 @@ public class IdleDestructible : DestructibleState
 
     public event Action<Vector3> DestructionEvent;
     
-    public override void Enter(GameObject gameObject)
+    public override void Enter(GameObject refObject)
     {
         Debug.Log("de retour en idle");
     }
-    public override void Tick(GameObject gameObject) //virtual si base.tick
+    public override void Tick(GameObject refObject) //virtual si base.tick
     {
        
     }
-    public override void Exit(GameObject gameObject)
+    public override void Exit(GameObject refObject)
     {
         
     }
     
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("Interactable"))
+        {
+            Rigidbody rb = other.GetComponent<Rigidbody>();
+
+            if (rb != null)
+            {
+                float rbSpeed = rb.velocity.magnitude;
+
+                if (rbSpeed > speedDestructible)
+                {
+                    DestructionEvent?.Invoke(rb.velocity.normalized);
+                    GetComponent<StateMachineDestructible>().ChangeState(GetComponent<DestroyDestructible>());
+                }
+            }
+        }
         
         if (other.CompareTag("Player")) //contact avec le player
         {
