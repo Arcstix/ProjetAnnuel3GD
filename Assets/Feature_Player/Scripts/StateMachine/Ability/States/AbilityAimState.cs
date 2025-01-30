@@ -9,6 +9,9 @@ public class AbilityAimState : AbilityState
     
     public event Action OnAim;
     public event Action OnRelease;
+
+    public event Action OnAirAim;
+    
     public AbilityAimState(AbilityStateMachine abilityStateMachine) : base(abilityStateMachine)
     {
         
@@ -19,8 +22,15 @@ public class AbilityAimState : AbilityState
     public override void Enter()
     {
         base.Enter();
-        
-        OnAim?.Invoke();
+
+        if (reusableData.InAir)
+        {
+            OnAirAim?.Invoke();
+        }
+        else
+        {
+            OnAim?.Invoke();
+        }
         
         if (reusableData.RightInput)
         {

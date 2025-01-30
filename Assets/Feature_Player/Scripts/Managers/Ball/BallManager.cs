@@ -9,6 +9,8 @@ public class BallManager : MonoBehaviour
     private GameObject _futurParent; // if the ball will be a child of an object interactable
     private bool _canBeActivate = false;
     private Vector3 refVelocity;
+
+    public event Action OnCollision;
     
     public void InitializeBall(float ballSpeed, float transportObjectSpeed, Vector3 endPos, GameObject futurParent)
     {
@@ -23,6 +25,10 @@ public class BallManager : MonoBehaviour
     {
         _endPos = endPos;
         _ballSpeed = speed;
+        if (futurParent == null)
+        {
+            transform.SetParent(null);
+        }
         _futurParent = futurParent;
         _canBeActivate = false;
     }
@@ -41,8 +47,6 @@ public class BallManager : MonoBehaviour
         
         if (Vector3.Distance(transform.position, _endPos) > 0.1f)
         {
-            // Played when Shoot and Recall
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Weapon/ShootV1");
             if (_futurParent != null)
             {
                 if (transform.parent == _futurParent.transform)
@@ -55,7 +59,6 @@ public class BallManager : MonoBehaviour
         else
         {
             // Played when position = end position
-
             if (!_canBeActivate)
             {
                 transform.position = _endPos;
@@ -66,6 +69,7 @@ public class BallManager : MonoBehaviour
             {
                 if (transform.parent != _futurParent.transform)
                 {
+                    OnCollision?.Invoke();
                     transform.SetParent(_futurParent.transform);
                 }
             }

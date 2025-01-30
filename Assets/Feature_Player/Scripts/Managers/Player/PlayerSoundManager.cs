@@ -17,6 +17,11 @@ public class PlayerSoundManager : MonoBehaviour
         movementManager.OnMovementStarted += InitMovement;
     }
 
+    private void InitMovement()
+    {
+        movementManager.MovementStateMachine.LandingState.OnLanding += PlayerLanding;
+    }
+
     public void InitAbility()
     {
         abilityManager.AbilityStateMachine.ShootState.OnRightShoot += RightShoot;
@@ -26,12 +31,8 @@ public class PlayerSoundManager : MonoBehaviour
         abilityManager.AbilityStateMachine.TransportState.OnRightActivation += RightActivation;
         abilityManager.AbilityStateMachine.TransportState.OnLeftActivation += LeftActivation;
         abilityManager.AbilityStateMachine.TransportState.OnDash += Dash;
-    }
-
-    public void InitMovement()
-    {
-        movementManager.MovementStateMachine.FallingState.OnGravityFreeze += GravityFreeze;
-        movementManager.MovementStateMachine.FallingState.OnGravityUnFreeze += Falling;
+        abilityManager.AbilityStateMachine.AimState.OnAirAim += EnterGravityFreeze;
+        abilityManager.AbilityStateMachine.AimState.OnRelease += QuitGravityFreeze;
     }
 
     private void OnDisable()
@@ -87,27 +88,21 @@ public class PlayerSoundManager : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Player/dash");
     }
     
-    public void GravityFreeze()
+    public void EnterGravityFreeze()
     {
         //  Son lorsqu"on rentre en etat gravity Freeze
         FMODUnity.RuntimeManager.PlayOneShot("event:/Player/gravity freeze");
     }
     
-    public void Falling()
+    public void QuitGravityFreeze()
     {
         //  Son qui s'active � la fin du gravity freeze
         FMODUnity.RuntimeManager.PlayOneShot("event:/Player/Chute");
     }
 
-    public void PlayerCollision()
+    public void PlayerLanding()
     {
-        // Son qui s'active lorseque le joueur touche le sol. 
+        // Son qui s'active lorsque le joueur touche le sol. 
         FMODUnity.RuntimeManager.PlayOneShot("event:/Player/player collision");
-    }
-
-    public void ProjectileCollision()
-    {
-        // Son qui s'active lorseque le projectile touche un objet/ingrédient/mur/sol... (quelque chose). 
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/projectile collision");
     }
 }

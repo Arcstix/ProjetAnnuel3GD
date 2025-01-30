@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class PlayerFallingState : PlayerAirState
 {
-    public event Action OnGravityFreeze;
-    public event Action OnGravityUnFreeze;
+
     
     public PlayerFallingState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
     {
@@ -17,7 +16,6 @@ public class PlayerFallingState : PlayerAirState
         base.Enter();
         timer = 0;
         reusableData.ShouldSlowDown = true;
-        OnGravityFreeze?.Invoke();
         reusableData.MovementSpeedModifier = metricsManager.CurrentPlayerSO.FallingData.SpeedModifier;
     }
 
@@ -42,7 +40,6 @@ public class PlayerFallingState : PlayerAirState
         {
             if (reusableData.ShouldSlowDown)
             {
-                OnGravityUnFreeze?.Invoke();
                 reusableData.ShouldSlowDown = false;
             }
             rigidbody.AddForce(Physics.gravity * groundedData.GravityMultiplier - GetCurrentVerticalVelocity(), ForceMode.Acceleration);

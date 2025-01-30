@@ -42,13 +42,13 @@ public class PlayerTimeManager : MonoBehaviour
 
     private void OnDisable()
     {
-        abilityManager.AbilityStateMachine.AimState.OnAim -= SlowTime;
+        abilityManager.AbilityStateMachine.AimState.OnAirAim -= SlowTime;
         abilityManager.AbilityStateMachine.AimState.OnRelease -= DefaultTime;
     }
 
     private void SubscribeEvent()
     {
-        abilityManager.AbilityStateMachine.AimState.OnAim += SlowTime;
+        abilityManager.AbilityStateMachine.AimState.OnAirAim += SlowTime;
         abilityManager.AbilityStateMachine.AimState.OnRelease += DefaultTime;
     }
 
@@ -61,10 +61,7 @@ public class PlayerTimeManager : MonoBehaviour
     {
         if (metricsManager.CurrentPlayerSO != null)
         {
-            if (abilityManager.ReusableData.InAir)
-            {
-                targetTime = metricsManager.CurrentPlayerSO.AbilityData.SlowTime;
-            }
+            targetTime = metricsManager.CurrentPlayerSO.AbilityData.SlowTime;
         }
     }
 }

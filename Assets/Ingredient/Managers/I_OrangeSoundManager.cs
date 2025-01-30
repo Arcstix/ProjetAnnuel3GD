@@ -6,7 +6,7 @@ public class I_OrangeSoundManager : MonoBehaviour
 {
     public void CollisionOrangeIngredient()
     {
-        // Son qui s'active lorsequ'on fait entrer en collision un objet déplacable 
+        // Son qui s'active lorsqu'on fait entrer en collision un objet dï¿½placable 
         FMODUnity.RuntimeManager.PlayOneShot("event:/Player/player collision");
     }
 }
