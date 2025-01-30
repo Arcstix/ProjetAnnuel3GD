@@ -54,10 +54,7 @@ public class PlayerTimeManager : MonoBehaviour
 
     private void DefaultTime()
     {
-        if (abilityManager.ReusableData.InAir)
-        {
-            targetTime = defaultTime;
-        }
+        targetTime = defaultTime;
     }
 
     private void SlowTime()

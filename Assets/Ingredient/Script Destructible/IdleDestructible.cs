@@ -25,19 +25,14 @@ public class IdleDestructible : DestructibleState
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Interactable"))
+        if (other.CompareTag("Movable"))
         {
             Rigidbody rb = other.GetComponent<Rigidbody>();
 
             if (rb != null)
             {
-                float rbSpeed = rb.velocity.magnitude;
-
-                if (rbSpeed > speedDestructible)
-                {
-                    DestructionEvent?.Invoke(rb.velocity.normalized);
-                    GetComponent<StateMachineDestructible>().ChangeState(GetComponent<DestroyDestructible>());
-                }
+                DestructionEvent?.Invoke(rb.velocity.normalized);
+                GetComponent<StateMachineDestructible>().ChangeState(GetComponent<DestroyDestructible>());
             }
         }
         

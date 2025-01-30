@@ -19,7 +19,7 @@ public class AbilityData
     
     [field : Header("Recall Data"), Space(1)]
     [field : SerializeField] [field : Range(10f, 100f)] public float RecallSpeed { get; set; } = 50f;
-    [field : SerializeField] public float DistanceToEndRecall { get; set; } = 0.2f;
+    [field : SerializeField] [field : Range(0.5f, 5f)]public float DistanceToEndRecall { get; set; } = 0.5f;
     
     [field : Header("Transport Data"), Space(1)]
     [field: SerializeField] public float TransportPlayerSpeed { get; set; } = 10f;
