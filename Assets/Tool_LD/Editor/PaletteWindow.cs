@@ -389,15 +389,15 @@ namespace Tool_LD.Editor
         {
             GameObject[] objectsHit;
             // Check if the object hit is a child of an object
-            if (objectHit.transform.parent != null)
-            {
-                objectsHit = new GameObject[objectHit.transform.parent.childCount];
-                for (int i = 0; i < objectsHit.Length; i++)
-                {
-                    objectsHit[i] = objectHit.transform.parent.GetChild(i).gameObject;
-                }
-            }
-            else if(objectHit.transform.childCount > 0)
+            // if (objectHit.transform.parent != null)
+            // {
+            //     objectsHit = new GameObject[objectHit.transform.parent.childCount];
+            //     for (int i = 0; i < objectsHit.Length; i++)
+            //     {
+            //         objectsHit[i] = objectHit.transform.parent.GetChild(i).gameObject;
+            //     }
+            // }
+            if(objectHit.transform.childCount > 0)
             {
                 // In this case the raycast hit the parent and he has child object
                 objectsHit = new GameObject[objectHit.transform.childCount];
