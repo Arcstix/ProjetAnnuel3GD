@@ -25,21 +25,6 @@ public class IdleDestructible : DestructibleState
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Interactable"))
-        {
-            Rigidbody rb = other.GetComponent<Rigidbody>();
-
-            if (rb != null)
-            {
-                float rbSpeed = rb.velocity.magnitude;
-
-                if (rbSpeed > speedDestructible)
-                {
-                    DestructionEvent?.Invoke(rb.velocity.normalized);
-                    GetComponent<StateMachineDestructible>().ChangeState(GetComponent<DestroyDestructible>());
-                }
-            }
-        }
         
         if (other.CompareTag("Player")) //contact avec le player
         {
