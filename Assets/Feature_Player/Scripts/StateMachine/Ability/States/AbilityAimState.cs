@@ -121,7 +121,7 @@ public class AbilityAimState : AbilityState
             reusableData.ObjectAimed = aimHit.collider.gameObject;
         }
         else if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out aimHit,
-                     metricsManager.CurrentPlayerSO.AbilityData.AimDistance, ~LayerMask.GetMask("Interactable")))
+                     metricsManager.CurrentPlayerSO.AbilityData.AimDistance, ~LayerMask.GetMask("Interactable"), QueryTriggerInteraction.Ignore))
         {
             aimObject.GetComponent<MeshRenderer>().material.color = Color.grey;
             aimObject.transform.position = Vector3.Lerp(aimObject.transform.position, aimHit.point + aimHit.normal * aimObject.transform.localScale.x, Time.unscaledDeltaTime * smoothSpeed);
