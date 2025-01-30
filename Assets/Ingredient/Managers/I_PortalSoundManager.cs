@@ -1,14 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class I_PortalSoundManager : MonoBehaviour
 {
-    public void blocCassablePortal()
+    private DestroyDestructible destroyDestructible;
+
+    private void Awake()
     {
-        //  Son lorsequ'on casse l'igrédient portail
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Ingredients/Bloc cassable (portal)");
+        destroyDestructible = GetComponent<DestroyDestructible>();
     }
 
+    private void OnEnable()
+    {
+        destroyDestructible.OnDestroyed += PortalDestroySound;
+    }
 
+    private void PortalDestroySound()
+    {
+        Debug.Log("PortalDestroySound");
+        //  Son lorsqu'on casse l'igrï¿½dient portail
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Ingredients/Bloc cassable (portal)");
+    }
 }

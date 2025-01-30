@@ -25,7 +25,7 @@ public class IdleDestructible : DestructibleState
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Movable"))
+        if (other.CompareTag("Movable") || other.CompareTag("Interactable"))
         {
             Rigidbody rb = other.GetComponent<Rigidbody>();
 
