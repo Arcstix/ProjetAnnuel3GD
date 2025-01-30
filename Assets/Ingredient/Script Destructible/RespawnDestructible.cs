@@ -2,30 +2,30 @@ using UnityEngine;
 
 public class RespawnDestructible : DestructibleState
 {
-    public override void Enter(GameObject gameObject)
+    public override void Enter(GameObject refObject)
     {
         Debug.Log("Cube respawn");
         
         // Désactiver tous les Colliders attachés à cet objet et à ses enfants
-        Collider[] colliders = gameObject.GetComponentsInChildren<Collider>();
-        foreach (Collider collider in colliders)
+        Collider[] colliders = refObject.GetComponentsInChildren<Collider>();
+        foreach (Collider col in colliders)
         {
-            collider.enabled = true;
+            col.enabled = true;
         }
         
         // Désactiver tous les MeshRenderers attachés à cet objet et à ses enfants
-        MeshRenderer[] meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>();
+        MeshRenderer[] meshRenderers = refObject.GetComponentsInChildren<MeshRenderer>();
         foreach (MeshRenderer meshRenderer in meshRenderers)
         {
             meshRenderer.enabled = true;
         }
 
         // Désactiver tous les Rigidbodies attachés à cet objet et à ses enfants
-        Rigidbody[] rigidbodies = gameObject.GetComponentsInChildren<Rigidbody>();
-        foreach (Rigidbody rigidbody in rigidbodies)
+        Rigidbody[] rigidbodies = refObject.GetComponentsInChildren<Rigidbody>();
+        foreach (Rigidbody rb in rigidbodies)
         {
-            rigidbody.isKinematic = false; // Rendre le Rigidbody kinematic
-            rigidbody.detectCollisions = true; // Désactiver les collisions
+            rb.isKinematic = false; // Rendre le Rigidbody kinematic
+            rb.detectCollisions = true; // Désactiver les collisions
         }
 
    
@@ -33,7 +33,7 @@ public class RespawnDestructible : DestructibleState
         GetComponent<StateMachineDestructible>().ChangeState(GetComponent<IdleDestructible>());
     }
 
-    public override void Tick(GameObject gameObject) { }
+    public override void Tick(GameObject refObject) { }
 
-    public override void Exit(GameObject gameObject) { }
+    public override void Exit(GameObject refObject) { }
 }

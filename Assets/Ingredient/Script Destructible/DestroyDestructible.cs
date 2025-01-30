@@ -7,36 +7,36 @@ public class DestroyDestructible : DestructibleState
     [SerializeField] private float timer;
     [SerializeField] private float timeToRespawn;
 
-    public override void Enter(GameObject gameObject)
+    public override void Enter(GameObject refObject)
     {
         Debug.Log("EnterInDestroyDestructible");
         
         // Désactiver tous les Colliders attachés à cet objet et à ses enfants
-        Collider[] colliders = gameObject.GetComponentsInChildren<Collider>();
-        foreach (Collider collider in colliders)
+        Collider[] colliders = refObject.GetComponentsInChildren<Collider>();
+        foreach (Collider col in colliders)
         {
-            collider.enabled = false;
+            col.enabled = false;
         }
         
         // Désactiver tous les MeshRenderers attachés à cet objet et à ses enfants
-        MeshRenderer[] meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>();
+        MeshRenderer[] meshRenderers = refObject.GetComponentsInChildren<MeshRenderer>();
         foreach (MeshRenderer meshRenderer in meshRenderers)
         {
             meshRenderer.enabled = false;
         }
 
         // Désactiver tous les Rigidbodies attachés à cet objet et à ses enfants
-        Rigidbody[] rigidbodies = gameObject.GetComponentsInChildren<Rigidbody>();
-        foreach (Rigidbody rigidbody in rigidbodies)
+        Rigidbody[] rigidbodies = refObject.GetComponentsInChildren<Rigidbody>();
+        foreach (Rigidbody rb in rigidbodies)
         {
-            rigidbody.isKinematic = true; // Rendre le Rigidbody kinematic
-            rigidbody.detectCollisions = false; // Désactiver les collisions
+            rb.isKinematic = true; // Rendre le Rigidbody kinematic
+            rb.detectCollisions = false; // Désactiver les collisions
         }
 
-        Debug.Log("Tous les composants désactivés sur : " + gameObject.name);
+        Debug.Log("Tous les composants désactivés sur : " + refObject.name);
     }
 
-    public override void Tick(GameObject gameObject)
+    public override void Tick(GameObject refObject)
     {
         
         // Timer avant la réactivation
@@ -49,7 +49,7 @@ public class DestroyDestructible : DestructibleState
         }
     }
 
-    public override void Exit(GameObject gameObject)
+    public override void Exit(GameObject refObject)
     {
     }
 }

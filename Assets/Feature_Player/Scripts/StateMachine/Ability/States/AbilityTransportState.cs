@@ -127,7 +127,7 @@ public class AbilityTransportState : AbilityState
     }
     
     /// <summary>
-    /// If LeftObjet and RightObject isn't null Playr can Move in this State
+    /// If LeftObjet and RightObject isn't null Player can Move in this State
     /// </summary>
     private bool CheckPlayerTransportState()
     {

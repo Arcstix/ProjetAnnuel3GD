@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class AbilityShootState : AbilityState
 {
-    private Transform playerTransform;
+    private readonly Transform playerTransform;
     private Vector3 aimEndPosition;
 
     public event Action OnRightShoot;
@@ -31,7 +31,7 @@ public class AbilityShootState : AbilityState
             OnLeftShoot?.Invoke();
             leftLauncher.GetComponent<MeshRenderer>().enabled = false;
             reusableData.LeftObject = InstantiateBall(reusableData.LeftObject, metricsManager.CurrentPlayerSO.AbilityData.LeftBall, leftLauncher.position);
-            reusableData.LeftObject.InitializeBall(metricsManager.CurrentPlayerSO.AbilityData.ShootSpeed, metricsManager.CurrentPlayerSO.AbilityData.TransportObjectSpeed,aimEndPosition, reusableData.LeftParent);
+            reusableData.LeftObject.InitializeBall(metricsManager.CurrentPlayerSO.AbilityData.ShootSpeed, metricsManager.CurrentPlayerSO.AbilityData.TransportObjectSpeed, aimEndPosition, reusableData.LeftParent);
         }
         
 
@@ -50,6 +50,7 @@ public class AbilityShootState : AbilityState
     {
         base.Exit();
         reusableData.InstancePosition = Vector3.zero;
+        aimEndPosition = Vector3.zero;
         reusableData.LeftInput = false;
         reusableData.RightInput = false;
     }
@@ -60,8 +61,8 @@ public class AbilityShootState : AbilityState
         RaycastHit aimHit;
         aimEndPosition = aimRay.origin + aimRay.direction * metricsManager.CurrentPlayerSO.AbilityData.AimDistance;
         
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out aimHit,
-                metricsManager.CurrentPlayerSO.AbilityData.AimDistance, LayerMask.GetMask("Interactable"), QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(aimRay, out aimHit, metricsManager.CurrentPlayerSO.AbilityData.AimDistance, LayerMask.GetMask("Interactable"), 
+                QueryTriggerInteraction.Ignore))
         {
             aimEndPosition = aimHit.point;
             if (reusableData.LeftInput)
@@ -73,8 +74,8 @@ public class AbilityShootState : AbilityState
                 reusableData.RightParent = aimHit.transform.gameObject;
             }
         }
-        else if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out aimHit,
-                     metricsManager.CurrentPlayerSO.AbilityData.AimDistance, ~LayerMask.GetMask("Interactable")))
+        else if (Physics.Raycast(aimRay, out aimHit, metricsManager.CurrentPlayerSO.AbilityData.AimDistance, ~LayerMask.GetMask("Interactable", "Player"), 
+                     QueryTriggerInteraction.Ignore))
         {
             aimEndPosition = aimHit.point + aimHit.normal * 0.25f;
         }
