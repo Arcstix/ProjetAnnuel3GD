@@ -428,7 +428,7 @@ namespace Tool_LD.Editor
             Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
                 
             //Shoot Raycast for the position of the preview object and set a Layer to ignore himself
-            if (Physics.Raycast(ray, out RaycastHit previewHit, Mathf.Infinity, ~LayerMask.GetMask("Ignore Raycast"), QueryTriggerInteraction.Collide))
+            if (Physics.Raycast(ray, out RaycastHit previewHit, 10f, ~LayerMask.GetMask("Ignore Raycast"), QueryTriggerInteraction.Collide))
             {
                 // In case we don't have preview Object showing in scene 
                 if (previewObject == null || previewObject.name !=
@@ -562,6 +562,10 @@ namespace Tool_LD.Editor
         }
         private void OnDisable()
         {
+            if (previewObject != null)
+            {
+                DestroyImmediate(previewObject);
+            }
             SceneView.duringSceneGui -= OnSceneGUI;
         }
     }
