@@ -11,13 +11,13 @@ public class AbilityIdleState : AbilityState
     {
         base.HandleInput();
 
-        if (input.PlayerActions.ThrowRecallRight.WasPerformedThisFrame())
+        if (input.PlayerActions.ThrowRecallRight.WasPerformedThisFrame() && reusableData.RightObject == null)
         {
             HandleRightAimState();
             return;
         }
 
-        if (input.PlayerActions.ThrowRecallLeft.WasPerformedThisFrame())
+        if (input.PlayerActions.ThrowRecallLeft.WasPerformedThisFrame() && reusableData.LeftObject == null)
         {
             HandleLeftAimState();
             return;

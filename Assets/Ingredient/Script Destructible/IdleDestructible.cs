@@ -40,7 +40,7 @@ public class IdleDestructible : DestructibleState
                 // Vérifier si la vitesse est au-dessus ou en dessous du seuil
                 if (playerSpeed >= speedDestructible)
                 {
-                    playerRigidbody.AddForce(playerRigidbody.velocity.normalized * speedAjout, ForceMode.Impulse);
+                    playerRigidbody.GetComponent<PlayerMetricsManager>().AddExternForce(speedAjout);
                     Debug.Log("vitesse ajouter" + playerRigidbody.velocity.magnitude);
                     DestructionEvent?.Invoke(playerRigidbody.velocity.normalized);
                     GetComponent<StateMachineDestructible>().ChangeState(GetComponent<DestroyDestructible>());

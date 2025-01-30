@@ -31,7 +31,7 @@ public class AbilityShootState : AbilityState
             OnLeftShoot?.Invoke();
             leftLauncher.GetComponent<MeshRenderer>().enabled = false;
             reusableData.LeftObject = InstantiateBall(reusableData.LeftObject, metricsManager.CurrentPlayerSO.AbilityData.LeftBall, leftLauncher.position);
-            reusableData.LeftObject.InitializeBall(metricsManager.CurrentPlayerSO.AbilityData.ShootSpeed, aimEndPosition, reusableData.LeftParent);
+            reusableData.LeftObject.InitializeBall(metricsManager.CurrentPlayerSO.AbilityData.ShootSpeed, metricsManager.CurrentPlayerSO.AbilityData.TransportObjectSpeed,aimEndPosition, reusableData.LeftParent);
         }
         
 
@@ -40,7 +40,7 @@ public class AbilityShootState : AbilityState
             OnRightShoot?.Invoke();
             rightLauncher.GetComponent<MeshRenderer>().enabled = false;
             reusableData.RightObject = InstantiateBall(reusableData.RightObject, metricsManager.CurrentPlayerSO.AbilityData.RightBall, rightLauncher.position);
-            reusableData.RightObject.InitializeBall(metricsManager.CurrentPlayerSO.AbilityData.ShootSpeed, aimEndPosition, reusableData.RightParent);
+            reusableData.RightObject.InitializeBall(metricsManager.CurrentPlayerSO.AbilityData.ShootSpeed, metricsManager.CurrentPlayerSO.AbilityData.TransportObjectSpeed, aimEndPosition, reusableData.RightParent);
         }
         
         _stateMachine.ChangeState(_stateMachine.IdleState);

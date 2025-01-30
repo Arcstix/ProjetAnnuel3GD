@@ -11,7 +11,6 @@ public class PlayerInitializer : MonoBehaviour
     private PlayerAbilityManager abilityManager;
     private PlayerMetricsManager metricsManager;
     private PlayerCameraManager cameraManager;
-    private PlayerSoundManager soundManager;
 
     private void Awake()
     {
@@ -21,7 +20,6 @@ public class PlayerInitializer : MonoBehaviour
         abilityManager = GetComponent<PlayerAbilityManager>();
         metricsManager = GetComponent<PlayerMetricsManager>();
         cameraManager = GetComponent<PlayerCameraManager>();
-        soundManager = GetComponent<PlayerSoundManager>();
     }
 
     private void Start()
@@ -30,6 +28,5 @@ public class PlayerInitializer : MonoBehaviour
         abilityManager.Init(reusableStateData);
         movementManager.Init(reusableStateData);
         cameraManager.Init(reusableStateData);
-        soundManager.Init(reusableStateData);
     }
 }

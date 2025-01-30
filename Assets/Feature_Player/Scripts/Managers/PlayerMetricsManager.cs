@@ -9,22 +9,40 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
     [SerializeField] private PlayerSO defaultPlayerSO;
 
     public PlayerSO CurrentPlayerSO { get => currentPlayerSO; set => currentPlayerSO = value; }
-
-    private Dictionary<int, float> abilityDictionary = new Dictionary<int, float>();
+    
+    public float ExternForce => currentExternForce;
 
     private Rigidbody playerRb;
     private PlayerSO currentPlayerSO;
-
+    
+    private float currentExternForce = 1;
+    
+    public event Action OnMetricsSet;
+    
     public void Init(PlayerReusableStateData reusableStateData)
     {
         //InitializeDictionary();
         playerRb = GetComponent<Rigidbody>();
         currentPlayerSO = defaultPlayerSO;
         SetRigidbodyMetrics();
+        OnMetricsSet?.Invoke();
+    }
+
+    private void Update()
+    {
+        if (currentExternForce > 1)
+        {
+            currentExternForce = Mathf.Lerp(currentExternForce, 1, Time.deltaTime);
+        }
     }
 
     public void SetRigidbodyMetrics()
     {
         playerRb.drag = CurrentPlayerSO.Drag;
+    }
+
+    public void AddExternForce(float forceValue)
+    {
+        currentExternForce += forceValue;
     }
 }

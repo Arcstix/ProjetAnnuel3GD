@@ -12,6 +12,8 @@ public class PlayerAbilityManager : PlayerManager, I_Initializer
     
     private AbilityStateMachine abilityStateMachine;
     private PlayerReusableStateData reusableData;
+    
+    public event Action OnAbilityStarted;
 
     public PlayerReusableStateData ReusableData { get => reusableData; set => reusableData = value; }
 
@@ -26,6 +28,7 @@ public class PlayerAbilityManager : PlayerManager, I_Initializer
         
         abilityStateMachine = new AbilityStateMachine(this);
         abilityStateMachine.ChangeState(abilityStateMachine.IdleState);
+        OnAbilityStarted?.Invoke();
     }
 
     private void Update()

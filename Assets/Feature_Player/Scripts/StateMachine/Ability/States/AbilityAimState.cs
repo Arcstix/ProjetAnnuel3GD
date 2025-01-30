@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class AbilityAimState : AbilityState
 {
     private GameObject aimObject;
     private Vector3 velocityRef;
+    
+    public event Action OnAim;
+    public event Action OnRelease;
     public AbilityAimState(AbilityStateMachine abilityStateMachine) : base(abilityStateMachine)
     {
         
@@ -16,7 +20,7 @@ public class AbilityAimState : AbilityState
     {
         base.Enter();
         
-        // TODO : Mettre dans un AnimationManager
+        OnAim?.Invoke();
         
         if (reusableData.RightInput)
         {
@@ -62,6 +66,9 @@ public class AbilityAimState : AbilityState
     public override void Exit()
     {
         base.Exit();
+        
+        OnRelease?.Invoke();
+        
         GameObject.Destroy(aimObject);
 
         if (reusableData.ObjectAimed != null)
@@ -110,20 +117,20 @@ public class AbilityAimState : AbilityState
                 metricsManager.CurrentPlayerSO.AbilityData.AimDistance, LayerMask.GetMask("Interactable"), QueryTriggerInteraction.Ignore))
         {
             aimObject.GetComponent<MeshRenderer>().material.color = Color.green;
-            aimObject.transform.position = Vector3.Lerp(aimObject.transform.position, aimHit.point, Time.deltaTime * smoothSpeed);
+            aimObject.transform.position = Vector3.Lerp(aimObject.transform.position, aimHit.point, Time.unscaledDeltaTime * smoothSpeed);
             reusableData.ObjectAimed = aimHit.collider.gameObject;
         }
         else if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out aimHit,
                      metricsManager.CurrentPlayerSO.AbilityData.AimDistance, ~LayerMask.GetMask("Interactable")))
         {
             aimObject.GetComponent<MeshRenderer>().material.color = Color.grey;
-            aimObject.transform.position = Vector3.Lerp(aimObject.transform.position, aimHit.point + aimHit.normal * aimObject.transform.localScale.x, Time.deltaTime * smoothSpeed);
+            aimObject.transform.position = Vector3.Lerp(aimObject.transform.position, aimHit.point + aimHit.normal * aimObject.transform.localScale.x, Time.unscaledDeltaTime * smoothSpeed);
             reusableData.ObjectAimed = null;
         }
         else
         {
             aimObject.GetComponent<MeshRenderer>().material.color = Color.grey;
-            aimObject.transform.position = Vector3.Lerp(aimObject.transform.position, aimEndPosition, Time.deltaTime * smoothSpeed);
+            aimObject.transform.position = Vector3.Lerp(aimObject.transform.position, aimEndPosition, Time.unscaledDeltaTime * smoothSpeed);
             reusableData.ObjectAimed = null;
         }
         

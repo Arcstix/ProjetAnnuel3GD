@@ -11,6 +11,8 @@ public class PlayerMovementManager : PlayerManager, I_Initializer
     private PlayerMovementStateMachine movementStateMachine;
     private PlayerReusableStateData reusableData;
 
+    public event Action OnMovementStarted;
+    
     public PlayerReusableStateData ReusableData { get => reusableData; set => reusableData = value; }
 
     public PlayerMovementStateMachine MovementStateMachine { get => movementStateMachine; }
@@ -21,6 +23,7 @@ public class PlayerMovementManager : PlayerManager, I_Initializer
 
         movementStateMachine = new PlayerMovementStateMachine(this);
         movementStateMachine.ChangeState(movementStateMachine.IdleState);
+        OnMovementStarted?.Invoke();
     }
 
     private void OnValidate()
