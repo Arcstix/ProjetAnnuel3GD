@@ -62,11 +62,21 @@
 	<object class="EventAutomatableProperties" id="{619d1d79-1767-4e5f-b1a0-85155ec07d5b}" />
 	<object class="MarkerTrack" id="{3b0f84ef-55a0-4bde-a4a5-d1faf3f3084b}" />
 	<object class="GroupTrack" id="{ec51a163-4a37-4d50-945a-ec6a588d2f03}">
+		<relationship name="automationTracks">
+			<destination>{fcbda1bb-1055-4d58-8980-733d0e550ee9}</destination>
+		</relationship>
+		<relationship name="modules">
+			<destination>{e419f09f-b933-4a5d-a8ce-ef607565e14f}</destination>
+		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{62da1950-7693-4111-aa8e-36a3a3f668f5}</destination>
 		</relationship>
 	</object>
-	<object class="Timeline" id="{6e04c405-db3f-4ad8-85d3-a35798e03078}" />
+	<object class="Timeline" id="{6e04c405-db3f-4ad8-85d3-a35798e03078}">
+		<relationship name="modules">
+			<destination>{e419f09f-b933-4a5d-a8ce-ef607565e14f}</destination>
+		</relationship>
+	</object>
 	<object class="EventMixerMaster" id="{0e79c390-8acc-4ee9-88ac-ffc1fb595fb7}">
 		<relationship name="effectChain">
 			<destination>{7e55e002-d46b-4a32-8c46-eee5ad57c066}</destination>
@@ -84,7 +94,35 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{e38e7497-20dd-4eec-9fac-64874dab93f8}" />
+	<object class="AutomationTrack" id="{fcbda1bb-1055-4d58-8980-733d0e550ee9}">
+		<relationship name="automator">
+			<destination>{b2f852e9-2910-4bec-9fa3-2fc2be6f7920}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{e419f09f-b933-4a5d-a8ce-ef607565e14f}">
+		<property name="triggerProbability">
+			<value>49.5</value>
+		</property>
+		<property name="length">
+			<value>2.5</value>
+		</property>
+		<property name="pitch">
+			<value>0.900000036</value>
+		</property>
+		<relationship name="automators">
+			<destination>{b2f852e9-2910-4bec-9fa3-2fc2be6f7920}</destination>
+		</relationship>
+		<relationship name="modulators">
+			<destination>{353c9318-400c-414b-bc4a-06ef2e7f7add}</destination>
+		</relationship>
+		<relationship name="audioFile">
+			<destination>{9f3fbf02-85e8-4ffa-942c-ba4b520705fb}</destination>
+		</relationship>
+	</object>
 	<object class="EventMixerGroup" id="{62da1950-7693-4111-aa8e-36a3a3f668f5}">
+		<property name="volume">
+			<value>-14</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -106,6 +144,22 @@
 	</object>
 	<object class="MixerBusPanner" id="{f227fa17-b158-4088-be03-1b284abcbf36}" />
 	<object class="MixerBusFader" id="{e7b25e0e-37ac-47b0-b877-33809aa6f49c}" />
+	<object class="Automator" id="{b2f852e9-2910-4bec-9fa3-2fc2be6f7920}">
+		<property name="nameOfPropertyBeingAutomated">
+			<value>pitch</value>
+		</property>
+		<relationship name="automationCurves">
+			<destination>{069d6921-bb2c-4618-935b-2f02bcb0fab9}</destination>
+		</relationship>
+	</object>
+	<object class="RandomizerModulator" id="{353c9318-400c-414b-bc4a-06ef2e7f7add}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>pitch</value>
+		</property>
+		<property name="amount">
+			<value>7.5</value>
+		</property>
+	</object>
 	<object class="MixerBusEffectChain" id="{11e11ecd-b0d4-4c32-b9ee-59b08758fe7d}">
 		<relationship name="effects">
 			<destination>{655efa43-aa0c-4cc4-947d-fbe942cbe8ba}</destination>
@@ -114,5 +168,21 @@
 	<object class="MixerBusPanner" id="{58b33abc-d807-490e-b051-3162d7f3df47}" />
 	<object class="MixerBusFader" id="{2c1de42f-9af4-4e50-9c11-02dba9ed5259}" />
 	<object class="SpatialiserEffect" id="{727d5c07-a7d5-4fa3-b167-cad477606eed}" />
+	<object class="AutomationCurve" id="{069d6921-bb2c-4618-935b-2f02bcb0fab9}">
+		<relationship name="parameter">
+			<destination>{6e04c405-db3f-4ad8-85d3-a35798e03078}</destination>
+		</relationship>
+		<relationship name="automationPoints">
+			<destination>{cfe5a6c1-747e-4d8f-9ab5-c83ede5806d5}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{655efa43-aa0c-4cc4-947d-fbe942cbe8ba}" />
+	<object class="AutomationPoint" id="{cfe5a6c1-747e-4d8f-9ab5-c83ede5806d5}">
+		<property name="position">
+			<value>0.96059113300492616</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+	</object>
 </objects>
