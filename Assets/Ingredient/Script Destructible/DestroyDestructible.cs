@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,9 +8,13 @@ public class DestroyDestructible : DestructibleState
     [SerializeField] private float timer;
     [SerializeField] private float timeToRespawn;
 
+    public event Action OnDestroyed;
+    
     public override void Enter(GameObject refObject)
     {
         Debug.Log("EnterInDestroyDestructible");
+        
+        OnDestroyed?.Invoke();
         
         // Désactiver tous les Colliders attachés à cet objet et à ses enfants
         Collider[] colliders = refObject.GetComponentsInChildren<Collider>();

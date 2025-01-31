@@ -12,7 +12,6 @@ public class IdleDestructible : DestructibleState
     
     public override void Enter(GameObject refObject)
     {
-        Debug.Log("de retour en idle");
     }
     public override void Tick(GameObject refObject) //virtual si base.tick
     {
@@ -25,7 +24,7 @@ public class IdleDestructible : DestructibleState
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Movable"))
+        if (other.CompareTag("Movable") || other.CompareTag("Interactable"))
         {
             Rigidbody rb = other.GetComponent<Rigidbody>();
 

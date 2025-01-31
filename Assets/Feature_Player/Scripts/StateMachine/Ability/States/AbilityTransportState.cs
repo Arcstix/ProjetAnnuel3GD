@@ -7,7 +7,6 @@ public class AbilityTransportState : AbilityState
 {
     private Vector3 refVelocity;
     private Vector3 startPosition;
-    private float timer;
 
     public event Action OnRightActivation;
     public event Action OnLeftActivation;
@@ -22,8 +21,7 @@ public class AbilityTransportState : AbilityState
     public override void Enter()
     {
         base.Enter();
-
-        timer = 0;
+        
         if (CheckPlayerTransportState())
         {
             startPosition = _stateMachine.AbilityManager.transform.position;
@@ -252,14 +250,7 @@ public class AbilityTransportState : AbilityState
     {
         if (reusableData.RightObject != null)
         {
-            if (reusableData.RightParent != null)
-            {
-                reusableData.RightParent.GetComponent<InteractionManager>().Activate(true);
-            }
-            else
-            {
-                reusableData.RightObject.GetComponent<InteractionManager>().Activate(true);
-            }
+            reusableData.RightObject.GetComponent<InteractionManager>().Activate(true);
             
             // Move Player to RightObject
             Vector3 direction = (reusableData.RightObject.transform.position -
@@ -271,14 +262,7 @@ public class AbilityTransportState : AbilityState
         }
         else
         {
-            if (reusableData.LeftParent != null)
-            {
-                reusableData.LeftParent.GetComponent<InteractionManager>().Activate(true);
-            }
-            else
-            {
-                reusableData.LeftObject.GetComponent<InteractionManager>().Activate(true);
-            }
+            reusableData.LeftObject.GetComponent<InteractionManager>().Activate(true);
             
             // Move Player to LeftObject
             Vector3 direction = (reusableData.LeftObject.transform.position -
