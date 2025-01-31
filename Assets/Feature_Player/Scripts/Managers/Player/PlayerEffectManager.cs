@@ -21,5 +21,9 @@ public class PlayerEffectManager : MonoBehaviour
         {
             speedEffect.Play();
         }
+        else
+        {
+            speedEffect.Stop();
+        }
     }
 }
