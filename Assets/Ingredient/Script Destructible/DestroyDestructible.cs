@@ -12,8 +12,6 @@ public class DestroyDestructible : DestructibleState
     
     public override void Enter(GameObject refObject)
     {
-        Debug.Log("EnterInDestroyDestructible");
-        
         OnDestroyed?.Invoke();
         
         // Désactiver tous les Colliders attachés à cet objet et à ses enfants
@@ -37,8 +35,6 @@ public class DestroyDestructible : DestructibleState
             rb.isKinematic = true; // Rendre le Rigidbody kinematic
             rb.detectCollisions = false; // Désactiver les collisions
         }
-
-        Debug.Log("Tous les composants désactivés sur : " + refObject.name);
     }
 
     public override void Tick(GameObject refObject)

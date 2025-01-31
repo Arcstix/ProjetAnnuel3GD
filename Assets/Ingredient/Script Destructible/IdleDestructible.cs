@@ -43,9 +43,6 @@ public class IdleDestructible : DestructibleState
             {
                 float playerSpeed = playerRigidbody.velocity.magnitude; // Vitesse du joueur
 
-                // Afficher la vitesse dans la console
-                Debug.Log($"Vitesse du joueur au moment du contact : {playerSpeed} m/s");
-
                 // Vérifier si la vitesse est au-dessus ou en dessous du seuil
                 if (playerSpeed >= speedDestructible)
                 {
@@ -54,15 +51,6 @@ public class IdleDestructible : DestructibleState
                     DestructionEvent?.Invoke(playerRigidbody.velocity.normalized);
                     GetComponent<StateMachineDestructible>().ChangeState(GetComponent<DestroyDestructible>());
                 }
-                else if (playerSpeed <= -speedDestructible)
-                {
-                    Debug.Log("Le joueur manque de vitesse");
-                }
-               
-            }
-            else
-            {
-                Debug.LogWarning("Le joueur détecté n'a pas de Rigidbody attaché.");
             }
         }
     }

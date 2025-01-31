@@ -19,7 +19,7 @@ public class I_PorteSoundManager : MonoBehaviour
 
     private void Door()
     {
-        //  Son qui s'activee lorse que la porte s'ouvre
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Ingredients/Porte");
+        //  Son qui s'active lorsque la porte s'ouvre
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Ingredients/Porte", transform.position);
     }
 }

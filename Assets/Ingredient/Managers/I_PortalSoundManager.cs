@@ -19,8 +19,7 @@ public class I_PortalSoundManager : MonoBehaviour
 
     private void PortalDestroySound()
     {
-        Debug.Log("PortalDestroySound");
         //  Son lorsqu'on casse l'igr�dient portail
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Ingredients/Bloc cassable (portal)");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Ingredients/Bloc cassable (portal)", transform.position);
     }
 }

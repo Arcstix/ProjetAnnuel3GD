@@ -4,8 +4,6 @@ public class RespawnDestructible : DestructibleState
 {
     public override void Enter(GameObject refObject)
     {
-        Debug.Log("Cube respawn");
-        
         // Désactiver tous les Colliders attachés à cet objet et à ses enfants
         Collider[] colliders = refObject.GetComponentsInChildren<Collider>();
         foreach (Collider col in colliders)
