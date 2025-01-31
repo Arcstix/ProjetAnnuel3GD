@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6223023337725886965}
   - component: {fileID: 4126073623283246122}
   - component: {fileID: 5363812859574986354}
+  - component: {fileID: 8991898617530993844}
   m_Layer: 0
   m_Name: Switch
   m_TagString: Untagged
@@ -151,6 +152,21 @@ MonoBehaviour:
   switchCenter: {fileID: 8320970389409239643}
   idleSwitch: {fileID: 6223023337725886965}
   inCenter: 0
+  onSwitch:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DoorManager, Assembly-CSharp
+        m_MethodName: OpenDoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5363812859574986354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,5 +177,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f42cd0ca6d80afa408708c8ac83bf5a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8991898617530993844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6964436228803944401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05c14ed21de689c44af3d7b8c1f4cd08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

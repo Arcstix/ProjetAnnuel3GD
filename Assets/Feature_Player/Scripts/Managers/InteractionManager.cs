@@ -29,6 +29,11 @@ public class InteractionManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("Player") && interactionType == InteractionType.Ball && isActive)
+        {
+            Destroy(gameObject);
+        }
+        
         if (isActive)
         {
             if (other.gameObject.TryGetComponent(out InteractionManager manager))

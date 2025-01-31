@@ -12,7 +12,6 @@ public class IdleDestructible : DestructibleState
     
     public override void Enter(GameObject refObject)
     {
-        Debug.Log("de retour en idle");
     }
     public override void Tick(GameObject refObject) //virtual si base.tick
     {

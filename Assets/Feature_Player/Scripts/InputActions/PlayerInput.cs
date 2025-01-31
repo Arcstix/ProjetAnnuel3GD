@@ -20,7 +20,6 @@ public class PlayerInput : MonoBehaviour
 
     private void OnEnable()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Weapon/ShootV1");
         InputActions.Enable();
         InputActionInitialize?.Invoke();
         Cursor.lockState = CursorLockMode.Locked;
