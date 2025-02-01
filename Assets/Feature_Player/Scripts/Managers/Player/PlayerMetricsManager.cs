@@ -12,6 +12,9 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
     
     public float ExternForce => currentExternForce;
 
+    public float staminaRight = 0;
+    public float staminaLeft = 0;
+
     private Rigidbody playerRb;
     private PlayerSO currentPlayerSO;
     
