@@ -25,7 +25,7 @@ public class BallManager : MonoBehaviour
     {
         _endPos = endPos;
         _ballSpeed = speed;
-        if (futurParent == null)
+        if (futurParent == null && transform.parent != null)
         {
             transform.SetParent(null);
         }
