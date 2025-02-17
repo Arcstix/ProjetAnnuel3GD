@@ -24,7 +24,7 @@ public class PlayerTimeManager : MonoBehaviour
         {
             // TimeScale back to normal
             currentTime = Mathf.Lerp(currentTime, targetTime,
-                metricsManager.CurrentPlayerSO.AbilityData.DefaultLerpTime);
+                metricsManager.CurrentMetrics.AbilityData.DefaultLerpTime);
             
             Time.timeScale = currentTime;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
@@ -33,7 +33,7 @@ public class PlayerTimeManager : MonoBehaviour
         {
             // Timescale go on slow mode
             currentTime = Mathf.Lerp(currentTime, targetTime,
-                metricsManager.CurrentPlayerSO.AbilityData.SlowLerpTime);
+                metricsManager.CurrentMetrics.AbilityData.SlowLerpTime);
             
             Time.timeScale = currentTime;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
@@ -59,9 +59,9 @@ public class PlayerTimeManager : MonoBehaviour
 
     private void SlowTime()
     {
-        if (metricsManager.CurrentPlayerSO != null)
+        if (metricsManager.CurrentMetrics != null)
         {
-            targetTime = metricsManager.CurrentPlayerSO.AbilityData.SlowTime;
+            targetTime = metricsManager.CurrentMetrics.AbilityData.SlowTime;
         }
     }
 }

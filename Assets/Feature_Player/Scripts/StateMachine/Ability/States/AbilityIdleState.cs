@@ -35,12 +35,12 @@ public class AbilityIdleState : AbilityState
             return;
         }
 
-        if (input.PlayerActions.AttractionRight.WasPerformedThisFrame())
+        if (input.PlayerActions.AttractionRight.WasPerformedThisFrame() && metricsManager.StaminaRight > metricsManager.CurrentMetrics.StaminaData.MinimumStamina)
         {
             HandleAttraction();
         }
 
-        if (input.PlayerActions.AttractionLeft.WasPerformedThisFrame())
+        if (input.PlayerActions.AttractionLeft.WasPerformedThisFrame() && metricsManager.StaminaLeft > metricsManager.CurrentMetrics.StaminaData.MinimumStamina)
         {
             HandleAttraction();
         }

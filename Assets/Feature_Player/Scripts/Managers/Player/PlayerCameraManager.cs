@@ -30,7 +30,7 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
 
     public void SetCameraMetrics()
     {
-        cameraData = metricsManager.CurrentPlayerSO.CameraData;
+        cameraData = metricsManager.CurrentMetrics.CameraData;
         virtualCamera.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.m_MaxSpeed = cameraData.ControllerVerticalSpeed;
         virtualCamera.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxSpeed = cameraData.ControllerHorizontalSpeed;
     }
@@ -61,11 +61,11 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
     private void SetBaseFOV()
     {
         virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(virtualCamera.m_Lens.FieldOfView,
-            metricsManager.CurrentPlayerSO.CameraData.BaseFOV, metricsManager.CurrentPlayerSO.CameraData.SmoothingFactorBaseFOV);
+            metricsManager.CurrentMetrics.CameraData.BaseFOV, metricsManager.CurrentMetrics.CameraData.SmoothingFactorBaseFOV);
     }
     
     private void SetTransportFOV(float time)
     {
-        virtualCamera.m_Lens.FieldOfView = metricsManager.CurrentPlayerSO.CameraData.TransitionBaseTransportFOV.Evaluate(time);
+        virtualCamera.m_Lens.FieldOfView = metricsManager.CurrentMetrics.CameraData.TransitionBaseTransportFOV.Evaluate(time);
     }
 }

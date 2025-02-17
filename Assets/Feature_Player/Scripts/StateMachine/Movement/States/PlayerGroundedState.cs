@@ -12,7 +12,7 @@ public class PlayerGroundedState : PlayerMovementState
     public PlayerGroundedState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
     {
         capsuleColliderUtility = stateMachine.MovementManager.CapsuleColliderUtility;
-        groundedData = stateMachine.MovementManager.Metrics.CurrentPlayerSO.GroundedData;
+        groundedData = stateMachine.MovementManager.Metrics.CurrentMetrics.GroundedData;
     }
 
     public override void FixedTick()

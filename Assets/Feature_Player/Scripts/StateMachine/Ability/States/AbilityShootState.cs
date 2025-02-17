@@ -30,8 +30,8 @@ public class AbilityShootState : AbilityState
         {
             OnLeftShoot?.Invoke();
             leftLauncher.GetComponent<MeshRenderer>().enabled = false;
-            reusableData.LeftObject = InstantiateBall(reusableData.LeftObject, metricsManager.CurrentPlayerSO.AbilityData.LeftBall, leftLauncher.position);
-            reusableData.LeftObject.InitializeBall(metricsManager.CurrentPlayerSO.AbilityData.ShootSpeed, metricsManager.CurrentPlayerSO.AbilityData.TransportObjectSpeed, aimEndPosition, reusableData.LeftParent);
+            reusableData.LeftObject = InstantiateBall(reusableData.LeftObject, metricsManager.CurrentMetrics.AbilityData.LeftBall, leftLauncher.position);
+            reusableData.LeftObject.InitializeBall(metricsManager.CurrentMetrics.AbilityData.ShootSpeed, metricsManager.CurrentMetrics.AbilityData.TransportObjectSpeed, aimEndPosition, reusableData.LeftParent);
         }
         
 
@@ -39,8 +39,8 @@ public class AbilityShootState : AbilityState
         {
             OnRightShoot?.Invoke();
             rightLauncher.GetComponent<MeshRenderer>().enabled = false;
-            reusableData.RightObject = InstantiateBall(reusableData.RightObject, metricsManager.CurrentPlayerSO.AbilityData.RightBall, rightLauncher.position);
-            reusableData.RightObject.InitializeBall(metricsManager.CurrentPlayerSO.AbilityData.ShootSpeed, metricsManager.CurrentPlayerSO.AbilityData.TransportObjectSpeed, aimEndPosition, reusableData.RightParent);
+            reusableData.RightObject = InstantiateBall(reusableData.RightObject, metricsManager.CurrentMetrics.AbilityData.RightBall, rightLauncher.position);
+            reusableData.RightObject.InitializeBall(metricsManager.CurrentMetrics.AbilityData.ShootSpeed, metricsManager.CurrentMetrics.AbilityData.TransportObjectSpeed, aimEndPosition, reusableData.RightParent);
         }
         
         _stateMachine.ChangeState(_stateMachine.IdleState);
@@ -59,9 +59,9 @@ public class AbilityShootState : AbilityState
     {
         Ray aimRay = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         RaycastHit aimHit;
-        aimEndPosition = aimRay.origin + aimRay.direction * metricsManager.CurrentPlayerSO.AbilityData.AimDistance;
+        aimEndPosition = aimRay.origin + aimRay.direction * metricsManager.CurrentMetrics.AbilityData.AimDistance;
         
-        if (Physics.Raycast(aimRay, out aimHit, metricsManager.CurrentPlayerSO.AbilityData.AimDistance, LayerMask.GetMask("Interactable"), 
+        if (Physics.Raycast(aimRay, out aimHit, metricsManager.CurrentMetrics.AbilityData.AimDistance, LayerMask.GetMask("Interactable"), 
                 QueryTriggerInteraction.Ignore))
         {
             aimEndPosition = aimHit.point;
@@ -74,7 +74,7 @@ public class AbilityShootState : AbilityState
                 reusableData.RightParent = aimHit.transform.gameObject;
             }
         }
-        else if (Physics.Raycast(aimRay, out aimHit, metricsManager.CurrentPlayerSO.AbilityData.AimDistance, ~LayerMask.GetMask("Interactable", "Player"), 
+        else if (Physics.Raycast(aimRay, out aimHit, metricsManager.CurrentMetrics.AbilityData.AimDistance, ~LayerMask.GetMask("Interactable", "Player"), 
                      QueryTriggerInteraction.Ignore))
         {
             aimEndPosition = aimHit.point + aimHit.normal * 0.25f;

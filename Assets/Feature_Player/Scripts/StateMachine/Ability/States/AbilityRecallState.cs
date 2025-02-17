@@ -33,9 +33,9 @@ public class AbilityRecallState : AbilityState
         
         if (reusableData.LeftInput)
         {
-            reusableData.LeftObject.SetNewInfo(leftLauncher.position, metricsManager.CurrentPlayerSO.AbilityData.RecallSpeed, null);
+            reusableData.LeftObject.SetNewInfo(leftLauncher.position, metricsManager.CurrentMetrics.AbilityData.RecallSpeed, null);
             
-            if (Vector3.Distance(reusableData.LeftObject.transform.position, leftLauncher.position) < metricsManager.CurrentPlayerSO.AbilityData.DistanceToEndRecall)
+            if (Vector3.Distance(reusableData.LeftObject.transform.position, leftLauncher.position) < metricsManager.CurrentMetrics.AbilityData.DistanceToEndRecall)
             {
                 _stateMachine.ChangeState(_stateMachine.IdleState);
             }
@@ -43,9 +43,9 @@ public class AbilityRecallState : AbilityState
         
         if (reusableData.RightInput)
         {
-            reusableData.RightObject.SetNewInfo(rightLauncher.position, metricsManager.CurrentPlayerSO.AbilityData.RecallSpeed, null);
+            reusableData.RightObject.SetNewInfo(rightLauncher.position, metricsManager.CurrentMetrics.AbilityData.RecallSpeed, null);
             
-            if (Vector3.Distance(reusableData.RightObject.transform.position, rightLauncher.position) < metricsManager.CurrentPlayerSO.AbilityData.DistanceToEndRecall)
+            if (Vector3.Distance(reusableData.RightObject.transform.position, rightLauncher.position) < metricsManager.CurrentMetrics.AbilityData.DistanceToEndRecall)
             {
                 _stateMachine.ChangeState(_stateMachine.IdleState);
             }

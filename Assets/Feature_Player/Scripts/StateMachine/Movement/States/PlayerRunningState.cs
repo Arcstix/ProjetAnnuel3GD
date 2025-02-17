@@ -12,7 +12,7 @@ public class PlayerRunningState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
-        reusableData.MovementSpeedModifier = metricsManager.CurrentPlayerSO.GroundedData.RunData.SpeedModifier;
+        reusableData.MovementSpeedModifier = metricsManager.CurrentMetrics.GroundedData.RunData.SpeedModifier;
     }
 
     public override void Tick()

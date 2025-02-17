@@ -35,11 +35,6 @@ public class PlayerUIManager : MonoBehaviour
         }
 
         // TODO : L'update de la position doit être réalisé à part car on sort de la State quand la charge est finit
-
-        if (abilityManager.ReusableData.OnTransportation)
-        {
-            
-        }
         
         // if (input.PlayerActions.AttractionLeft.IsPressed() && abilityManager.ReusableData.LeftObject != null)
         // {

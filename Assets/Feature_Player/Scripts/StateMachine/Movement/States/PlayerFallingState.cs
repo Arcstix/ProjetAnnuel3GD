@@ -16,7 +16,7 @@ public class PlayerFallingState : PlayerAirState
         base.Enter();
         timer = 0;
         reusableData.ShouldSlowDown = true;
-        reusableData.MovementSpeedModifier = metricsManager.CurrentPlayerSO.FallingData.SpeedModifier;
+        reusableData.MovementSpeedModifier = metricsManager.CurrentMetrics.FallingData.SpeedModifier;
     }
 
     public override void Exit()
@@ -30,7 +30,7 @@ public class PlayerFallingState : PlayerAirState
         HandleRotation(GetMovementDirection());
         
         timer += Time.deltaTime;
-        GroundedData groundedData = metricsManager.CurrentPlayerSO.GroundedData;
+        GroundedData groundedData = metricsManager.CurrentMetrics.GroundedData;
         
         if (timer <= groundedData.GravityModifier.keys[groundedData.GravityModifier.length - 1].time && reusableData.ShouldSlowDown)
         {

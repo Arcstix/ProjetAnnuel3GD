@@ -14,6 +14,8 @@ public class PlayerReusableStateData
     public Vector3 InstancePosition { get; set; }
     public bool RightInput { get; set; } = false;
     public bool LeftInput { get; set; } = false;
+    public bool RightActivation { get; set; } = false;
+    public bool LeftActivation { get; set; } = false;
     public GameObject ObjectAimed { get; set; }
     public GameObject RightParent { get; set; }
     public GameObject LeftParent { get; set; }

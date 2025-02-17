@@ -16,7 +16,7 @@ public class PlayerAirState : PlayerMovementState
     {
         //faire le chemin ici comme �a = une fois
         capsuleColliderUtility = stateMachine.MovementManager.CapsuleColliderUtility;
-        groundedData = stateMachine.MovementManager.Metrics.CurrentPlayerSO.GroundedData;
+        groundedData = stateMachine.MovementManager.Metrics.CurrentMetrics.GroundedData;
     }
 
     public override void FixedTick()

@@ -30,6 +30,7 @@ public class AbilityTransportState : AbilityState
         if (input.PlayerActions.AttractionLeft.IsPressed())
         {
             OnLeftActivation?.Invoke();
+            reusableData.LeftActivation = true;
             if (reusableData.RightObject == null)
             {
                 // Player Move
@@ -40,6 +41,7 @@ public class AbilityTransportState : AbilityState
         if (input.PlayerActions.AttractionRight.IsPressed())
         {
             OnRightActivation?.Invoke();
+            reusableData.RightActivation = true;
             if (reusableData.LeftObject == null)
             {
                 // Player Move
@@ -63,6 +65,26 @@ public class AbilityTransportState : AbilityState
             
             _stateMachine.ChangeState(_stateMachine.IdleState);
             return;
+        }
+
+        if (reusableData.RightActivation)
+        {
+            if (metricsManager.StaminaRight <= 0)
+            {
+                reusableData.RightInput = true;
+                _stateMachine.ChangeState(_stateMachine.RecallState);
+                return;
+            }
+        }
+
+        if (reusableData.LeftActivation)
+        {
+            if (metricsManager.StaminaLeft <= 0)
+            {
+                reusableData.LeftInput = true;
+                _stateMachine.ChangeState(_stateMachine.RecallState);
+                return;
+            }
         }
         
         if (input.PlayerActions.AttractionLeft.IsPressed())
@@ -121,6 +143,9 @@ public class AbilityTransportState : AbilityState
             }
             reusableData.RightObject.GetComponent<InteractionManager>().Activate(false);
         }
+
+        reusableData.LeftActivation = false;
+        reusableData.RightActivation = false;
         reusableData.OnTransportation = false;
     }
     
@@ -283,7 +308,7 @@ public class AbilityTransportState : AbilityState
         float currentPercentageDistance = currentDistance / totalDistance;
 
         float currentSpeedMultiplier =
-            metricsManager.CurrentPlayerSO.AbilityData.TransportCurve.Evaluate(currentPercentageDistance);
+            metricsManager.CurrentMetrics.AbilityData.TransportCurve.Evaluate(currentPercentageDistance);
         
         SpeedModifierEvent?.Invoke(currentPercentageDistance);
         
@@ -292,6 +317,6 @@ public class AbilityTransportState : AbilityState
             currentSpeedMultiplier = 0.1f;
         }
         
-        return  currentSpeedMultiplier * metricsManager.CurrentPlayerSO.AbilityData.TransportPlayerSpeed;
+        return  currentSpeedMultiplier * metricsManager.CurrentMetrics.AbilityData.TransportPlayerSpeed;
     }
 }
