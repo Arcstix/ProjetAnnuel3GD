@@ -33,7 +33,15 @@ public class AbilityRecallState : AbilityState
         
         if (reusableData.LeftInput)
         {
-            reusableData.LeftObject.SetNewInfo(leftLauncher.position, metricsManager.CurrentMetrics.AbilityData.RecallSpeed, null);
+            if (reusableData.LeftObject)
+            {
+                reusableData.LeftObject.SetNewInfo(leftLauncher.position, metricsManager.CurrentMetrics.AbilityData.RecallSpeed, null);
+            }
+            else
+            {
+                _stateMachine.ChangeState(_stateMachine.IdleState);
+                return;
+            }
             
             if (Vector3.Distance(reusableData.LeftObject.transform.position, leftLauncher.position) < metricsManager.CurrentMetrics.AbilityData.DistanceToEndRecall)
             {
@@ -43,7 +51,15 @@ public class AbilityRecallState : AbilityState
         
         if (reusableData.RightInput)
         {
-            reusableData.RightObject.SetNewInfo(rightLauncher.position, metricsManager.CurrentMetrics.AbilityData.RecallSpeed, null);
+            if (reusableData.RightObject)
+            {
+                reusableData.RightObject.SetNewInfo(rightLauncher.position, metricsManager.CurrentMetrics.AbilityData.RecallSpeed, null);
+            }
+            else
+            {
+                _stateMachine.ChangeState(_stateMachine.IdleState);
+                return;
+            }
             
             if (Vector3.Distance(reusableData.RightObject.transform.position, rightLauncher.position) < metricsManager.CurrentMetrics.AbilityData.DistanceToEndRecall)
             {
@@ -58,7 +74,10 @@ public class AbilityRecallState : AbilityState
 
         if (reusableData.LeftInput)
         {
-            GameObject.Destroy(reusableData.LeftObject.gameObject);
+            if (reusableData.LeftObject)
+            {
+                GameObject.Destroy(reusableData.LeftObject.gameObject);
+            }
             reusableData.LeftObject = null;
             reusableData.LeftParent = null;
             leftLauncher.GetComponent<MeshRenderer>().enabled = true;
@@ -66,7 +85,10 @@ public class AbilityRecallState : AbilityState
 
         if (reusableData.RightInput)
         {
-            GameObject.Destroy(reusableData.RightObject.gameObject);
+            if (reusableData.RightObject)
+            {
+                GameObject.Destroy(reusableData.RightObject.gameObject);
+            }
             reusableData.RightObject = null;
             reusableData.RightParent = null;
             rightLauncher.GetComponent<MeshRenderer>().enabled = true;
