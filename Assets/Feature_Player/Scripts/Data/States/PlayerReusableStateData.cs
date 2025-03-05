@@ -16,6 +16,7 @@ public class PlayerReusableStateData
     public bool LeftInput { get; set; } = false;
     public bool RightActivation { get; set; } = false;
     public bool LeftActivation { get; set; } = false;
+    public GameObject ObjectAutoAimed { get; set; }
     public GameObject ObjectAimed { get; set; }
     public GameObject RightParent { get; set; }
     public GameObject LeftParent { get; set; }

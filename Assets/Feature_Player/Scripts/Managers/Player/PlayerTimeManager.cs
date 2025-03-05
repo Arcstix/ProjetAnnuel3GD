@@ -43,13 +43,13 @@ public class PlayerTimeManager : MonoBehaviour
     private void OnDisable()
     {
         abilityManager.AbilityStateMachine.AimState.OnAirAim -= SlowTime;
-        abilityManager.AbilityStateMachine.AimState.OnRelease -= DefaultTime;
+        abilityManager.AbilityStateMachine.AimState.OnExitAim -= DefaultTime;
     }
 
     private void SubscribeEvent()
     {
         abilityManager.AbilityStateMachine.AimState.OnAirAim += SlowTime;
-        abilityManager.AbilityStateMachine.AimState.OnRelease += DefaultTime;
+        abilityManager.AbilityStateMachine.AimState.OnExitAim += DefaultTime;
     }
 
     private void DefaultTime()
