@@ -18,6 +18,7 @@ public class PlayerTargetSystem : MonoBehaviour, I_Initializer
 
     [Header("Target")]
     public InteractiveTarget currentTarget;
+
     public InteractiveTarget storedTarget;
 
     [Header("Parameters")]
