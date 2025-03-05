@@ -17,13 +17,21 @@ public class AbilityShootState : AbilityState
     public override void Enter()
     {
         base.Enter();
+        
         if (reusableData.InstancePosition != Vector3.zero)
         {
             aimEndPosition = reusableData.InstancePosition;
         }
         else
         {
-            RaycastCheck();
+            if (reusableData.ObjectAutoAimed != null)
+            {
+                aimEndPosition = reusableData.ObjectAutoAimed.transform.position;
+            }
+            else
+            {
+                RaycastCheck();
+            }
         }
         
         if (reusableData.LeftInput)

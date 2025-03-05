@@ -32,7 +32,7 @@ public class PlayerSoundManager : MonoBehaviour
         abilityManager.AbilityStateMachine.TransportState.OnLeftActivation += LeftActivation;
         abilityManager.AbilityStateMachine.TransportState.OnDash += Dash;
         abilityManager.AbilityStateMachine.AimState.OnAirAim += EnterGravityFreeze;
-        abilityManager.AbilityStateMachine.AimState.OnRelease += QuitGravityFreeze;
+        abilityManager.AbilityStateMachine.AimState.OnExitAim += QuitGravityFreeze;
     }
 
     private void OnDisable()

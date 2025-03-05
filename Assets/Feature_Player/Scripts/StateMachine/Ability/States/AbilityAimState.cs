@@ -7,9 +7,8 @@ public class AbilityAimState : AbilityState
     private GameObject aimObject;
     private Vector3 velocityRef;
     
-    public event Action OnAim;
-    public event Action OnRelease;
-
+    public event Action OnEnterAim;
+    public event Action OnExitAim;
     public event Action OnAirAim;
     
     public AbilityAimState(AbilityStateMachine abilityStateMachine) : base(abilityStateMachine)
@@ -22,14 +21,12 @@ public class AbilityAimState : AbilityState
     public override void Enter()
     {
         base.Enter();
-
+        
+        OnEnterAim?.Invoke();
+        
         if (reusableData.InAir)
         {
             OnAirAim?.Invoke();
-        }
-        else
-        {
-            OnAim?.Invoke();
         }
         
         if (reusableData.RightInput)
@@ -77,7 +74,7 @@ public class AbilityAimState : AbilityState
     {
         base.Exit();
         
-        OnRelease?.Invoke();
+        OnExitAim?.Invoke();
         
         GameObject.Destroy(aimObject);
 

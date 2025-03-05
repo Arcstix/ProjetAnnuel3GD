@@ -11,6 +11,7 @@ public class PlayerInitializer : MonoBehaviour
     private PlayerAbilityManager abilityManager;
     private PlayerMetricsManager metricsManager;
     private PlayerCameraManager cameraManager;
+    private PlayerTargetSystem targetSystem;
 
     private void Awake()
     {
@@ -19,6 +20,7 @@ public class PlayerInitializer : MonoBehaviour
         movementManager = GetComponent<PlayerMovementManager>();
         abilityManager = GetComponent<PlayerAbilityManager>();
         metricsManager = GetComponent<PlayerMetricsManager>();
+        targetSystem = GetComponent<PlayerTargetSystem>();
         cameraManager = GetComponent<PlayerCameraManager>();
     }
 
@@ -27,6 +29,7 @@ public class PlayerInitializer : MonoBehaviour
         metricsManager.Init(reusableStateData);
         abilityManager.Init(reusableStateData);
         movementManager.Init(reusableStateData);
+        targetSystem.Init(reusableStateData);
         cameraManager.Init(reusableStateData);
     }
 }
