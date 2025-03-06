@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Drag>k__BackingField: 1
   <GroundedData>k__BackingField:
-    <BaseSpeed>k__BackingField: 10
+    <BaseSpeed>k__BackingField: 15.4
     <GravityMultiplier>k__BackingField: 2
     <GravityModifier>k__BackingField:
       serializedVersion: 2
@@ -125,12 +125,12 @@ MonoBehaviour:
     <RunData>k__BackingField:
       <SpeedModifier>k__BackingField: 1
   <JumpData>k__BackingField:
-    <SpeedModifier>k__BackingField: 0.7
-    <JumpHeight>k__BackingField: 10
+    <SpeedModifier>k__BackingField: 1
+    <JumpHeight>k__BackingField: 20
     <JumpTimer>k__BackingField: 0.5
-    maxAirJumps: 0
+    maxAirJumps: 1
   <FallingData>k__BackingField:
-    <SpeedModifier>k__BackingField: 0.7
+    <SpeedModifier>k__BackingField: 0.486
   <AbilityData>k__BackingField:
     <AimDistance>k__BackingField: 10
     <AimBallOffset>k__BackingField: {x: 0, y: 0, z: 0.3}
@@ -150,14 +150,14 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0.6
-        inSlope: 0
-        outSlope: 0
+        time: -0.029167175
+        value: 0.643396
+        inSlope: 1.3301748
+        outSlope: 1.3301748
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.03238914
       - serializedVersion: 3
         time: 1
         value: 1
