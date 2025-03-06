@@ -19,7 +19,7 @@ public class PlayerGroundedState : PlayerMovementState
     {
         base.FixedTick();
 
-        if (!stateMachine.ReusableData.OnTransportation)
+        if (!stateMachine.ReusableData.OnTransportation && stateMachine.currentState != stateMachine.JumpState)
         {
             CheckDistanceToTheGround();
         }
@@ -84,7 +84,7 @@ public class PlayerGroundedState : PlayerMovementState
     {
         if (reusableData.ShouldWalk)
         {
-            stateMachine.ChangeState(stateMachine.SlowState);
+            stateMachine.ChangeState(stateMachine.WalkState);
             return;
         }
 

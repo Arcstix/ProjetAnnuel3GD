@@ -29,8 +29,10 @@ public class InteractionManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // Transportation Case
         if (other.CompareTag("Player") && interactionType == InteractionType.Ball && isActive)
         {
+            other.GetComponent<PlayerMetricsManager>().AddExternForce(1f);
             Destroy(gameObject);
         }
         

@@ -19,6 +19,8 @@ public class PlayerIdleState : PlayerGroundedState
 
     public override void Tick()
     {
+        base.Tick();
+        
         HandleRotation(GetMovementDirection());
         
         if (!reusableData.InAir && !reusableData.OnTransportation)

@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class PlayerFallingState : PlayerAirState
 {
-
-    
     public PlayerFallingState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
     {
     }
@@ -15,7 +13,15 @@ public class PlayerFallingState : PlayerAirState
     {
         base.Enter();
         timer = 0;
-        reusableData.ShouldSlowDown = true;
+        reusableData.InAir = true;
+        if (reusableData.hadJump)
+        {
+            reusableData.ShouldSlowDown = false;
+        }
+        else
+        {
+            reusableData.ShouldSlowDown = true;
+        }
         reusableData.MovementSpeedModifier = metricsManager.CurrentMetrics.FallingData.SpeedModifier;
     }
 
@@ -23,10 +29,13 @@ public class PlayerFallingState : PlayerAirState
     {
         ResetSlowDown();
         base.Exit();
+        reusableData.hadJump = false;
     }
 
     public override void Tick()
     {
+        base.Tick();
+        
         HandleRotation(GetMovementDirection());
         
         timer += Time.deltaTime;
@@ -42,7 +51,7 @@ public class PlayerFallingState : PlayerAirState
             {
                 reusableData.ShouldSlowDown = false;
             }
-            rigidbody.AddForce(Physics.gravity * groundedData.GravityMultiplier - GetCurrentVerticalVelocity(), ForceMode.Acceleration);
+            rigidbody.AddForce(Physics.gravity * groundedData.GravityMultiplier - GetCurrentVerticalVelocity(), ForceMode.Force);
         }
 
         if (reusableData.OnTransportation)

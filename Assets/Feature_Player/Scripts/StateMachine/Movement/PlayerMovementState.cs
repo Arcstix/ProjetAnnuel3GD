@@ -49,7 +49,11 @@ public class PlayerMovementState : IState
 
     public virtual void Tick()
     {
-        
+        if (input.PlayerActions.Jump.WasReleasedThisFrame() && stateMachine.currentState != stateMachine.FallingState &&
+            stateMachine.currentState != stateMachine.LandingState && stateMachine.currentState != stateMachine.JumpState)
+        {
+            stateMachine.ChangeState(stateMachine.JumpState);
+        }
     }
 
     public virtual void FixedTick()
@@ -78,7 +82,7 @@ public class PlayerMovementState : IState
 
     private void Move()
     {
-        if(reusableData.MovementInput == Vector2.zero || reusableData.MovementSpeedModifier == 0f) { return; }
+        if (reusableData.MovementInput == Vector2.zero || reusableData.MovementSpeedModifier == 0f) { return; }
 
         Vector3 movementDirection = GetMovementDirection();
 
@@ -89,8 +93,9 @@ public class PlayerMovementState : IState
         float movementSpeed = GetMovementSpeed();
 
         Vector3 currentHorizontalVelocity = GetCurrentHorizontalVelocity();       
-
-        rigidbody.AddForce(targetRotationDirection * (movementSpeed * metricsManager.ExternForce) - currentHorizontalVelocity, ForceMode.VelocityChange);
+        
+        
+        rigidbody.AddForce(Vector3.Lerp(currentHorizontalVelocity, targetRotationDirection * (movementSpeed * metricsManager.ExternForce) - currentHorizontalVelocity, 1f) , ForceMode.Acceleration);
     }
 
     public float HandleRotation(Vector3 direction)
@@ -197,7 +202,15 @@ public class PlayerMovementState : IState
 
     protected void ResetVelocity()
     {
-        rigidbody.velocity = Vector3.zero;
+        if (rigidbody.velocity.sqrMagnitude > 0f)
+        {
+            Vector3 velocity = new Vector3(rigidbody.velocity.x, 0, rigidbody.velocity.z);
+            rigidbody.velocity = Vector3.Lerp(velocity, Vector3.zero, 0.1f);
+        }
+        else
+        {
+            rigidbody.velocity = Vector3.zero;
+        }
     }
 
     protected virtual void SubscribeInputAction()

@@ -12,7 +12,9 @@ public class PlayerMovementStateMachine : StateMachine
 
     public PlayerRunningState RunningState { get; }
 
-    public PlayerWalkState SlowState { get; }
+    public PlayerWalkState WalkState { get; }
+    
+    public PlayerJumpState JumpState { get; }
 
     public PlayerFallingState FallingState { get; }
 
@@ -25,7 +27,8 @@ public class PlayerMovementStateMachine : StateMachine
 
         IdleState = new PlayerIdleState(this);
         RunningState = new PlayerRunningState(this);
-        SlowState = new PlayerWalkState(this);
+        WalkState = new PlayerWalkState(this);
+        JumpState = new PlayerJumpState(this);
         FallingState = new PlayerFallingState(this);
         LandingState = new PlayerLandingState(this);
     }

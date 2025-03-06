@@ -17,6 +17,8 @@ public class PlayerRunningState : PlayerGroundedState
 
     public override void Tick()
     {
+        base.Tick();
+        
         if (reusableData.InAir && !reusableData.OnTransportation)
         {
             stateMachine.ChangeState(stateMachine.FallingState);
@@ -33,6 +35,6 @@ public class PlayerRunningState : PlayerGroundedState
     {
         base.OnSlowStarted(context);
 
-        stateMachine.ChangeState(stateMachine.SlowState);
+        stateMachine.ChangeState(stateMachine.WalkState);
     }
 }
