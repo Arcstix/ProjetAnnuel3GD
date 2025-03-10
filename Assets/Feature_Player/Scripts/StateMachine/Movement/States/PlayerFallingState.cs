@@ -14,14 +14,7 @@ public class PlayerFallingState : PlayerAirState
         base.Enter();
         timer = 0;
         reusableData.InAir = true;
-        if (reusableData.hadJump)
-        {
-            reusableData.ShouldSlowDown = false;
-        }
-        else
-        {
-            reusableData.ShouldSlowDown = true;
-        }
+        reusableData.ShouldSlowDown = !reusableData.hadJump;
         reusableData.MovementSpeedModifier = metricsManager.CurrentMetrics.FallingData.SpeedModifier;
     }
 
@@ -51,7 +44,7 @@ public class PlayerFallingState : PlayerAirState
             {
                 reusableData.ShouldSlowDown = false;
             }
-            rigidbody.AddForce(Physics.gravity * groundedData.GravityMultiplier - GetCurrentVerticalVelocity(), ForceMode.Force);
+            rigidbody.AddForce(Physics.gravity * metricsManager.CurrentMetrics.FallingData.GravityModifier - GetCurrentVerticalVelocity(), ForceMode.Force);
         }
 
         if (reusableData.OnTransportation)
