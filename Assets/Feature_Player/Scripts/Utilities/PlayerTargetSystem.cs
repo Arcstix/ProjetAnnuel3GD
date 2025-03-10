@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class PlayerTargetSystem : MonoBehaviour, I_Initializer
 {
@@ -26,7 +27,7 @@ public class PlayerTargetSystem : MonoBehaviour, I_Initializer
     [SerializeField] float screenDistanceWeight = 1;
     [SerializeField] float positionDistanceWeight = 8;
     //Min Distance for targets
-    public float minReachDistance = 70;
+    [FormerlySerializedAs("minReachDistance")] public float maxReachDistance = 70;
     
     [Header("User Interface")]
     [SerializeField] RectTransform rectImage;
@@ -91,7 +92,7 @@ public class PlayerTargetSystem : MonoBehaviour, I_Initializer
     {
         if (reachableTargets.Count < 1 || !isActivated)
         {
-            storedTarget = null;
+            //storedTarget = null;
             
             if (reusableData != null)
                 reusableData.ObjectAutoAimed = null;
@@ -159,13 +160,13 @@ public class PlayerTargetSystem : MonoBehaviour, I_Initializer
         {
             storedTarget = currentTarget;
             
-            if (reusableData != null)
-                reusableData.ObjectAutoAimed = storedTarget.gameObject;
-            
             rectImage.DOComplete();
             rectImage.DORotate(new Vector3(0,0,rotateAngle), animationDuration).From();
             rectImage.DOScale(startScale, animationDuration).From();
         }
+        
+        if (reusableData != null)
+            reusableData.ObjectAutoAimed = storedTarget.gameObject;
     }
 
     Vector2 MiddleOfScreen()

@@ -1218,7 +1218,7 @@ Transform:
   m_GameObject: {fileID: 2596340562038923937}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0009765625, y: -5.4039993, z: 0}
+  m_LocalPosition: {x: 0.001, y: 0.866, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1246,7 +1246,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 1823324514637461384}
   m_Lens:
-    FieldOfView: 80.00007
+    FieldOfView: 80.00477
     OrthographicSize: 10
     NearClipPlane: 0.12
     FarClipPlane: 5000
@@ -2000,7 +2000,7 @@ Camera:
     height: 1
   near clip plane: 0.2
   far clip plane: 1000
-  field of view: 70
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -2226,7 +2226,7 @@ Transform:
   m_GameObject: {fileID: 5070103808724584987}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -6.27, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2324,7 +2324,7 @@ MonoBehaviour:
   storedTarget: {fileID: 0}
   screenDistanceWeight: 1
   positionDistanceWeight: 8
-  minReachDistance: 20
+  maxReachDistance: 20
   rectImage: {fileID: 3627039177811085882}
   rectSizeMultiplier: 1
   rotateAngle: 90
@@ -2432,7 +2432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52a0b13edd55e034281e7085c96a164e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  metricsPlayer: {fileID: 11400000, guid: eeb17e9524a26e747a2dc497ad27873b, type: 2}
+  metricsPlayer: {fileID: 11400000, guid: 3b5ad5f66e777f847b9e58da2f8daa80, type: 2}
 --- !u!114 &6352340799900980117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3268,7 +3268,7 @@ MonoBehaviour:
   m_VerticalAxis:
     Value: 0
     m_SpeedMode: 1
-    m_MaxSpeed: 2
+    m_MaxSpeed: 1
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
@@ -3292,7 +3292,7 @@ MonoBehaviour:
   m_HorizontalAxis:
     Value: 0
     m_SpeedMode: 1
-    m_MaxSpeed: 2
+    m_MaxSpeed: 1
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
@@ -3522,7 +3522,7 @@ Transform:
   m_GameObject: {fileID: 9138152823317935278}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0009765625, y: -5.4039993, z: 0}
+  m_LocalPosition: {x: 0.001, y: 0.866, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3566,13 +3566,13 @@ Camera:
     height: 1
   near clip plane: 0.12
   far clip plane: 5000
-  field of view: 80.00007
+  field of view: 80.00477
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 511
+    m_Bits: 1023
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

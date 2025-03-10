@@ -27,7 +27,7 @@ public class InteractiveTarget : MonoBehaviour
         float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
         bool inVisionRange = angle < 30;
 
-        if (Vector3.Distance(transform.position, player.transform.position) < player.minReachDistance && inVisionRange && !isReachable)
+        if (Vector3.Distance(transform.position, player.transform.position) < player.maxReachDistance && inVisionRange && !isReachable)
         {
             if (player.targets.Contains(this))
             {
@@ -36,7 +36,7 @@ public class InteractiveTarget : MonoBehaviour
             }
         }
 
-        if ((Vector3.Distance(transform.position, player.transform.position) > player.minReachDistance || !inVisionRange) && isReachable)
+        if ((Vector3.Distance(transform.position, player.transform.position) > player.maxReachDistance || !inVisionRange) && isReachable)
         {
             isReachable = false;
             if (player.reachableTargets.Contains(this))
@@ -77,7 +77,6 @@ public class InteractiveTarget : MonoBehaviour
     {
         Vector3 direction = (transform.position - target.transform.position).normalized;
         Ray ray = new Ray(target.transform.position, direction);
-        Debug.DrawRay(target.transform.position, direction, Color.red);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, Vector3.Distance(transform.position, target.position), ~LayerMask.GetMask("Player")))
