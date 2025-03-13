@@ -9,16 +9,19 @@ public class BallManager : MonoBehaviour
     private GameObject _futurParent; // if the ball will be a child of an object interactable
     private bool _canBeActivate = false;
     private Vector3 refVelocity;
+    private GameObject objectAutoAimed;
 
     public event Action OnCollision;
     
-    public void InitializeBall(float ballSpeed, float transportObjectSpeed, Vector3 endPos, GameObject futurParent)
+    public void InitializeBall(float ballSpeed, float transportObjectSpeed, Vector3 endPos, GameObject futurParent,
+        GameObject autoAimed = null)
     {
         _ballSpeed = ballSpeed;
         _transportObjectSpeed = transportObjectSpeed;
         _endPos = endPos;
         _futurParent = futurParent;
         _canBeActivate = false;
+        this.objectAutoAimed = autoAimed;
     }
     
     public void SetNewInfo(Vector3 endPos, float speed, GameObject futurParent)
@@ -63,6 +66,10 @@ public class BallManager : MonoBehaviour
             {
                 transform.position = _endPos;
                 _canBeActivate = true;
+                if (objectAutoAimed != null)
+                {
+                    GetComponent<InteractionSystem>().Interact(objectAutoAimed.GetComponent<InteractionSystem>());
+                }
             }
             
             if (_futurParent != null)

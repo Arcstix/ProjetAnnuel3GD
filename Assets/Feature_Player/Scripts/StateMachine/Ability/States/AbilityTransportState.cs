@@ -8,6 +8,10 @@ public class AbilityTransportState : AbilityState
     private Vector3 refVelocity;
     private Vector3 startPosition;
 
+    private InteractionSystem leftInteraction;
+    private InteractionSystem rightInteraction;
+    private InteractionSystem playerInteraction;
+
     public event Action OnRightActivation;
     public event Action OnLeftActivation;
     public event Action OnDash;
@@ -21,6 +25,33 @@ public class AbilityTransportState : AbilityState
     public override void Enter()
     {
         base.Enter();
+
+        // Assignation variable car souvent utilisé
+        playerInteraction = _stateMachine.AbilityManager.GetComponent<InteractionSystem>();
+
+        if (reusableData.LeftObject != null)
+        {
+            if (reusableData.LeftParent != null)
+            {
+                leftInteraction = reusableData.LeftParent.GetComponent<InteractionSystem>();
+            }
+            else
+            {
+                leftInteraction = reusableData.LeftObject.GetComponent<InteractionSystem>();
+            }
+        }
+        
+        if (reusableData.RightObject != null)
+        {
+            if (reusableData.RightParent != null)
+            {
+                rightInteraction = reusableData.RightParent.GetComponent<InteractionSystem>();
+            }
+            else
+            {
+                rightInteraction = reusableData.RightObject.GetComponent<InteractionSystem>();
+            }
+        }
         
         if (CheckPlayerTransportState())
         {
@@ -125,23 +156,15 @@ public class AbilityTransportState : AbilityState
     public override void Exit()
     {
         base.Exit();
-        _stateMachine.AbilityManager.GetComponent<InteractionManager>().Activate(false);
+        playerInteraction.Interactable(false);
         if (reusableData.LeftObject != null)
         {
-            if (reusableData.LeftParent != null)
-            {
-                reusableData.LeftParent.GetComponent<InteractionManager>().Activate(false);
-            }
-            reusableData.LeftObject.GetComponent<InteractionManager>().Activate(false);
+            leftInteraction.Interactable(false);
         }
 
         if (reusableData.RightObject != null)
         {
-            if (reusableData.RightParent != null)
-            {
-                reusableData.RightParent.GetComponent<InteractionManager>().Activate(false);
-            }
-            reusableData.RightObject.GetComponent<InteractionManager>().Activate(false);
+            rightInteraction.Interactable(false);
         }
 
         reusableData.LeftActivation = false;
@@ -159,11 +182,9 @@ public class AbilityTransportState : AbilityState
             reusableData.OnTransportation = false;
             return false;
         }
-        else
-        {
-            reusableData.OnTransportation = true;
-            return true;
-        }
+
+        reusableData.OnTransportation = true;
+        return true;
     }
     
     
@@ -173,23 +194,23 @@ public class AbilityTransportState : AbilityState
         {
             if (reusableData.RightObject != null)
             {
+                rightInteraction.Interactable(true);
+                
                 if (reusableData.RightParent != null)
                 {
                     // Move LeftParent to RightParent
-                    reusableData.RightParent.GetComponent<InteractionManager>().Activate(true);
                     reusableData.LeftObject.Move(reusableData.LeftParent, reusableData.RightParent);
                 }
                 else
                 {
                     // Move LeftParent to RightObject
-                    reusableData.RightObject.GetComponent<InteractionManager>().Activate(true);
                     reusableData.LeftObject.Move(reusableData.LeftParent, reusableData.RightObject.gameObject);
                 }
             }
             else
             {
                 // Move LeftParent to Player
-                _stateMachine.AbilityManager.GetComponent<InteractionManager>().Activate(true);
+                playerInteraction.Interactable(true);
                 reusableData.LeftObject.Move(reusableData.LeftParent, _stateMachine.AbilityManager.RightLauncherTransform.gameObject);
             }
         }
@@ -197,23 +218,23 @@ public class AbilityTransportState : AbilityState
         {
             if (reusableData.RightObject != null)
             {
+                rightInteraction.Interactable(true);
+                
                 if (reusableData.RightParent != null)
                 {
                     // Move LeftObject to RightParent
-                    reusableData.RightParent.GetComponent<InteractionManager>().Activate(true);
                     reusableData.LeftObject.Move(reusableData.LeftObject.gameObject, reusableData.RightParent);
                 }
                 else
                 {
                     // Move LeftObject to RightObject
-                    reusableData.RightObject.GetComponent<InteractionManager>().Activate(true);
                     reusableData.LeftObject.Move(reusableData.LeftObject.gameObject, reusableData.RightObject.gameObject);
                 }
             }
             else
             {
                 // Move LeftObject to Player
-                _stateMachine.AbilityManager.GetComponent<InteractionManager>().Activate(true);
+                playerInteraction.Interactable(true);
                 reusableData.LeftObject.Move(reusableData.LeftObject.gameObject, _stateMachine.AbilityManager.RightLauncherTransform.gameObject);
             }
         }
@@ -225,23 +246,23 @@ public class AbilityTransportState : AbilityState
         {
             if (reusableData.LeftObject != null)
             {
+                leftInteraction.Interactable(true);
+                
                 if (reusableData.LeftParent != null)
                 {
                     // Move RightParent to LeftParent
-                    reusableData.LeftParent.GetComponent<InteractionManager>().Activate(true);
                     reusableData.RightObject.Move(reusableData.RightParent, reusableData.LeftParent);
                 }
                 else
                 {
                     // Move RightParent to LeftObject
-                    reusableData.LeftObject.GetComponent<InteractionManager>().Activate(true);
                     reusableData.RightObject.Move(reusableData.RightParent, reusableData.LeftObject.gameObject);
                 }
             }
             else
             {
                 // Move RightParent to Player
-                _stateMachine.AbilityManager.GetComponent<InteractionManager>().Activate(true);
+                playerInteraction.Interactable(true);
                 reusableData.RightObject.Move(reusableData.RightParent, _stateMachine.AbilityManager.LeftLauncherTransform.gameObject);
             }
         }
@@ -249,23 +270,23 @@ public class AbilityTransportState : AbilityState
         {
             if (reusableData.LeftObject != null)
             {
+                leftInteraction.Interactable(true);
+                
                 if (reusableData.LeftParent != null)
                 {
                     // Move RightObject to LeftParent
-                    reusableData.LeftParent.GetComponent<InteractionManager>().Activate(true);
                     reusableData.RightObject.Move(reusableData.RightObject.gameObject, reusableData.LeftParent);
                 }
                 else
                 {
                     // Move RightObject to LeftObject
-                    reusableData.LeftObject.GetComponent<InteractionManager>().Activate(true);
                     reusableData.RightObject.Move(reusableData.RightObject.gameObject, reusableData.LeftObject.gameObject);
                 }
             }
             else
             {
                 // Move RightObject to Player
-                _stateMachine.AbilityManager.GetComponent<InteractionManager>().Activate(true);
+                playerInteraction.Interactable(true);
                 reusableData.RightObject.Move(reusableData.RightObject.gameObject, _stateMachine.AbilityManager.LeftLauncherTransform.gameObject);
             }
         }
@@ -275,7 +296,7 @@ public class AbilityTransportState : AbilityState
     {
         if (reusableData.RightObject != null)
         {
-            reusableData.RightObject.GetComponent<InteractionManager>().Activate(true);
+            rightInteraction.Interactable(true);
             
             // Move Player to RightObject
             Vector3 direction = (reusableData.RightObject.transform.position -
@@ -287,7 +308,7 @@ public class AbilityTransportState : AbilityState
         }
         else
         {
-            reusableData.LeftObject.GetComponent<InteractionManager>().Activate(true);
+            leftInteraction.Interactable(true);
             
             // Move Player to LeftObject
             Vector3 direction = (reusableData.LeftObject.transform.position -

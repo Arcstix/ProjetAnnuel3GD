@@ -2199,9 +2199,9 @@ GameObject:
   - component: {fileID: 3668788458043126165}
   - component: {fileID: 3378459044418692473}
   - component: {fileID: 1413206358893859251}
+  - component: {fileID: 2176679995534653101}
   - component: {fileID: 4411385529839098973}
   - component: {fileID: 5898392857559906949}
-  - component: {fileID: 3132336553373172998}
   - component: {fileID: 4017817760061865883}
   - component: {fileID: 2523894465163747667}
   - component: {fileID: 8139018201912062604}
@@ -2330,6 +2330,20 @@ MonoBehaviour:
   rotateAngle: 90
   startScale: 4
   animationDuration: 0.25
+--- !u!114 &2176679995534653101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5070103808724584987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d37e7e859dfc4af4a2429875234e2a72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactorType: 1
+  isInteractive: 0
 --- !u!114 &4411385529839098973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2356,19 +2370,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f728e3f73f9c5d74f986e9cbe725c137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3132336553373172998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5070103808724584987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03f1ec10e068493fab043506cbcd78c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionType: 1
 --- !u!114 &4017817760061865883
 MonoBehaviour:
   m_ObjectHideFlags: 0

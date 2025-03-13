@@ -39,7 +39,7 @@ public class AbilityShootState : AbilityState
             OnLeftShoot?.Invoke();
             leftLauncher.GetComponent<MeshRenderer>().enabled = false;
             reusableData.LeftObject = InstantiateBall(reusableData.LeftObject, metricsManager.CurrentMetrics.AbilityData.LeftBall, leftLauncher.position);
-            reusableData.LeftObject.InitializeBall(metricsManager.CurrentMetrics.AbilityData.ShootSpeed, metricsManager.CurrentMetrics.AbilityData.TransportObjectSpeed, aimEndPosition, reusableData.LeftParent);
+            reusableData.LeftObject.InitializeBall(metricsManager.CurrentMetrics.AbilityData.ShootSpeed, metricsManager.CurrentMetrics.AbilityData.TransportObjectSpeed, aimEndPosition, reusableData.LeftParent, reusableData.ObjectAutoAimed);
         }
         
 
@@ -48,7 +48,7 @@ public class AbilityShootState : AbilityState
             OnRightShoot?.Invoke();
             rightLauncher.GetComponent<MeshRenderer>().enabled = false;
             reusableData.RightObject = InstantiateBall(reusableData.RightObject, metricsManager.CurrentMetrics.AbilityData.RightBall, rightLauncher.position);
-            reusableData.RightObject.InitializeBall(metricsManager.CurrentMetrics.AbilityData.ShootSpeed, metricsManager.CurrentMetrics.AbilityData.TransportObjectSpeed, aimEndPosition, reusableData.RightParent);
+            reusableData.RightObject.InitializeBall(metricsManager.CurrentMetrics.AbilityData.ShootSpeed, metricsManager.CurrentMetrics.AbilityData.TransportObjectSpeed, aimEndPosition, reusableData.RightParent, reusableData.ObjectAutoAimed);
         }
         
         _stateMachine.ChangeState(_stateMachine.IdleState);

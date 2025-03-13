@@ -79,7 +79,7 @@ public class InteractiveTarget : MonoBehaviour
         Ray ray = new Ray(target.transform.position, direction);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, Vector3.Distance(transform.position, target.position), ~LayerMask.GetMask("Player")))
+        if (Physics.Raycast(ray, out hit, Vector3.Distance(transform.position, target.position), ~LayerMask.GetMask("Player", "Interactable")))
         {
             // Si le premier objet touché est bien la cible, elle est visible
             return hit.transform == transform;

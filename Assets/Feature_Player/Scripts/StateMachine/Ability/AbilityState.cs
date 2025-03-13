@@ -15,7 +15,7 @@ public class AbilityState : IState
     
     protected Transform rightLauncher;
     protected Transform leftLauncher;
-
+    
     public event Action ExitTransportation;
 
     // Sert � la cr�ation de raccourcie.
