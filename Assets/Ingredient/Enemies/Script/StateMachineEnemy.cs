@@ -6,9 +6,12 @@ using UnityEngine.Serialization;
 public class StateMachineEnemy : MonoBehaviour
 {
     [Header("Spécifité Enemies")]
-    public bool _flashLightOn;
+    [Tooltip("Si l'ennemis se déplace")]
     public bool patrol;
+    [Tooltip("Si ça tete est mobile")]
     public bool headMobile;
+    [Tooltip("Si ça lumière clignote")]
+    public bool flashLightOn;
     
     #region Hidden Variables
     

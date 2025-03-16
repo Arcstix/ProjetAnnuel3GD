@@ -5939,8 +5939,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76f468fc1ad176847a0d3481c84df247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _flashLightOn: 0
-  patrol: 1
+  flashLightOn: 0
+  patrol: 0
   headMobile: 0
   defaultState: {fileID: 354461167}
   currentState: {fileID: 0}
@@ -5999,8 +5999,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e4355f24bc917d429b8adf969276940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 30
-  detectionAngle: 30
+  detectionRange: 50
+  detectionAngle: 45
   speed: 0
   headTransform: {fileID: 0}
   _navMeshAgent: {fileID: 0}
@@ -6012,6 +6012,8 @@ MonoBehaviour:
   - {fileID: 149588620}
   - {fileID: 1347073148}
   waitTimeAtPoint: 2
+  EnemyRotationSpeed: 30
+  EnemyRotationAngle: 30
   currentPatrolIndex: 0
   movingForward: 1
   isWaiting: 0
@@ -6029,6 +6031,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spotLightWhite: {fileID: 1104418187}
   spotLightRed: {fileID: 990527959}
+  minIntensity: 0
+  maxIntensity: 10
+  flickerSpeed: 1
+  intensityCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.46334532
+      value: 0.9684692
+      inSlope: 1.2219381
+      outSlope: 1.2219381
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9956332
+      value: 0.016497489
+      inSlope: -0.43112347
+      outSlope: -0.43112347
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.1518009
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &355409321
 GameObject:
   m_ObjectHideFlags: 0

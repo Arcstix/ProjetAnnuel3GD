@@ -11,6 +11,12 @@ public class PatrolEnemyState : EnemyState
     [SerializeField] private List<Transform> checkPoints;
     [Tooltip("Temps de pause à chaque point")]
     [SerializeField] private float waitTimeAtPoint; 
+    [Header("MoveHead")]
+    [Tooltip("Vitesse de rotation de la tête")]
+    [SerializeField] private float EnemyRotationSpeed; 
+    [Tooltip("Angle maximal de rotation")]
+    [SerializeField] private float EnemyRotationAngle;
+    private float idleTime = 0f;
     #endregion
     
     #region Hidden Variables
@@ -39,6 +45,14 @@ public class PatrolEnemyState : EnemyState
         if (!PlayerIsDetected())
         {
             Patrol();
+            if (GetComponent<StateMachineEnemy>().headMobile)
+            {
+                MobileHead();
+            }
+            if (GetComponent<StateMachineEnemy>().flashLightOn)
+            {
+                lightManager.FlashLight();
+            }
         }
         if (PlayerIsDetected())
         {
@@ -64,6 +78,7 @@ public class PatrolEnemyState : EnemyState
             }
         }
     }
+#endregion
 
     #region WaitAtPoint
 
@@ -107,5 +122,17 @@ public class PatrolEnemyState : EnemyState
     }
 
     #endregion
+    
+    #region HeadMobile
+    // la tête de l'ennemi tourne de gauche à droite
+    private void MobileHead()
+    {
+        if (headTransform == null) return; // Vérification de la tête
+
+        idleTime += Time.deltaTime; // Incrémente le temps écoulé
+
+        float rotationY = Mathf.Sin(idleTime * EnemyRotationSpeed * Mathf.Deg2Rad) * EnemyRotationAngle;
+        headTransform.localRotation = Quaternion.Euler(0, rotationY, 0);
+    }
     #endregion
 }

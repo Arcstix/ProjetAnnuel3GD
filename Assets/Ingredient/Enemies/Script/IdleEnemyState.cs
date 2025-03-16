@@ -48,14 +48,16 @@ public class IdleEnemyState : EnemyState
         {
             MobileHead();
         }
-        
+
+        if (GetComponent<StateMachineEnemy>().flashLightOn)
+        {
+            lightManager.FlashLight();
+        }
         if (PlayerIsDetected())
         {
             GetComponent<StateMachineEnemy>().ChangeState(GetComponent<AlertEnemyState>());
         }
     }
-
-  
     #region HeadMobile
     // la tête de l'ennemi tourne de gauche à droite
     private void MobileHead()

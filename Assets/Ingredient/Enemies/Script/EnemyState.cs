@@ -12,8 +12,6 @@ public abstract class EnemyState : MonoBehaviour
     [Tooltip("Angle de la zone de détection")]
     public float detectionAngle;
     [Header("Comportement Ennemis")]
-    [Tooltip("Vitesse de déplacement de l'ennemis")]
-    [SerializeField] private float speed; 
     [Tooltip("Référence à la zone mobile de l'ennemi")]
     public Transform headTransform;
     #endregion
@@ -23,7 +21,7 @@ public abstract class EnemyState : MonoBehaviour
     [HideInInspector] public UnityEngine.AI.NavMeshAgent _navMeshAgent;
     [HideInInspector] public Transform playerTransform;
     [HideInInspector] public LightManager lightManager;
-    public bool isPatrolling = false;
+    [HideInInspector] public bool isPatrolling = false;
     
     #endregion
     
