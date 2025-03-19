@@ -103,7 +103,7 @@ public class AbilityAimState : AbilityState
     }
     #endregion
     
-    // Affiche une prévisualisation de la balle 
+    // Affiche une prévisualisation de l'outil 
     private void ShowAiming()
     {
         // Tir un Raycast d'une certaine longueur

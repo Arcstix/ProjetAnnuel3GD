@@ -58,6 +58,7 @@ public class BallManager : MonoBehaviour
                 }
             }
             transform.position = Vector3.Lerp(transform.position, _endPos, Time.unscaledDeltaTime * _ballSpeed);
+            transform.LookAt(_endPos, Vector3.up);
         }
         else
         {
