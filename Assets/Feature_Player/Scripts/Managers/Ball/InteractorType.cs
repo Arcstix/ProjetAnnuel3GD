@@ -7,5 +7,7 @@ public enum InteractorType
     Tool,
     InstantDestructible,
     Enemy,
-    Platform
+    Platform,
+    Projectile,
+    DestructibleWall
 }
