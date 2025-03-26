@@ -7,42 +7,45 @@ using UnityEngine;
 public class PlayerMovementManager : PlayerManager, I_Initializer
 {
     [field : Header("Collider")]
-    [field : SerializeField] public CapsuleColliderUtility CapsuleColliderUtility { get; private set; }
+    [field : SerializeField] public CapsuleColliderUtility CapsuleUtility { get; private set; }
+    
+    public float sphereGroundCheckRadius = 0.2f;
+    public float sphereDistanceGroundCheck = 0.5f;
 
-    private PlayerMovementStateMachine movementStateMachine;
+    private PlayerMovementStateMachine stateMachine;
     private PlayerReusableStateData reusableData;
 
     public event Action OnMovementStarted;
     
     public PlayerReusableStateData ReusableData { get => reusableData; set => reusableData = value; }
 
-    public PlayerMovementStateMachine MovementStateMachine { get => movementStateMachine; }
+    public PlayerMovementStateMachine StateMachine { get => stateMachine; }
 
     public void Init(PlayerReusableStateData reusableStateData)
     {
         reusableData = reusableStateData;
 
-        movementStateMachine = new PlayerMovementStateMachine(this);
-        movementStateMachine.ChangeState(movementStateMachine.IdleState);
+        stateMachine = new PlayerMovementStateMachine(this);
+        stateMachine.ChangeState(stateMachine.IdleState);
         OnMovementStarted?.Invoke();
     }
 
     private void OnValidate()
     {
-        CapsuleColliderUtility.Initialize(gameObject);
-        CapsuleColliderUtility.CalculateCapsuleColliderDimension();
+        CapsuleUtility.Initialize(gameObject);
+        CapsuleUtility.CalculateCapsuleColliderDimension();
     }
 
     private void Start()
     {        
-        CapsuleColliderUtility.Initialize(gameObject);
-        CapsuleColliderUtility.CalculateCapsuleColliderDimension();
+        CapsuleUtility.Initialize(gameObject);
+        CapsuleUtility.CalculateCapsuleColliderDimension();
     }
 
     private void SetFirstPersonMode()
     {
         ReusableData.CanMove = false;
-        movementStateMachine.ChangeState(movementStateMachine.IdleState);
+        stateMachine.ChangeState(stateMachine.IdleState);
     }
 
     private void SetThirdPersonMode()
@@ -52,19 +55,25 @@ public class PlayerMovementManager : PlayerManager, I_Initializer
 
     private void Update()
     {
-        movementStateMachine?.HandleInput();
+        stateMachine?.HandleInput();
 
-        movementStateMachine?.Tick();
+        stateMachine?.Tick();
     }
 
     private void FixedUpdate()
     {
-        movementStateMachine?.FixedTick();
+        stateMachine?.FixedTick();
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position + new Vector3(0, CapsuleColliderUtility.CapsuleColliderData.Collider.center.y, 0), transform.position + new Vector3(0, CapsuleColliderUtility.CapsuleColliderData.Collider.center.y - CapsuleColliderUtility.SlopeData.DistanceGroundCheck, 0));
+        Gizmos.DrawLine(transform.position + new Vector3(0, CapsuleUtility.CapsuleColliderData.Collider.center.y, 0), transform.position + new Vector3(0, CapsuleUtility.CapsuleColliderData.Collider.center.y - CapsuleUtility.SlopeData.DistanceGroundCheck, 0));
+
+        // when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
+        Gizmos.DrawSphere(
+            new Vector3(transform.position.x, CapsuleUtility.CapsuleColliderData.Collider.bounds.center.y - sphereDistanceGroundCheck,
+                transform.position.z), sphereGroundCheckRadius);
+        
     }
 }

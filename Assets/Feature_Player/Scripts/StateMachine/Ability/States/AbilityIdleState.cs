@@ -3,17 +3,11 @@ using UnityEngine.InputSystem;
 
 public class AbilityIdleState : AbilityState
 {
-    private MeshRenderer leftTool;
-    private MeshRenderer rightTool;
+    private readonly MeshRenderer leftTool;
+    private readonly MeshRenderer rightTool;
     
     public AbilityIdleState(AbilityStateMachine abilityStateMachine) : base(abilityStateMachine)
     {
-    }
-
-    public override void Enter()
-    {
-        base.Enter();
-        
         leftTool = leftLauncher.GetComponent<MeshRenderer>();
         rightTool = rightLauncher.GetComponent<MeshRenderer>();
     }
@@ -38,39 +32,82 @@ public class AbilityIdleState : AbilityState
     public override void HandleInput()
     {
         base.HandleInput();
-
-        if (input.PlayerActions.ThrowRecallRight.WasPerformedThisFrame() && reusableData.RightObject == null)
+        
+        // Aim State
+        if (!_stateMachine.AbilityManager.thirdPersonMode)
         {
-            HandleRightAimState();
-            return;
+            // Aim State active just in 1st person
+            if (input.PlayerActions.ThrowRecallRight.WasPerformedThisFrame() && reusableData.RightObject == null)
+            {
+                HandleRightAimState();
+                return;
+            }
+
+            if (input.PlayerActions.ThrowRecallLeft.WasPerformedThisFrame() && reusableData.LeftObject == null)
+            {
+                HandleLeftAimState();
+                return;
+            }
         }
-
-        if (input.PlayerActions.ThrowRecallLeft.WasPerformedThisFrame() && reusableData.LeftObject == null)
+        
+        // Shoot and Recall State
+        if (_stateMachine.AbilityManager.thirdPersonMode)
         {
-            HandleLeftAimState();
-            return;
+            // 3rd person
+            if (input.PlayerActions.ThrowRecallRight.WasPressedThisFrame())
+            {
+                HandleRightShootRecall();
+                return;
+            }
+            
+            if (input.PlayerActions.ThrowRecallLeft.WasPressedThisFrame())
+            {
+                HandleLeftShootRecall();
+                return;
+            }
         }
-
-        if (input.PlayerActions.ThrowRecallRight.WasReleasedThisFrame())
+        else
         {
-            HandleRightShootRecall();
-            return;
+            // 1st person 
+            if (input.PlayerActions.ThrowRecallRight.WasReleasedThisFrame())
+            {
+                HandleRightShootRecall();
+                return;
+            }
+            
+            if (input.PlayerActions.ThrowRecallLeft.WasReleasedThisFrame())
+            {
+                HandleLeftShootRecall();
+                return;
+            }
         }
-
-        if (input.PlayerActions.ThrowRecallLeft.WasReleasedThisFrame())
+        
+        // Attraction State
+        if (_stateMachine.AbilityManager.thirdPersonMode)
         {
-            HandleLeftShootRecall();
-            return;
+            // 3rd Person
+            if (input.PlayerActions.AttractionRight.WasPerformedThisFrame())
+            {
+                HandleAttraction();
+            }
+
+            if (input.PlayerActions.AttractionLeft.WasPerformedThisFrame())
+            {
+                HandleAttraction();
+            }
         }
-
-        if (input.PlayerActions.AttractionRight.WasPerformedThisFrame() && metricsManager.StaminaRight > metricsManager.CurrentMetrics.StaminaData.MinimumStamina)
+        else
         {
-            HandleAttraction();
-        }
+            // 1st Person
+            if (input.PlayerActions.AttractionRight.WasPerformedThisFrame() && metricsManager.StaminaRight > metricsManager.CurrentMetrics.StaminaData.MinimumStamina)
+            {
+                HandleAttraction();
+            }
 
-        if (input.PlayerActions.AttractionLeft.WasPerformedThisFrame() && metricsManager.StaminaLeft > metricsManager.CurrentMetrics.StaminaData.MinimumStamina)
-        {
-            HandleAttraction();
+            if (input.PlayerActions.AttractionLeft.WasPerformedThisFrame() && metricsManager.StaminaLeft > metricsManager.CurrentMetrics.StaminaData.MinimumStamina)
+            {
+                HandleAttraction();
+            }
         }
     }
 }

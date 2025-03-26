@@ -12,6 +12,7 @@ public class PlayerReusableStateData
     public bool ShouldWalk { get; set; }
     public bool CanMove { get; set; }
     public bool hadJump {get; set;} = false;
+    public int numberOfJump { get; set; } = 0;
     public Vector3 InstancePosition { get; set; }
     public bool RightInput { get; set; } = false;
     public bool LeftInput { get; set; } = false;
@@ -24,9 +25,9 @@ public class PlayerReusableStateData
     public BallManager RightObject { get; set; }
     public BallManager LeftObject { get; set; }
     public bool OnTransportation { get; set; } = false;
+    public bool IsWallRunning { get; set; } = false;
     public bool ShouldSlowDown { get; set; } = false;
     public float CurrentTargetRotation { get; set; }
-    public float TimeToReachTargetRotation { get; set; }
     public float DampedTargetRotationPassedTime { get; set; }
 
     private float turnSmoothVelocity;

@@ -13,6 +13,7 @@ public class PlayerTargetSystem : MonoBehaviour, I_Initializer
     private bool isActivated = true;
     
     public Camera playerCamera;
+    public float visionAngle = 45f;
     
     public List<InteractiveTarget> targets;
     public List<InteractiveTarget> reachableTargets;
@@ -24,10 +25,10 @@ public class PlayerTargetSystem : MonoBehaviour, I_Initializer
 
     [Header("Parameters")]
     //Weight values that determine what distance (screen/player) gets prioritized
-    [SerializeField] float screenDistanceWeight = 1;
-    [SerializeField] float positionDistanceWeight = 8;
+    [SerializeField] float screenDistanceWeight = 1f;
+    [SerializeField] float positionDistanceWeight = 8f;
     //Min Distance for targets
-    [FormerlySerializedAs("minReachDistance")] public float maxReachDistance = 70;
+    public float maxReachDistance = 10f;
     
     [Header("User Interface")]
     [SerializeField] RectTransform rectImage;
@@ -114,7 +115,7 @@ public class PlayerTargetSystem : MonoBehaviour, I_Initializer
 
     Vector3 ClampedScreenPosition(Vector3 targetPos)
     {
-        Vector3 WorldToScreenPos = Camera.main.WorldToScreenPoint(targetPos);
+        Vector3 WorldToScreenPos = playerCamera.WorldToScreenPoint(targetPos);
         Vector3 clampedPosition = new Vector3(Mathf.Clamp(WorldToScreenPos.x, 0, Screen.width), Mathf.Clamp(WorldToScreenPos.y, 0, Screen.height), WorldToScreenPos.z);
         return clampedPosition;
     }
@@ -142,7 +143,7 @@ public class PlayerTargetSystem : MonoBehaviour, I_Initializer
         //Find the index number relative to the target with the smallest distance
         for (int i = 0; i < distances.Length; i++)
         {
-            if (minDistance == distances[i])
+            if (Mathf.Approximately(minDistance, distances[i]))
                 index = i;
         }
 
@@ -171,6 +172,6 @@ public class PlayerTargetSystem : MonoBehaviour, I_Initializer
 
     Vector2 MiddleOfScreen()
     {
-        return new Vector2(Screen.width / 2, Screen.height / 2);
+        return new Vector2(Screen.width / 2, Screen.height / 2f);
     }
 }

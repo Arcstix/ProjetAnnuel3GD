@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class PlayerAirState : PlayerMovementState
     public PlayerAirState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
     {
         //faire le chemin ici comme �a = une fois
-        capsuleColliderUtility = stateMachine.MovementManager.CapsuleColliderUtility;
+        capsuleColliderUtility = stateMachine.MovementManager.CapsuleUtility;
         groundedData = stateMachine.MovementManager.Metrics.CurrentMetrics.GroundedData;
     }
 

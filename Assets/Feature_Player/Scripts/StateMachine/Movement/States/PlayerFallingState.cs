@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class PlayerFallingState : PlayerAirState
 {
+    private float verticalVelocity;
+
+    public event Action OnFalling;
+    
     public PlayerFallingState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
     {
     }
@@ -12,7 +16,9 @@ public class PlayerFallingState : PlayerAirState
     public override void Enter()
     {
         base.Enter();
+        OnFalling?.Invoke();
         timer = 0;
+        verticalVelocity = Physics.gravity.y * metricsManager.CurrentMetrics.FallingData.GravityModifier;
         reusableData.InAir = true;
         reusableData.ShouldSlowDown = !reusableData.hadJump;
         reusableData.MovementSpeedModifier = metricsManager.CurrentMetrics.FallingData.SpeedModifier;
@@ -34,6 +40,12 @@ public class PlayerFallingState : PlayerAirState
         timer += Time.deltaTime;
         GroundedData groundedData = metricsManager.CurrentMetrics.GroundedData;
         
+        // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
+        if (verticalVelocity < metricsManager.CurrentMetrics.FallingData.MaxFallingSpeed)
+        {
+            verticalVelocity += Physics.gravity.y * metricsManager.CurrentMetrics.FallingData.GravityModifier * Time.deltaTime;
+        }
+        
         if (timer <= groundedData.GravityModifier.keys[groundedData.GravityModifier.length - 1].time && reusableData.ShouldSlowDown)
         {
             SlowDown();
@@ -44,7 +56,7 @@ public class PlayerFallingState : PlayerAirState
             {
                 reusableData.ShouldSlowDown = false;
             }
-            rigidbody.AddForce(Physics.gravity * metricsManager.CurrentMetrics.FallingData.GravityModifier - GetCurrentVerticalVelocity(), ForceMode.Force);
+            rigidbody.AddForce(new Vector3(0, verticalVelocity, 0) - GetCurrentVerticalVelocity(), ForceMode.Force);
         }
 
         if (reusableData.OnTransportation)
@@ -52,8 +64,15 @@ public class PlayerFallingState : PlayerAirState
             stateMachine.ChangeState(stateMachine.IdleState);
         }
 
+        if (input.PlayerActions.Jump.WasPressedThisFrame() && reusableData.InAir && reusableData.numberOfJump < metricsManager.CurrentMetrics.JumpData.MaxAirJumps)
+        {
+            reusableData.numberOfJump++;
+            stateMachine.ChangeState(stateMachine.JumpState);
+        }
+
         if(!stateMachine.ReusableData.InAir)
         {
+            reusableData.numberOfJump = 0;
             stateMachine.ChangeState(stateMachine.LandingState);
         }
     }

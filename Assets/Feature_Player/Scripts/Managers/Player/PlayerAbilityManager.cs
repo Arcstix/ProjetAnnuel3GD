@@ -10,6 +10,8 @@ public class PlayerAbilityManager : PlayerManager, I_Initializer
     [SerializeField] private Transform rightLauncherTransform;
     [SerializeField] private Transform leftLauncherTransform;
     
+    public bool thirdPersonMode = false;
+    
     private AbilityStateMachine abilityStateMachine;
     private PlayerReusableStateData reusableData;
     

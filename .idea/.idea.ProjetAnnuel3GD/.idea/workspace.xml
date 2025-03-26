@@ -5,19 +5,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f475a8ed-4584-4315-bac6-7eac2e1d8d9b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Ingredient/DestructibleWallInteraction.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Ingredient/Enemies/Script/EnemyInteraction.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Ingredient/Enemies/Script/EnemyInteraction.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Ingredient/ProjectileInteraction.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Ingredient/ProjectileInteraction.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Movement/States/PlayerWallJumpState.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Movement/States/PlayerWallJumpState.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Movement/States/PlayerWallRunState.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Movement/States/PlayerWallRunState.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Movement/States/PlayerWallState.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Movement/States/PlayerWallState.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetAnnuel3GD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetAnnuel3GD/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/SO/GameFeelMetricsLouis.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/SO/GameFeelMetricsLouis.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Managers/Ball/InteractorType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Managers/Ball/InteractorType.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Ingredient/Enemies/Prefab/EnemyBase.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ingredient/Enemies/Prefab/EnemyBase.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Data/States/AirData/FallingData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Data/States/AirData/FallingData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Data/States/Grounded/GroundedData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Data/States/Grounded/GroundedData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Data/States/Grounded/JumpData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Data/States/Grounded/JumpData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Data/States/PlayerReusableStateData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Data/States/PlayerReusableStateData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Managers/Player/PlayerAbilityManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Managers/Player/PlayerAbilityManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Managers/Player/PlayerAnimationManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Managers/Player/PlayerAnimationManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Managers/Player/PlayerEffectManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Managers/Player/PlayerEffectManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Managers/Player/PlayerMovementManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Managers/Player/PlayerMovementManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Managers/Player/PlayerSoundManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Managers/Player/PlayerSoundManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Ability/AbilityState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Ability/AbilityState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Ability/States/AbilityAimState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Ability/States/AbilityAimState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Ability/States/AbilityIdleState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Ability/States/AbilityIdleState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Ability/States/AbilityShootState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Ability/States/AbilityShootState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Movement/PlayerMovementState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Movement/PlayerMovementState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Movement/States/PlayerAirState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Movement/States/PlayerAirState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Movement/States/PlayerFallingState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Movement/States/PlayerFallingState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Movement/States/PlayerGroundedState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Movement/States/PlayerGroundedState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Movement/States/PlayerIdleState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Movement/States/PlayerIdleState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Movement/States/PlayerJumpState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Movement/States/PlayerJumpState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Movement/States/PlayerRunningState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Movement/States/PlayerRunningState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Movement/States/PlayerWalkState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/StateMachine/Movement/States/PlayerWalkState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Utilities/InteractiveTarget.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Utilities/InteractiveTarget.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Utilities/PlayerTargetSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feature_Player/Scripts/Utilities/PlayerTargetSystem.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SceneGymLouis.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SceneGymLouis.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +77,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Develop&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Cuisine__Louis&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -69,7 +88,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/Builds/Kyper_Version_Jouet\ProjetAnnuel3GD.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Builds/Version_LD_Gym\ProjetAnnuel3GD.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="C:\Users\morva\Documents\GitHub\ProjetAnnuel3GD\Builds\Version_Gym_Nico_V1" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -155,6 +174,10 @@
       <workItem from="1741612506061" duration="8931000" />
       <workItem from="1741881794665" duration="9759000" />
       <workItem from="1742394756310" duration="4270000" />
+      <workItem from="1742808007520" duration="15801000" />
+      <workItem from="1742855628454" duration="1715000" />
+      <workItem from="1742910645372" duration="4817000" />
+      <workItem from="1743007239438" duration="6447000" />
     </task>
     <servers />
   </component>

@@ -25,7 +25,7 @@ public class InteractiveTarget : MonoBehaviour
         Vector3 playerToObject = (transform.position - player.transform.position).normalized;
         float dot = Vector3.Dot(Camera.main.transform.forward, playerToObject);
         float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
-        bool inVisionRange = angle < 30;
+        bool inVisionRange = angle < player.visionAngle;
 
         if (Vector3.Distance(transform.position, player.transform.position) < player.maxReachDistance && inVisionRange && !isReachable)
         {

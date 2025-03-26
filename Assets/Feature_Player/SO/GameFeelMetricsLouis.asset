@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Drag>k__BackingField: 1
   <GroundedData>k__BackingField:
-    <BaseSpeed>k__BackingField: 10
+    <BaseSpeed>k__BackingField: 5
     <GravityMultiplier>k__BackingField: 2
     <GravityModifier>k__BackingField:
       serializedVersion: 2
@@ -118,8 +118,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    <BaseRotationData>k__BackingField:
-      <TargetRotationReachTime>k__BackingField: 0.1
+    <TimeToReachTargetRotation>k__BackingField: 0.1
     <WalkData>k__BackingField:
       <SpeedModifier>k__BackingField: 0.225
     <RunData>k__BackingField:
@@ -128,9 +127,11 @@ MonoBehaviour:
     <SpeedModifier>k__BackingField: 2.5
     <JumpHeight>k__BackingField: 1
     <JumpTimer>k__BackingField: 0.2
+    MaxAirJumps: 1
   <FallingData>k__BackingField:
     <SpeedModifier>k__BackingField: 1.5
     <GravityModifier>k__BackingField: 5
+    <MaxFallingSpeed>k__BackingField: 52
   <AbilityData>k__BackingField:
     <AimDistance>k__BackingField: 7.5
     <AimBallOffset>k__BackingField: {x: 0, y: -0.3, z: 0}
@@ -176,14 +177,14 @@ MonoBehaviour:
     <ConsumptionRate>k__BackingField: 90
     <RecoveryRate>k__BackingField: 50
   <CameraData>k__BackingField:
-    BaseFOV: 80
+    BaseFOV: 60
     SmoothingFactorBaseFOV: 0.05
     TransitionBaseTransportFOV:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 90
+        time: -0.0013122559
+        value: 60
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -192,7 +193,7 @@ MonoBehaviour:
         outWeight: 0
       - serializedVersion: 3
         time: 1
-        value: 110
+        value: 80
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -202,5 +203,5 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    ControllerVerticalSpeed: 4
-    ControllerHorizontalSpeed: 4
+    ControllerVerticalSpeed: 0.01
+    ControllerHorizontalSpeed: 0.01

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerRunningState : PlayerGroundedState
 {
+    public event Action OnRunning;
+    
     public PlayerRunningState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
     {
     }
@@ -12,6 +15,7 @@ public class PlayerRunningState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
+        OnRunning?.Invoke();
         reusableData.MovementSpeedModifier = metricsManager.CurrentMetrics.GroundedData.RunData.SpeedModifier;
     }
 

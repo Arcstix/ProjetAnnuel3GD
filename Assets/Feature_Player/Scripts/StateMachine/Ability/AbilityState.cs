@@ -12,6 +12,8 @@ public class AbilityState : IState
     protected PlayerInput input;
     protected PlayerReusableStateData reusableData;
     protected Rigidbody rigidbody;
+    // target system work without the need of Ability State machine but not the Ability
+    protected readonly PlayerTargetSystem targetSystem;
     
     protected Transform rightLauncher;
     protected Transform leftLauncher;
@@ -30,6 +32,7 @@ public class AbilityState : IState
         
         rightLauncher = _stateMachine.AbilityManager.RightLauncherTransform;
         leftLauncher = _stateMachine.AbilityManager.LeftLauncherTransform;
+        targetSystem = _stateMachine.AbilityManager.GetComponent<PlayerTargetSystem>();
     }
 
     #region State Methods
@@ -81,7 +84,10 @@ public class AbilityState : IState
         reusableData.RightInput = true;
         if (reusableData.RightObject == null)
         {
-            _stateMachine.ChangeState(_stateMachine.ShootState);
+            if (!_stateMachine.AbilityManager.thirdPersonMode || targetSystem.currentTarget != null)
+            {
+                _stateMachine.ChangeState(_stateMachine.ShootState);
+            }
         }
         else
         {
@@ -94,7 +100,10 @@ public class AbilityState : IState
         reusableData.LeftInput = true;
         if (reusableData.LeftObject == null)
         {
-            _stateMachine.ChangeState(_stateMachine.ShootState);
+            if (!_stateMachine.AbilityManager.thirdPersonMode || targetSystem.currentTarget != null)
+            {
+                _stateMachine.ChangeState(_stateMachine.ShootState);
+            }
         }
         else
         {

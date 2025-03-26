@@ -65,7 +65,7 @@ public class AbilityShootState : AbilityState
     
     private void RaycastCheck()
     {
-        Ray aimRay = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        Ray aimRay = new Ray(rigidbody.transform.position, Camera.main.transform.forward);
         RaycastHit aimHit;
         aimEndPosition = aimRay.origin + aimRay.direction * metricsManager.CurrentMetrics.AbilityData.AimDistance;
         

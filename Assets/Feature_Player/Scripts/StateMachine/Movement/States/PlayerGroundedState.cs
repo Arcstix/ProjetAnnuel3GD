@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,7 +12,7 @@ public class PlayerGroundedState : PlayerMovementState
 
     public PlayerGroundedState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
     {
-        capsuleColliderUtility = stateMachine.MovementManager.CapsuleColliderUtility;
+        capsuleColliderUtility = stateMachine.MovementManager.CapsuleUtility;
         groundedData = stateMachine.MovementManager.Metrics.CurrentMetrics.GroundedData;
     }
 
@@ -24,17 +25,27 @@ public class PlayerGroundedState : PlayerMovementState
             CheckDistanceToTheGround();
         }
     }
-
+    
     protected void CheckDistanceToTheGround()
     {
         Vector3 capsuleColliderCenterInWorldSpace = capsuleColliderUtility.CapsuleColliderData.Collider.bounds.center;
 
         Ray downwardsRayFromCapsuleCenter = new Ray(capsuleColliderCenterInWorldSpace, Vector3.down);
-
-        if (Physics.Raycast(downwardsRayFromCapsuleCenter, out RaycastHit hit, capsuleColliderUtility.SlopeData.DistanceGroundCheck, capsuleColliderUtility.LayerData.GroundLayer, QueryTriggerInteraction.Ignore))
+        
+        // set sphere position, with offset
+        Vector3 spherePosition = new Vector3(capsuleColliderCenterInWorldSpace.x, capsuleColliderCenterInWorldSpace.y - stateMachine.MovementManager.sphereDistanceGroundCheck,
+            capsuleColliderCenterInWorldSpace.z);
+        
+        // Check Ground State with sphere more efficient than Raycast
+        if(Physics.CheckSphere(spherePosition, stateMachine.MovementManager.sphereGroundCheckRadius, capsuleColliderUtility.LayerData.GroundLayer, QueryTriggerInteraction.Ignore))
         {
             reusableData.CanMove = true;
             reusableData.InAir = false;
+        }
+        
+        // Usefull for Vertical force on Ground
+        if (Physics.Raycast(downwardsRayFromCapsuleCenter, out RaycastHit hit, capsuleColliderUtility.SlopeData.DistanceGroundCheck, capsuleColliderUtility.LayerData.GroundLayer, QueryTriggerInteraction.Ignore))
+        {
             float groundAngle = Vector3.Angle(hit.normal, -downwardsRayFromCapsuleCenter.direction);
 
             float distanceToGround = capsuleColliderUtility.CapsuleColliderData.ColliderCenterInLocalSpace.y * stateMachine.MovementManager.transform.localScale.y - hit.distance;

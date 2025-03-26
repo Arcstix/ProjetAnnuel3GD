@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerWalkState : PlayerGroundedState
 {
+    public event Action OnWalking;
+    
     public PlayerWalkState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
     {
     }
@@ -13,7 +15,7 @@ public class PlayerWalkState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
-
+        OnWalking?.Invoke();
         reusableData.MovementSpeedModifier = metricsManager.CurrentMetrics.GroundedData.WalkData.SpeedModifier;
     }
 
