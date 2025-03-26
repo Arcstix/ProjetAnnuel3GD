@@ -93,9 +93,16 @@ public class PlayerMovementState : IState
         float movementSpeed = GetMovementSpeed();
 
         Vector3 currentHorizontalVelocity = GetCurrentHorizontalVelocity();
+
+        if (reusableData.InAir)
+        {
+            rigidbody.AddForce(Vector3.Lerp(currentHorizontalVelocity, targetRotationDirection * (movementSpeed * metricsManager.ExternForce) - currentHorizontalVelocity, 1f) , ForceMode.Acceleration);
+        }
+        else
+        {
+            rigidbody.AddForce(Vector3.Lerp(currentHorizontalVelocity, targetRotationDirection * (movementSpeed * metricsManager.ExternForce) - currentHorizontalVelocity, 1f) , ForceMode.VelocityChange);
+        }
         
-        
-        rigidbody.AddForce(Vector3.Lerp(currentHorizontalVelocity, targetRotationDirection * (movementSpeed * metricsManager.ExternForce) - currentHorizontalVelocity, 1f) , ForceMode.VelocityChange);
     }
 
     protected float HandleRotation(Vector3 direction)
