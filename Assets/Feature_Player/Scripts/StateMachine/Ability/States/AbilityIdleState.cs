@@ -37,13 +37,13 @@ public class AbilityIdleState : AbilityState
         if (!_stateMachine.AbilityManager.thirdPersonMode)
         {
             // Aim State active just in 1st person
-            if (input.PlayerActions.ThrowRecallRight.WasPerformedThisFrame() && reusableData.RightObject == null)
+            if (input.PlayerActions.ShootRecallRight.WasPerformedThisFrame() && reusableData.RightObject == null)
             {
                 HandleRightAimState();
                 return;
             }
 
-            if (input.PlayerActions.ThrowRecallLeft.WasPerformedThisFrame() && reusableData.LeftObject == null)
+            if (input.PlayerActions.ShootRecallLeft.WasPerformedThisFrame() && reusableData.LeftObject == null)
             {
                 HandleLeftAimState();
                 return;
@@ -54,13 +54,13 @@ public class AbilityIdleState : AbilityState
         if (_stateMachine.AbilityManager.thirdPersonMode)
         {
             // 3rd person
-            if (input.PlayerActions.ThrowRecallRight.WasPressedThisFrame())
+            if (input.PlayerActions.ShootRecallRight.WasPressedThisFrame())
             {
                 HandleRightShootRecall();
                 return;
             }
             
-            if (input.PlayerActions.ThrowRecallLeft.WasPressedThisFrame())
+            if (input.PlayerActions.ShootRecallLeft.WasPressedThisFrame())
             {
                 HandleLeftShootRecall();
                 return;
@@ -69,13 +69,13 @@ public class AbilityIdleState : AbilityState
         else
         {
             // 1st person 
-            if (input.PlayerActions.ThrowRecallRight.WasReleasedThisFrame())
+            if (input.PlayerActions.ShootRecallRight.WasReleasedThisFrame())
             {
                 HandleRightShootRecall();
                 return;
             }
             
-            if (input.PlayerActions.ThrowRecallLeft.WasReleasedThisFrame())
+            if (input.PlayerActions.ShootRecallLeft.WasReleasedThisFrame())
             {
                 HandleLeftShootRecall();
                 return;
@@ -108,6 +108,18 @@ public class AbilityIdleState : AbilityState
             {
                 HandleAttraction();
             }
+        }
+        
+        if (input.PlayerActions.ThrowRight.WasPerformedThisFrame() && reusableData.RightParent != null)
+        {
+            reusableData.RightThrow = true;
+            _stateMachine.ChangeState(_stateMachine.ThrowState);
+        }
+
+        if (input.PlayerActions.ThrowLeft.WasPerformedThisFrame() && reusableData.LeftParent != null)
+        {
+            reusableData.LeftThrow = true;
+            _stateMachine.ChangeState(_stateMachine.ThrowState);
         }
     }
 }

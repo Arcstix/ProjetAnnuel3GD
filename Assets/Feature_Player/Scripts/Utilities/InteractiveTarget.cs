@@ -22,6 +22,8 @@ public class InteractiveTarget : MonoBehaviour
 
     private void Update()
     {
+        if (!isAvailable) return;
+        
         Vector3 playerToObject = (transform.position - player.transform.position).normalized;
         float dot = Vector3.Dot(Camera.main.transform.forward, playerToObject);
         float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
@@ -106,6 +108,23 @@ public class InteractiveTarget : MonoBehaviour
         }
 
         if(player.currentTarget == this)
+        {
+            player.ClearCurrentTarget();
+        }
+    }
+
+    public void DisableInteraction()
+    {
+        isAvailable = false;
+        isReachable = false;
+        if (player.targets.Contains(this))
+        {
+            player.targets.Remove(this);
+            if(player.reachableTargets.Contains(this))
+                player.reachableTargets.Remove(this);
+        }
+
+        if (player.currentTarget == this)
         {
             player.ClearCurrentTarget();
         }

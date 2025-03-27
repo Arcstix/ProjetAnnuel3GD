@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Throw/RecallRight",
+                    "name": "ShootRecallRight",
                     "type": "Button",
                     "id": "b424d459-e885-4d6d-8783-77cf0972ce52",
                     "expectedControlType": "Button",
@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Throw/RecallLeft",
+                    "name": "ShootRecallLeft",
                     "type": "Button",
                     "id": "8c22dd22-e0c0-40ec-b9d4-45bb885829f3",
                     "expectedControlType": "Button",
@@ -99,6 +99,24 @@
                     "name": "CameraToggle",
                     "type": "Button",
                     "id": "ce194096-1956-4135-a950-66b61da22aae",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ThrowRight",
+                    "type": "Button",
+                    "id": "ae96c7a0-8d47-4592-96a2-f22201144357",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ThrowLeft",
+                    "type": "Button",
+                    "id": "37c858a2-6503-41e9-9c18-1456603571c1",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -223,7 +241,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Throw/RecallRight",
+                    "action": "ShootRecallRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -234,7 +252,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Throw/RecallRight",
+                    "action": "ShootRecallRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -289,7 +307,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Throw/RecallLeft",
+                    "action": "ShootRecallLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -300,7 +318,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Throw/RecallLeft",
+                    "action": "ShootRecallLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -367,6 +385,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aa7a5f01-392c-41e5-b4f9-eefd4ef1831d",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThrowRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8434c6c1-b255-4be1-ba04-595b6387f6b2",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThrowLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

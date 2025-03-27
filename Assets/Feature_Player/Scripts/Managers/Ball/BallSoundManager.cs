@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class BallSoundManager : MonoBehaviour
 {
-    private BallManager ballManager;
+    private ToolManager toolManager;
 
     private void Awake()
     {
-        ballManager = GetComponent<BallManager>();
-        ballManager.OnCollision += ProjectileCollision;
+        toolManager = GetComponent<ToolManager>();
+        toolManager.OnCollision += ProjectileCollision;
     }
 
 

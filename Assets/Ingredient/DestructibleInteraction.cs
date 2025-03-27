@@ -19,7 +19,7 @@ public class DestructibleInteraction : InteractionSystem
             return;
         }
 
-        if (otherSystem.interactorType == InteractorType.Platform)
+        if (otherSystem.interactorType == InteractorType.Projectile)
         {
             // In case a destructible object is coming into the platform // Destroy object
             OnPlatformInteract?.Invoke();
@@ -31,8 +31,7 @@ public class DestructibleInteraction : InteractionSystem
         {
             // In case the destructible object trigger into the tool // DESTROY object and tool
             OnToolInteract?.Invoke();
-            Destroy(otherSystem.gameObject);
-            Destroy(this.gameObject);
+            Destroy(this.gameObject, 0.01f);
             return;
         }
     }

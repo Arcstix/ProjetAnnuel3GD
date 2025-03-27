@@ -19,11 +19,20 @@ public class AbilityRecallState : AbilityState
         if (reusableData.LeftInput)
         {
             OnLeftRecall?.Invoke();
+            if (reusableData.LeftParent != null)
+            {
+                reusableData.LeftObject.DisableInteraction();
+            }
+            
         }
 
         if (reusableData.RightInput)
         {
             OnRightRecall?.Invoke();
+            if (reusableData.RightParent != null)
+            {
+                reusableData.RightObject.DisableInteraction();
+            }
         }
     }
     

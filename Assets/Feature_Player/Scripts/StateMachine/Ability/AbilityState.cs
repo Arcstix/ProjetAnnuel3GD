@@ -14,9 +14,14 @@ public class AbilityState : IState
     protected Rigidbody rigidbody;
     // target system work without the need of Ability State machine but not the Ability
     protected readonly PlayerTargetSystem targetSystem;
+    // Target for throwing projectile
+    protected Transform aimTransform;
     
     protected Transform rightLauncher;
     protected Transform leftLauncher;
+
+    protected Transform rightProjectileLauncher;
+    protected Transform leftProjectileLauncher;
     
     public event Action ExitTransportation;
 
@@ -32,7 +37,10 @@ public class AbilityState : IState
         
         rightLauncher = _stateMachine.AbilityManager.RightLauncherTransform;
         leftLauncher = _stateMachine.AbilityManager.LeftLauncherTransform;
+        rightProjectileLauncher = _stateMachine.AbilityManager.RightProjectileLauncherTransform;
+        leftProjectileLauncher = _stateMachine.AbilityManager.LeftProjectileLauncherTransform;
         targetSystem = _stateMachine.AbilityManager.GetComponent<PlayerTargetSystem>();
+        aimTransform = _stateMachine.AbilityManager.AimTransform;
     }
 
     #region State Methods

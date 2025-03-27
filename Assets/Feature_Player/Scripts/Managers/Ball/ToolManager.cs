@@ -1,27 +1,38 @@
 ﻿using System;
 using UnityEngine;
 
-public class BallManager : MonoBehaviour
+public class ToolManager : MonoBehaviour
 {
     private float _ballSpeed;
     private float _transportObjectSpeed;
     private Vector3 _endPos;
+    private Transform _launcherTransform;
     private GameObject _futurParent; // if the ball will be a child of an object interactable
     private bool _canBeActivate = false;
     private Vector3 refVelocity;
     private GameObject objectAutoAimed;
+    private bool isLaunched = false;
 
     public event Action OnCollision;
     
-    public void InitializeBall(float ballSpeed, float transportObjectSpeed, Vector3 endPos, GameObject futurParent,
+    public void InitializeBall(float ballSpeed, float transportObjectSpeed, Vector3 endPos, Transform launcherTransform, GameObject futurParent,
         GameObject autoAimed = null)
     {
         _ballSpeed = ballSpeed;
         _transportObjectSpeed = transportObjectSpeed;
         _endPos = endPos;
-        _futurParent = futurParent;
+        _launcherTransform = launcherTransform;
         _canBeActivate = false;
-        this.objectAutoAimed = autoAimed;
+
+        if (autoAimed != null)
+        {
+            this.objectAutoAimed = autoAimed;
+            _futurParent = autoAimed;
+        }
+        else
+        {
+            _futurParent = futurParent;
+        }
     }
     
     public void SetNewInfo(Vector3 endPos, float speed, GameObject futurParent)
@@ -69,6 +80,7 @@ public class BallManager : MonoBehaviour
                 _canBeActivate = true;
                 if (objectAutoAimed != null)
                 {
+                    _futurParent.GetComponent<Rigidbody>().useGravity = false;
                     GetComponent<InteractionSystem>().Interact(objectAutoAimed.GetComponent<InteractionSystem>());
                 }
             }
@@ -84,6 +96,15 @@ public class BallManager : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (isLaunched && _futurParent != null)
+        {
+            Vector3 direction = (_launcherTransform.position - _futurParent.transform.position).normalized;
+            _futurParent.GetComponent<Rigidbody>().AddForce(direction * _transportObjectSpeed, ForceMode.Acceleration);
+        }
+    }
+
     public void Move(GameObject objectToMove, GameObject destination)
     {
         Vector3 direction = (destination.transform.position - objectToMove.transform.position).normalized;
@@ -95,6 +116,29 @@ public class BallManager : MonoBehaviour
             rb.drag = 2;
             rb.useGravity = false;
         }
+        else
+        {
+            Rigidbody rb = objectToMove.GetComponent<Rigidbody>();
+            rb.useGravity = false;
+        }
         objectToMove.GetComponent<Rigidbody>().AddForce(direction * _transportObjectSpeed, ForceMode.Acceleration);
+    }
+
+    public void DisableInteraction()
+    {
+        Rigidbody rb = _futurParent.GetComponent<Rigidbody>();
+        rb.useGravity = true;
+    }
+
+    public void Launch()
+    {
+        Debug.Log("Launch");
+        isLaunched = true;
+    }
+
+    public void ThrowProjectile(Vector3 direction, float throwSpeed)
+    {
+        Rigidbody rb = _futurParent.GetComponent<Rigidbody>();
+        rb.AddForce(direction * throwSpeed, ForceMode.Impulse);
     }
 }

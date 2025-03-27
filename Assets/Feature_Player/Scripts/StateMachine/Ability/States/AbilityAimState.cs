@@ -46,7 +46,7 @@ public class AbilityAimState : AbilityState
         
         if (reusableData.RightInput)
         {
-            if (input.PlayerActions.ThrowRecallRight.WasReleasedThisFrame())
+            if (input.PlayerActions.ShootRecallRight.WasReleasedThisFrame())
             {
                 HandleRightShootRecall();
                 return;
@@ -55,7 +55,7 @@ public class AbilityAimState : AbilityState
         
         if (reusableData.LeftInput)
         {
-            if (input.PlayerActions.ThrowRecallLeft.WasReleasedThisFrame())
+            if (input.PlayerActions.ShootRecallLeft.WasReleasedThisFrame())
             {
                 HandleLeftShootRecall();
                 return;

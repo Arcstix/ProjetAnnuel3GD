@@ -19,7 +19,7 @@ public class PlayerMovementManager : PlayerManager, I_Initializer
     
     public PlayerReusableStateData ReusableData { get => reusableData; set => reusableData = value; }
 
-    public PlayerMovementStateMachine StateMachine { get => stateMachine; }
+    public PlayerMovementStateMachine StateMachine => stateMachine;
 
     public void Init(PlayerReusableStateData reusableStateData)
     {
