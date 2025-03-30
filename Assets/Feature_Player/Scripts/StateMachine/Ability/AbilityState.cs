@@ -39,7 +39,7 @@ public class AbilityState : IState
         leftLauncher = _stateMachine.AbilityManager.LeftLauncherTransform;
         rightProjectileLauncher = _stateMachine.AbilityManager.RightProjectileLauncherTransform;
         leftProjectileLauncher = _stateMachine.AbilityManager.LeftProjectileLauncherTransform;
-        targetSystem = _stateMachine.AbilityManager.GetComponent<PlayerTargetSystem>();
+        targetSystem = _stateMachine.AbilityManager.TargetSystem;
         aimTransform = _stateMachine.AbilityManager.AimTransform;
     }
 
@@ -92,7 +92,7 @@ public class AbilityState : IState
         reusableData.RightInput = true;
         if (reusableData.RightObject == null)
         {
-            if (!_stateMachine.AbilityManager.thirdPersonMode || targetSystem.currentTarget != null)
+            if (!_stateMachine.AbilityManager.aimBotMode || targetSystem.currentTarget != null)
             {
                 _stateMachine.ChangeState(_stateMachine.ShootState);
             }
@@ -108,7 +108,7 @@ public class AbilityState : IState
         reusableData.LeftInput = true;
         if (reusableData.LeftObject == null)
         {
-            if (!_stateMachine.AbilityManager.thirdPersonMode || targetSystem.currentTarget != null)
+            if (!_stateMachine.AbilityManager.aimBotMode || targetSystem.currentTarget != null)
             {
                 _stateMachine.ChangeState(_stateMachine.ShootState);
             }

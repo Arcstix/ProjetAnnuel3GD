@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(InteractionSystem))]
 [SelectionBase]
 public class InteractiveTarget : MonoBehaviour
 {
@@ -11,10 +12,13 @@ public class InteractiveTarget : MonoBehaviour
     public bool isAvailable = true;
     public bool isReachable = false;
     public bool isRendered = false;
-
+    
+    [Header("Interaction Type")]
+    public InteractorType _currentType = InteractorType.None;
+    
     [Header("Connections")]
     [SerializeField] Renderer visualRenderer;
-
+    
     private void Start()
     {
         player = FindObjectOfType<PlayerTargetSystem>();
@@ -113,6 +117,11 @@ public class InteractiveTarget : MonoBehaviour
         }
     }
 
+    public void EnableInteraction()
+    {
+        isAvailable = true;
+    }
+    
     public void DisableInteraction()
     {
         isAvailable = false;
@@ -128,5 +137,15 @@ public class InteractiveTarget : MonoBehaviour
         {
             player.ClearCurrentTarget();
         }
+    }
+    
+    public void SetInteractionType(InteractorType type)
+    {
+        _currentType = type;
+    }
+
+    public InteractorType GetCurrentType()
+    {
+        return _currentType;
     }
 }

@@ -4,10 +4,17 @@ using UnityEngine;
 public class ToolInteraction : InteractionSystem
 {
     public event Action OnPlayerInteract;
-    public event Action OnPlatformInteract;
-    public event Action OnToolInteract;
     public event Action OnInstantDestruction;
-    
+
+    public bool canInteractWithPlayer = true;
+
+    public override void Interactable(bool isInteractable)
+    {
+        base.Interactable(isInteractable);
+        
+        canInteractWithPlayer = isInteractable;
+    }
+
     public override void Interact(InteractionSystem otherSystem)
     {
         base.Interact(otherSystem);
@@ -15,9 +22,12 @@ public class ToolInteraction : InteractionSystem
         switch (otherSystem.interactorType)
         {
             case InteractorType.Player:
-                // The tool is coming on the player
-                OnPlayerInteract?.Invoke();
-                Destroy(this.gameObject);
+                if (canInteractWithPlayer)
+                {
+                    OnPlayerInteract?.Invoke();
+                    GetComponentInParent<InteractiveTarget>().EnableInteraction();
+                    Destroy(this.gameObject);
+                }
                 return;
             case InteractorType.InstantDestructible:
                 // In case a tool object trigger into an instant destructible
@@ -25,7 +35,8 @@ public class ToolInteraction : InteractionSystem
                 Destroy(this.gameObject, 0.01f);
                 return;
             case InteractorType.Projectile:
-                GetComponent<ToolManager>().Launch();
+                GetComponent<ToolManager>().SetLaunch(true);
+                canInteractWithPlayer = false;
                 return;
         }
     }

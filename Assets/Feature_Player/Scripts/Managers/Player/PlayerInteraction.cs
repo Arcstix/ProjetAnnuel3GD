@@ -18,10 +18,23 @@ public class PlayerInteraction : InteractionSystem
             return;
         }
 
-        if (otherSystem.interactorType == InteractorType.Platform)
+        if (otherSystem.interactorType == InteractorType.Anchor)
         {
             // In case a Player is coming into the platform
             OnPlatformInteract?.Invoke();
+            PlayerReusableStateData reusableData = GetComponent<PlayerAbilityManager>().ReusableData;
+            if (reusableData.LeftActivation)
+            {
+                reusableData.LeftInput = true;
+            }
+            else
+            {
+                reusableData.RightInput = true;
+            }
+            AbilityStateMachine abilityStateMachine = GetComponent<PlayerAbilityManager>().AbilityStateMachine;
+            abilityStateMachine.ChangeState(abilityStateMachine.RecallState);
+            PlayerMovementStateMachine stateMachine = GetComponent<PlayerMovementManager>().StateMachine;
+            stateMachine.ChangeState(stateMachine.JumpState);
             return;
         }
 
@@ -30,7 +43,6 @@ public class PlayerInteraction : InteractionSystem
             // In case the Player trigger into the tool // DESTROY TOOL
             OnToolInteract?.Invoke();
             GetComponent<PlayerMetricsManager>().AddExternForce(1f);
-            Destroy(otherSystem.gameObject);
             return;
         }
     }

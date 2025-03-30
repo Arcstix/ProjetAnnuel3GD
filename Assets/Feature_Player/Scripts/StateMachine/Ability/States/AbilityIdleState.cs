@@ -34,7 +34,7 @@ public class AbilityIdleState : AbilityState
         base.HandleInput();
         
         // Aim State
-        if (!_stateMachine.AbilityManager.thirdPersonMode)
+        if (!_stateMachine.AbilityManager.aimBotMode)
         {
             // Aim State active just in 1st person
             if (input.PlayerActions.ShootRecallRight.WasPerformedThisFrame() && reusableData.RightObject == null)
@@ -51,7 +51,7 @@ public class AbilityIdleState : AbilityState
         }
         
         // Shoot and Recall State
-        if (_stateMachine.AbilityManager.thirdPersonMode)
+        if (_stateMachine.AbilityManager.aimBotMode)
         {
             // 3rd person
             if (input.PlayerActions.ShootRecallRight.WasPressedThisFrame())
@@ -83,7 +83,7 @@ public class AbilityIdleState : AbilityState
         }
         
         // Attraction State
-        if (_stateMachine.AbilityManager.thirdPersonMode)
+        if (!_stateMachine.AbilityManager.useStamina)
         {
             // 3rd Person
             if (input.PlayerActions.AttractionRight.WasPerformedThisFrame())
@@ -99,24 +99,24 @@ public class AbilityIdleState : AbilityState
         else
         {
             // 1st Person
-            if (input.PlayerActions.AttractionRight.WasPerformedThisFrame() && metricsManager.StaminaRight > metricsManager.CurrentMetrics.StaminaData.MinimumStamina)
+            if (input.PlayerActions.AttractionRight.WasPerformedThisFrame())
             {
                 HandleAttraction();
             }
 
-            if (input.PlayerActions.AttractionLeft.WasPerformedThisFrame() && metricsManager.StaminaLeft > metricsManager.CurrentMetrics.StaminaData.MinimumStamina)
+            if (input.PlayerActions.AttractionLeft.WasPerformedThisFrame())
             {
                 HandleAttraction();
             }
         }
         
-        if (input.PlayerActions.ThrowRight.WasPerformedThisFrame() && reusableData.RightParent != null)
+        if (input.PlayerActions.ThrowRight.WasPerformedThisFrame() && targetSystem.rightTargetLaunch != null)
         {
             reusableData.RightThrow = true;
             _stateMachine.ChangeState(_stateMachine.ThrowState);
         }
 
-        if (input.PlayerActions.ThrowLeft.WasPerformedThisFrame() && reusableData.LeftParent != null)
+        if (input.PlayerActions.ThrowLeft.WasPerformedThisFrame() && targetSystem.leftTargetLaunch != null)
         {
             reusableData.LeftThrow = true;
             _stateMachine.ChangeState(_stateMachine.ThrowState);

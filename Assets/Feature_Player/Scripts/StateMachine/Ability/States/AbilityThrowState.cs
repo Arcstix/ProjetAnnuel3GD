@@ -4,6 +4,8 @@ using UnityEngine;
 public class AbilityThrowState : AbilityState
 {
     public event Action OnThrow;
+
+    private Vector3 direction;
     
     public AbilityThrowState(AbilityStateMachine abilityStateMachine) : base(abilityStateMachine)
     {
@@ -36,27 +38,44 @@ public class AbilityThrowState : AbilityState
     {
         base.FixedTick();
         
-        Vector3 direction = (aimTransform.position - _stateMachine.AbilityManager.Cam.transform.position).normalized;
+        AimThrow();
+        
+        _stateMachine.ChangeState(_stateMachine.RecallState);
+    }
+
+    private void AimBotThrow()
+    {
+        
+    }
+
+    private void AimThrow()
+    {
+        Vector3 targetPoint = _stateMachine.AbilityManager.Cam.transform.position + _stateMachine.AbilityManager.Cam.transform.forward * 20;
         
         if (reusableData.LeftThrow)
         {
+            Vector3 leftPos = leftProjectileLauncher.transform.position;
+            
+            direction = (targetPoint - leftPos).normalized;
             // We Throw Left Projectile
             reusableData.LeftObject.ThrowProjectile(direction, metricsManager.CurrentMetrics.AbilityData.ThrowSpeed);
+            targetSystem.leftTargetLaunch = null;
         }
-
-        if (reusableData.RightThrow)
+        else
         {
+            Vector3 rightPos = rightProjectileLauncher.transform.position;
+            
+            direction = (targetPoint - rightPos).normalized;
             // We Throw Right Projectile
             reusableData.RightObject.ThrowProjectile(direction, metricsManager.CurrentMetrics.AbilityData.ThrowSpeed);
+            targetSystem.rightTargetLaunch = null;
         }
-        
-        _stateMachine.ChangeState(_stateMachine.RecallState);
     }
 
     public override void Exit()
     {
         base.Exit();
-
+        
         reusableData.LeftInput = reusableData.LeftThrow;
         reusableData.RightInput = reusableData.RightThrow;
 

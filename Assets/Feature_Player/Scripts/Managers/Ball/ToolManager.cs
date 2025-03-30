@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 
 public class ToolManager : MonoBehaviour
 {
+    public float _maxSpeed = 10f;
+    
     private float _ballSpeed;
     private float _transportObjectSpeed;
     private Vector3 _endPos;
@@ -12,6 +15,7 @@ public class ToolManager : MonoBehaviour
     private Vector3 refVelocity;
     private GameObject objectAutoAimed;
     private bool isLaunched = false;
+    private Rigidbody _parentRb;
 
     public event Action OnCollision;
     
@@ -28,10 +32,12 @@ public class ToolManager : MonoBehaviour
         {
             this.objectAutoAimed = autoAimed;
             _futurParent = autoAimed;
+            _parentRb = _futurParent.GetComponent<Rigidbody>();
         }
         else
         {
             _futurParent = futurParent;
+            _parentRb = _futurParent.GetComponent<Rigidbody>();
         }
     }
     
@@ -41,9 +47,14 @@ public class ToolManager : MonoBehaviour
         _ballSpeed = speed;
         if (futurParent == null && transform.parent != null)
         {
+            GetComponentInParent<InteractiveTarget>().EnableInteraction();
             transform.SetParent(null);
         }
         _futurParent = futurParent;
+        if (_futurParent != null)
+        {
+            _parentRb = _futurParent.GetComponent<Rigidbody>();
+        }
         _canBeActivate = false;
     }
 
@@ -80,7 +91,7 @@ public class ToolManager : MonoBehaviour
                 _canBeActivate = true;
                 if (objectAutoAimed != null)
                 {
-                    _futurParent.GetComponent<Rigidbody>().useGravity = false;
+                    _parentRb.useGravity = false;
                     GetComponent<InteractionSystem>().Interact(objectAutoAimed.GetComponent<InteractionSystem>());
                 }
             }
@@ -101,44 +112,68 @@ public class ToolManager : MonoBehaviour
         if (isLaunched && _futurParent != null)
         {
             Vector3 direction = (_launcherTransform.position - _futurParent.transform.position).normalized;
-            _futurParent.GetComponent<Rigidbody>().AddForce(direction * _transportObjectSpeed, ForceMode.Acceleration);
+
+            if (_parentRb.velocity.magnitude < _maxSpeed && Vector3.Distance(_launcherTransform.position, _futurParent.transform.position) > 0.5f)
+            {
+                _parentRb.AddForce(direction * _transportObjectSpeed, ForceMode.Acceleration);
+            }
         }
     }
 
     public void Move(GameObject objectToMove, GameObject destination)
     {
         Vector3 direction = (destination.transform.position - objectToMove.transform.position).normalized;
-
-        if (objectToMove.GetComponent<Rigidbody>() == null)
+        
+        Rigidbody rb = objectToMove.GetComponent<Rigidbody>();
+        
+        if (rb == null)
         {
-            Rigidbody rb = objectToMove.AddComponent<Rigidbody>();
+            rb = objectToMove.AddComponent<Rigidbody>();
             //rb.constraints = RigidbodyConstraints.FreezeRotation;
             rb.drag = 2;
             rb.useGravity = false;
         }
         else
         {
-            Rigidbody rb = objectToMove.GetComponent<Rigidbody>();
+            rb = objectToMove.GetComponent<Rigidbody>();
             rb.useGravity = false;
         }
-        objectToMove.GetComponent<Rigidbody>().AddForce(direction * _transportObjectSpeed, ForceMode.Acceleration);
+
+        float distance = Vector3.Distance(destination.transform.position, _futurParent.transform.position);
+        
+        if (rb.velocity.magnitude < _maxSpeed && distance > 0.5f)
+        {
+            objectToMove.GetComponent<Rigidbody>().AddForce(direction * _transportObjectSpeed * distance, ForceMode.Acceleration);
+        }
     }
 
     public void DisableInteraction()
     {
         Rigidbody rb = _futurParent.GetComponent<Rigidbody>();
         rb.useGravity = true;
+        InteractionSystem interaction = _futurParent.GetComponents<InteractionSystem>().FirstOrDefault(c => c.enabled);
+        if (interaction != null)
+        {
+            interaction.ExitInteraction(GetComponent<InteractionSystem>());
+        }
     }
 
-    public void Launch()
+    public void SetLaunch(bool isActive)
     {
         Debug.Log("Launch");
-        isLaunched = true;
+        isLaunched = isActive;
     }
 
     public void ThrowProjectile(Vector3 direction, float throwSpeed)
     {
-        Rigidbody rb = _futurParent.GetComponent<Rigidbody>();
-        rb.AddForce(direction * throwSpeed, ForceMode.Impulse);
+        _parentRb.AddForce(direction * throwSpeed, ForceMode.Impulse);
+    }
+
+    private void OnDestroy()
+    {
+        if (transform.parent != null)
+        {
+            GetComponentInParent<InteractiveTarget>().EnableInteraction();
+        }
     }
 }

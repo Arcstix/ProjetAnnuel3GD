@@ -6,6 +6,7 @@ using UnityEngine;
 public class ProjectileInteraction : InteractionSystem
 {
     public event Action OnPlatformInteract;
+    public event Action OnToolInteract;
 
     private Rigidbody rb;
 
@@ -14,33 +15,45 @@ public class ProjectileInteraction : InteractionSystem
         rb = GetComponent<Rigidbody>();
     }
 
-    private void Start()
+    protected override void Start()
     {
-        isInteractive = true;
-    }
-
-    public override void CollisionInteract(InteractionSystem otherSystem, Collision other)
-    {
-        base.CollisionInteract(otherSystem, other);
+        base.Start();
         
-        Debug.Log("Interact");
-        
-        if (otherSystem.interactorType == InteractorType.Platform)
-        {
-            // the projectile stuck into the platform and interaction is stopped
-            Debug.Log(otherSystem.interactorType);
-            OnPlatformInteract?.Invoke();
-            rb.isKinematic = true;
-            rb.useGravity = false;
-            rb.constraints = RigidbodyConstraints.FreezeAll;
-            isInteractive = false;
-            GetComponent<InteractiveTarget>().DisableInteraction();
-            return;
-        }
+        _isInteractive = true;
     }
 
     public override void Interact(InteractionSystem otherSystem)
     {
+        if (otherSystem.interactorType == InteractorType.Platform)
+        {
+            // the projectile stuck into the platform and became a point of attachment
+            OnPlatformInteract?.Invoke();
+            rb.isKinematic = true;
+            rb.useGravity = false;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+            GetComponent<AnchorInteraction>().enabled = true;
+            this.enabled = false;
+            return;
+        }
         
+        if (otherSystem.interactorType == InteractorType.Tool)
+        {
+            // the projectile is no more targetable
+            OnToolInteract?.Invoke();
+            Debug.Log("Interact Performed");
+            GetComponent<InteractiveTarget>().DisableInteraction();
+            _isInteractive = false;
+        }
+    }
+
+    public override void ExitInteraction(InteractionSystem otherSystem)
+    {
+        if (otherSystem.interactorType == InteractorType.Tool)
+        {
+            // the projectile is no more targetable
+            OnToolInteract?.Invoke();
+            GetComponent<InteractiveTarget>().EnableInteraction();
+            _isInteractive = true;
+        }
     }
 }

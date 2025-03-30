@@ -22,6 +22,9 @@ public class PlayerTargetSystem : MonoBehaviour, I_Initializer
     public InteractiveTarget currentTarget;
 
     public InteractiveTarget storedTarget;
+    
+    public InteractiveTarget leftTargetLaunch;
+    public InteractiveTarget rightTargetLaunch;
 
     [Header("Parameters")]
     //Weight values that determine what distance (screen/player) gets prioritized
@@ -91,6 +94,15 @@ public class PlayerTargetSystem : MonoBehaviour, I_Initializer
 
     void Update()
     {
+        if (rightTargetLaunch != null && leftTargetLaunch != null)
+        {
+            DisableTargetSystem();
+        }
+        else
+        {
+            EnableTargetSystem();
+        }
+        
         if (reachableTargets.Count < 1 || !isActivated)
         {
             //storedTarget = null;
