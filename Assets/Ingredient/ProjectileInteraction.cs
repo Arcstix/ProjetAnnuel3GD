@@ -2,7 +2,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody), typeof(LandingPlatform))]
 public class ProjectileInteraction : InteractionSystem
 {
     public event Action OnPlatformInteract;
@@ -32,6 +32,7 @@ public class ProjectileInteraction : InteractionSystem
             rb.useGravity = false;
             rb.constraints = RigidbodyConstraints.FreezeAll;
             GetComponent<AnchorInteraction>().enabled = true;
+            GetComponent<LandingPlatform>().SetLandingState(true);
             this.enabled = false;
             return;
         }

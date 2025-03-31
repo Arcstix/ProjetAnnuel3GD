@@ -11,22 +11,30 @@ public class PlayerAirState : PlayerMovementState
     //cr�er des raccourcies pour les variables
     protected CapsuleColliderUtility capsuleColliderUtility;
     protected GroundedData groundedData;
+    protected JumpData jumpData;
     protected float timer;
+    protected Transform targetLandingPoint;
 
     public PlayerAirState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
     {
         //faire le chemin ici comme �a = une fois
         capsuleColliderUtility = stateMachine.MovementManager.CapsuleUtility;
         groundedData = stateMachine.MovementManager.Metrics.CurrentMetrics.GroundedData;
+        jumpData = stateMachine.MovementManager.Metrics.CurrentMetrics.JumpData;
     }
 
     public override void FixedTick()
     {
         base.FixedTick();
 
-        if (!reusableData.OnTransportation)
+        if (!reusableData.OnTransportation && stateMachine.currentState != stateMachine.JumpState)
         {
             CheckDistanceToTheGround();
+        }
+
+        if (reusableData.hadJump && targetLandingPoint)
+        {
+            AdjustTrajectory();
         }
     }
 
@@ -46,6 +54,58 @@ public class PlayerAirState : PlayerMovementState
             reusableData.InAir = true;
         }
     }
+    
+    protected void DetectLandingZone()
+    {
+        Collider[] hits = Physics.OverlapSphere( rigidbody.transform.position + rigidbody.transform.forward * jumpData.DetectionRange * 0.5f, jumpData.DetectionRadius);
+        float bestScore = Mathf.NegativeInfinity;
+        Transform bestPlatform = null;
+
+        foreach (Collider hit in hits)
+        {
+            if (hit.TryGetComponent<LandingPlatform>(out LandingPlatform landingPlatform))
+            {
+                if (landingPlatform.IsLanding())
+                {
+                    Vector3 directionToPlatform = (hit.transform.position - rigidbody.transform.position).normalized;
+                    float angle = Vector3.Angle(rigidbody.transform.forward, directionToPlatform);
+                    float distance = Vector3.Distance(rigidbody.transform.position, hit.transform.position);
+
+                    if (angle < jumpData.MaxDetectionAngle)
+                    {
+                        float score = Mathf.Cos(angle * Mathf.Deg2Rad) / (distance + 0.1f); // Priorité à l'angle, puis la distance
+                    
+                        if (score > bestScore)
+                        {
+                            bestScore = score;
+                            bestPlatform = hit.transform;
+                        }
+                    }
+                }
+            }
+        }
+
+        targetLandingPoint = bestPlatform;
+        Debug.Log("Target : " + targetLandingPoint);
+    }
+    
+    void AdjustTrajectory()
+    {
+        Vector3 directionToTarget = (targetLandingPoint.position - rigidbody.transform.position).normalized;
+        float distanceToTarget = Vector3.Distance(rigidbody.transform.position, targetLandingPoint.position);
+        
+        // Réduire la correction à mesure qu'on approche de la plateforme
+        float correctionMultiplier = Mathf.Clamp01(jumpData.DetectionRange/ distanceToTarget);
+        Vector3 correction = new Vector3(directionToTarget.x, 0, directionToTarget.z) * jumpData.CorrectionForce * correctionMultiplier * Time.fixedDeltaTime;
+        rigidbody.velocity += correction;
+        
+        // Réduire la vitesse horizontale si on est très proche
+        if (distanceToTarget < jumpData.MagnetThreshold * 2)
+        {
+            rigidbody.velocity = new Vector3(rigidbody.velocity.x * jumpData.SpeedReductionFactor, rigidbody.velocity.y, rigidbody.velocity.z * jumpData.SpeedReductionFactor);
+        }
+    }
+
 
     public void SlowDown()
     {

@@ -29,6 +29,8 @@ public class PlayerReusableStateData
     public bool OnTransportation { get; set; } = false;
     public bool IsWallRunning { get; set; } = false;
     public bool ShouldSlowDown { get; set; } = false;
+    public bool WallLeft { get; set; } = false;
+    public bool WallRight { get; set; } = false;
     public float CurrentTargetRotation { get; set; }
     public float DampedTargetRotationPassedTime { get; set; }
 

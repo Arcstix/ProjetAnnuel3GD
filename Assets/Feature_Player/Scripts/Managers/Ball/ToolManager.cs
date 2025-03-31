@@ -91,7 +91,10 @@ public class ToolManager : MonoBehaviour
                 _canBeActivate = true;
                 if (objectAutoAimed != null)
                 {
-                    _parentRb.useGravity = false;
+                    if (_parentRb)
+                    {
+                        _parentRb.useGravity = false;
+                    }
                     GetComponent<InteractionSystem>().Interact(objectAutoAimed.GetComponent<InteractionSystem>());
                 }
             }
@@ -150,7 +153,10 @@ public class ToolManager : MonoBehaviour
     public void DisableInteraction()
     {
         Rigidbody rb = _futurParent.GetComponent<Rigidbody>();
-        rb.useGravity = true;
+        if (rb)
+        {
+            rb.useGravity = true;
+        }
         InteractionSystem interaction = _futurParent.GetComponents<InteractionSystem>().FirstOrDefault(c => c.enabled);
         if (interaction != null)
         {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerJumpState : PlayerGroundedState
+public class PlayerJumpState : PlayerAirState
 {
     private float timer;
     private JumpData jumpData;
@@ -41,6 +41,7 @@ public class PlayerJumpState : PlayerGroundedState
         base.Tick();
         
         timer += Time.deltaTime;
+        DetectLandingZone();
         
         if (timer >= jumpData.JumpTimer)
         {

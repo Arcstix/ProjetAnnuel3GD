@@ -9,6 +9,8 @@ public class AnchorInteraction : InteractionSystem
     {
         base.Start();
         _isInteractive = true;
+        
+        GetComponent<LandingPlatform>().SetLandingState(true);
     }
 
     public override void Interact(InteractionSystem otherSystem)

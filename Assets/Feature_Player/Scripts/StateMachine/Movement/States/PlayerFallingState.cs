@@ -38,7 +38,6 @@ public class PlayerFallingState : PlayerAirState
         HandleRotation(GetMovementDirection());
         
         timer += Time.deltaTime;
-        GroundedData groundedData = metricsManager.CurrentMetrics.GroundedData;
         
         // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
         if (verticalVelocity < metricsManager.CurrentMetrics.FallingData.MaxFallingSpeed)
@@ -73,6 +72,7 @@ public class PlayerFallingState : PlayerAirState
         if(!stateMachine.ReusableData.InAir)
         {
             reusableData.numberOfJump = 0;
+            Debug.Log("reset jump");
             stateMachine.ChangeState(stateMachine.LandingState);
         }
     }
