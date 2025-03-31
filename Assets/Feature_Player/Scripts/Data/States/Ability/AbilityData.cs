@@ -14,8 +14,8 @@ public class AbilityData
     
     [field : Header ("Shoot Data"), Space(1)]
     [field : SerializeField] public float ShootSpeed { get; set; } = 50f;
-    [field : SerializeField] public BallManager RightBall { get; private set; }
-    [field : SerializeField] public BallManager LeftBall { get; private set; }
+    [field : SerializeField] public ToolManager RightTool { get; private set; }
+    [field : SerializeField] public ToolManager LeftTool { get; private set; }
     
     [field : Header("Recall Data"), Space(1)]
     [field : SerializeField] [field : Range(10f, 100f)] public float RecallSpeed { get; set; } = 50f;
@@ -25,4 +25,7 @@ public class AbilityData
     [field: SerializeField] public float TransportPlayerSpeed { get; set; } = 10f;
     [field: SerializeField] public float TransportObjectSpeed { get; set; } = 30f;
     [field : SerializeField] public AnimationCurve TransportCurve { get; private set; }
+    
+    [field : Header("Throw Data"), Space(1)]
+    [field: SerializeField] public float ThrowSpeed { get; set; } = 50f;
 }

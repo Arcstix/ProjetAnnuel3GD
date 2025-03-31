@@ -31,31 +31,12 @@ public class AbilityTransportState : AbilityState
 
         if (reusableData.LeftObject != null)
         {
-            if (reusableData.LeftParent != null)
-            {
-                leftInteraction = reusableData.LeftParent.GetComponent<InteractionSystem>();
-            }
-            else
-            {
-                leftInteraction = reusableData.LeftObject.GetComponent<InteractionSystem>();
-            }
+            leftInteraction = reusableData.LeftObject.GetComponent<InteractionSystem>();
         }
         
         if (reusableData.RightObject != null)
         {
-            if (reusableData.RightParent != null)
-            {
-                rightInteraction = reusableData.RightParent.GetComponent<InteractionSystem>();
-            }
-            else
-            {
-                rightInteraction = reusableData.RightObject.GetComponent<InteractionSystem>();
-            }
-        }
-        
-        if (CheckPlayerTransportState())
-        {
-            startPosition = _stateMachine.AbilityManager.transform.position;
+            rightInteraction = reusableData.RightObject.GetComponent<InteractionSystem>();
         }
 
         if (input.PlayerActions.AttractionLeft.IsPressed())
@@ -79,6 +60,11 @@ public class AbilityTransportState : AbilityState
                 OnDash?.Invoke();
             }
         }
+        
+        if (CheckPlayerTransportState())
+        {
+            startPosition = _stateMachine.AbilityManager.transform.position;
+        }
     }
 
     public override void Tick()
@@ -100,7 +86,7 @@ public class AbilityTransportState : AbilityState
 
         if (reusableData.RightActivation)
         {
-            if (metricsManager.StaminaRight <= 0)
+            if (_stateMachine.AbilityManager.useStamina && metricsManager.StaminaRight <= 0)
             {
                 reusableData.RightInput = true;
                 _stateMachine.ChangeState(_stateMachine.RecallState);
@@ -108,7 +94,7 @@ public class AbilityTransportState : AbilityState
             }
         }
 
-        if (reusableData.LeftActivation)
+        if (_stateMachine.AbilityManager.useStamina && reusableData.LeftActivation)
         {
             if (metricsManager.StaminaLeft <= 0)
             {
@@ -122,7 +108,10 @@ public class AbilityTransportState : AbilityState
         {
             if (reusableData.RightObject == null)
             {
-                MovePlayer();
+                if (targetSystem.leftTargetLaunch.GetCurrentType() != InteractorType.Projectile)
+                {
+                    MovePlayer();
+                }
             }
             else
             {
@@ -134,7 +123,10 @@ public class AbilityTransportState : AbilityState
         {
             if (reusableData.LeftObject == null)
             {
-                MovePlayer();
+                if (targetSystem.rightTargetLaunch.GetCurrentType() != InteractorType.Projectile)
+                {
+                    MovePlayer();
+                }
             }
             else
             {
@@ -160,11 +152,13 @@ public class AbilityTransportState : AbilityState
         if (reusableData.LeftObject != null)
         {
             leftInteraction.Interactable(false);
+            reusableData.LeftObject.SetLaunch(true);
         }
 
         if (reusableData.RightObject != null)
         {
             rightInteraction.Interactable(false);
+            reusableData.RightObject.SetLaunch(true);
         }
 
         reusableData.LeftActivation = false;
@@ -177,14 +171,26 @@ public class AbilityTransportState : AbilityState
     /// </summary>
     private bool CheckPlayerTransportState()
     {
-        if (reusableData.RightObject != null && reusableData.LeftObject != null)
+        if (reusableData.RightActivation)
         {
-            reusableData.OnTransportation = false;
-            return false;
+            if (reusableData.LeftObject == null)
+            {
+                reusableData.OnTransportation = true;
+                return true;
+            }
         }
 
-        reusableData.OnTransportation = true;
-        return true;
+        if (reusableData.LeftActivation)
+        {
+            if (reusableData.RightObject == null)
+            {
+                reusableData.OnTransportation = true;
+                return true;
+            }
+        }
+        
+        reusableData.OnTransportation = false;
+        return false;
     }
     
     
@@ -211,7 +217,8 @@ public class AbilityTransportState : AbilityState
             {
                 // Move LeftParent to Player
                 playerInteraction.Interactable(true);
-                reusableData.LeftObject.Move(reusableData.LeftParent, _stateMachine.AbilityManager.RightLauncherTransform.gameObject);
+                reusableData.LeftObject.SetLaunch(false);
+                reusableData.LeftObject.Move(reusableData.LeftParent, _stateMachine.AbilityManager.RightCloseLauncherTransform.gameObject);
             }
         }
         else
@@ -263,7 +270,8 @@ public class AbilityTransportState : AbilityState
             {
                 // Move RightParent to Player
                 playerInteraction.Interactable(true);
-                reusableData.RightObject.Move(reusableData.RightParent, _stateMachine.AbilityManager.LeftLauncherTransform.gameObject);
+                reusableData.RightObject.SetLaunch(false);
+                reusableData.RightObject.Move(reusableData.RightParent, _stateMachine.AbilityManager.LeftCloseLauncherTransform.gameObject);
             }
         }
         else
@@ -297,6 +305,7 @@ public class AbilityTransportState : AbilityState
         if (reusableData.RightObject != null)
         {
             rightInteraction.Interactable(true);
+            playerInteraction.Interactable(true);
             
             // Move Player to RightObject
             Vector3 direction = (reusableData.RightObject.transform.position -
@@ -309,7 +318,7 @@ public class AbilityTransportState : AbilityState
         else
         {
             leftInteraction.Interactable(true);
-            
+            playerInteraction.Interactable(true);
             // Move Player to LeftObject
             Vector3 direction = (reusableData.LeftObject.transform.position -
                                  _stateMachine.AbilityManager.RightLauncherTransform.position).normalized;

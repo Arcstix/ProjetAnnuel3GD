@@ -12,31 +12,30 @@ public class PlayerReusableStateData
     public bool ShouldWalk { get; set; }
     public bool CanMove { get; set; }
     public bool hadJump {get; set;} = false;
+    public int numberOfJump { get; set; } = 0;
     public Vector3 InstancePosition { get; set; }
     public bool RightInput { get; set; } = false;
     public bool LeftInput { get; set; } = false;
     public bool RightActivation { get; set; } = false;
     public bool LeftActivation { get; set; } = false;
+    public bool RightThrow { get; set; } = false;
+    public bool LeftThrow { get; set; } = false;
     public GameObject ObjectAutoAimed { get; set; }
     public GameObject ObjectAimed { get; set; }
     public GameObject RightParent { get; set; }
     public GameObject LeftParent { get; set; }
-    public BallManager RightObject { get; set; }
-    public BallManager LeftObject { get; set; }
+    public ToolManager RightObject { get; set; }
+    public ToolManager LeftObject { get; set; }
     public bool OnTransportation { get; set; } = false;
+    public bool IsWallRunning { get; set; } = false;
     public bool ShouldSlowDown { get; set; } = false;
+    public bool WallLeft { get; set; } = false;
+    public bool WallRight { get; set; } = false;
     public float CurrentTargetRotation { get; set; }
-    public float TimeToReachTargetRotation { get; set; }
     public float DampedTargetRotationPassedTime { get; set; }
 
     private float turnSmoothVelocity;
     public bool InAir { get; set; }
 
-    public ref float TurnSmoothVelocity 
-    {
-        get
-        {
-            return ref turnSmoothVelocity;
-        }
-    }
+    public ref float TurnSmoothVelocity => ref turnSmoothVelocity;
 }

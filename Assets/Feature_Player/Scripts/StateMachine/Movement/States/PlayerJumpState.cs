@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerJumpState : PlayerGroundedState
+public class PlayerJumpState : PlayerAirState
 {
     private float timer;
     private JumpData jumpData;
@@ -12,6 +13,8 @@ public class PlayerJumpState : PlayerGroundedState
     private float currentGravity;
     private float gravity;
     
+    public event Action OnJump;
+    
     public PlayerJumpState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
     {
 
@@ -19,7 +22,7 @@ public class PlayerJumpState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
-        
+        OnJump?.Invoke();
         jumpData = stateMachine.MovementManager.Metrics.CurrentMetrics.JumpData;
         reusableData.MovementSpeedModifier = jumpData.SpeedModifier;
         reusableData.hadJump = true;
@@ -38,6 +41,7 @@ public class PlayerJumpState : PlayerGroundedState
         base.Tick();
         
         timer += Time.deltaTime;
+        DetectLandingZone();
         
         if (timer >= jumpData.JumpTimer)
         {

@@ -17,6 +17,8 @@ public class PlayerEffectManager : MonoBehaviour
 
     private void Update()
     {
+        if (speedEffect == null) return;
+        
         if (rb.velocity.magnitude > speedForEffect)
         {
             speedEffect.Play();

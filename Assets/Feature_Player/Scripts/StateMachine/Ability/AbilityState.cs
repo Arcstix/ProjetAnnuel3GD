@@ -12,9 +12,16 @@ public class AbilityState : IState
     protected PlayerInput input;
     protected PlayerReusableStateData reusableData;
     protected Rigidbody rigidbody;
+    // target system work without the need of Ability State machine but not the Ability
+    protected readonly PlayerTargetSystem targetSystem;
+    // Target for throwing projectile
+    protected Transform aimTransform;
     
     protected Transform rightLauncher;
     protected Transform leftLauncher;
+
+    protected Transform rightProjectileLauncher;
+    protected Transform leftProjectileLauncher;
     
     public event Action ExitTransportation;
 
@@ -30,6 +37,10 @@ public class AbilityState : IState
         
         rightLauncher = _stateMachine.AbilityManager.RightLauncherTransform;
         leftLauncher = _stateMachine.AbilityManager.LeftLauncherTransform;
+        rightProjectileLauncher = _stateMachine.AbilityManager.RightProjectileLauncherTransform;
+        leftProjectileLauncher = _stateMachine.AbilityManager.LeftProjectileLauncherTransform;
+        targetSystem = _stateMachine.AbilityManager.TargetSystem;
+        aimTransform = _stateMachine.AbilityManager.AimTransform;
     }
 
     #region State Methods
@@ -81,7 +92,10 @@ public class AbilityState : IState
         reusableData.RightInput = true;
         if (reusableData.RightObject == null)
         {
-            _stateMachine.ChangeState(_stateMachine.ShootState);
+            if (!_stateMachine.AbilityManager.aimBotMode || targetSystem.currentTarget != null)
+            {
+                _stateMachine.ChangeState(_stateMachine.ShootState);
+            }
         }
         else
         {
@@ -94,7 +108,10 @@ public class AbilityState : IState
         reusableData.LeftInput = true;
         if (reusableData.LeftObject == null)
         {
-            _stateMachine.ChangeState(_stateMachine.ShootState);
+            if (!_stateMachine.AbilityManager.aimBotMode || targetSystem.currentTarget != null)
+            {
+                _stateMachine.ChangeState(_stateMachine.ShootState);
+            }
         }
         else
         {

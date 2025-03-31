@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerIdleState : PlayerGroundedState
 {
+    public event Action OnIdle;
+    
     public PlayerIdleState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
     {
 
@@ -13,6 +15,7 @@ public class PlayerIdleState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
+        OnIdle?.Invoke();
         reusableData.MovementInput = Vector2.zero;
         reusableData.MovementSpeedModifier = 0f;
     }
@@ -27,7 +30,7 @@ public class PlayerIdleState : PlayerGroundedState
         {
             ResetVelocity();
         }
-
+        
         if (reusableData.InAir && !reusableData.OnTransportation)
         {
             // Change to Falling State

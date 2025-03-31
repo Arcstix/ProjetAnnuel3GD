@@ -2,64 +2,59 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody), typeof(LandingPlatform))]
 public class ProjectileInteraction : InteractionSystem
 {
-    public event Action OnEnemyInteract;
     public event Action OnPlatformInteract;
     public event Action OnToolInteract;
-    public event Action OnWallDestroy;
-    
+
+    private Rigidbody rb;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        
+        _isInteractive = true;
+    }
+
     public override void Interact(InteractionSystem otherSystem)
     {
-        base.Interact(otherSystem);
-        
-        if (otherSystem.interactorType == InteractorType.Enemy)
-        {
-            // In case the Projectile is coming into the enemy // add rigidbody to enemy
-            OnEnemyInteract?.Invoke();
-            if (!otherSystem.TryGetComponent(out Rigidbody otherRigidbody))
-            {
-                otherSystem.AddComponent<Rigidbody>();
-            }
-
-            if (!TryGetComponent(out Rigidbody rigidbody))
-            {
-                gameObject.AddComponent<Rigidbody>();
-            }
-            return;
-        }
-        
-        if (otherSystem.interactorType == InteractorType.Projectile)
-        {
-            if (!otherSystem.TryGetComponent(out Rigidbody otherRigidbody))
-            {
-                otherSystem.AddComponent<Rigidbody>();
-            }
-            
-            if (!TryGetComponent(out Rigidbody rigidbody))
-            {
-                gameObject.AddComponent<Rigidbody>();
-            }
-        }
-
         if (otherSystem.interactorType == InteractorType.Platform)
         {
-            // In case a projectile is coming into the platform
+            // the projectile stuck into the platform and became a point of attachment
             OnPlatformInteract?.Invoke();
+            rb.isKinematic = true;
+            rb.useGravity = false;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+            GetComponent<AnchorInteraction>().enabled = true;
+            GetComponent<LandingPlatform>().SetLandingState(true);
+            this.enabled = false;
             return;
         }
-
-        if (otherSystem.interactorType == InteractorType.DestructibleWall)
-        {
-            OnWallDestroy?.Invoke();
-            Destroy(otherSystem.gameObject);
-        }
-
+        
         if (otherSystem.interactorType == InteractorType.Tool)
         {
-            // In case the Projectile trigger into the tool // DESTROY TOOL
+            // the projectile is no more targetable
             OnToolInteract?.Invoke();
-            return;
+            Debug.Log("Interact Performed");
+            GetComponent<InteractiveTarget>().DisableInteraction();
+            _isInteractive = false;
+        }
+    }
+
+    public override void ExitInteraction(InteractionSystem otherSystem)
+    {
+        if (otherSystem.interactorType == InteractorType.Tool)
+        {
+            // the projectile is no more targetable
+            OnToolInteract?.Invoke();
+            GetComponent<InteractiveTarget>().EnableInteraction();
+            _isInteractive = true;
         }
     }
 }

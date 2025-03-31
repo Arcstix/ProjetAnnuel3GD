@@ -49,7 +49,7 @@ public class PlayerMovementState : IState
 
     public virtual void Tick()
     {
-        if (input.PlayerActions.Jump.WasReleasedThisFrame() && stateMachine.currentState != stateMachine.FallingState &&
+        if (input.PlayerActions.Jump.WasPressedThisFrame() && stateMachine.currentState != stateMachine.FallingState &&
             stateMachine.currentState != stateMachine.LandingState && stateMachine.currentState != stateMachine.JumpState)
         {
             stateMachine.ChangeState(stateMachine.JumpState);
@@ -92,14 +92,23 @@ public class PlayerMovementState : IState
 
         float movementSpeed = GetMovementSpeed();
 
-        Vector3 currentHorizontalVelocity = GetCurrentHorizontalVelocity();       
+        Vector3 currentHorizontalVelocity = GetCurrentHorizontalVelocity();
+
+        if (reusableData.InAir)
+        {
+            rigidbody.AddForce(Vector3.Lerp(currentHorizontalVelocity, targetRotationDirection * (movementSpeed * metricsManager.ExternForce) - currentHorizontalVelocity, 1f) , ForceMode.Acceleration);
+        }
+        else
+        {
+            rigidbody.AddForce(Vector3.Lerp(currentHorizontalVelocity, targetRotationDirection * (movementSpeed * metricsManager.ExternForce) - currentHorizontalVelocity, 1f) , ForceMode.VelocityChange);
+        }
         
-        
-        rigidbody.AddForce(Vector3.Lerp(currentHorizontalVelocity, targetRotationDirection * (movementSpeed * metricsManager.ExternForce) - currentHorizontalVelocity, 1f) , ForceMode.Acceleration);
     }
 
-    public float HandleRotation(Vector3 direction)
+    protected float HandleRotation(Vector3 direction)
     {
+        if (GetMovementDirection() == Vector3.zero) return reusableData.CurrentTargetRotation;
+        
         float directionAngle = UpdateTargetRotation(direction);
 
         RotateTowardsTargetRotation(directionAngle);
@@ -159,13 +168,14 @@ public class PlayerMovementState : IState
     protected void RotateTowardsTargetRotation(float directionAngle)
     {
         float currentYAngle = stateMachine.MovementManager.transform.eulerAngles.y;
-
-        if(currentYAngle == reusableData.CurrentTargetRotation)
+        
+        if(Mathf.Approximately(currentYAngle, reusableData.CurrentTargetRotation))
         {
             return;
         }
 
-        float smoothYAngle = Mathf.SmoothDampAngle(currentYAngle, reusableData.CurrentTargetRotation, ref reusableData.TurnSmoothVelocity, reusableData.TimeToReachTargetRotation - reusableData.DampedTargetRotationPassedTime);
+        float timeToReachTargetRotation = metricsManager.CurrentMetrics.GroundedData.TimeToReachTargetRotation;
+        float smoothYAngle = Mathf.SmoothDampAngle(currentYAngle, reusableData.CurrentTargetRotation, ref reusableData.TurnSmoothVelocity, timeToReachTargetRotation - reusableData.DampedTargetRotationPassedTime);
 
         reusableData.DampedTargetRotationPassedTime += Time.deltaTime;
         rigidbody.MoveRotation(Quaternion.Euler(0f, smoothYAngle, 0f));
@@ -180,7 +190,7 @@ public class PlayerMovementState : IState
             directionAngle = AddCameraRotationToAngle(directionAngle);
         }
 
-        if (directionAngle != reusableData.CurrentTargetRotation)
+        if (!Mathf.Approximately(directionAngle, reusableData.CurrentTargetRotation))
         {
             UpdateTargetRotationData(directionAngle);
         }

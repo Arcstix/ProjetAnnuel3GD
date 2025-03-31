@@ -19,7 +19,7 @@ public class PlayerSoundManager : MonoBehaviour
 
     private void InitMovement()
     {
-        movementManager.MovementStateMachine.LandingState.OnLanding += PlayerLanding;
+        movementManager.StateMachine.LandingState.OnLanding += PlayerLanding;
     }
 
     public void InitAbility()

@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(InteractionSystem))]
 [SelectionBase]
 public class InteractiveTarget : MonoBehaviour
 {
@@ -11,10 +12,13 @@ public class InteractiveTarget : MonoBehaviour
     public bool isAvailable = true;
     public bool isReachable = false;
     public bool isRendered = false;
-
+    
+    [Header("Interaction Type")]
+    public InteractorType _currentType = InteractorType.None;
+    
     [Header("Connections")]
     [SerializeField] Renderer visualRenderer;
-
+    
     private void Start()
     {
         player = FindObjectOfType<PlayerTargetSystem>();
@@ -22,10 +26,12 @@ public class InteractiveTarget : MonoBehaviour
 
     private void Update()
     {
+        if (!isAvailable) return;
+        
         Vector3 playerToObject = (transform.position - player.transform.position).normalized;
         float dot = Vector3.Dot(Camera.main.transform.forward, playerToObject);
         float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
-        bool inVisionRange = angle < 30;
+        bool inVisionRange = angle < player.visionAngle;
 
         if (Vector3.Distance(transform.position, player.transform.position) < player.maxReachDistance && inVisionRange && !isReachable)
         {
@@ -109,5 +115,37 @@ public class InteractiveTarget : MonoBehaviour
         {
             player.ClearCurrentTarget();
         }
+    }
+
+    public void EnableInteraction()
+    {
+        isAvailable = true;
+    }
+    
+    public void DisableInteraction()
+    {
+        isAvailable = false;
+        isReachable = false;
+        if (player.targets.Contains(this))
+        {
+            player.targets.Remove(this);
+            if(player.reachableTargets.Contains(this))
+                player.reachableTargets.Remove(this);
+        }
+
+        if (player.currentTarget == this)
+        {
+            player.ClearCurrentTarget();
+        }
+    }
+    
+    public void SetInteractionType(InteractorType type)
+    {
+        _currentType = type;
+    }
+
+    public InteractorType GetCurrentType()
+    {
+        return _currentType;
     }
 }

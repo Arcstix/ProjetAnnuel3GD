@@ -30,8 +30,8 @@ namespace TMPro
         /// </summary>
         public CharacterSelectionEvent onCharacterSelection
         {
-            get { return m_OnCharacterSelection; }
-            set { m_OnCharacterSelection = value; }
+            get => m_OnCharacterSelection;
+            set => m_OnCharacterSelection = value;
         }
         [SerializeField]
         private CharacterSelectionEvent m_OnCharacterSelection = new CharacterSelectionEvent();
@@ -42,8 +42,8 @@ namespace TMPro
         /// </summary>
         public SpriteSelectionEvent onSpriteSelection
         {
-            get { return m_OnSpriteSelection; }
-            set { m_OnSpriteSelection = value; }
+            get => m_OnSpriteSelection;
+            set => m_OnSpriteSelection = value;
         }
         [SerializeField]
         private SpriteSelectionEvent m_OnSpriteSelection = new SpriteSelectionEvent();
@@ -54,8 +54,8 @@ namespace TMPro
         /// </summary>
         public WordSelectionEvent onWordSelection
         {
-            get { return m_OnWordSelection; }
-            set { m_OnWordSelection = value; }
+            get => m_OnWordSelection;
+            set => m_OnWordSelection = value;
         }
         [SerializeField]
         private WordSelectionEvent m_OnWordSelection = new WordSelectionEvent();
@@ -66,8 +66,8 @@ namespace TMPro
         /// </summary>
         public LineSelectionEvent onLineSelection
         {
-            get { return m_OnLineSelection; }
-            set { m_OnLineSelection = value; }
+            get => m_OnLineSelection;
+            set => m_OnLineSelection = value;
         }
         [SerializeField]
         private LineSelectionEvent m_OnLineSelection = new LineSelectionEvent();
@@ -78,8 +78,8 @@ namespace TMPro
         /// </summary>
         public LinkSelectionEvent onLinkSelection
         {
-            get { return m_OnLinkSelection; }
-            set { m_OnLinkSelection = value; }
+            get => m_OnLinkSelection;
+            set => m_OnLinkSelection = value;
         }
         [SerializeField]
         private LinkSelectionEvent m_OnLinkSelection = new LinkSelectionEvent();

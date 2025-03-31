@@ -11,6 +11,7 @@ public class AbilityStateMachine : StateMachine
     public AbilityAimState AimState { get; }
     public AbilityShootState ShootState { get; }
     public AbilityRecallState RecallState { get; }
+    public AbilityThrowState ThrowState { get; }
     
     public AbilityStateMachine(PlayerAbilityManager playerStateMachine)
     {
@@ -21,5 +22,6 @@ public class AbilityStateMachine : StateMachine
         AimState = new AbilityAimState(this);
         ShootState = new AbilityShootState(this);
         RecallState = new AbilityRecallState(this);
+        ThrowState = new AbilityThrowState(this);
     }
 }

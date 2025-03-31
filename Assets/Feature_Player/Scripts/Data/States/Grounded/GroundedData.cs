@@ -10,7 +10,7 @@ public class GroundedData
     [field: SerializeField] public float GravityMultiplier { get; private set; }
     [field: SerializeField] public AnimationCurve GravityModifier { get; private set; }
     [field: SerializeField] public AnimationCurve SlopeSpeedAngle { get; private set; }
-    [field: SerializeField] public PlayerRotationData BaseRotationData { get; private set; }
+    [field: SerializeField] public float TimeToReachTargetRotation { get; set; } = 0.2f;
     [field: SerializeField] public PlayerWalkData WalkData { get; private set; }
     [field: SerializeField] public PlayerRunData RunData { get; private set; }
 }

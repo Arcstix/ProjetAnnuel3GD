@@ -46,7 +46,7 @@ public class AbilityAimState : AbilityState
         
         if (reusableData.RightInput)
         {
-            if (input.PlayerActions.ThrowRecallRight.WasReleasedThisFrame())
+            if (input.PlayerActions.ShootRecallRight.WasReleasedThisFrame())
             {
                 HandleRightShootRecall();
                 return;
@@ -55,7 +55,7 @@ public class AbilityAimState : AbilityState
         
         if (reusableData.LeftInput)
         {
-            if (input.PlayerActions.ThrowRecallLeft.WasReleasedThisFrame())
+            if (input.PlayerActions.ShootRecallLeft.WasReleasedThisFrame())
             {
                 HandleLeftShootRecall();
                 return;
@@ -107,7 +107,7 @@ public class AbilityAimState : AbilityState
     private void ShowAiming()
     {
         // Tir un Raycast d'une certaine longueur
-        Ray aimRay = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        Ray aimRay = new Ray(rigidbody.transform.position, Camera.main.transform.forward);
         RaycastHit aimHit;
         Vector3 aimEndPosition = aimRay.origin + aimRay.direction * metricsManager.CurrentMetrics.AbilityData.AimDistance;
         float smoothSpeed = metricsManager.CurrentMetrics.AbilityData.AimSpeed;
@@ -120,14 +120,14 @@ public class AbilityAimState : AbilityState
         // Si le Raycast touche un objet intéragissable le point de contact est sur l'objet (planté)
         // Si le Raycast touche un objet non intéragissable le visuel se trouve à un offset de l'objet (non planté)
         // Si le Raycast ne touche rien le visuel se trouve au bout du Raycast
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out aimHit,
+        if (Physics.Raycast(aimRay, out aimHit,
                 metricsManager.CurrentMetrics.AbilityData.AimDistance, LayerMask.GetMask("Interactable"), QueryTriggerInteraction.Ignore))
         {
             aimObject.GetComponent<MeshRenderer>().material.color = Color.green;
             aimObject.transform.position = Vector3.Lerp(aimObject.transform.position, aimHit.point, Time.unscaledDeltaTime * smoothSpeed);
             reusableData.ObjectAimed = aimHit.collider.gameObject;
         }
-        else if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out aimHit,
+        else if (Physics.Raycast(aimRay, out aimHit,
                      metricsManager.CurrentMetrics.AbilityData.AimDistance, ~LayerMask.GetMask("Interactable"), QueryTriggerInteraction.Ignore))
         {
             aimObject.GetComponent<MeshRenderer>().material.color = Color.grey;

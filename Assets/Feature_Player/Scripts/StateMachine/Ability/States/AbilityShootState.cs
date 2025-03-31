@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 
 public class AbilityShootState : AbilityState
@@ -38,8 +39,13 @@ public class AbilityShootState : AbilityState
         {
             OnLeftShoot?.Invoke();
             leftLauncher.GetComponent<MeshRenderer>().enabled = false;
-            reusableData.LeftObject = InstantiateBall(reusableData.LeftObject, metricsManager.CurrentMetrics.AbilityData.LeftBall, leftLauncher.position);
-            reusableData.LeftObject.InitializeBall(metricsManager.CurrentMetrics.AbilityData.ShootSpeed, metricsManager.CurrentMetrics.AbilityData.TransportObjectSpeed, aimEndPosition, reusableData.LeftParent, reusableData.ObjectAutoAimed);
+            if (reusableData.ObjectAutoAimed != null)
+            {
+                reusableData.LeftParent = reusableData.ObjectAutoAimed;
+            }
+            reusableData.LeftObject = InstantiateBall(reusableData.LeftObject, metricsManager.CurrentMetrics.AbilityData.LeftTool, leftLauncher.position);
+            reusableData.LeftObject.InitializeBall(metricsManager.CurrentMetrics.AbilityData.ShootSpeed, metricsManager.CurrentMetrics.AbilityData.TransportObjectSpeed, aimEndPosition, leftProjectileLauncher,reusableData.LeftParent, reusableData.ObjectAutoAimed);
+            targetSystem.leftTargetLaunch = reusableData.ObjectAutoAimed.GetComponent<InteractiveTarget>();
         }
         
 
@@ -47,8 +53,13 @@ public class AbilityShootState : AbilityState
         {
             OnRightShoot?.Invoke();
             rightLauncher.GetComponent<MeshRenderer>().enabled = false;
-            reusableData.RightObject = InstantiateBall(reusableData.RightObject, metricsManager.CurrentMetrics.AbilityData.RightBall, rightLauncher.position);
-            reusableData.RightObject.InitializeBall(metricsManager.CurrentMetrics.AbilityData.ShootSpeed, metricsManager.CurrentMetrics.AbilityData.TransportObjectSpeed, aimEndPosition, reusableData.RightParent, reusableData.ObjectAutoAimed);
+            if (reusableData.ObjectAutoAimed != null)
+            {
+                reusableData.RightParent = reusableData.ObjectAutoAimed;
+            }
+            reusableData.RightObject = InstantiateBall(reusableData.RightObject, metricsManager.CurrentMetrics.AbilityData.RightTool, rightLauncher.position);
+            reusableData.RightObject.InitializeBall(metricsManager.CurrentMetrics.AbilityData.ShootSpeed, metricsManager.CurrentMetrics.AbilityData.TransportObjectSpeed, aimEndPosition, rightProjectileLauncher, reusableData.RightParent, reusableData.ObjectAutoAimed);
+            targetSystem.rightTargetLaunch = reusableData.ObjectAutoAimed.GetComponent<InteractiveTarget>();
         }
         
         _stateMachine.ChangeState(_stateMachine.IdleState);
@@ -65,7 +76,7 @@ public class AbilityShootState : AbilityState
     
     private void RaycastCheck()
     {
-        Ray aimRay = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        Ray aimRay = new Ray(rigidbody.transform.position, Camera.main.transform.forward);
         RaycastHit aimHit;
         aimEndPosition = aimRay.origin + aimRay.direction * metricsManager.CurrentMetrics.AbilityData.AimDistance;
         
@@ -89,7 +100,7 @@ public class AbilityShootState : AbilityState
         }
     }
     
-    private BallManager InstantiateBall(BallManager newInstance, BallManager refObject, Vector3 defaultPosition)
+    private ToolManager InstantiateBall(ToolManager newInstance, ToolManager refObject, Vector3 defaultPosition)
     {
         if (CheckWalls(defaultPosition))
         {
