@@ -22,6 +22,7 @@ public class AbilityRecallState : AbilityState
             if (reusableData.LeftParent != null)
             {
                 reusableData.LeftObject.DisableInteraction();
+                targetSystem.leftTargetLaunch = null;
             }
             
         }
@@ -32,6 +33,7 @@ public class AbilityRecallState : AbilityState
             if (reusableData.RightParent != null)
             {
                 reusableData.RightObject.DisableInteraction();
+                targetSystem.rightTargetLaunch = null;
             }
         }
     }
