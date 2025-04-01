@@ -2,23 +2,24 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody), typeof(LandingPlatform))]
+[RequireComponent(typeof(Rigidbody), typeof(LandingPlatform), typeof(InteractiveTarget))]
 public class ProjectileInteraction : InteractionSystem
 {
     public event Action OnPlatformInteract;
     public event Action OnToolInteract;
 
     private Rigidbody rb;
+    private InteractiveTarget _target;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
-
-    protected override void Start()
+    
+    protected virtual void Start()
     {
-        base.Start();
-        
+        _target = GetComponent<InteractiveTarget>();
+        _target.SetInteractionType(interactorType);
         _isInteractive = true;
     }
 

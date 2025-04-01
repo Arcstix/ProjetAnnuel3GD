@@ -66,6 +66,16 @@ public class AbilityState : IState
         
     }
 
+    public void OnCollisionEnter(Collision collision)
+    {
+        
+    }
+
+    public void OnCollisionExit(Collision collision)
+    {
+        
+    }
+
     public virtual void HandleInput()
     {
         

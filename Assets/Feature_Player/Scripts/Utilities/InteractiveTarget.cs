@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(InteractionSystem))]
 [SelectionBase]
 public class InteractiveTarget : MonoBehaviour
 {

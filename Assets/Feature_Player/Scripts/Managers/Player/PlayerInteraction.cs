@@ -34,7 +34,14 @@ public class PlayerInteraction : InteractionSystem
             AbilityStateMachine abilityStateMachine = GetComponent<PlayerAbilityManager>().AbilityStateMachine;
             abilityStateMachine.ChangeState(abilityStateMachine.RecallState);
             PlayerMovementStateMachine stateMachine = GetComponent<PlayerMovementManager>().StateMachine;
-            stateMachine.ChangeState(stateMachine.JumpState);
+            if (otherSystem._onWall)
+            {
+                stateMachine.ChangeState(stateMachine.WallRunState);
+            }
+            else
+            {
+                stateMachine.ChangeState(stateMachine.JumpState);
+            }
             return;
         }
 

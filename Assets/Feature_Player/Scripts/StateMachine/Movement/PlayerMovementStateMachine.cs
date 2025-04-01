@@ -19,6 +19,10 @@ public class PlayerMovementStateMachine : StateMachine
     public PlayerFallingState FallingState { get; }
 
     public PlayerLandingState LandingState { get; }
+    
+    public PlayerWallRunState WallRunState { get; }
+    
+    public PlayerWallJumpState WallJumpState { get; }
 
     public PlayerMovementStateMachine(PlayerMovementManager playerStateMachineManager)
     {
@@ -31,5 +35,7 @@ public class PlayerMovementStateMachine : StateMachine
         JumpState = new PlayerJumpState(this);
         FallingState = new PlayerFallingState(this);
         LandingState = new PlayerLandingState(this);
+        WallRunState = new PlayerWallRunState(this);
+        WallJumpState = new PlayerWallJumpState(this);
     }
 }

@@ -16,4 +16,8 @@ public interface IState
     public void Tick();
 
     public void FixedTick();
+    
+    public void OnCollisionEnter(Collision collision);
+    
+    public void OnCollisionExit(Collision collision);
 }

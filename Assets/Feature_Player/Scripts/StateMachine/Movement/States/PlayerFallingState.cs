@@ -72,7 +72,6 @@ public class PlayerFallingState : PlayerAirState
         if(!stateMachine.ReusableData.InAir)
         {
             reusableData.numberOfJump = 0;
-            Debug.Log("reset jump");
             stateMachine.ChangeState(stateMachine.LandingState);
         }
     }

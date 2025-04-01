@@ -152,13 +152,19 @@ public class AbilityTransportState : AbilityState
         if (reusableData.LeftObject != null)
         {
             leftInteraction.Interactable(false);
-            reusableData.LeftObject.SetLaunch(true);
+            if (targetSystem.leftTargetLaunch.GetCurrentType() == InteractorType.Projectile)
+            {
+                reusableData.LeftObject.SetLaunch(true);
+            }
         }
 
         if (reusableData.RightObject != null)
         {
             rightInteraction.Interactable(false);
-            reusableData.RightObject.SetLaunch(true);
+            if (targetSystem.rightTargetLaunch.GetCurrentType() == InteractorType.Projectile)
+            {
+                reusableData.RightObject.SetLaunch(true);
+            }
         }
 
         reusableData.LeftActivation = false;

@@ -86,7 +86,6 @@ public class PlayerAirState : PlayerMovementState
         }
 
         targetLandingPoint = bestPlatform;
-        Debug.Log("Target : " + targetLandingPoint);
     }
     
     void AdjustTrajectory()

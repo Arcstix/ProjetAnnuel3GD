@@ -179,7 +179,11 @@ public class ToolManager : MonoBehaviour
     {
         if (transform.parent != null)
         {
-            GetComponentInParent<InteractiveTarget>().EnableInteraction();
+            InteractiveTarget interactiveTarget = GetComponentInParent<InteractiveTarget>();
+            if (interactiveTarget)
+            {
+                interactiveTarget.EnableInteraction();
+            }
         }
     }
 }

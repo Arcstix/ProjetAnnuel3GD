@@ -19,6 +19,8 @@ public class PlayerWallRunState : PlayerWallState
         rigidbody.velocity = new Vector3(rigidbody.velocity.x, 0f, rigidbody.velocity.z);
 
         Vector3 wallNormal = reusableData.WallRight ? rightWallhit.normal : leftWallhit.normal;
+        
+        Debug.Log(leftWallhit.normal);
 
         Vector3 wallForward = Vector3.Cross(wallNormal, rigidbody.transform.up);
 

@@ -29,4 +29,14 @@ public abstract class StateMachine
     {
         currentState?.FixedTick();
     }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        currentState?.OnCollisionEnter(collision);
+    }
+
+    public void OnCollisionExit(Collision collision)
+    {
+        currentState?.OnCollisionExit(collision);
+    }
 }

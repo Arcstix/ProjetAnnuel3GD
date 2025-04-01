@@ -14,7 +14,6 @@ public class BallSoundManager : MonoBehaviour
 
     public void ProjectileCollision()
     {
-        Debug.Log("Ball Collision");
         // Son qui s'active lorsque le projectile touche un objet/ingrédient/mur/sol... (quelque chose). 
         FMODUnity.RuntimeManager.PlayOneShot("event:/Player/projectile collision");
     }

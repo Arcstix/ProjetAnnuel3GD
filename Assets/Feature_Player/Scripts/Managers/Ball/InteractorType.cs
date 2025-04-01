@@ -10,5 +10,6 @@ public enum InteractorType
     Platform,
     Projectile,
     DestructibleWall,
-    Anchor
+    Anchor,
+    Wall
 }

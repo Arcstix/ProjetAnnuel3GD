@@ -71,6 +71,22 @@ public class PlayerMovementState : IState
             ReadMovementInput();
         }
     }
+    
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            reusableData.OnWall = collision.gameObject;
+        }
+    }
+
+    public void OnCollisionExit(Collision collision)
+    {
+        if (reusableData.OnWall != null && collision.gameObject == reusableData.OnWall)
+        {
+            reusableData.OnWall = null;
+        }
+    }
 
     #endregion
 

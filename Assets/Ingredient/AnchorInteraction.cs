@@ -1,21 +1,32 @@
 ﻿using System;
 using UnityEngine;
 
+[RequireComponent(typeof(InteractiveTarget))]
 public class AnchorInteraction : InteractionSystem
 {
     public event Action OnToolInteract;
     
-    protected override void Start()
+    private InteractiveTarget _target;
+    
+    private void Start()
     {
-        base.Start();
+        _target = GetComponent<InteractiveTarget>();
+        _target.SetInteractionType(interactorType);
         _isInteractive = true;
         
-        GetComponent<LandingPlatform>().SetLandingState(true);
+        LandingPlatform landingPlatform = GetComponent<LandingPlatform>();
+        if (landingPlatform != null)
+        {
+            landingPlatform.SetLandingState(true);
+        }
     }
 
     public override void Interact(InteractionSystem otherSystem)
     {
-        
+        if (otherSystem.interactorType == InteractorType.Wall)
+        {
+            _onWall = true;
+        }
     }
 
     public override void ExitInteraction(InteractionSystem otherSystem)

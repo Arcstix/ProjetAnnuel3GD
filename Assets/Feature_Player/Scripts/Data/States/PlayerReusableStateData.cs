@@ -31,6 +31,7 @@ public class PlayerReusableStateData
     public bool ShouldSlowDown { get; set; } = false;
     public bool WallLeft { get; set; } = false;
     public bool WallRight { get; set; } = false;
+    public GameObject OnWall { get; set; }
     public float CurrentTargetRotation { get; set; }
     public float DampedTargetRotationPassedTime { get; set; }
 

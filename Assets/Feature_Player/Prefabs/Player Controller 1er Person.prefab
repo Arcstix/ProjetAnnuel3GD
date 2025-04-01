@@ -2815,7 +2815,6 @@ GameObject:
   - component: {fileID: 3893881984197082912}
   - component: {fileID: 4766889936055011746}
   - component: {fileID: 8163003079428228155}
-  - component: {fileID: 6397938787136251215}
   m_Layer: 9
   m_Name: Player StateMachine
   m_TagString: Player
@@ -2893,7 +2892,7 @@ Rigidbody:
   m_GameObject: {fileID: 6090733447672573452}
   serializedVersion: 4
   m_Mass: 5
-  m_Drag: 1
+  m_Drag: 2
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -3122,23 +3121,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 2021070098789645740}
   blendAnimSpeed: 5
---- !u!114 &6397938787136251215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6090733447672573452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a1d53107d7a4429ae71d67304a4377b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isAvailable: 0
-  isReachable: 0
-  isRendered: 0
-  _currentType: 1
-  visualRenderer: {fileID: 0}
 --- !u!1 &6101891743509082145
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,4 +13,5 @@ public class WallData
     [Header("Detection")]
     [field: SerializeField] public float WallCheckDistance;
     [field: SerializeField] public float MinJumpHeight;
+    [field: SerializeField] public float WallCheckRadius;
 }

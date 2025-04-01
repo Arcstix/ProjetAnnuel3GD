@@ -27,11 +27,12 @@ public class DestructibleInteraction : InteractionSystem
             return;
         }
 
-        if (interactorType == InteractorType.Tool)
+        if (otherSystem.interactorType == InteractorType.Tool)
         {
-            // In case the destructible object trigger into the tool // DESTROY object and tool
+            // In case the destructible object trigger into the tool // DESTROY object
             OnToolInteract?.Invoke();
-            Destroy(this.gameObject, 0.01f);
+            Destroy(otherSystem.gameObject);
+            Destroy(this.gameObject);
             return;
         }
     }

@@ -62,7 +62,6 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
 
         if (reusableData is { OnTransportation: true })
         {
-            Debug.Log("Consume");
             ConsumeStamina();
         }
     }

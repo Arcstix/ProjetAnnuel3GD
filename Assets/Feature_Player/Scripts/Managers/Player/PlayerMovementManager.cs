@@ -65,6 +65,16 @@ public class PlayerMovementManager : PlayerManager, I_Initializer
         stateMachine?.FixedTick();
     }
 
+    private void OnCollisionEnter(Collision other)
+    {
+        stateMachine?.OnCollisionEnter(other);
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        stateMachine?.OnCollisionExit(other);
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
