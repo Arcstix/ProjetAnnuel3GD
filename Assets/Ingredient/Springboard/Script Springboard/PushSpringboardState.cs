@@ -7,22 +7,28 @@ public class PushSpringboardState : SpringboardState
 {
     [SerializeField] private AnimationCurve pushCurve; // Courbe d'animation pour la projection
     [SerializeField] private float pushDuration; // Durée du saut
-    private float pushTimer = 0f;
-    public bool isPushing = false;
+    public float pushTimer = 0f;
+    public bool isPushing = true;
     public float pushForceMultiplier;
     public override void Enter(GameObject gameObject)
     {
         Debug.Log("PushSpringboardState");
+        isPushing = true;
     }
 
     public override void Tick(GameObject gameObject)
     {
         Debug.Log("Début du saut");
 
+        if (isPushing && pushTimer == 0f) // Ne lancer la coroutine qu'une seule fois
+        {
+            StartCoroutine(ApplyPushForce());
+        }
+        
         if (!isPushing)
         {
-            isPushing = true;
-            StartCoroutine(ApplyPushForce());
+            pushTimer = 0f;
+            GetComponent<StateMachineSpringboard>().ChangeState(GetComponent<IdleSpringboardState>());
         }
     }
 
@@ -32,14 +38,8 @@ public class PushSpringboardState : SpringboardState
     }
     private IEnumerator ApplyPushForce()
     {
-       
         Rigidbody rb = player.GetComponentInChildren<Rigidbody>();
-
-        if (rb == null)
-        {
-            Debug.LogError("Aucun Rigidbody trouvé sur player !");
-            yield break; // Stop la coroutine si pas de Rigidbody
-        }
+        pushTimer = 0f; // Réinitialisation du timer
 
         while (pushTimer < pushDuration)
         {
@@ -47,15 +47,16 @@ public class PushSpringboardState : SpringboardState
             pushTimer += Time.deltaTime;
             float t = pushTimer / pushDuration; // Normalisation du temps (0 à 1)
             float force = pushCurve.Evaluate(t) * pushForceMultiplier;
-            rb.velocity += Vector3.up * force; // Applique la force en vertical
+            rb.AddForce(Vector3.up * force, ForceMode.Impulse);
 
             yield return null; // Attend le prochain frame
         }
 
-        Debug.Log("Fin du saut");
-
+        // Assurer que la valeur finale est bien atteinte
+        pushTimer = pushDuration;
         isPushing = false;
-        GetComponent<StateMachineSpringboard>().ChangeState(GetComponent<IdleSpringboardState>());
+        pushTimer = 0f;
+        Debug.Log("Fin du saut");
     }
     private void OnTriggerExit(Collider other)
     {

@@ -20,13 +20,5 @@ public abstract class SpringboardState : MonoBehaviour
              player = other.gameObject.GetComponentInChildren<Rigidbody>();
          }
     }
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.CompareTag("Player"))
-        {
-            GetComponent<StateMachineSpringboard>().ChangeState(GetComponent<IdleSpringboardState>());
-            player = null;
-        }
-    }
     #endregion 
 }
