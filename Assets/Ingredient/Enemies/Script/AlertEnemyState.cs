@@ -13,11 +13,13 @@ public class AlertEnemyState : EnemyState
     #region Hidden Variables
 
     [HideInInspector] public Vector3 lastSeenPosition;
+    [HideInInspector] public HealthPlayer healthPlayer;
     
     #endregion
     
     public override void Enter(GameObject gameObject)
     {
+        healthPlayer = gameObject.GetComponent<HealthPlayer>();
         isPatrolling = false;
         _navMeshAgent.speed = 0f;
         lightManager.EnableSpotLightRed();
