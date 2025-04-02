@@ -25,7 +25,11 @@ public class ToolInteraction : InteractionSystem
                 if (canInteractWithPlayer)
                 {
                     OnPlayerInteract?.Invoke();
-                    GetComponentInParent<InteractiveTarget>().EnableInteraction();
+                    InteractiveTarget interactiveTarget = GetComponentInParent<InteractiveTarget>();
+                    if (interactiveTarget)
+                    {
+                        interactiveTarget.EnableInteraction();
+                    }
                     Destroy(this.gameObject);
                 }
                 return;
