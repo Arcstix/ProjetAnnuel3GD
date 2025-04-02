@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,7 +20,7 @@ public abstract class EnemyState : MonoBehaviour
     #region Hidden Variables
     
     [HideInInspector] public UnityEngine.AI.NavMeshAgent _navMeshAgent;
-    [HideInInspector] public Transform playerTransform;
+    public Transform playerTransform;
     [HideInInspector] public LightManager lightManager;
     [HideInInspector] public bool isPatrolling = false;
     
@@ -32,7 +33,7 @@ public abstract class EnemyState : MonoBehaviour
         _navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         playerTransform = GameObject.FindWithTag("Player").transform;
         lightManager = GetComponent<LightManager>();
-        headTransform = GameObject.FindWithTag("Mobile").transform;
+        //headTransform = GameObject.FindWithTag("Mobile").transform;
     }
 
 
@@ -58,6 +59,14 @@ public abstract class EnemyState : MonoBehaviour
     public abstract void Exit(GameObject gameObject);
 
     #region Detection du player
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            GetComponent<StateMachineEnemy>().ChangeState(GetComponent<AlertEnemyState>());
+        }
+    }
     public bool PlayerIsDetected()
     {
         // Cible potentielle, probablement le joueur dans ce contexte

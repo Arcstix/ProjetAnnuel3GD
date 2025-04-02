@@ -13,22 +13,24 @@ public class AlertEnemyState : EnemyState
     #region Hidden Variables
 
     [HideInInspector] public Vector3 lastSeenPosition;
-    [HideInInspector] public HealthPlayer healthPlayer;
+    public HealthPlayer healthPlayer;
     
     #endregion
     
     public override void Enter(GameObject gameObject)
     {
-        healthPlayer = gameObject.GetComponent<HealthPlayer>();
+        //healthPlayer = playerTransform.GetComponentInChildren<HealthPlayer>();
         isPatrolling = false;
         _navMeshAgent.speed = 0f;
         lightManager.EnableSpotLightRed();
         //Debug.Log("AlertState");
+        healthPlayer.enemyAlerted = true;
     }
 
     public override void Exit(GameObject gameObject)
     {
         GetComponent<SearchEnemyState>().PositionGoTo = lastSeenPosition;
+        healthPlayer.enemyAlerted = false;
     }
 
     public override void Tick(GameObject gameObject)
@@ -38,18 +40,18 @@ public class AlertEnemyState : EnemyState
         {
             LookAtPlayer();
         }
-        if (!PlayerIsDetected())
-        {
-            CapturePlayerPosition();
-            if (GetComponent<StateMachineEnemy>().patrol)
-            {
-                PatrolTrue();
-            }
-            else
-            {
-                PatrolFalse();
-            }
-        }
+        // if (!PlayerIsDetected())
+        // {
+        //     CapturePlayerPosition();
+        //     if (GetComponent<StateMachineEnemy>().patrol)
+        //     {
+        //         PatrolTrue();
+        //     }
+        //     else
+        //     {
+        //         PatrolFalse();
+        //     }
+        // }
     }
 
     #region Idle or Search
@@ -87,4 +89,20 @@ public class AlertEnemyState : EnemyState
     }
 
     #endregion 
+    
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            GetComponent<StateMachineEnemy>().ChangeState(GetComponent<IdleEnemyState>());
+            if (GetComponent<StateMachineEnemy>().patrol)
+            {
+                PatrolTrue();
+            }
+            else
+            {
+                PatrolFalse();
+            }
+        }
+    }
 }

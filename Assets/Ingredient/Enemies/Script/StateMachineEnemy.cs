@@ -16,7 +16,7 @@ public class StateMachineEnemy : MonoBehaviour
     #region Hidden Variables
     
     [HideInInspector] [SerializeField] private EnemyState defaultState;
-    [HideInInspector] public EnemyState currentState;
+     public EnemyState currentState;
     
     #endregion
     
@@ -36,6 +36,7 @@ public class StateMachineEnemy : MonoBehaviour
 
         currentState = newState;
         currentState.Enter(gameObject);
+        Debug.Log(currentState);
     }
 
     void Update()
