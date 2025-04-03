@@ -23,8 +23,9 @@ public class IdleSpringboardState : SpringboardState
     {
         if(other.CompareTag("Player"))
         {
-            GetComponent<StateMachineSpringboard>().ChangeState(GetComponent<PushSpringboardState>());
             player = other.gameObject.GetComponentInChildren<Rigidbody>();
+            GetComponent<PushSpringboardState>().player= player; 
+            GetComponent<StateMachineSpringboard>().ChangeState(GetComponent<PushSpringboardState>());
         }
     }
     #endregion 
