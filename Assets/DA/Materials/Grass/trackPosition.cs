@@ -16,6 +16,6 @@ public class trackPosition : MonoBehaviour
     void Update()
     {
        Vector3 trackerPos = tracker.GetComponent<Transform>().position;
-       grassMat.SetVector("_trackerPosition", trackerPos);
+       grassMat.SetVector("trackerPosition", trackerPos);
     }
 }
