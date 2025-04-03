@@ -13,13 +13,13 @@ public class AlertEnemyState : EnemyState
     #region Hidden Variables
 
     [HideInInspector] public Vector3 lastSeenPosition;
-    public HealthPlayer healthPlayer;
     
     #endregion
     
     public override void Enter(GameObject gameObject)
     {
-        //healthPlayer = playerTransform.GetComponentInChildren<HealthPlayer>();
+        healthPlayer = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<HealthPlayer>();
+        //healthPlayer = playerTransfrm.GetComponentInChildren<HealthPlayer>();
         isPatrolling = false;
         _navMeshAgent.speed = 0f;
         lightManager.EnableSpotLightRed();
@@ -35,23 +35,24 @@ public class AlertEnemyState : EnemyState
 
     public override void Tick(GameObject gameObject)
     {
+        base.Tick(gameObject);
         //fonction damage
         if (PlayerIsDetected())
         {
             LookAtPlayer();
         }
-        // if (!PlayerIsDetected())
-        // {
-        //     CapturePlayerPosition();
-        //     if (GetComponent<StateMachineEnemy>().patrol)
-        //     {
-        //         PatrolTrue();
-        //     }
-        //     else
-        //     {
-        //         PatrolFalse();
-        //     }
-        // }
+        if (!PlayerIsDetected())
+        {
+            CapturePlayerPosition();
+            if (GetComponent<StateMachineEnemy>().patrol)
+             {
+                 PatrolTrue();
+             }
+             else
+             {
+                 PatrolFalse();
+             }
+         }
     }
 
     #region Idle or Search
@@ -89,20 +90,4 @@ public class AlertEnemyState : EnemyState
     }
 
     #endregion 
-    
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            GetComponent<StateMachineEnemy>().ChangeState(GetComponent<IdleEnemyState>());
-            if (GetComponent<StateMachineEnemy>().patrol)
-            {
-                PatrolTrue();
-            }
-            else
-            {
-                PatrolFalse();
-            }
-        }
-    }
 }

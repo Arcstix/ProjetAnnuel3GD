@@ -23,6 +23,8 @@ public abstract class EnemyState : MonoBehaviour
     public Transform playerTransform;
     [HideInInspector] public LightManager lightManager;
     [HideInInspector] public bool isPatrolling = false;
+    public HealthPlayer healthPlayer;
+
     
     #endregion
     
@@ -32,6 +34,7 @@ public abstract class EnemyState : MonoBehaviour
         isPatrolling = false;
         _navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         playerTransform = GameObject.FindWithTag("Player").transform;
+        healthPlayer = playerTransform.GetComponent<HealthPlayer>();
         lightManager = GetComponent<LightManager>();
         //headTransform = GameObject.FindWithTag("Mobile").transform;
     }
@@ -59,14 +62,6 @@ public abstract class EnemyState : MonoBehaviour
     public abstract void Exit(GameObject gameObject);
 
     #region Detection du player
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            GetComponent<StateMachineEnemy>().ChangeState(GetComponent<AlertEnemyState>());
-        }
-    }
     public bool PlayerIsDetected()
     {
         // Cible potentielle, probablement le joueur dans ce contexte
