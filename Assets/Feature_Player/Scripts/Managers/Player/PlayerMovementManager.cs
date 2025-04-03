@@ -6,6 +6,8 @@ using UnityEngine;
 [SelectionBase]
 public class PlayerMovementManager : PlayerManager, I_Initializer
 {
+    public bool hasExternalForces = false;
+    
     [field : Header("Collider")]
     [field : SerializeField] public CapsuleColliderUtility CapsuleUtility { get; private set; }
     

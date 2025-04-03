@@ -62,7 +62,10 @@ public class PlayerGroundedState : PlayerMovementState
                 return;
             }
 
-            AddVerticalForce(distanceToGround, capsuleColliderUtility.SlopeData.StepReachForce);
+            if (!stateMachine.MovementManager.hasExternalForces)
+            {
+                AddVerticalForce(distanceToGround, capsuleColliderUtility.SlopeData.StepReachForce);
+            }
         }
         else
         {

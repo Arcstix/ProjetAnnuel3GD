@@ -12,6 +12,8 @@ public class PushSpringboardState : SpringboardState
     public override void Enter(GameObject gameObject)
     {
         Debug.Log("PushSpringboardState");
+        PlayerMovementManager movementManager = player.GetComponent<PlayerMovementManager>();
+        movementManager.hasExternalForces = true;
     }
 
     public override void Tick(GameObject gameObject)
@@ -33,6 +35,8 @@ public class PushSpringboardState : SpringboardState
     public override void Exit(GameObject gameObject)
     {
        pushTimer = 0f;
+       PlayerMovementManager movementManager = player.GetComponent<PlayerMovementManager>();
+       movementManager.hasExternalForces = false;
     }
     private void ApplyPushForce()
     {
@@ -43,14 +47,5 @@ public class PushSpringboardState : SpringboardState
         float t = pushTimer / pushDuration; // Normalisation du temps (0 à 1)
         float force = pushCurve.Evaluate(t) * pushForceMultiplier;
         rb.AddForce(Vector3.up * force, ForceMode.Impulse);
-        
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.CompareTag("Player"))
-        {
-            GetComponent<StateMachineSpringboard>().ChangeState(GetComponent<IdleSpringboardState>());
-            player = null;
-        }
     }
 }
