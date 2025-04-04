@@ -9,7 +9,7 @@ public class trackPosition : MonoBehaviour
     void Start()
     {
         grassMat = GetComponent<Renderer>().material;
-        tracker = GameObject.Find("tracker");
+        tracker = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
