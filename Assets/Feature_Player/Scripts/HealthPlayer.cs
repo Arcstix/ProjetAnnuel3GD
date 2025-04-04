@@ -14,7 +14,8 @@ public class HealthPlayer : MonoBehaviour
     [SerializeField] private float timerBeforeIncrease = 0f;
     private float timer;
     public bool enemyAlerted = false; // Booléen indiquant si un ennemi est en alerte
-    
+    [SerializeField] private GameObject spawner;
+    private Transform playerTransform;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,8 @@ public class HealthPlayer : MonoBehaviour
         currentHealth = maxHealth;
         UpdateHealthUI();
         timer = 0f;
+        spawner = GameObject.FindGameObjectWithTag("Spawner");
+        playerTransform = this.transform;
     }
 
     // Update is called once per frame
@@ -47,7 +50,7 @@ public class HealthPlayer : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-           
+            Respawn();
         }
     }
     void DecreaseHealthOverTime()
@@ -72,5 +75,24 @@ public class HealthPlayer : MonoBehaviour
     void UpdateHealthUI()
     {
         healthSlider.value = Mathf.Lerp(healthSlider.value, currentHealth / maxHealth, Time.deltaTime * 5);
+    }
+
+    public void Respawn()
+    { 
+        playerTransform.position = spawner.transform.position; // Déplace le joueur
+        ResetHealth(); // Remet la vie à 100%
+    }
+
+    private void ResetHealth()
+    {
+        currentHealth = maxHealth; // Reset la vie
+        UpdateHealthUI();
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("DeathZone")) // Vérifie si on touche la DeathZone
+        {
+            Respawn();
+        }
     }
 }
