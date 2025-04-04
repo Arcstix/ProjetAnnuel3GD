@@ -115,7 +115,11 @@ public class AbilityTransportState : AbilityState
             }
             else
             {
-                MoveRightObject();
+                if (targetSystem.rightTargetLaunch.GetCurrentType() != InteractorType.Anchor &&
+                    targetSystem.rightTargetLaunch.GetCurrentType() != InteractorType.Enemy)
+                {
+                    MoveRightObject();
+                }
             }
         }
 
@@ -130,7 +134,12 @@ public class AbilityTransportState : AbilityState
             }
             else
             {
-                MoveLeftObject();
+                if (targetSystem.leftTargetLaunch.GetCurrentType() != InteractorType.Anchor &&
+                    targetSystem.leftTargetLaunch.GetCurrentType() != InteractorType.Enemy)
+                {
+                    MoveLeftObject();
+                }
+                
             }
         }
         

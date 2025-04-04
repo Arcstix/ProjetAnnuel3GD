@@ -36,7 +36,7 @@ public class PlayerWallRunState : PlayerWallState
     private void WallRunningMovement(Vector3 wallNormal, Vector3 slideDirection)
     {
         // forward force
-        rigidbody.AddForce(slideDirection * wallData.WallRunForce, ForceMode.Force);
+        rigidbody.AddForce(slideDirection * wallData.WallRunForce - GetCurrentHorizontalVelocity(), ForceMode.VelocityChange);
             
         // push to wall force
         if (!(reusableData.WallLeft && reusableData.MovementInput.x > 0) && !(reusableData.WallRight && reusableData.MovementInput.x < 0))
