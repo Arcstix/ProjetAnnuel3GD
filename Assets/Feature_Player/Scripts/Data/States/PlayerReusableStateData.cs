@@ -11,8 +11,8 @@ public class PlayerReusableStateData
     public float MovementOnSlopeSpeedModifier { get; set; } = 1f;
     public bool ShouldWalk { get; set; }
     public bool CanMove { get; set; }
-    public bool hadJump {get; set;} = false;
-    public int numberOfJump { get; set; } = 0;
+    public bool HadJump {get; set;} = false;
+    public int NumberOfJump { get; set; } = 0;
     public Vector3 InstancePosition { get; set; }
     public bool RightInput { get; set; } = false;
     public bool LeftInput { get; set; } = false;
@@ -39,4 +39,5 @@ public class PlayerReusableStateData
     public bool InAir { get; set; }
 
     public ref float TurnSmoothVelocity => ref turnSmoothVelocity;
+    public bool OnLandingPlatform { get; set; } = false;
 }

@@ -11,6 +11,7 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
 
     private PlayerMetricsManager metricsManager;
     private PlayerAbilityManager abilityManager;
+    private PlayerMovementManager movementManager;
     private CinemachineFramingTransposer framingTransposer;
     private CinemachineInputProvider inputProvider;
 
@@ -21,6 +22,7 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
     {
         metricsManager = GetComponent<PlayerMetricsManager>();
         abilityManager = GetComponent<PlayerAbilityManager>();
+        movementManager = GetComponent<PlayerMovementManager>();
         abilityManager.AbilityStateMachine.TransportState.SpeedModifierEvent += SetTransportFOV;
         abilityManager.AbilityStateMachine.IdleState.ExitTransportation += SetBaseFOV;
         //framingTransposer = metricsManager.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();
@@ -38,6 +40,7 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
     private void Update()
     {
         //Zoom();
+        
     }
 
     // private void Zoom()

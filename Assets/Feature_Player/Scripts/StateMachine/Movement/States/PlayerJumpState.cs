@@ -25,7 +25,7 @@ public class PlayerJumpState : PlayerAirState
         OnJump?.Invoke();
         jumpData = stateMachine.MovementManager.Metrics.CurrentMetrics.JumpData;
         reusableData.MovementSpeedModifier = jumpData.SpeedModifier;
-        reusableData.hadJump = true;
+        reusableData.HadJump = true;
 
         timeToApex = jumpData.JumpTimer / 2;
         gravity = Mathf.Sqrt(-2f * Physics.gravity.y * jumpData.JumpHeight);

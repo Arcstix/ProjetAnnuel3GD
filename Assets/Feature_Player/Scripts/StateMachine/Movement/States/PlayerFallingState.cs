@@ -20,7 +20,7 @@ public class PlayerFallingState : PlayerAirState
         timer = 0;
         verticalVelocity = Physics.gravity.y * metricsManager.CurrentMetrics.FallingData.GravityModifier;
         reusableData.InAir = true;
-        reusableData.ShouldSlowDown = !reusableData.hadJump;
+        reusableData.ShouldSlowDown = !reusableData.HadJump;
         reusableData.MovementSpeedModifier = metricsManager.CurrentMetrics.FallingData.SpeedModifier;
     }
 
@@ -28,7 +28,7 @@ public class PlayerFallingState : PlayerAirState
     {
         ResetSlowDown();
         base.Exit();
-        reusableData.hadJump = false;
+        reusableData.HadJump = false;
     }
 
     public override void Tick()
@@ -63,15 +63,15 @@ public class PlayerFallingState : PlayerAirState
             stateMachine.ChangeState(stateMachine.IdleState);
         }
 
-        if (input.PlayerActions.Jump.WasPressedThisFrame() && reusableData.InAir && reusableData.numberOfJump < metricsManager.CurrentMetrics.JumpData.MaxAirJumps)
+        if (input.PlayerActions.Jump.WasPressedThisFrame() && reusableData.InAir && reusableData.NumberOfJump < metricsManager.CurrentMetrics.JumpData.MaxAirJumps)
         {
-            reusableData.numberOfJump++;
+            reusableData.NumberOfJump++;
             stateMachine.ChangeState(stateMachine.JumpState);
         }
 
         if(!stateMachine.ReusableData.InAir)
         {
-            reusableData.numberOfJump = 0;
+            reusableData.NumberOfJump = 0;
             stateMachine.ChangeState(stateMachine.LandingState);
         }
     }

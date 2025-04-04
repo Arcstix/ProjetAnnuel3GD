@@ -34,8 +34,12 @@ public class PlayerWallState : PlayerMovementState
         reusableData.WallLeft = Physics.Raycast(capsuleColliderCenterInWorldSpace, -Vector3.right, out leftWallhit, wallData.WallCheckDistance, wallData.WallLayer);
     }
     
-    private bool AboveGround()
+    public static Vector3 GetSlideDirection(Vector3 normal, Vector3 velocity, float maxAngle)
     {
-        return !Physics.Raycast(rigidbody.transform.position, Vector3.down, wallData.MinJumpHeight, stateMachine.MovementManager.CapsuleUtility.LayerData.GroundLayer);
+        Vector3 tangent = Vector3.Cross(normal, Vector3.up);
+        float signedAngle = Vector3.SignedAngle(normal, velocity.normalized, -Vector3.up);
+        float multiplier = Mathf.Abs(signedAngle) >= maxAngle ? 0 : Mathf.Sign(signedAngle);
+        
+        return multiplier * tangent;
     }
 }

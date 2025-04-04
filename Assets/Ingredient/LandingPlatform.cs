@@ -25,7 +25,7 @@ public class LandingPlatform : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && isLanding)
         {
-            if (other.gameObject.GetComponent<PlayerMovementManager>().ReusableData.hadJump)
+            if (other.gameObject.GetComponent<PlayerMovementManager>().ReusableData.HadJump)
             {
                 if (Vector3.Distance(other.gameObject.transform.position, transform.position + landingTarget) > 0.5f)
                 {
@@ -38,6 +38,8 @@ public class LandingPlatform : MonoBehaviour
                     isLanding = false;
                     player = other.gameObject;
                 }
+                
+                other.gameObject.GetComponent<PlayerMovementManager>().ReusableData.OnLandingPlatform = true;
             }
         }
     }
@@ -51,6 +53,7 @@ public class LandingPlatform : MonoBehaviour
                 onCoroutine = true;
                 StartCoroutine(ResetLandingState());
             }
+            other.gameObject.GetComponent<PlayerMovementManager>().ReusableData.OnLandingPlatform = false;
         }
     }
 

@@ -32,7 +32,7 @@ public class PlayerAirState : PlayerMovementState
             CheckDistanceToTheGround();
         }
 
-        if (reusableData.hadJump && targetLandingPoint)
+        if (reusableData.HadJump && targetLandingPoint)
         {
             AdjustTrajectory();
         }

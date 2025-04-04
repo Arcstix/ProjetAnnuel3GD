@@ -38,7 +38,7 @@ public class PlayerIdleState : PlayerGroundedState
             return;
         }
 
-        if (reusableData.CanMove && !reusableData.InAir && !reusableData.OnTransportation && reusableData.MovementInput != Vector2.zero)
+        if (reusableData.CanMove && !reusableData.InAir && !reusableData.OnTransportation && reusableData.MovementInput != Vector2.zero && !reusableData.OnLandingPlatform)
         {
             // Change to Running State
             OnMove();

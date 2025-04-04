@@ -10,15 +10,4 @@ public abstract class SpringboardState : MonoBehaviour
     public abstract void Tick(GameObject gameObject);
     
     public abstract void Exit(GameObject gameObject);
-    
-    #region Detection du player
-    private void OnTriggerEnter(Collider other)
-    {
-         if(other.CompareTag("Player"))
-         {
-             GetComponent<StateMachineSpringboard>().ChangeState(GetComponent<PushSpringboardState>());
-             player = other.gameObject.GetComponentInChildren<Rigidbody>();
-         }
-    }
-    #endregion 
 }
