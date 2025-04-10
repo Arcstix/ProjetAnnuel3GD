@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class LightManager : MonoBehaviour
 {
-    [Header("Lights")]
-    public Light spotLightWhite;
-    public Light spotLightRed;
+    [FormerlySerializedAs("spotLightWhite")] [Header("Lights")]
+    public Light lightBase;
+    [FormerlySerializedAs("spotLightRed")] 
+    public Light lightDetected;
 
     [Header("Intensity Settings")]
     [Tooltip("Minimum d'intensité lumière")]
@@ -27,13 +29,13 @@ public class LightManager : MonoBehaviour
     }
         public void EnableSpotLightWhite()
         {
-            spotLightRed.gameObject.SetActive(false);
-            spotLightWhite.gameObject.SetActive(true);
+            lightDetected.gameObject.SetActive(false);
+            lightBase.gameObject.SetActive(true);
         }
         public void EnableSpotLightRed()
         {
-            spotLightWhite.gameObject.SetActive(false);
-            spotLightRed.gameObject.SetActive(true);
+            lightBase.gameObject.SetActive(false);
+            lightDetected.gameObject.SetActive(true);
         }
         
         #region LightChanges
@@ -48,8 +50,8 @@ public class LightManager : MonoBehaviour
             float newIntensity = Mathf.Lerp(minIntensity, maxIntensity, curveValue);
 
             // Applique la nouvelle intensité aux lumières
-            if (spotLightWhite != null) spotLightWhite.intensity = newIntensity;
-            if (spotLightRed != null) spotLightRed.intensity = newIntensity;
+            if (lightBase != null) lightBase.intensity = newIntensity;
+            if (lightDetected != null) lightDetected.intensity = newIntensity;
         }
         #endregion
 }
