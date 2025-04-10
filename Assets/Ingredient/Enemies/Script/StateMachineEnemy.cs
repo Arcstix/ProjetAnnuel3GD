@@ -15,7 +15,7 @@ public class StateMachineEnemy : MonoBehaviour
     
     #region Hidden Variables
     
-    [HideInInspector] [SerializeField] private EnemyState defaultState;
+    [SerializeField] private EnemyState defaultState;
      public EnemyState currentState;
     
     #endregion
