@@ -90,4 +90,13 @@ public abstract class EnemyState : MonoBehaviour
         return false;
     }
     #endregion 
+    #region Detection du playerMort
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") || other.CompareTag("Projectile"))
+        {
+            gameObject.SetActive(false);
+        }
+    }
+    #endregion
 }
