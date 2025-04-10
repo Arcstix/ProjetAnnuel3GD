@@ -7,33 +7,51 @@ using UnityEngine.InputSystem;
 /// <summary>
 /// Se script sert � avoir toutes les m�thodes li�s au mouvement et � la rotation
 /// </summary>
-public class PlayerMovementState : IState
+public class MovementState : IState
 {
-    protected PlayerMovementStateMachine stateMachine;
+    protected MovementStateMachine stateMachine;
     protected PlayerMetricsManager metricsManager;
     protected PlayerInput input;
     protected PlayerCameraManager cameraManager;
     protected PlayerReusableStateData reusableData;
     protected Rigidbody rigidbody;
+    protected WallData wallData;
+    protected RaycastHit leftWallhit;
+    protected RaycastHit rightWallhit;
+    
+    protected RaycastHit cashWallhit;
+    
+    private CapsuleColliderUtility capsuleColliderUtility;
+
+    protected InputAction movement;
+    protected InputAction jump;
+    protected InputAction walkToggle;
 
     #region StateMachine Methods
 
     /// <summary>
     /// Un constructeur poss�dant des raccourcies utiles pour le code. ATTENTION A NE PAS SPECIFIER DES COMPOSANTS SUSCEPTIBLE DE CHANGER
     /// </summary>
-    /// <param name="playerStateMachine"></param>
-    public PlayerMovementState(PlayerMovementStateMachine playerStateMachine)
+    /// <param name="stateMachine"></param>
+    public MovementState(MovementStateMachine stateMachine)
     {
-        stateMachine = playerStateMachine;
-        metricsManager = playerStateMachine.MovementManager.Metrics;
+        this.stateMachine = stateMachine;
+        metricsManager = stateMachine.MovementManager.Metrics;
         input = stateMachine.MovementManager.Input;
-        reusableData = stateMachine.ReusableData;
-        rigidbody = stateMachine.MovementManager.Rb;
+        reusableData = this.stateMachine.ReusableData;
+        rigidbody = this.stateMachine.MovementManager.Rb;
 
-        if (stateMachine.MovementManager.CameraManager != null)
+        if (this.stateMachine.MovementManager.CameraManager != null)
         {
-            cameraManager = stateMachine.MovementManager.CameraManager;
+            cameraManager = this.stateMachine.MovementManager.CameraManager;
         }
+        
+        capsuleColliderUtility = stateMachine.MovementManager.CapsuleUtility;
+        wallData = metricsManager.CurrentMetrics.WallData;
+        
+        movement = input.actions["Movement"];
+        jump = input.actions["Jump"];
+        walkToggle = input.actions["WalkToggle"];
     }
 
     public virtual void Enter()
@@ -49,10 +67,15 @@ public class PlayerMovementState : IState
 
     public virtual void Tick()
     {
-        if (input.PlayerActions.Jump.WasPressedThisFrame() && stateMachine.currentState != stateMachine.FallingState &&
+        if (jump.WasPressedThisFrame() && stateMachine.currentState != stateMachine.FallingState &&
             stateMachine.currentState != stateMachine.LandingState && stateMachine.currentState != stateMachine.JumpState)
         {
             stateMachine.ChangeState(stateMachine.JumpState);
+        }
+
+        if (stateMachine.currentState != stateMachine.TransportedState && reusableData.OnTransportation)
+        {
+            stateMachine.ChangeState(stateMachine.TransportedState);
         }
     }
 
@@ -62,6 +85,8 @@ public class PlayerMovementState : IState
         {
             Move();
         }
+        
+        CheckForWall();
     }
 
     public virtual void HandleInput()
@@ -76,7 +101,13 @@ public class PlayerMovementState : IState
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
+            Debug.Log("Collision Enter");
             reusableData.OnWall = collision.gameObject;
+            if (stateMachine.MovementManager.WallCheck.CanWallRun())
+            {
+                Debug.Log("Wall Run");
+                stateMachine.ChangeState(stateMachine.WallRunState);
+            }
         }
     }
 
@@ -93,7 +124,7 @@ public class PlayerMovementState : IState
     #region Main Methods
     private void ReadMovementInput()
     {
-        reusableData.MovementInput = input.PlayerActions.Movement.ReadValue<Vector2>();
+        reusableData.MovementInput = movement.ReadValue<Vector2>();
     }
 
     private void Move()
@@ -238,15 +269,34 @@ public class PlayerMovementState : IState
             rigidbody.velocity = Vector3.zero;
         }
     }
+    
+    protected void CheckForWall()
+    {
+        Vector3 capsuleColliderCenterInWorldSpace = capsuleColliderUtility.CapsuleColliderData.Collider.bounds.center;
+        
+        reusableData.WallRight = Physics.Raycast(capsuleColliderCenterInWorldSpace, rigidbody.transform.right, out rightWallhit, wallData.WallCheckDistance, wallData.WallLayer);
+        reusableData.WallLeft = Physics.Raycast(capsuleColliderCenterInWorldSpace, -rigidbody.transform.right, out leftWallhit, wallData.WallCheckDistance, wallData.WallLayer);
+
+        if (rightWallhit.collider != null)
+        {
+            cashWallhit = rightWallhit;
+            return;
+        }
+
+        if (leftWallhit.collider != null)
+        {
+            cashWallhit = leftWallhit;
+        }
+    }
 
     protected virtual void SubscribeInputAction()
     {
-        input.PlayerActions.WalkToggle.started += OnSlowStarted;
+        walkToggle.started += OnSlowStarted;
     }
 
     protected virtual void UnsubscribeInputAction()
     {
-        input.PlayerActions.WalkToggle.started -= OnSlowStarted;
+        walkToggle.started -= OnSlowStarted;
     }
 
     #endregion

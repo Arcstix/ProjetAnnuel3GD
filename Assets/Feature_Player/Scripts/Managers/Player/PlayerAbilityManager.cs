@@ -61,4 +61,15 @@ public class PlayerAbilityManager : PlayerManager, I_Initializer
     {
         abilityStateMachine?.FixedTick();
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        
+        Gizmos.DrawRay(transform.position + new Vector3(0, 0.5f, 0), transform.right * 5f);
+        
+        Gizmos.color = Color.blue;
+        
+        Gizmos.DrawRay(transform.position + new Vector3(0, 0.5f, 0), -transform.right * 5f);
+    }
 }

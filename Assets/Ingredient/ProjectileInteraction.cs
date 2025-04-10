@@ -33,7 +33,7 @@ public class ProjectileInteraction : InteractionSystem
             rb.useGravity = false;
             rb.constraints = RigidbodyConstraints.FreezeAll;
             GetComponent<AnchorInteraction>().enabled = true;
-            GetComponent<LandingPlatform>().SetLandingState(true);
+            GetComponent<LandingPlatform>().SetAvailableState(true);
             this.enabled = false;
             return;
         }

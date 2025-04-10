@@ -75,6 +75,7 @@ public class PlayerAnimationManager : MonoBehaviour
         movementManager.StateMachine.FallingState.OnFalling += Fall;
         movementManager.StateMachine.JumpState.OnJump += Jump;
         movementManager.StateMachine.LandingState.OnLanding += Land;
+        movementManager.StateMachine.OnPlatformState.OnPlatform += Idle;
     }
 
     private void UnSubscribeMovementEvent()
@@ -85,6 +86,7 @@ public class PlayerAnimationManager : MonoBehaviour
         movementManager.StateMachine.FallingState.OnFalling -= Fall;
         movementManager.StateMachine.JumpState.OnJump -= Jump;
         movementManager.StateMachine.LandingState.OnLanding -= Land;
+        movementManager.StateMachine.OnPlatformState.OnPlatform -= Idle;
     }
     
     #region Ability

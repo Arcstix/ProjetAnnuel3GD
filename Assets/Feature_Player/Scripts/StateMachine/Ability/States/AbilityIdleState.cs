@@ -37,13 +37,13 @@ public class AbilityIdleState : AbilityState
         if (!_stateMachine.AbilityManager.aimBotMode)
         {
             // Aim State active just in 1st person
-            if (input.PlayerActions.ShootRecallRight.WasPerformedThisFrame() && reusableData.RightObject == null)
+            if (rightShootRecall.WasPerformedThisFrame() && reusableData.RightObject == null)
             {
                 HandleRightAimState();
                 return;
             }
 
-            if (input.PlayerActions.ShootRecallLeft.WasPerformedThisFrame() && reusableData.LeftObject == null)
+            if (leftShootRecall.WasPerformedThisFrame() && reusableData.LeftObject == null)
             {
                 HandleLeftAimState();
                 return;
@@ -54,13 +54,13 @@ public class AbilityIdleState : AbilityState
         if (_stateMachine.AbilityManager.aimBotMode)
         {
             // 3rd person
-            if (input.PlayerActions.ShootRecallRight.WasPressedThisFrame())
+            if (rightShootRecall.WasPressedThisFrame())
             {
                 HandleRightShootRecall();
                 return;
             }
             
-            if (input.PlayerActions.ShootRecallLeft.WasPressedThisFrame())
+            if (leftShootRecall.WasPressedThisFrame())
             {
                 HandleLeftShootRecall();
                 return;
@@ -69,13 +69,13 @@ public class AbilityIdleState : AbilityState
         else
         {
             // 1st person 
-            if (input.PlayerActions.ShootRecallRight.WasReleasedThisFrame())
+            if (rightShootRecall.WasReleasedThisFrame())
             {
                 HandleRightShootRecall();
                 return;
             }
             
-            if (input.PlayerActions.ShootRecallLeft.WasReleasedThisFrame())
+            if (leftShootRecall.WasReleasedThisFrame())
             {
                 HandleLeftShootRecall();
                 return;
@@ -86,40 +86,46 @@ public class AbilityIdleState : AbilityState
         if (!_stateMachine.AbilityManager.useStamina)
         {
             // 3rd Person
-            if (input.PlayerActions.AttractionRight.WasPerformedThisFrame())
+            if (rightAttraction.WasPerformedThisFrame())
             {
-                HandleAttraction();
+                HandleRightAttraction();
             }
 
-            if (input.PlayerActions.AttractionLeft.WasPerformedThisFrame())
+            if (leftAttraction.WasPerformedThisFrame())
             {
-                HandleAttraction();
+                HandleLeftAttraction();
             }
         }
         else
         {
             // 1st Person
-            if (input.PlayerActions.AttractionRight.WasPerformedThisFrame())
+            if (rightAttraction.WasPerformedThisFrame())
             {
-                HandleAttraction();
+                HandleRightAttraction();
             }
 
-            if (input.PlayerActions.AttractionLeft.WasPerformedThisFrame())
+            if (leftAttraction.WasPerformedThisFrame())
             {
-                HandleAttraction();
+                HandleLeftAttraction();
             }
         }
         
-        if (input.PlayerActions.ThrowRight.WasPerformedThisFrame() && targetSystem.rightTargetLaunch != null)
+        if (rightThrow.WasPerformedThisFrame() && targetSystem.rightTargetLaunch != null)
         {
-            reusableData.RightThrow = true;
-            _stateMachine.ChangeState(_stateMachine.ThrowState);
+            if (targetSystem.rightTargetLaunch.GetCurrentType() == InteractorType.Projectile)
+            {
+                reusableData.RightThrow = true;
+                _stateMachine.ChangeState(_stateMachine.ThrowState);
+            }
         }
 
-        if (input.PlayerActions.ThrowLeft.WasPerformedThisFrame() && targetSystem.leftTargetLaunch != null)
+        if (leftThrow.WasPerformedThisFrame() && targetSystem.leftTargetLaunch != null)
         {
-            reusableData.LeftThrow = true;
-            _stateMachine.ChangeState(_stateMachine.ThrowState);
+            if (targetSystem.leftTargetLaunch.GetCurrentType() == InteractorType.Projectile)
+            {
+                reusableData.LeftThrow = true;
+                _stateMachine.ChangeState(_stateMachine.ThrowState);
+            }
         }
     }
 }

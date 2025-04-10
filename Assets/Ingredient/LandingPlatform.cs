@@ -2,51 +2,44 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class LandingPlatform : MonoBehaviour
 {
-    public bool isLanding = false;
+    public bool isAvailable = true;
     public Vector3 landingTarget = new Vector3(0, 0.5f, 0);
     
     private GameObject player;
     private bool onCoroutine = false;
     
-    public void SetLandingState(bool state)
+    public void SetAvailableState(bool state)
     {
-        isLanding = state;
+        isAvailable = state;
     }
 
-    public bool IsLanding()
+    public bool IsAvailable()
     {
-        return isLanding;
+        return isAvailable;
     }
-    
+
     void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && isLanding)
+        if (other.gameObject.CompareTag("Player") && isAvailable)
         {
             if (other.gameObject.GetComponent<PlayerMovementManager>().ReusableData.HadJump)
             {
-                if (Vector3.Distance(other.gameObject.transform.position, transform.position + landingTarget) > 0.5f)
-                {
-                    other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    other.gameObject.transform.position =
-                        Vector3.Lerp(other.gameObject.transform.position, transform.position + landingTarget, 0.2f);
-                }
-                else
-                {
-                    isLanding = false;
-                    player = other.gameObject;
-                }
-                
-                other.gameObject.GetComponent<PlayerMovementManager>().ReusableData.OnLandingPlatform = true;
+                MovementStateMachine stateMachine = other.gameObject.GetComponent<PlayerMovementManager>().StateMachine;
+                PlayerReusableStateData reusableData = other.gameObject.GetComponent<PlayerMovementManager>().ReusableData;
+                reusableData.OnLandingPlatform = true;
+                reusableData.TargetPosition = transform.position + landingTarget;
+                isAvailable = false;
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && player != null)
+        if (other.gameObject.CompareTag("Player"))
         {
             if (!onCoroutine)
             {
@@ -60,7 +53,7 @@ public class LandingPlatform : MonoBehaviour
     private IEnumerator ResetLandingState()
     {
         yield return new WaitForSeconds(1);
-        SetLandingState(true);
+        SetAvailableState(true);
         onCoroutine = false;
     }
 }

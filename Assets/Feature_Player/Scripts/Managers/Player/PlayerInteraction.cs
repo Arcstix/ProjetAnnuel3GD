@@ -20,23 +20,26 @@ public class PlayerInteraction : InteractionSystem
 
         if (otherSystem.interactorType == InteractorType.Anchor)
         {
-            // In case a Player is coming into the platform
+            // In case a Player is coming into an Anchor
             OnPlatformInteract?.Invoke();
             PlayerReusableStateData reusableData = GetComponent<PlayerAbilityManager>().ReusableData;
             if (reusableData.LeftActivation)
             {
-                reusableData.LeftInput = true;
+                reusableData.RightInput = true;
             }
             else
             {
-                reusableData.RightInput = true;
+                reusableData.LeftInput = true;
             }
+            // Recall Tool 
             AbilityStateMachine abilityStateMachine = GetComponent<PlayerAbilityManager>().AbilityStateMachine;
             abilityStateMachine.ChangeState(abilityStateMachine.RecallState);
-            PlayerMovementStateMachine stateMachine = GetComponent<PlayerMovementManager>().StateMachine;
+            MovementStateMachine stateMachine = GetComponent<PlayerMovementManager>().StateMachine;
             if (otherSystem._onWall)
             {
-                stateMachine.ChangeState(stateMachine.WallRunState);
+                Debug.Log("Interaction Wall");
+                GetComponent<WallCheck>().SetCanWallRun(true);
+                //stateMachine.ChangeState(stateMachine.WallRunState);
             }
             else
             {

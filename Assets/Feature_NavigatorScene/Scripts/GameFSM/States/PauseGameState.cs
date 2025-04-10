@@ -17,13 +17,13 @@ public class PauseGameState : GameState
     private void EnableInputPlayer()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        player.GetComponent<PlayerInput>().EnableInput();
+        player.GetComponent<PlayerInput>().enabled = true;
     }
     
     private void DisableInputPlayer()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        player.GetComponent<PlayerInput>().DisableInput();
+        player.GetComponent<PlayerInput>().enabled = false;
     }
 
     //todo Return to game

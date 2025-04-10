@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// Script utilis� quand le joueur est dans les airs
 /// </summary>
-public class PlayerAirState : PlayerMovementState
+public class AirState : MovementState
 {
     //cr�er des raccourcies pour les variables
     protected CapsuleColliderUtility capsuleColliderUtility;
@@ -14,13 +14,15 @@ public class PlayerAirState : PlayerMovementState
     protected JumpData jumpData;
     protected float timer;
     protected Transform targetLandingPoint;
+    
+    protected Transform lastLandingPoint;
 
-    public PlayerAirState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
+    public AirState(MovementStateMachine stateMachine) : base(stateMachine)
     {
         //faire le chemin ici comme �a = une fois
-        capsuleColliderUtility = stateMachine.MovementManager.CapsuleUtility;
-        groundedData = stateMachine.MovementManager.Metrics.CurrentMetrics.GroundedData;
-        jumpData = stateMachine.MovementManager.Metrics.CurrentMetrics.JumpData;
+        capsuleColliderUtility = base.stateMachine.MovementManager.CapsuleUtility;
+        groundedData = base.stateMachine.MovementManager.Metrics.CurrentMetrics.GroundedData;
+        jumpData = base.stateMachine.MovementManager.Metrics.CurrentMetrics.JumpData;
     }
 
     public override void FixedTick()
@@ -32,7 +34,7 @@ public class PlayerAirState : PlayerMovementState
             CheckDistanceToTheGround();
         }
 
-        if (reusableData.HadJump && targetLandingPoint)
+        if (reusableData.HadJump && targetLandingPoint != null && targetLandingPoint != lastLandingPoint)
         {
             AdjustTrajectory();
         }
@@ -65,7 +67,7 @@ public class PlayerAirState : PlayerMovementState
         {
             if (hit.TryGetComponent<LandingPlatform>(out LandingPlatform landingPlatform))
             {
-                if (landingPlatform.IsLanding())
+                if (landingPlatform.IsAvailable())
                 {
                     Vector3 directionToPlatform = (hit.transform.position - rigidbody.transform.position).normalized;
                     float angle = Vector3.Angle(rigidbody.transform.forward, directionToPlatform);

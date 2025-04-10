@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerIdleState : PlayerGroundedState
+public class PlayerIdleState : GroundedState
 {
     public event Action OnIdle;
     
-    public PlayerIdleState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
+    public PlayerIdleState(MovementStateMachine stateMachine) : base(stateMachine)
     {
 
     }
@@ -37,7 +37,7 @@ public class PlayerIdleState : PlayerGroundedState
             stateMachine.ChangeState(stateMachine.FallingState);
             return;
         }
-
+        
         if (reusableData.CanMove && !reusableData.InAir && !reusableData.OnTransportation && reusableData.MovementInput != Vector2.zero && !reusableData.OnLandingPlatform)
         {
             // Change to Running State

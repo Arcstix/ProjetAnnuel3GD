@@ -22,9 +22,14 @@ public class AbilityState : IState
 
     protected Transform rightProjectileLauncher;
     protected Transform leftProjectileLauncher;
-    
-    public event Action ExitTransportation;
 
+    protected InputAction rightShootRecall;
+    protected InputAction leftShootRecall;
+    protected InputAction rightThrow;
+    protected InputAction leftThrow;
+    protected InputAction leftAttraction;
+    protected InputAction rightAttraction;
+    
     // Sert � la cr�ation de raccourcie.
     // ATTENTION AUX SCRIPTABLES OBJECTS QUI PEUVENT TOTALEMENT CHANGER COMME LE PLAYERSO !
     public AbilityState(AbilityStateMachine abilityStateMachine)
@@ -41,6 +46,13 @@ public class AbilityState : IState
         leftProjectileLauncher = _stateMachine.AbilityManager.LeftProjectileLauncherTransform;
         targetSystem = _stateMachine.AbilityManager.TargetSystem;
         aimTransform = _stateMachine.AbilityManager.AimTransform;
+
+        rightShootRecall = input.actions["ShootRecallRight"];
+        leftShootRecall = input.actions["ShootRecallLeft"];
+        rightThrow = input.actions["ThrowRight"];
+        leftThrow = input.actions["ThrowLeft"];
+        leftAttraction = input.actions["AttractionLeft"];
+        rightAttraction = input.actions["AttractionRight"];
     }
 
     #region State Methods
@@ -55,10 +67,7 @@ public class AbilityState : IState
 
     public virtual void Tick()
     {
-        if (!reusableData.OnTransportation)
-        {
-            ExitTransportation?.Invoke();
-        }
+        
     }
 
     public virtual void FixedTick()
@@ -81,10 +90,10 @@ public class AbilityState : IState
         
     }
     #endregion
-    
 
-    #region Ability methods
+    #region Change States methods
     
+    #region AimState
     protected void HandleRightAimState()
     {
         reusableData.RightInput = true;
@@ -96,7 +105,9 @@ public class AbilityState : IState
         reusableData.LeftInput = true;
         _stateMachine.ChangeState(_stateMachine.AimState);
     }
-
+    #endregion
+    
+    #region ShootState / RecallState
     protected void HandleRightShootRecall()
     {
         reusableData.RightInput = true;
@@ -129,7 +140,11 @@ public class AbilityState : IState
         }
     }
     
-    protected void HandleAttraction()
+    #endregion
+    
+    #region AttractionState
+
+    protected void HandleRightAttraction()
     {
         if (reusableData.LeftObject == null && reusableData.RightObject == null)
         {
@@ -137,10 +152,82 @@ public class AbilityState : IState
         }
         else
         {
-            _stateMachine.ChangeState(_stateMachine.TransportState);
+            // Case : Attraction de RightObject vers LeftObject
+            if (reusableData.RightObject != null && reusableData.LeftObject != null)
+            {
+                _stateMachine.ChangeState(_stateMachine.MoveLeftObject);
+                return;
+            }
+            
+            // Si on arrive ici c'est que l'un des 2 est null
+            
+            // Case : RightObject == null && LeftObject != null --> On attire LeftObject vers soit
+            if (reusableData.RightObject == null)
+            {
+                _stateMachine.ChangeState(_stateMachine.MoveLeftObject);
+                return;
+            }
+            
+            // Case : RightObject != null && LeftObject == null --> Attraction du Player vers la cible
+            if (reusableData.LeftObject == null)
+            {
+                _stateMachine.ChangeState(_stateMachine.MovePlayer);
+            }
         }
     }
 
+    protected void HandleLeftAttraction()
+    {
+        if (reusableData.LeftObject == null && reusableData.RightObject == null)
+        {
+            return;
+        }
+        else
+        {
+            // Case : Attraction de LeftObject vers RightObject
+            if (reusableData.RightObject != null && reusableData.LeftObject != null)
+            {
+                _stateMachine.ChangeState(_stateMachine.MoveRightObject);
+                return;
+            }
+            
+            // Si on arrive ici c'est que l'un des 2 est null
+            
+            // Case : RightObject != null && LeftObject == null --> On attire RightObject vers soit
+            if (reusableData.LeftObject == null)
+            {
+                _stateMachine.ChangeState(_stateMachine.MoveRightObject);
+            }
+            
+            // Case : RightObject == null && LeftObject != null --> Attraction du Player vers la cible
+            if (reusableData.RightObject == null)
+            {
+                _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                return;
+            }
+        }
+    }
+    
     #endregion
-
+    
+    #endregion
+    
+    #region Utility Methods
+    
+    public void CheckToolPresence()
+    {
+        // Important car on ne peut pas rester dans cette state si ce n'est pas vérifié.
+        if (reusableData.RightObject == null && reusableData.LeftObject == null)
+        {
+            reusableData.LeftParent = null;
+            reusableData.RightParent = null;
+            
+            leftLauncher.GetComponent<MeshRenderer>().enabled = true;
+            rightLauncher.GetComponent<MeshRenderer>().enabled = true;
+            
+            _stateMachine.ChangeState(_stateMachine.IdleState);
+        }
+    }
+    
+    #endregion
 }

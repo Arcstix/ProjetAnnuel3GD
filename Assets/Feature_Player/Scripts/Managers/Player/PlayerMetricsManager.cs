@@ -48,6 +48,11 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
         UpdateRightStamina(currentMetrics.StaminaData.MaxStamina);
     }
 
+    private void OnEnable()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     private void Update()
     {
         if (currentExternForce > 1)

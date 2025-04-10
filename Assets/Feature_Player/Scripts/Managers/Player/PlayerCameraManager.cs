@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 // S'occupe de mettre � jour les param�tre de la cam�ra 
 public class PlayerCameraManager : MonoBehaviour, I_Initializer
@@ -11,36 +12,62 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
 
     private PlayerMetricsManager metricsManager;
     private PlayerAbilityManager abilityManager;
-    private PlayerMovementManager movementManager;
+    private PlayerInput playerInput;
     private CinemachineFramingTransposer framingTransposer;
-    private CinemachineInputProvider inputProvider;
-
     private float currentTargetDistance;
     private PlayerCameraData cameraData;
+    
+    private InputAction freeLookAction;
+    private string lastUsedDevice = "";
+
+    private void Awake()
+    {
+        playerInput = GetComponent<PlayerInput>();
+    }
 
     public void Init(PlayerReusableStateData reusableStateData)
     {
         metricsManager = GetComponent<PlayerMetricsManager>();
         abilityManager = GetComponent<PlayerAbilityManager>();
-        movementManager = GetComponent<PlayerMovementManager>();
-        abilityManager.AbilityStateMachine.TransportState.SpeedModifierEvent += SetTransportFOV;
-        abilityManager.AbilityStateMachine.IdleState.ExitTransportation += SetBaseFOV;
-        //framingTransposer = metricsManager.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();
-        inputProvider = metricsManager.GetComponent<CinemachineInputProvider>();
-        SetCameraMetrics();
-    }
+        abilityManager.AbilityStateMachine.MovePlayer.SpeedModifierEvent += SetTransportFOV;
+        abilityManager.AbilityStateMachine.MovePlayer.ExitDash += SetBaseFOV;
 
-    public void SetCameraMetrics()
-    {
         cameraData = metricsManager.CurrentMetrics.CameraData;
-        virtualCamera.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.m_MaxSpeed = cameraData.ControllerVerticalSpeed;
-        virtualCamera.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxSpeed = cameraData.ControllerHorizontalSpeed;
+        // Récupère l’action "FreeLook" de l’Action Map
+        freeLookAction = playerInput.actions["FreeLook"];
+        if (freeLookAction != null)
+        {
+            freeLookAction.performed += OnFreeLookPerformed;
+        }
     }
 
-    private void Update()
+    private void OnFreeLookPerformed(InputAction.CallbackContext context)
     {
-        //Zoom();
-        
+        var device = context.control.device;
+
+        if (device is Gamepad && lastUsedDevice != "Gamepad")
+        {
+            ApplySpeed("Gamepad");
+            lastUsedDevice = "Gamepad";
+        }
+        else if ((device is Mouse || device is Pointer) && lastUsedDevice != "Mouse")
+        {
+            ApplySpeed("Mouse");
+            lastUsedDevice = "Mouse";
+        }
+    }
+
+    private void ApplySpeed(string deviceType)
+    {
+        float speed = deviceType == "Gamepad" ? cameraData.ControllerSpeed * 10 : cameraData.MouseSpeed / 100;
+
+        if (virtualCamera != null)
+        {
+            virtualCamera.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.m_MaxSpeed = speed;
+            virtualCamera.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxSpeed = speed;
+        }
+
+        Debug.Log($"[CameraSettingsAdaptation] Appareil : {deviceType}, Vitesse appliquée : {speed}");
     }
 
     // private void Zoom()

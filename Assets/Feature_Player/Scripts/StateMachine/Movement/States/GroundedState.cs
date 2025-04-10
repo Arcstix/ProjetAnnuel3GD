@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -5,21 +6,21 @@ using UnityEngine.InputSystem;
 /// <summary>
 /// Script utilis� quand le joueur est dans une state li� au sol
 /// </summary>
-public class PlayerGroundedState : PlayerMovementState
+public class GroundedState : MovementState
 {
     private CapsuleColliderUtility capsuleColliderUtility;
     private GroundedData groundedData;
 
-    public PlayerGroundedState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
+    public GroundedState(MovementStateMachine stateMachine) : base(stateMachine)
     {
-        capsuleColliderUtility = stateMachine.MovementManager.CapsuleUtility;
-        groundedData = stateMachine.MovementManager.Metrics.CurrentMetrics.GroundedData;
+        capsuleColliderUtility = base.stateMachine.MovementManager.CapsuleUtility;
+        groundedData = base.stateMachine.MovementManager.Metrics.CurrentMetrics.GroundedData;
     }
 
     public override void FixedTick()
     {
         base.FixedTick();
-
+        
         if (!stateMachine.ReusableData.OnTransportation && stateMachine.currentState != stateMachine.JumpState)
         {
             CheckDistanceToTheGround();

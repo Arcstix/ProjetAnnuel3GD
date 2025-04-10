@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b56aa3a78f68114c8075bea00d5ced9, type: 3}
   m_Name: GameFeelMetricsLouis
   m_EditorClassIdentifier: 
-  <Drag>k__BackingField: 2
+  <Drag>k__BackingField: 1
   <GroundedData>k__BackingField:
     <BaseSpeed>k__BackingField: 5
     <GravityMultiplier>k__BackingField: 2
@@ -124,7 +124,7 @@ MonoBehaviour:
     <RunData>k__BackingField:
       <SpeedModifier>k__BackingField: 1.5
   <JumpData>k__BackingField:
-    <SpeedModifier>k__BackingField: 2.5
+    <SpeedModifier>k__BackingField: 1.5
     <JumpHeight>k__BackingField: 1
     <JumpTimer>k__BackingField: 0.2
     MaxAirJumps: 1
@@ -137,14 +137,14 @@ MonoBehaviour:
   <FallingData>k__BackingField:
     <SpeedModifier>k__BackingField: 1.5
     <GravityModifier>k__BackingField: 5
-    <MaxFallingSpeed>k__BackingField: 52
+    <MaxFallingSpeed>k__BackingField: 50
   <WallData>k__BackingField:
     WallLayer:
       serializedVersion: 2
       m_Bits: 2048
-    WallRunForce: 20
-    WallCheckDistance: 2
-    MaxAngle: 175
+    WallRunForce: 10
+    WallCheckDistance: 5
+    MaxAngle: 179
   <AbilityData>k__BackingField:
     <AimDistance>k__BackingField: 7.5
     <AimBallOffset>k__BackingField: {x: 0, y: -0.3, z: 0}
@@ -217,5 +217,5 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    ControllerVerticalSpeed: 0.01
-    ControllerHorizontalSpeed: 0.01
+    ControllerSpeed: 1
+    MouseSpeed: 1

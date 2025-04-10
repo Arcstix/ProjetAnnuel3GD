@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerRunningState : PlayerGroundedState
+public class RunningState : GroundedState
 {
     public event Action OnRunning;
     
-    public PlayerRunningState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
+    public RunningState(MovementStateMachine stateMachine) : base(stateMachine)
     {
     }
 
@@ -29,7 +29,7 @@ public class PlayerRunningState : PlayerGroundedState
             return;
         }
         
-        if (reusableData.OnTransportation || !reusableData.CanMove || reusableData.MovementInput == Vector2.zero)
+        if ((!reusableData.OnTransportation && !reusableData.CanMove) || reusableData.MovementInput == Vector2.zero)
         {
             stateMachine.ChangeState(stateMachine.IdleState);
         }

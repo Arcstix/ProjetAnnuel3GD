@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInput), typeof(PlayerMetricsManager))]
 public class PlayerManager : MonoBehaviour
@@ -15,6 +16,8 @@ public class PlayerManager : MonoBehaviour
     public PlayerInput Input { get; private set; }
 
     public PlayerCameraManager CameraManager { get; private set; }
+    
+    public WallCheck WallCheck { get; private set; }
 
     protected virtual void Awake()
     {
@@ -27,5 +30,7 @@ public class PlayerManager : MonoBehaviour
         Rb = GetComponent<Rigidbody>();
 
         CameraManager = GetComponent<PlayerCameraManager>();
+        
+        WallCheck = GetComponent<WallCheck>();
     }
 }

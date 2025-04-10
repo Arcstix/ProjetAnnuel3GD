@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 
-public class PlayerWallRunState : PlayerWallState
+public class WallRunState : WallState
 {
-    public PlayerWallRunState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
+    private Vector3 wallNormal;
+    private Vector3 slideDirection;
+    
+    public WallRunState(MovementStateMachine stateMachine) : base(stateMachine)
     {
     }
 
@@ -10,30 +13,38 @@ public class PlayerWallRunState : PlayerWallState
     {
         base.Enter();
         
+        Debug.Log("Enter WallRunState");
         rigidbody.useGravity = false;
         rigidbody.velocity = new Vector3(rigidbody.velocity.x, 0f, rigidbody.velocity.z);
     }
 
     public override void FixedTick()
     {
-        base.FixedTick();
+        CheckForWall();
         
-        Vector3 wallNormal = reusableData.WallRight ? rightWallhit.normal : leftWallhit.normal;
+        wallNormal = reusableData.WallRight ? rightWallhit.normal : leftWallhit.normal;
         
-        Vector3 slideDirection = GetSlideDirection(wallNormal, rigidbody.velocity, metricsManager.CurrentMetrics.WallData.MaxAngle);
+        slideDirection = GetSlideDirection(wallNormal, rigidbody.velocity, metricsManager.CurrentMetrics.WallData.MaxAngle);
 
         if (slideDirection != Vector3.zero)
         {
-            WallRunningMovement(wallNormal, slideDirection);
+            WallRunningMovement();
         }
         else
         {
             stateMachine.ChangeState(stateMachine.FallingState);
         }
-        
     }
 
-    private void WallRunningMovement(Vector3 wallNormal, Vector3 slideDirection)
+    public override void Exit()
+    {
+        base.Exit();
+
+        // forward force
+        rigidbody.AddForce(slideDirection * wallData.WallRunForce - GetCurrentHorizontalVelocity(), ForceMode.VelocityChange);
+    }
+
+    private void WallRunningMovement()
     {
         // forward force
         rigidbody.AddForce(slideDirection * wallData.WallRunForce - GetCurrentHorizontalVelocity(), ForceMode.VelocityChange);

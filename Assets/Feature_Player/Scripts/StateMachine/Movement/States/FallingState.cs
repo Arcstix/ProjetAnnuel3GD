@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFallingState : PlayerAirState
+public class FallingState : AirState
 {
     private float verticalVelocity;
 
     public event Action OnFalling;
     
-    public PlayerFallingState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
+    public FallingState(MovementStateMachine stateMachine) : base(stateMachine)
     {
     }
 
@@ -40,7 +40,7 @@ public class PlayerFallingState : PlayerAirState
         timer += Time.deltaTime;
         
         // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
-        if (verticalVelocity < metricsManager.CurrentMetrics.FallingData.MaxFallingSpeed)
+        if (Mathf.Abs(verticalVelocity) < metricsManager.CurrentMetrics.FallingData.MaxFallingSpeed)
         {
             verticalVelocity += Physics.gravity.y * metricsManager.CurrentMetrics.FallingData.GravityModifier * Time.deltaTime;
         }
@@ -63,13 +63,13 @@ public class PlayerFallingState : PlayerAirState
             stateMachine.ChangeState(stateMachine.IdleState);
         }
 
-        if (input.PlayerActions.Jump.WasPressedThisFrame() && reusableData.InAir && reusableData.NumberOfJump < metricsManager.CurrentMetrics.JumpData.MaxAirJumps)
+        if (jump.WasPressedThisFrame() && reusableData.InAir && reusableData.NumberOfJump < metricsManager.CurrentMetrics.JumpData.MaxAirJumps)
         {
             reusableData.NumberOfJump++;
             stateMachine.ChangeState(stateMachine.JumpState);
         }
 
-        if(!stateMachine.ReusableData.InAir)
+        if(!stateMachine.ReusableData.InAir || reusableData.OnLandingPlatform)
         {
             reusableData.NumberOfJump = 0;
             stateMachine.ChangeState(stateMachine.LandingState);

@@ -4,8 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(InteractiveTarget))]
 public class AnchorInteraction : InteractionSystem
 {
-    public event Action OnToolInteract;
-    
     private InteractiveTarget _target;
     
     private void Start()
@@ -17,7 +15,7 @@ public class AnchorInteraction : InteractionSystem
         LandingPlatform landingPlatform = GetComponent<LandingPlatform>();
         if (landingPlatform != null)
         {
-            landingPlatform.SetLandingState(true);
+            landingPlatform.SetAvailableState(true);
         }
     }
 

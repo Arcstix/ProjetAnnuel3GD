@@ -311,7 +311,7 @@ Transform:
   m_GameObject: {fileID: 2575590915882072333}
   serializedVersion: 2
   m_LocalRotation: {x: 0.12186935, y: 0, z: 0, w: 0.99254614}
-  m_LocalPosition: {x: -311.249, y: -24.526314, z: -134.02118}
+  m_LocalPosition: {x: -44.489002, y: 9.233686, z: -286.5812}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -356,13 +356,13 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 60.00003
+  field of view: 60.54422
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 3071
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -689,7 +689,6 @@ GameObject:
   - component: {fileID: 6853947441784969740}
   - component: {fileID: 7098877830191296562}
   - component: {fileID: 4874100215383875600}
-  - component: {fileID: 2442817497824257724}
   - component: {fileID: 4137492129963649270}
   - component: {fileID: 3390054086931496672}
   - component: {fileID: 8608706955153301980}
@@ -698,7 +697,7 @@ GameObject:
   - component: {fileID: 6452900145228080616}
   - component: {fileID: 9011495374266890239}
   - component: {fileID: 2504822229828253428}
-  - component: {fileID: 1861289198223481941}
+  - component: {fileID: 6541187359964308589}
   m_Layer: 9
   m_Name: Player StateMachine
   m_TagString: Player
@@ -715,7 +714,7 @@ Transform:
   m_GameObject: {fileID: 3725881075513752365}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -311.25, y: -27.36, z: -130.14}
+  m_LocalPosition: {x: -44.49, y: 6.4, z: -282.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -877,6 +876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 271fb0a440ec7e9498f02e914dc10e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasExternalForces: 0
   <CapsuleUtility>k__BackingField:
     <DefaultColliderData>k__BackingField:
       <Height>k__BackingField: 1.8
@@ -892,18 +892,6 @@ MonoBehaviour:
         m_Bits: 64
   sphereGroundCheckRadius: 0.2
   sphereDistanceGroundCheck: 1.1
---- !u!114 &2442817497824257724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3725881075513752365}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8919de7b88cd42942afce3396508f4eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4137492129963649270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -952,6 +940,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 5695835314643884536}
+  mouseSpeed: 0.1
+  gamepadSpeed: 10
 --- !u!114 &1514048884484430222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1026,7 +1016,8 @@ MonoBehaviour:
   increaseTimer: 1
   timerBeforeIncrease: 0
   enemyAlerted: 0
---- !u!114 &1861289198223481941
+  spawner: {fileID: 0}
+--- !u!114 &6541187359964308589
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1035,14 +1026,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 3725881075513752365}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a1d53107d7a4429ae71d67304a4377b, type: 3}
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAvailable: 1
-  isReachable: 0
-  isRendered: 0
-  _currentType: 0
-  visualRenderer: {fileID: 0}
+  m_Actions: {fileID: -944628639613478452, guid: cbdec881f31544a4c819486b6d7f5a27, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 4367882771013306227}
 --- !u!1 &4197273346030736694
 GameObject:
   m_ObjectHideFlags: 0
@@ -1071,7 +1075,7 @@ Transform:
   m_GameObject: {fileID: 4197273346030736694}
   serializedVersion: 2
   m_LocalRotation: {x: 0.12186935, y: 0, z: 0, w: 0.99254614}
-  m_LocalPosition: {x: -311.249, y: -24.526314, z: -134.02118}
+  m_LocalPosition: {x: -44.489002, y: 9.233686, z: -286.5812}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1099,7 +1103,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 5081304130938120538}
   m_Follow: {fileID: 5081304130938120538}
   m_Lens:
-    FieldOfView: 60.00003
+    FieldOfView: 60.54422
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -1610,7 +1614,7 @@ MonoBehaviour:
   m_VerticalAxis:
     Value: 14
     m_SpeedMode: 1
-    m_MaxSpeed: 0.01
+    m_MaxSpeed: 0.1
     m_AccelTime: 0.8
     m_DecelTime: 0.05
     m_InputAxisName: Mouse Y
@@ -1634,7 +1638,7 @@ MonoBehaviour:
   m_HorizontalAxis:
     Value: 0
     m_SpeedMode: 1
-    m_MaxSpeed: 0.01
+    m_MaxSpeed: 0.1
     m_AccelTime: 0.8
     m_DecelTime: 0.25
     m_InputAxisName: Mouse X

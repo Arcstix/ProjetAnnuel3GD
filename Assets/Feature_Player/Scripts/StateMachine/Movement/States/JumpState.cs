@@ -3,11 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerJumpState : PlayerAirState
+public class JumpState : AirState
 {
-    private float timer;
-    private JumpData jumpData;
-
     private float timeToApex;
     private float initialJumpVelocity;
     private float currentGravity;
@@ -15,7 +12,7 @@ public class PlayerJumpState : PlayerAirState
     
     public event Action OnJump;
     
-    public PlayerJumpState(PlayerMovementStateMachine playerStateMachine) : base(playerStateMachine)
+    public JumpState(MovementStateMachine stateMachine) : base(stateMachine)
     {
 
     }

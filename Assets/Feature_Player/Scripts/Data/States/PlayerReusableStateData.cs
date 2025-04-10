@@ -34,6 +34,8 @@ public class PlayerReusableStateData
     public GameObject OnWall { get; set; }
     public float CurrentTargetRotation { get; set; }
     public float DampedTargetRotationPassedTime { get; set; }
+    
+    public Vector3 TargetPosition { get; set; }
 
     private float turnSmoothVelocity;
     public bool InAir { get; set; }

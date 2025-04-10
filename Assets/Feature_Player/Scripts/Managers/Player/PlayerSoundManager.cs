@@ -28,9 +28,9 @@ public class PlayerSoundManager : MonoBehaviour
         abilityManager.AbilityStateMachine.ShootState.OnLeftShoot += LeftShoot;
         abilityManager.AbilityStateMachine.RecallState.OnRightRecall += RightRecall;
         abilityManager.AbilityStateMachine.RecallState.OnLeftRecall += LeftRecall;
-        abilityManager.AbilityStateMachine.TransportState.OnRightActivation += RightActivation;
-        abilityManager.AbilityStateMachine.TransportState.OnLeftActivation += LeftActivation;
-        abilityManager.AbilityStateMachine.TransportState.OnDash += Dash;
+        abilityManager.AbilityStateMachine.MoveLeftObject.OnRightActivation += RightActivation;
+        abilityManager.AbilityStateMachine.MoveRightObject.OnLeftActivation += LeftActivation;
+        abilityManager.AbilityStateMachine.MovePlayer.EnterDash += Dash;
         abilityManager.AbilityStateMachine.AimState.OnAirAim += EnterGravityFreeze;
         abilityManager.AbilityStateMachine.AimState.OnExitAim += QuitGravityFreeze;
     }
@@ -41,9 +41,9 @@ public class PlayerSoundManager : MonoBehaviour
         abilityManager.AbilityStateMachine.ShootState.OnLeftShoot -= LeftShoot;
         abilityManager.AbilityStateMachine.RecallState.OnRightRecall -= RightRecall;
         abilityManager.AbilityStateMachine.RecallState.OnLeftRecall -= LeftRecall;
-        abilityManager.AbilityStateMachine.TransportState.OnRightActivation -= RightActivation;
-        abilityManager.AbilityStateMachine.TransportState.OnLeftActivation -= LeftActivation;
-        abilityManager.AbilityStateMachine.TransportState.OnDash -= Dash;
+        abilityManager.AbilityStateMachine.MoveLeftObject.OnRightActivation -= RightActivation;
+        abilityManager.AbilityStateMachine.MoveRightObject.OnLeftActivation -= LeftActivation;
+        abilityManager.AbilityStateMachine.MovePlayer.EnterDash -= Dash;
     }
 
     public void RightShoot()

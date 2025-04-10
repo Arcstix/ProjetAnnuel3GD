@@ -107,7 +107,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8985292475141258581
 MonoBehaviour:
@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b55eff2c3e7341fbaa6c46ff8e9d871c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxSpeed: 10
 --- !u!114 &4950928553113127872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,8 +147,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactorType: 2
-  isInteractive: 0
-  isInteracting: 0
+  detectedObjects: []
+  _isInteractive: 0
+  _onWall: 0
+  canInteractWithPlayer: 1
 --- !u!1001 &3990679861233631217
 PrefabInstance:
   m_ObjectHideFlags: 0

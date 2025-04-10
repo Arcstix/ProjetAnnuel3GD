@@ -14,20 +14,20 @@ public class PlayerMovementManager : PlayerManager, I_Initializer
     public float sphereGroundCheckRadius = 0.2f;
     public float sphereDistanceGroundCheck = 0.5f;
 
-    private PlayerMovementStateMachine stateMachine;
+    private MovementStateMachine stateMachine;
     private PlayerReusableStateData reusableData;
 
     public event Action OnMovementStarted;
     
     public PlayerReusableStateData ReusableData { get => reusableData; set => reusableData = value; }
 
-    public PlayerMovementStateMachine StateMachine => stateMachine;
-
+    public MovementStateMachine StateMachine => stateMachine;
+    
     public void Init(PlayerReusableStateData reusableStateData)
     {
         reusableData = reusableStateData;
 
-        stateMachine = new PlayerMovementStateMachine(this);
+        stateMachine = new MovementStateMachine(this);
         stateMachine.ChangeState(stateMachine.IdleState);
         OnMovementStarted?.Invoke();
     }
@@ -69,6 +69,10 @@ public class PlayerMovementManager : PlayerManager, I_Initializer
 
     private void OnCollisionEnter(Collision other)
     {
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            Debug.Log("Collision Wall Enter");
+        }
         stateMachine?.OnCollisionEnter(other);
     }
 

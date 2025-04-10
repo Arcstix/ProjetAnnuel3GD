@@ -15,7 +15,7 @@ public class AbilityRecallState : AbilityState
     public override void Enter()
     {
         base.Enter();
-
+        
         if (reusableData.LeftInput)
         {
             OnLeftRecall?.Invoke();
