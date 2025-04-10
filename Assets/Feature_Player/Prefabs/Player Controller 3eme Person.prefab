@@ -356,13 +356,13 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 60.54422
+  field of view: 71.65216
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 3071
+    m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -698,6 +698,7 @@ GameObject:
   - component: {fileID: 9011495374266890239}
   - component: {fileID: 2504822229828253428}
   - component: {fileID: 6541187359964308589}
+  - component: {fileID: 6927001712821428279}
   m_Layer: 9
   m_Name: Player StateMachine
   m_TagString: Player
@@ -940,8 +941,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 5695835314643884536}
-  mouseSpeed: 0.1
-  gamepadSpeed: 10
 --- !u!114 &1514048884484430222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1047,6 +1046,20 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 4367882771013306227}
+--- !u!114 &6927001712821428279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3725881075513752365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e61a806513414d56b805ab9df825c755, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timeForWallRun: 0.5
+  _canWallRun: 0
 --- !u!1 &4197273346030736694
 GameObject:
   m_ObjectHideFlags: 0
@@ -1103,7 +1116,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 5081304130938120538}
   m_Follow: {fileID: 5081304130938120538}
   m_Lens:
-    FieldOfView: 60.54422
+    FieldOfView: 71.65216
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -1614,7 +1627,7 @@ MonoBehaviour:
   m_VerticalAxis:
     Value: 14
     m_SpeedMode: 1
-    m_MaxSpeed: 0.1
+    m_MaxSpeed: 0.01
     m_AccelTime: 0.8
     m_DecelTime: 0.05
     m_InputAxisName: Mouse Y
@@ -1638,7 +1651,7 @@ MonoBehaviour:
   m_HorizontalAxis:
     Value: 0
     m_SpeedMode: 1
-    m_MaxSpeed: 0.1
+    m_MaxSpeed: 0.01
     m_AccelTime: 0.8
     m_DecelTime: 0.25
     m_InputAxisName: Mouse X
