@@ -125,8 +125,8 @@ MonoBehaviour:
       <SpeedModifier>k__BackingField: 1.5
   <JumpData>k__BackingField:
     <SpeedModifier>k__BackingField: 1.5
-    <JumpHeight>k__BackingField: 1
-    <JumpTimer>k__BackingField: 0.2
+    <JumpHeight>k__BackingField: 2
+    <JumpTimer>k__BackingField: 0.3
     MaxAirJumps: 1
     DetectionRange: 15
     CorrectionForce: 60
@@ -135,9 +135,9 @@ MonoBehaviour:
     MaxDetectionAngle: 80
     SpeedReductionFactor: 0.5
   <FallingData>k__BackingField:
-    <SpeedModifier>k__BackingField: 1.5
-    <GravityModifier>k__BackingField: 5
-    <MaxFallingSpeed>k__BackingField: 50
+    <SpeedModifier>k__BackingField: 0.5
+    <GravityModifier>k__BackingField: 3
+    <MaxFallingSpeed>k__BackingField: 30
   <WallData>k__BackingField:
     WallLayer:
       serializedVersion: 2
@@ -158,7 +158,7 @@ MonoBehaviour:
     <LeftTool>k__BackingField: {fileID: 8985292475141258581, guid: 5edd0d58c6fb4214989ea10faea7db68, type: 3}
     <RecallSpeed>k__BackingField: 40
     <DistanceToEndRecall>k__BackingField: 0.5
-    <TransportPlayerSpeed>k__BackingField: 15
+    <TransportPlayerSpeed>k__BackingField: 20
     <TransportObjectSpeed>k__BackingField: 15
     <TransportCurve>k__BackingField:
       serializedVersion: 2
@@ -191,7 +191,7 @@ MonoBehaviour:
     <ConsumptionRate>k__BackingField: 90
     <RecoveryRate>k__BackingField: 50
   <CameraData>k__BackingField:
-    BaseFOV: 60
+    BaseFOV: 70
     SmoothingFactorBaseFOV: 0.05
     TransitionBaseTransportFOV:
       serializedVersion: 2
