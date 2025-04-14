@@ -76,7 +76,7 @@ public class AbilityMovePlayer : AbilityTransportState
             
             // Move Player to LeftObject
             Vector3 direction = (reusableData.LeftObject.transform.position -
-                                 _stateMachine.AbilityManager.RightLauncherTransform.position).normalized;
+                                 _stateMachine.AbilityManager.transform.position).normalized;
 
             float currentSpeed = CalculateSpeed(reusableData.LeftObject.transform.position);
             

@@ -15,7 +15,7 @@ public class AbilityMoveLeftObject : AbilityTransportState
         
         OnRightActivation?.Invoke();
 
-        leftInteraction = reusableData.LeftObject.GetComponent<InteractionSystem>();
+        leftInteraction = reusableData.LeftParent.GetComponent<InteractionSystem>();
         
         reusableData.OnTransportation = false;
     }
@@ -23,8 +23,11 @@ public class AbilityMoveLeftObject : AbilityTransportState
     public override void FixedTick()
     {
         base.FixedTick();
-        
-        MoveLeftObject();
+
+        if (leftInteraction.interactorType != InteractorType.Anchor)
+        {
+            MoveLeftObject();
+        }
     }
     
     public override void Exit()

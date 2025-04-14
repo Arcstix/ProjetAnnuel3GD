@@ -54,15 +54,15 @@ public class AbilityIdleState : AbilityState
         if (_stateMachine.AbilityManager.aimBotMode)
         {
             // 3rd person
-            if (rightShootRecall.WasPressedThisFrame())
+            if (rightShootThrow.WasPressedThisFrame())
             {
-                HandleRightShootRecall();
+                HandleRightShootThrow();
                 return;
             }
             
-            if (leftShootRecall.WasPressedThisFrame())
+            if (leftShootThrow.WasPressedThisFrame())
             {
-                HandleLeftShootRecall();
+                HandleLeftShootThrow();
                 return;
             }
         }
@@ -71,13 +71,13 @@ public class AbilityIdleState : AbilityState
             // 1st person 
             if (rightShootRecall.WasReleasedThisFrame())
             {
-                HandleRightShootRecall();
+                HandleRightShootThrow();
                 return;
             }
             
             if (leftShootRecall.WasReleasedThisFrame())
             {
-                HandleLeftShootRecall();
+                HandleLeftShootThrow();
                 return;
             }
         }
@@ -109,23 +109,28 @@ public class AbilityIdleState : AbilityState
                 HandleLeftAttraction();
             }
         }
-        
-        if (rightThrow.WasPerformedThisFrame() && targetSystem.rightTargetLaunch != null)
-        {
-            if (targetSystem.rightTargetLaunch.GetCurrentType() == InteractorType.Projectile)
-            {
-                reusableData.RightThrow = true;
-                _stateMachine.ChangeState(_stateMachine.ThrowState);
-            }
-        }
 
-        if (leftThrow.WasPerformedThisFrame() && targetSystem.leftTargetLaunch != null)
+        if (recall.WasPressedThisFrame())
         {
-            if (targetSystem.leftTargetLaunch.GetCurrentType() == InteractorType.Projectile)
-            {
-                reusableData.LeftThrow = true;
-                _stateMachine.ChangeState(_stateMachine.ThrowState);
-            }
+            HandleRecall();
         }
+        
+        // if (rightThrow.WasPerformedThisFrame() && targetSystem.rightTargetLaunch != null)
+        // {
+        //     if (targetSystem.rightTargetLaunch.GetCurrentType() == InteractorType.Projectile)
+        //     {
+        //         reusableData.RightThrow = true;
+        //         _stateMachine.ChangeState(_stateMachine.ThrowState);
+        //     }
+        // }
+        //
+        // if (leftThrow.WasPerformedThisFrame() && targetSystem.leftTargetLaunch != null)
+        // {
+        //     if (targetSystem.leftTargetLaunch.GetCurrentType() == InteractorType.Projectile)
+        //     {
+        //         reusableData.LeftThrow = true;
+        //         _stateMachine.ChangeState(_stateMachine.ThrowState);
+        //     }
+        // }
     }
 }

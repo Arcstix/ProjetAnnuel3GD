@@ -34,12 +34,19 @@ public class AbilityMoveBothObject : AbilityTransportState
     private void MoveBothObject()
     {
         rightInteraction.Interactable(true);
-                
-        // Move LeftParent to RightParent
-        reusableData.LeftObject.Move(reusableData.LeftParent, reusableData.RightParent);
-        
+
+        if (rightInteraction.interactorType != InteractorType.Anchor)
+        {
+            // Move LeftParent to RightParent
+            reusableData.LeftObject.Move(reusableData.LeftParent, reusableData.RightParent);
+        }
+
+        if (leftInteraction.interactorType != InteractorType.Anchor)
+        {
+            // Move RightParent to LeftParent
+            reusableData.RightObject.Move(reusableData.RightParent, reusableData.LeftParent);
+        }
         leftInteraction.Interactable(true);
-        // Move RightParent to LeftParent
-        reusableData.RightObject.Move(reusableData.RightParent, reusableData.LeftParent);
+        
     }
 }

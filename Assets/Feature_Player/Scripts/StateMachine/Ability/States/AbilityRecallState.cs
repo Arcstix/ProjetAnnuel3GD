@@ -24,7 +24,6 @@ public class AbilityRecallState : AbilityState
                 reusableData.LeftObject.DisableInteraction();
                 targetSystem.leftTargetLaunch = null;
             }
-            
         }
 
         if (reusableData.RightInput)
@@ -36,45 +35,79 @@ public class AbilityRecallState : AbilityState
                 targetSystem.rightTargetLaunch = null;
             }
         }
+        
+        Debug.Log("Enter recall");
     }
     
     public override void Tick()
     {
         base.Tick();
         
-        if (reusableData.LeftInput)
+        if (reusableData.LeftInput && reusableData.RightInput)
         {
+            Debug.Log("tick recall");
             if (reusableData.LeftObject)
             {
                 reusableData.LeftObject.SetNewInfo(leftLauncher.position, metricsManager.CurrentMetrics.AbilityData.RecallSpeed, null);
-            }
-            else
-            {
-                _stateMachine.ChangeState(_stateMachine.IdleState);
-                return;
+                
+                if (Vector3.Distance(reusableData.LeftObject.transform.position, leftLauncher.position) < metricsManager.CurrentMetrics.AbilityData.DistanceToEndRecall)
+                {
+                    GameObject.Destroy(reusableData.LeftObject.gameObject);
+                }
             }
             
-            if (Vector3.Distance(reusableData.LeftObject.transform.position, leftLauncher.position) < metricsManager.CurrentMetrics.AbilityData.DistanceToEndRecall)
+            if (reusableData.RightObject)
+            {
+                reusableData.RightObject.SetNewInfo(rightLauncher.position, metricsManager.CurrentMetrics.AbilityData.RecallSpeed, null);
+                
+                if (Vector3.Distance(reusableData.RightObject.transform.position, rightLauncher.position) < metricsManager.CurrentMetrics.AbilityData.DistanceToEndRecall)
+                {
+                    GameObject.Destroy(reusableData.RightObject.gameObject);
+                }
+            }
+
+            if (reusableData.LeftObject == null && reusableData.RightObject == null)
             {
                 _stateMachine.ChangeState(_stateMachine.IdleState);
             }
         }
-        
-        if (reusableData.RightInput)
+
+        if (!reusableData.RightInput || !reusableData.LeftInput)
         {
-            if (reusableData.RightObject)
+            if (reusableData.LeftInput)
             {
-                reusableData.RightObject.SetNewInfo(rightLauncher.position, metricsManager.CurrentMetrics.AbilityData.RecallSpeed, null);
-            }
-            else
-            {
-                _stateMachine.ChangeState(_stateMachine.IdleState);
-                return;
-            }
+                if (reusableData.LeftObject)
+                {
+                    reusableData.LeftObject.SetNewInfo(leftLauncher.position, metricsManager.CurrentMetrics.AbilityData.RecallSpeed, null);
+                }
+                else
+                {
+                    _stateMachine.ChangeState(_stateMachine.IdleState);
+                    return;
+                }
             
-            if (Vector3.Distance(reusableData.RightObject.transform.position, rightLauncher.position) < metricsManager.CurrentMetrics.AbilityData.DistanceToEndRecall)
+                if (Vector3.Distance(reusableData.LeftObject.transform.position, leftLauncher.position) < metricsManager.CurrentMetrics.AbilityData.DistanceToEndRecall)
+                {
+                    _stateMachine.ChangeState(_stateMachine.IdleState);
+                }
+            }
+        
+            if (reusableData.RightInput)
             {
-                _stateMachine.ChangeState(_stateMachine.IdleState);
+                if (reusableData.RightObject)
+                {
+                    reusableData.RightObject.SetNewInfo(rightLauncher.position, metricsManager.CurrentMetrics.AbilityData.RecallSpeed, null);
+                }
+                else
+                {
+                    _stateMachine.ChangeState(_stateMachine.IdleState);
+                    return;
+                }
+            
+                if (Vector3.Distance(reusableData.RightObject.transform.position, rightLauncher.position) < metricsManager.CurrentMetrics.AbilityData.DistanceToEndRecall)
+                {
+                    _stateMachine.ChangeState(_stateMachine.IdleState);
+                }
             }
         }
     }
@@ -82,7 +115,9 @@ public class AbilityRecallState : AbilityState
     public override void Exit()
     {
         base.Exit();
-
+        
+        Debug.Log("exit recall");
+        
         if (reusableData.LeftInput)
         {
             if (reusableData.LeftObject)

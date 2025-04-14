@@ -25,10 +25,13 @@ public class AbilityState : IState
 
     protected InputAction rightShootRecall;
     protected InputAction leftShootRecall;
+    protected InputAction rightShootThrow;
+    protected InputAction leftShootThrow;
     protected InputAction rightThrow;
     protected InputAction leftThrow;
     protected InputAction leftAttraction;
     protected InputAction rightAttraction;
+    protected InputAction recall;
     
     // Sert � la cr�ation de raccourcie.
     // ATTENTION AUX SCRIPTABLES OBJECTS QUI PEUVENT TOTALEMENT CHANGER COMME LE PLAYERSO !
@@ -49,10 +52,13 @@ public class AbilityState : IState
 
         rightShootRecall = input.actions["ShootRecallRight"];
         leftShootRecall = input.actions["ShootRecallLeft"];
+        rightShootThrow = input.actions["ShootThrowRight"];
+        leftShootThrow = input.actions["ShootThrowLeft"];
         rightThrow = input.actions["ThrowRight"];
         leftThrow = input.actions["ThrowLeft"];
         leftAttraction = input.actions["AttractionLeft"];
         rightAttraction = input.actions["AttractionRight"];
+        recall = input.actions["Recall"];
     }
 
     #region State Methods
@@ -142,6 +148,55 @@ public class AbilityState : IState
     
     #endregion
     
+    #region Shoot / Throw State
+    protected void HandleRightShootThrow()
+    {
+        reusableData.RightInput = true;
+        if (reusableData.RightObject == null)
+        {
+            if (!_stateMachine.AbilityManager.aimBotMode || targetSystem.currentTarget != null)
+            {
+                _stateMachine.ChangeState(_stateMachine.ShootState);
+            }
+        }
+        else
+        {
+            if (targetSystem.rightTargetLaunch != null)
+            {
+                if (targetSystem.rightTargetLaunch.GetCurrentType() == InteractorType.Projectile)
+                {
+                    reusableData.RightThrow = true;
+                    _stateMachine.ChangeState(_stateMachine.ThrowState);
+                }
+            }
+        }
+    }
+    
+    protected void HandleLeftShootThrow()
+    {
+        reusableData.LeftInput = true;
+        if (reusableData.LeftObject == null)
+        {
+            if (!_stateMachine.AbilityManager.aimBotMode || targetSystem.currentTarget != null)
+            {
+                _stateMachine.ChangeState(_stateMachine.ShootState);
+            }
+        }
+        else
+        {
+            if (targetSystem.leftTargetLaunch != null)
+            {
+                if (targetSystem.leftTargetLaunch.GetCurrentType() == InteractorType.Projectile)
+                {
+                    reusableData.LeftThrow = true;
+                    _stateMachine.ChangeState(_stateMachine.ThrowState);
+                }
+            }
+        }
+    }
+    
+    #endregion
+    
     #region AttractionState
 
     protected void HandleRightAttraction()
@@ -171,7 +226,11 @@ public class AbilityState : IState
             // Case : RightObject != null && LeftObject == null --> Attraction du Player vers la cible
             if (reusableData.LeftObject == null)
             {
-                _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                if (reusableData.RightParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
+                    InteractorType.Projectile)
+                {
+                    _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                }
             }
         }
     }
@@ -202,13 +261,25 @@ public class AbilityState : IState
             // Case : RightObject == null && LeftObject != null --> Attraction du Player vers la cible
             if (reusableData.RightObject == null)
             {
-                _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                if (reusableData.LeftParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
+                    InteractorType.Projectile)
+                {
+                    _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                }
                 return;
             }
         }
     }
     
     #endregion
+
+    protected void HandleRecall()
+    {
+        reusableData.RightInput = true;
+        reusableData.LeftInput = true;
+        
+        _stateMachine.ChangeState(_stateMachine.RecallState);
+    }
     
     #endregion
     

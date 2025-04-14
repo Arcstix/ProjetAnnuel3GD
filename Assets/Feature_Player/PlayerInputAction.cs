@@ -55,7 +55,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ShootRecallRight"",
+                    ""name"": ""ShootThrowRight"",
                     ""type"": ""Button"",
                     ""id"": ""b424d459-e885-4d6d-8783-77cf0972ce52"",
                     ""expectedControlType"": ""Button"",
@@ -64,9 +64,27 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ShootRecallLeft"",
+                    ""name"": ""ShootRecallRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""41df796b-bc5d-4822-ba6f-7ab4a1523de4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=0.2)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShootThrowLeft"",
                     ""type"": ""Button"",
                     ""id"": ""8c22dd22-e0c0-40ec-b9d4-45bb885829f3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=0.2)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShootRecallLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""a14f3a40-1c98-4e16-8e73-522d65c870f1"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Hold(duration=0.2)"",
@@ -91,36 +109,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SwitchAttraction"",
-                    ""type"": ""Button"",
-                    ""id"": ""c87b8402-16f8-4233-bed1-f040e519dd60"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""44ec42c2-cc3f-4e12-987d-fd785c608b06"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Zoom"",
-                    ""type"": ""Value"",
-                    ""id"": ""1ed233cd-6c1c-45ed-8b4d-f80af3ac905a"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": ""Clamp(min=-0.1,max=0.1),Invert"",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""CameraToggle"",
-                    ""type"": ""Button"",
-                    ""id"": ""ce194096-1956-4135-a950-66b61da22aae"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -139,6 +130,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""name"": ""ThrowLeft"",
                     ""type"": ""Button"",
                     ""id"": ""37c858a2-6503-41e9-9c18-1456603571c1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Recall"",
+                    ""type"": ""Button"",
+                    ""id"": ""fc497863-abc5-432b-a8e7-5abc4ccc23ed"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -263,7 +263,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ShootRecallRight"",
+                    ""action"": ""ShootThrowRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -274,29 +274,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ShootRecallRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0b2ced4f-0bf1-4b83-83b6-65bb63aca2c8"",
-                    ""path"": ""<Keyboard>/#(R)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwitchAttraction"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""80b31d52-f2f9-4cf4-8e74-fbfada95b0cb"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwitchAttraction"",
+                    ""action"": ""ShootThrowRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -329,7 +307,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ShootRecallLeft"",
+                    ""action"": ""ShootThrowLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -340,7 +318,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ShootRecallLeft"",
+                    ""action"": ""ShootThrowLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -390,28 +368,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f7a40088-e463-48fb-8afc-6071ebc9ef29"",
-                    ""path"": ""<Keyboard>/#(A)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CameraToggle"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d18ae059-0ca5-4409-8012-43e895847a83"",
-                    ""path"": ""<Mouse>/scroll/y"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Zoom"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""aa7a5f01-392c-41e5-b4f9-eefd4ef1831d"",
                     ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
@@ -453,6 +409,72 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""ThrowLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0dc8d5bb-3291-4371-9133-7d6a398d0c17"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Recall"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""37f24c33-23b0-4497-a931-5361e3a6bbee"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Recall"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""966eb3f7-8469-4e5a-9ec7-98140082e6b9"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShootRecallRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""02964d84-46f3-4d9a-98b7-daf278ae85fd"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShootRecallRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e535be81-ec23-4a6a-8d64-8b80f8b01080"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShootRecallLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ac1a6aac-3e3d-4448-83ff-3a74a7f71d99"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShootRecallLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -492,16 +514,16 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_FreeLook = m_Player.FindAction("FreeLook", throwIfNotFound: true);
         m_Player_WalkToggle = m_Player.FindAction("WalkToggle", throwIfNotFound: true);
+        m_Player_ShootThrowRight = m_Player.FindAction("ShootThrowRight", throwIfNotFound: true);
         m_Player_ShootRecallRight = m_Player.FindAction("ShootRecallRight", throwIfNotFound: true);
+        m_Player_ShootThrowLeft = m_Player.FindAction("ShootThrowLeft", throwIfNotFound: true);
         m_Player_ShootRecallLeft = m_Player.FindAction("ShootRecallLeft", throwIfNotFound: true);
         m_Player_AttractionRight = m_Player.FindAction("AttractionRight", throwIfNotFound: true);
         m_Player_AttractionLeft = m_Player.FindAction("AttractionLeft", throwIfNotFound: true);
-        m_Player_SwitchAttraction = m_Player.FindAction("SwitchAttraction", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
-        m_Player_CameraToggle = m_Player.FindAction("CameraToggle", throwIfNotFound: true);
         m_Player_ThrowRight = m_Player.FindAction("ThrowRight", throwIfNotFound: true);
         m_Player_ThrowLeft = m_Player.FindAction("ThrowLeft", throwIfNotFound: true);
+        m_Player_Recall = m_Player.FindAction("Recall", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -566,16 +588,16 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_FreeLook;
     private readonly InputAction m_Player_WalkToggle;
+    private readonly InputAction m_Player_ShootThrowRight;
     private readonly InputAction m_Player_ShootRecallRight;
+    private readonly InputAction m_Player_ShootThrowLeft;
     private readonly InputAction m_Player_ShootRecallLeft;
     private readonly InputAction m_Player_AttractionRight;
     private readonly InputAction m_Player_AttractionLeft;
-    private readonly InputAction m_Player_SwitchAttraction;
     private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_Zoom;
-    private readonly InputAction m_Player_CameraToggle;
     private readonly InputAction m_Player_ThrowRight;
     private readonly InputAction m_Player_ThrowLeft;
+    private readonly InputAction m_Player_Recall;
     public struct PlayerActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -583,16 +605,16 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @FreeLook => m_Wrapper.m_Player_FreeLook;
         public InputAction @WalkToggle => m_Wrapper.m_Player_WalkToggle;
+        public InputAction @ShootThrowRight => m_Wrapper.m_Player_ShootThrowRight;
         public InputAction @ShootRecallRight => m_Wrapper.m_Player_ShootRecallRight;
+        public InputAction @ShootThrowLeft => m_Wrapper.m_Player_ShootThrowLeft;
         public InputAction @ShootRecallLeft => m_Wrapper.m_Player_ShootRecallLeft;
         public InputAction @AttractionRight => m_Wrapper.m_Player_AttractionRight;
         public InputAction @AttractionLeft => m_Wrapper.m_Player_AttractionLeft;
-        public InputAction @SwitchAttraction => m_Wrapper.m_Player_SwitchAttraction;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
-        public InputAction @CameraToggle => m_Wrapper.m_Player_CameraToggle;
         public InputAction @ThrowRight => m_Wrapper.m_Player_ThrowRight;
         public InputAction @ThrowLeft => m_Wrapper.m_Player_ThrowLeft;
+        public InputAction @Recall => m_Wrapper.m_Player_Recall;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -611,9 +633,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @WalkToggle.started += instance.OnWalkToggle;
             @WalkToggle.performed += instance.OnWalkToggle;
             @WalkToggle.canceled += instance.OnWalkToggle;
+            @ShootThrowRight.started += instance.OnShootThrowRight;
+            @ShootThrowRight.performed += instance.OnShootThrowRight;
+            @ShootThrowRight.canceled += instance.OnShootThrowRight;
             @ShootRecallRight.started += instance.OnShootRecallRight;
             @ShootRecallRight.performed += instance.OnShootRecallRight;
             @ShootRecallRight.canceled += instance.OnShootRecallRight;
+            @ShootThrowLeft.started += instance.OnShootThrowLeft;
+            @ShootThrowLeft.performed += instance.OnShootThrowLeft;
+            @ShootThrowLeft.canceled += instance.OnShootThrowLeft;
             @ShootRecallLeft.started += instance.OnShootRecallLeft;
             @ShootRecallLeft.performed += instance.OnShootRecallLeft;
             @ShootRecallLeft.canceled += instance.OnShootRecallLeft;
@@ -623,24 +651,18 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @AttractionLeft.started += instance.OnAttractionLeft;
             @AttractionLeft.performed += instance.OnAttractionLeft;
             @AttractionLeft.canceled += instance.OnAttractionLeft;
-            @SwitchAttraction.started += instance.OnSwitchAttraction;
-            @SwitchAttraction.performed += instance.OnSwitchAttraction;
-            @SwitchAttraction.canceled += instance.OnSwitchAttraction;
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
-            @Zoom.started += instance.OnZoom;
-            @Zoom.performed += instance.OnZoom;
-            @Zoom.canceled += instance.OnZoom;
-            @CameraToggle.started += instance.OnCameraToggle;
-            @CameraToggle.performed += instance.OnCameraToggle;
-            @CameraToggle.canceled += instance.OnCameraToggle;
             @ThrowRight.started += instance.OnThrowRight;
             @ThrowRight.performed += instance.OnThrowRight;
             @ThrowRight.canceled += instance.OnThrowRight;
             @ThrowLeft.started += instance.OnThrowLeft;
             @ThrowLeft.performed += instance.OnThrowLeft;
             @ThrowLeft.canceled += instance.OnThrowLeft;
+            @Recall.started += instance.OnRecall;
+            @Recall.performed += instance.OnRecall;
+            @Recall.canceled += instance.OnRecall;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -654,9 +676,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @WalkToggle.started -= instance.OnWalkToggle;
             @WalkToggle.performed -= instance.OnWalkToggle;
             @WalkToggle.canceled -= instance.OnWalkToggle;
+            @ShootThrowRight.started -= instance.OnShootThrowRight;
+            @ShootThrowRight.performed -= instance.OnShootThrowRight;
+            @ShootThrowRight.canceled -= instance.OnShootThrowRight;
             @ShootRecallRight.started -= instance.OnShootRecallRight;
             @ShootRecallRight.performed -= instance.OnShootRecallRight;
             @ShootRecallRight.canceled -= instance.OnShootRecallRight;
+            @ShootThrowLeft.started -= instance.OnShootThrowLeft;
+            @ShootThrowLeft.performed -= instance.OnShootThrowLeft;
+            @ShootThrowLeft.canceled -= instance.OnShootThrowLeft;
             @ShootRecallLeft.started -= instance.OnShootRecallLeft;
             @ShootRecallLeft.performed -= instance.OnShootRecallLeft;
             @ShootRecallLeft.canceled -= instance.OnShootRecallLeft;
@@ -666,24 +694,18 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @AttractionLeft.started -= instance.OnAttractionLeft;
             @AttractionLeft.performed -= instance.OnAttractionLeft;
             @AttractionLeft.canceled -= instance.OnAttractionLeft;
-            @SwitchAttraction.started -= instance.OnSwitchAttraction;
-            @SwitchAttraction.performed -= instance.OnSwitchAttraction;
-            @SwitchAttraction.canceled -= instance.OnSwitchAttraction;
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
-            @Zoom.started -= instance.OnZoom;
-            @Zoom.performed -= instance.OnZoom;
-            @Zoom.canceled -= instance.OnZoom;
-            @CameraToggle.started -= instance.OnCameraToggle;
-            @CameraToggle.performed -= instance.OnCameraToggle;
-            @CameraToggle.canceled -= instance.OnCameraToggle;
             @ThrowRight.started -= instance.OnThrowRight;
             @ThrowRight.performed -= instance.OnThrowRight;
             @ThrowRight.canceled -= instance.OnThrowRight;
             @ThrowLeft.started -= instance.OnThrowLeft;
             @ThrowLeft.performed -= instance.OnThrowLeft;
             @ThrowLeft.canceled -= instance.OnThrowLeft;
+            @Recall.started -= instance.OnRecall;
+            @Recall.performed -= instance.OnRecall;
+            @Recall.canceled -= instance.OnRecall;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -724,15 +746,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnFreeLook(InputAction.CallbackContext context);
         void OnWalkToggle(InputAction.CallbackContext context);
+        void OnShootThrowRight(InputAction.CallbackContext context);
         void OnShootRecallRight(InputAction.CallbackContext context);
+        void OnShootThrowLeft(InputAction.CallbackContext context);
         void OnShootRecallLeft(InputAction.CallbackContext context);
         void OnAttractionRight(InputAction.CallbackContext context);
         void OnAttractionLeft(InputAction.CallbackContext context);
-        void OnSwitchAttraction(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnZoom(InputAction.CallbackContext context);
-        void OnCameraToggle(InputAction.CallbackContext context);
         void OnThrowRight(InputAction.CallbackContext context);
         void OnThrowLeft(InputAction.CallbackContext context);
+        void OnRecall(InputAction.CallbackContext context);
     }
 }
