@@ -46,6 +46,6 @@ public class PushSpringboardState : SpringboardState
        
         float t = pushTimer / pushDuration; // Normalisation du temps (0 à 1)
         float force = pushCurve.Evaluate(t) * pushForceMultiplier;
-        rb.AddForce(Vector3.up * force, ForceMode.Impulse);
+        rb.AddForce(transform.up * force, ForceMode.Impulse);
     }
 }
