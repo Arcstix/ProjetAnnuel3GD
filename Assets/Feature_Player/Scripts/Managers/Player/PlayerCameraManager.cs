@@ -19,6 +19,9 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
     
     private InputAction freeLookAction;
     private string lastUsedDevice = "";
+    private float currentFOV = 0f;
+    private float targetFOV;
+    
 
     private void Awake()
     {
@@ -33,11 +36,21 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
         abilityManager.AbilityStateMachine.MovePlayer.ExitDash += SetBaseFOV;
 
         cameraData = metricsManager.CurrentMetrics.CameraData;
+        targetFOV = cameraData.BaseFOV;
+        
         // Récupère l’action "FreeLook" de l’Action Map
         freeLookAction = playerInput.actions["FreeLook"];
         if (freeLookAction != null)
         {
             freeLookAction.performed += OnFreeLookPerformed;
+        }
+    }
+
+    private void Update()
+    {
+        if (currentFOV > targetFOV)
+        {
+            SwitchToBaseFOV();
         }
     }
 
@@ -90,12 +103,19 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
 
     private void SetBaseFOV()
     {
+        targetFOV = cameraData.BaseFOV;
+    }
+    
+    private void SwitchToBaseFOV()
+    {
         virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(virtualCamera.m_Lens.FieldOfView,
             metricsManager.CurrentMetrics.CameraData.BaseFOV, metricsManager.CurrentMetrics.CameraData.SmoothingFactorBaseFOV);
+        currentFOV = virtualCamera.m_Lens.FieldOfView;
     }
     
     private void SetTransportFOV(float time)
     {
         virtualCamera.m_Lens.FieldOfView = metricsManager.CurrentMetrics.CameraData.TransitionBaseTransportFOV.Evaluate(time);
+        currentFOV = virtualCamera.m_Lens.FieldOfView;
     }
 }

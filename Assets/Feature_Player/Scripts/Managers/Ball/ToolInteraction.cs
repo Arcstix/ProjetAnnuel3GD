@@ -30,6 +30,10 @@ public class ToolInteraction : InteractionSystem
                     {
                         interactiveTarget.EnableInteraction();
                     }
+                    ToolManager toolManager = GetComponentInParent<ToolManager>();
+                    
+                    toolManager.DisableInteraction();
+                    
                     Destroy(this.gameObject);
                 }
                 return;

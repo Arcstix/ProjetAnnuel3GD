@@ -21,7 +21,10 @@ public class AbilityRecallState : AbilityState
             OnLeftRecall?.Invoke();
             if (reusableData.LeftParent != null)
             {
-                reusableData.LeftObject.DisableInteraction();
+                if (reusableData.LeftObject != null)
+                {
+                    reusableData.LeftObject.DisableInteraction();
+                }
                 targetSystem.leftTargetLaunch = null;
             }
         }
@@ -31,7 +34,11 @@ public class AbilityRecallState : AbilityState
             OnRightRecall?.Invoke();
             if (reusableData.RightParent != null)
             {
-                reusableData.RightObject.DisableInteraction();
+                if (reusableData.RightObject != null)
+                {
+                    reusableData.RightObject.DisableInteraction();
+                }
+                
                 targetSystem.rightTargetLaunch = null;
             }
         }
@@ -126,6 +133,7 @@ public class AbilityRecallState : AbilityState
             }
             reusableData.LeftObject = null;
             reusableData.LeftParent = null;
+            targetSystem.leftTargetLaunch = null;
             leftLauncher.GetComponent<MeshRenderer>().enabled = true;
         }
 
@@ -137,6 +145,7 @@ public class AbilityRecallState : AbilityState
             }
             reusableData.RightObject = null;
             reusableData.RightParent = null;
+            targetSystem.rightTargetLaunch = null;
             rightLauncher.GetComponent<MeshRenderer>().enabled = true;
         }
         

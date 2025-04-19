@@ -42,10 +42,10 @@ public class AbilityShootState : AbilityState
             if (reusableData.ObjectAutoAimed != null)
             {
                 reusableData.LeftParent = reusableData.ObjectAutoAimed;
+                reusableData.LeftObject = InstantiateBall(reusableData.LeftObject, metricsManager.CurrentMetrics.AbilityData.LeftTool, leftLauncher.position);
+                reusableData.LeftObject.InitializeBall(metricsManager.CurrentMetrics.AbilityData.ShootSpeed, metricsManager.CurrentMetrics.AbilityData.TransportObjectSpeed, aimEndPosition, leftProjectileLauncher,reusableData.LeftParent, reusableData.ObjectAutoAimed);
+                targetSystem.leftTargetLaunch = reusableData.ObjectAutoAimed.GetComponent<InteractiveTarget>();
             }
-            reusableData.LeftObject = InstantiateBall(reusableData.LeftObject, metricsManager.CurrentMetrics.AbilityData.LeftTool, leftLauncher.position);
-            reusableData.LeftObject.InitializeBall(metricsManager.CurrentMetrics.AbilityData.ShootSpeed, metricsManager.CurrentMetrics.AbilityData.TransportObjectSpeed, aimEndPosition, leftProjectileLauncher,reusableData.LeftParent, reusableData.ObjectAutoAimed);
-            targetSystem.leftTargetLaunch = reusableData.ObjectAutoAimed.GetComponent<InteractiveTarget>();
         }
         
 
@@ -56,10 +56,11 @@ public class AbilityShootState : AbilityState
             if (reusableData.ObjectAutoAimed != null)
             {
                 reusableData.RightParent = reusableData.ObjectAutoAimed;
+                reusableData.RightObject = InstantiateBall(reusableData.RightObject, metricsManager.CurrentMetrics.AbilityData.RightTool, rightLauncher.position);
+                reusableData.RightObject.InitializeBall(metricsManager.CurrentMetrics.AbilityData.ShootSpeed, metricsManager.CurrentMetrics.AbilityData.TransportObjectSpeed, aimEndPosition, rightProjectileLauncher, reusableData.RightParent, reusableData.ObjectAutoAimed);
+                targetSystem.rightTargetLaunch = reusableData.ObjectAutoAimed.GetComponent<InteractiveTarget>();
             }
-            reusableData.RightObject = InstantiateBall(reusableData.RightObject, metricsManager.CurrentMetrics.AbilityData.RightTool, rightLauncher.position);
-            reusableData.RightObject.InitializeBall(metricsManager.CurrentMetrics.AbilityData.ShootSpeed, metricsManager.CurrentMetrics.AbilityData.TransportObjectSpeed, aimEndPosition, rightProjectileLauncher, reusableData.RightParent, reusableData.ObjectAutoAimed);
-            targetSystem.rightTargetLaunch = reusableData.ObjectAutoAimed.GetComponent<InteractiveTarget>();
+            
         }
         
         _stateMachine.ChangeState(_stateMachine.IdleState);

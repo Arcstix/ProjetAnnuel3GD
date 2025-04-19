@@ -152,15 +152,18 @@ public class ToolManager : MonoBehaviour
 
     public void DisableInteraction()
     {
-        Rigidbody rb = _futurParent.GetComponent<Rigidbody>();
-        if (rb)
+        if (_futurParent != null)
         {
-            rb.useGravity = true;
-        }
-        InteractionSystem interaction = _futurParent.GetComponents<InteractionSystem>().FirstOrDefault(c => c.enabled);
-        if (interaction != null)
-        {
-            interaction.ExitInteraction(GetComponent<InteractionSystem>());
+            Rigidbody rb = _futurParent.GetComponent<Rigidbody>();
+            if (rb)
+            {
+                rb.useGravity = true;
+            }
+            InteractionSystem interaction = _futurParent.GetComponents<InteractionSystem>().FirstOrDefault(c => c.enabled);
+            if (interaction != null)
+            {
+                interaction.ExitInteraction(GetComponent<InteractionSystem>());
+            }
         }
     }
 
