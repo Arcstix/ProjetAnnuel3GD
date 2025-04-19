@@ -59,7 +59,7 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
 
     private void ApplySpeed(string deviceType)
     {
-        float speed = deviceType == "Gamepad" ? cameraData.ControllerSpeed * 10 : cameraData.MouseSpeed / 100;
+        float speed = deviceType == "Gamepad" ? cameraData.ControllerSpeed : cameraData.MouseSpeed / 10;
 
         if (virtualCamera != null)
         {

@@ -19,6 +19,6 @@ public class PlayerCameraData
     // [field: SerializeField] [Range(0f, 10f)] public float ZoomSmoothing = 4f;
     // [field: SerializeField] [Range(0f, 10f)] public float ZoomSensitivity = 1f;
 
-    [field: SerializeField] [Range(0f, 10f)] public float ControllerSpeed = 1f;
-    [field: SerializeField] [Range(0f, 10f)] public float MouseSpeed = 1f;
+    [field: SerializeField] [Range(0f, 20f)] public float ControllerSpeed = 1f;
+    [field: SerializeField] [Range(0f, 20f)] public float MouseSpeed = 1f;
 }
