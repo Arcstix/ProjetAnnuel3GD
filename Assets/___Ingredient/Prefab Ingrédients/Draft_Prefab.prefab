@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 134298749084046954}
   - component: {fileID: 2368594771534842953}
   m_Layer: 0
-  m_Name: Springboard
+  m_Name: Draft_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -309.65, y: -27.66, z: -134.25}
-  m_LocalScale: {x: 2.0314717, y: 0.26992738, z: 0.94929796}
+  m_LocalScale: {x: 3.0498, y: 0.26992738, z: 2.6731}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a9addb0bdeda91f4b8437fcfe967ac67, type: 2}
+  - {fileID: 2100000, guid: 8355f77d54cd42f4fbdfdc9e38aa55a9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -173,6 +173,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  pushDuration: 0.3
+  pushDuration: 2
   pushTimer: 0
-  pushForceMultiplier: 2
+  pushForceMultiplier: 5
