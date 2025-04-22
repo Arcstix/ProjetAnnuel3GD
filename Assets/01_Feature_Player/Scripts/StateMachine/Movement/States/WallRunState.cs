@@ -24,11 +24,11 @@ public class WallRunState : WallState
         
         if (reusableData.WallRight)
         {
-            stateMachine.MovementManager.Cam.transform.DOLocalRotate(new Vector3(0, 0, 5), 0.25f);
+            OnWallRun?.Invoke(metricsManager.CurrentMetrics.WallData.Inclinaison);
         }
         else
         {
-            stateMachine.MovementManager.Cam.transform.DOLocalRotate(new Vector3(0, 0, -5), 0.25f);
+            OnWallRun?.Invoke(-metricsManager.CurrentMetrics.WallData.Inclinaison);
         }
     }
 
@@ -56,8 +56,6 @@ public class WallRunState : WallState
 
         // forward force
         rigidbody.AddForce(slideDirection * wallData.WallRunForce - GetCurrentHorizontalVelocity(), ForceMode.VelocityChange);
-        
-        Camera.main.transform.DOLocalRotate(new Vector3(0, 0, 0), 0.25f);
         ExitWallRun?.Invoke();
     }
 

@@ -13,6 +13,7 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
 
     private PlayerMetricsManager metricsManager;
     private PlayerAbilityManager abilityManager;
+    private PlayerMovementManager movementManager;
     private PlayerInput playerInput;
     private CinemachineFramingTransposer framingTransposer;
     private float currentTargetDistance;
@@ -22,6 +23,7 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
     private string lastUsedDevice = "";
     private float currentFOV = 0f;
     private float targetFOV;
+    private float targetDutch;
     
 
     private void Awake()
@@ -33,8 +35,11 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
     {
         metricsManager = GetComponent<PlayerMetricsManager>();
         abilityManager = GetComponent<PlayerAbilityManager>();
+        movementManager = GetComponent<PlayerMovementManager>();
         abilityManager.AbilityStateMachine.MovePlayer.SpeedModifierEvent += SetTransportFOV;
         abilityManager.AbilityStateMachine.MovePlayer.ExitDash += SetBaseFOV;
+        movementManager.StateMachine.WallRunState.OnWallRun += WallRunRotate;
+        movementManager.StateMachine.WallRunState.ExitWallRun += ExitWallRun;
 
         cameraData = metricsManager.CurrentMetrics.CameraData;
         targetFOV = cameraData.BaseFOV;
@@ -53,6 +58,16 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
         {
             SwitchToBaseFOV();
         }
+
+        if (targetDutch > virtualCamera.m_Lens.Dutch || targetDutch < virtualCamera.m_Lens.Dutch)
+        {
+            UpdateDutch();
+        }
+    }
+
+    private void UpdateDutch()
+    {
+        virtualCamera.m_Lens.Dutch = Mathf.Lerp(virtualCamera.m_Lens.Dutch, targetDutch, metricsManager.CurrentMetrics.WallData.SmoothInclinaison);
     }
 
     private void OnFreeLookPerformed(InputAction.CallbackContext context)
@@ -122,6 +137,11 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
 
     private void WallRunRotate(float zTilt)
     {
-        Camera.main.transform.DOLocalRotate(new Vector3(0, 0, zTilt), 0.25f);
+        targetDutch = zTilt;
+    }
+
+    private void ExitWallRun()
+    {
+        targetDutch = 0;
     }
 }
