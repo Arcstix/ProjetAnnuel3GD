@@ -24,15 +24,47 @@ public class AbilityMovePlayer : AbilityTransportState
         if (reusableData.RightObject)
         {
             reusableData.RightObject.GetComponent<InteractionSystem>().Interactable(true);
+            reusableData.RightActivation = true;
         }
         else
         {
             reusableData.LeftObject.GetComponent<InteractionSystem>().Interactable(true);
+            reusableData.LeftActivation = true;
         }
         
         EnterDash?.Invoke();
         reusableData.OnTransportation = true;
         startPosition = _stateMachine.AbilityManager.transform.position;
+    }
+
+    public override void Tick()
+    {
+        base.Tick();
+        
+        if (reusableData.RightObject != null && reusableData.LeftObject != null)
+        {
+            _stateMachine.ChangeState(_stateMachine.IdleState);
+            return;
+        }
+        
+        if (_stateMachine.AbilityManager.kinichMode)
+        {
+            if (reusableData.LeftActivation)
+            {
+                if (reusableData.LeftParent == null)
+                {
+                    CheckStamina();
+                }
+            }
+
+            if (reusableData.RightActivation)
+            {
+                if (reusableData.RightParent == null)
+                {
+                    CheckStamina();
+                }
+            }
+        }
     }
 
     public override void FixedTick()
@@ -48,6 +80,8 @@ public class AbilityMovePlayer : AbilityTransportState
         playerInteraction.Interactable(false);
         ExitDash?.Invoke();
         reusableData.OnTransportation = false;
+        reusableData.LeftActivation = false;
+        reusableData.RightActivation = false;
     }
 
     private void MovePlayer()
@@ -59,28 +93,31 @@ public class AbilityMovePlayer : AbilityTransportState
             playerInteraction.Interactable(true);
             
             // Move Player to RightObject
-            Vector3 direction = (reusableData.RightObject.transform.position -
-                                  _stateMachine.AbilityManager.transform.position).normalized;
+            if (reusableData.RightObject != null)
+            {
+                Vector3 direction = (reusableData.RightObject.transform.position -
+                                     _stateMachine.AbilityManager.transform.position).normalized;
             
 
-            float currentSpeed = CalculateSpeed(reusableData.RightObject.transform.position);
+                float currentSpeed = CalculateSpeed(reusableData.RightObject.transform.position);
             
-            rb.velocity = direction * (currentSpeed * metricsManager.ExternForce);
-            
-            Debug.DrawRay(rb.position, rb.velocity, Color.green);
-            Debug.DrawRay(rb.position, direction * 4f, Color.blue);
+                rb.velocity = direction * (currentSpeed * metricsManager.ExternForce);
+            }
         }
         else
         {
             playerInteraction.Interactable(true);
             
             // Move Player to LeftObject
-            Vector3 direction = (reusableData.LeftObject.transform.position -
-                                 _stateMachine.AbilityManager.transform.position).normalized;
+            if (reusableData.LeftObject != null)
+            {
+                Vector3 direction = (reusableData.LeftObject.transform.position -
+                                     _stateMachine.AbilityManager.transform.position).normalized;
 
-            float currentSpeed = CalculateSpeed(reusableData.LeftObject.transform.position);
+                float currentSpeed = CalculateSpeed(reusableData.LeftObject.transform.position);
             
-            rb.velocity = direction * (currentSpeed * metricsManager.ExternForce);
+                rb.velocity = direction * (currentSpeed * metricsManager.ExternForce);
+            }
         }
     }
     

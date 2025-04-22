@@ -17,11 +17,6 @@ public class AbilityTransportState : AbilityState
     public override void Tick()
     {
         base.Tick();
-        
-        if (_stateMachine.AbilityManager.useStamina)
-        {
-            CheckStamina();
-        }
 
         if (rightAttraction.IsPressed() && leftAttraction.IsPressed())
         {

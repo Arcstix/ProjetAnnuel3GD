@@ -34,16 +34,16 @@ public class AbilityIdleState : AbilityState
         base.HandleInput();
         
         // Aim State
-        if (!_stateMachine.AbilityManager.aimBotMode)
+        if (_stateMachine.AbilityManager.kinichMode)
         {
             // Aim State active just in 1st person
-            if (rightShootRecall.WasPerformedThisFrame() && reusableData.RightObject == null)
+            if (rightShootThrow.WasPerformedThisFrame() && reusableData.RightObject == null)
             {
                 HandleRightAimState();
                 return;
             }
 
-            if (leftShootRecall.WasPerformedThisFrame() && reusableData.LeftObject == null)
+            if (leftShootThrow.WasPerformedThisFrame() && reusableData.LeftObject == null)
             {
                 HandleLeftAimState();
                 return;
@@ -51,9 +51,9 @@ public class AbilityIdleState : AbilityState
         }
         
         // Shoot and Recall State
-        if (_stateMachine.AbilityManager.aimBotMode)
+        if (!_stateMachine.AbilityManager.kinichMode)
         {
-            // 3rd person
+            // Pressed this frame
             if (rightShootThrow.WasPressedThisFrame())
             {
                 HandleRightShootThrow();
@@ -68,46 +68,29 @@ public class AbilityIdleState : AbilityState
         }
         else
         {
-            // 1st person 
-            if (rightShootRecall.WasReleasedThisFrame())
+            // Released this frame 
+            if (rightShootThrow.WasReleasedThisFrame())
             {
                 HandleRightShootThrow();
                 return;
             }
             
-            if (leftShootRecall.WasReleasedThisFrame())
+            if (leftShootThrow.WasReleasedThisFrame())
             {
                 HandleLeftShootThrow();
                 return;
             }
         }
         
-        // Attraction State
-        if (!_stateMachine.AbilityManager.useStamina)
+        //Attraction State
+        if (rightAttraction.WasPerformedThisFrame())
         {
-            // 3rd Person
-            if (rightAttraction.WasPerformedThisFrame())
-            {
-                HandleRightAttraction();
-            }
-
-            if (leftAttraction.WasPerformedThisFrame())
-            {
-                HandleLeftAttraction();
-            }
+            HandleRightAttraction();
         }
-        else
-        {
-            // 1st Person
-            if (rightAttraction.WasPerformedThisFrame())
-            {
-                HandleRightAttraction();
-            }
 
-            if (leftAttraction.WasPerformedThisFrame())
-            {
-                HandleLeftAttraction();
-            }
+        if (leftAttraction.WasPerformedThisFrame())
+        {
+            HandleLeftAttraction();
         }
 
         if (recall.WasPressedThisFrame())

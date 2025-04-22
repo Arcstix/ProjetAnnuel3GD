@@ -18,9 +18,10 @@ public class PlayerAbilityManager : PlayerManager, I_Initializer
 
     [SerializeField] private Transform aimTransform;
     
-    public bool aimBotMode = false;
-    public bool thirdPersonMode = false;
-    public bool useStamina = false;
+    //public bool aimBotMode = false;
+    //public bool thirdPersonMode = false;
+    //public bool useStamina = false;
+    public bool kinichMode = false;
     
     
     private AbilityStateMachine abilityStateMachine;

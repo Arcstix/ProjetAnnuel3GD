@@ -119,7 +119,7 @@ public class AbilityState : IState
         reusableData.RightInput = true;
         if (reusableData.RightObject == null)
         {
-            if (!_stateMachine.AbilityManager.aimBotMode || targetSystem.currentTarget != null)
+            if (!_stateMachine.AbilityManager.kinichMode || targetSystem.currentTarget != null)
             {
                 _stateMachine.ChangeState(_stateMachine.ShootState);
             }
@@ -135,7 +135,7 @@ public class AbilityState : IState
         reusableData.LeftInput = true;
         if (reusableData.LeftObject == null)
         {
-            if (!_stateMachine.AbilityManager.aimBotMode || targetSystem.currentTarget != null)
+            if (!_stateMachine.AbilityManager.kinichMode || targetSystem.currentTarget != null)
             {
                 _stateMachine.ChangeState(_stateMachine.ShootState);
             }
@@ -154,7 +154,12 @@ public class AbilityState : IState
         reusableData.RightInput = true;
         if (reusableData.RightObject == null)
         {
-            if (!_stateMachine.AbilityManager.aimBotMode || targetSystem.currentTarget != null)
+            if (!_stateMachine.AbilityManager.kinichMode || targetSystem.currentTarget != null)
+            {
+                _stateMachine.ChangeState(_stateMachine.ShootState);
+            }
+
+            if (_stateMachine.AbilityManager.kinichMode)
             {
                 _stateMachine.ChangeState(_stateMachine.ShootState);
             }
@@ -177,7 +182,12 @@ public class AbilityState : IState
         reusableData.LeftInput = true;
         if (reusableData.LeftObject == null)
         {
-            if (!_stateMachine.AbilityManager.aimBotMode || targetSystem.currentTarget != null)
+            if (!_stateMachine.AbilityManager.kinichMode || targetSystem.currentTarget != null)
+            {
+                _stateMachine.ChangeState(_stateMachine.ShootState);
+            }
+            
+            if (_stateMachine.AbilityManager.kinichMode)
             {
                 _stateMachine.ChangeState(_stateMachine.ShootState);
             }
@@ -207,29 +217,78 @@ public class AbilityState : IState
         }
         else
         {
-            // Case : Attraction de RightObject vers LeftObject
-            if (reusableData.RightObject != null && reusableData.LeftObject != null)
+            // Case : Déplacement de LeftObject vers RightObject
+            if (_stateMachine.AbilityManager.kinichMode)
             {
-                _stateMachine.ChangeState(_stateMachine.MoveLeftObject);
-                return;
+                // In Kinich Mode you can move Object but can't move your tool
+                if (reusableData.RightObject != null && reusableData.LeftObject != null)
+                {
+                    if (reusableData.LeftParent != null)
+                    {
+                        _stateMachine.ChangeState(_stateMachine.MoveLeftObject);
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                if (reusableData.RightObject != null && reusableData.LeftObject != null)
+                {
+                    _stateMachine.ChangeState(_stateMachine.MoveLeftObject);
+                    return;
+                }
             }
             
             // Si on arrive ici c'est que l'un des 2 est null
             
             // Case : RightObject == null && LeftObject != null --> On attire LeftObject vers soit
-            if (reusableData.RightObject == null)
+            if (_stateMachine.AbilityManager.kinichMode)
             {
-                _stateMachine.ChangeState(_stateMachine.MoveLeftObject);
-                return;
+                // In Kinich Mode you can only move object to you not your tool
+                if (reusableData.LeftParent != null)
+                {
+                    if (reusableData.RightObject == null)
+                    {
+                        _stateMachine.ChangeState(_stateMachine.MoveLeftObject);
+                        return;
+                    }
+                }
             }
+            else
+            {
+                if (reusableData.RightObject == null)
+                {
+                    _stateMachine.ChangeState(_stateMachine.MoveLeftObject);
+                    return;
+                }
+            }
+            
             
             // Case : RightObject != null && LeftObject == null --> Attraction du Player vers la cible
             if (reusableData.LeftObject == null)
             {
-                if (reusableData.RightParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
-                    InteractorType.Projectile)
+                if (_stateMachine.AbilityManager.kinichMode)
                 {
-                    _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                    if (reusableData.RightParent != null)
+                    {
+                        if (reusableData.RightParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
+                            InteractorType.Projectile)
+                        {
+                            _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                        }
+                    }
+                    else
+                    {
+                        _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                    }
+                }
+                else
+                {
+                    if (reusableData.RightParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
+                        InteractorType.Projectile)
+                    {
+                        _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                    }
                 }
             }
         }
@@ -243,29 +302,75 @@ public class AbilityState : IState
         }
         else
         {
-            // Case : Attraction de LeftObject vers RightObject
-            if (reusableData.RightObject != null && reusableData.LeftObject != null)
+            // Case : Déplacement de RightObject vers LeftObject
+            if (_stateMachine.AbilityManager.kinichMode)
             {
-                _stateMachine.ChangeState(_stateMachine.MoveRightObject);
-                return;
+                if (reusableData.RightParent != null)
+                {
+                    if (reusableData.RightObject != null && reusableData.LeftObject != null)
+                    {
+                        _stateMachine.ChangeState(_stateMachine.MoveRightObject);
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                if (reusableData.RightObject != null && reusableData.LeftObject != null)
+                {
+                    _stateMachine.ChangeState(_stateMachine.MoveRightObject);
+                    return;
+                }
             }
             
             // Si on arrive ici c'est que l'un des 2 est null
             
             // Case : RightObject != null && LeftObject == null --> On attire RightObject vers soit
-            if (reusableData.LeftObject == null)
+            if (_stateMachine.AbilityManager.kinichMode)
             {
-                _stateMachine.ChangeState(_stateMachine.MoveRightObject);
+                if (reusableData.RightParent != null)
+                {
+                    if (reusableData.LeftObject == null)
+                    {
+                        _stateMachine.ChangeState(_stateMachine.MoveRightObject);
+                    }
+                }
+            }
+            else
+            {
+                if (reusableData.LeftObject == null)
+                {
+                    _stateMachine.ChangeState(_stateMachine.MoveRightObject);
+                }
             }
             
             // Case : RightObject == null && LeftObject != null --> Attraction du Player vers la cible
             if (reusableData.RightObject == null)
             {
-                if (reusableData.LeftParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
-                    InteractorType.Projectile)
+                if (_stateMachine.AbilityManager.kinichMode)
                 {
-                    _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                    if (reusableData.LeftParent != null)
+                    {
+                        if (reusableData.LeftParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
+                            InteractorType.Projectile)
+                        {
+                            _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                        }
+                    }
+                    else
+                    {
+                        _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                    }
                 }
+                else
+                {
+                    if (reusableData.LeftParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
+                        InteractorType.Projectile)
+                    {
+                        _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                    }
+                }
+                
                 return;
             }
         }

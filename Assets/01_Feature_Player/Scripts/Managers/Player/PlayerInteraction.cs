@@ -21,7 +21,6 @@ public class PlayerInteraction : InteractionSystem
         if (otherSystem.interactorType == InteractorType.Anchor)
         {
             // In case a Player is coming into an Anchor
-            OnPlatformInteract?.Invoke();
             PlayerReusableStateData reusableData = GetComponent<PlayerAbilityManager>().ReusableData;
             if (reusableData.LeftActivation)
             {
@@ -53,6 +52,22 @@ public class PlayerInteraction : InteractionSystem
             // In case the Player trigger into the tool // DESTROY TOOL
             OnToolInteract?.Invoke();
             GetComponent<PlayerMetricsManager>().AddExternForce(1f);
+            PlayerReusableStateData reusableData = GetComponent<PlayerAbilityManager>().ReusableData;
+
+            if (reusableData.LeftActivation)
+            {
+                if (reusableData.LeftParent != null)
+                {
+                    reusableData.LeftParent = null;
+                }
+            }
+            else
+            {
+                if (reusableData.RightParent != null)
+                {
+                    reusableData.RightParent = null;
+                }
+            }
             return;
         }
     }

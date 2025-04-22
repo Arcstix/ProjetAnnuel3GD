@@ -75,12 +75,18 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
     {
         if (reusableData.LeftActivation)
         {
-            UpdateLeftStamina(Mathf.Max(0, staminaLeft - Time.deltaTime * currentMetrics.StaminaData.ConsumptionRate));
+            if (reusableData.LeftParent == null)
+            {
+                UpdateLeftStamina(Mathf.Max(0, staminaLeft - Time.deltaTime * currentMetrics.StaminaData.ConsumptionRate));
+            }
         }
 
         if (reusableData.RightActivation)
         {
-            UpdateRightStamina(Mathf.Max(0, staminaRight - Time.deltaTime * currentMetrics.StaminaData.ConsumptionRate));
+            if (reusableData.RightParent == null)
+            {
+                UpdateRightStamina(Mathf.Max(0, staminaRight - Time.deltaTime * currentMetrics.StaminaData.ConsumptionRate));
+            }
         }
     }
 

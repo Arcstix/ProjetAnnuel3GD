@@ -35,6 +35,7 @@ public class UIHandleFilled : MonoBehaviour
 
     private void HandleFilled(float fillAmount, float maxFillAmount)
     {
+        Debug.Log("Filled or not");
         filledImage.fillAmount = fillAmount/maxFillAmount;
     }
 }

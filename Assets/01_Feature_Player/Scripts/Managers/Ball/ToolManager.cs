@@ -37,7 +37,10 @@ public class ToolManager : MonoBehaviour
         else
         {
             _futurParent = futurParent;
-            _parentRb = _futurParent.GetComponent<Rigidbody>();
+            if (_futurParent != null)
+            {
+                _parentRb = _futurParent.GetComponent<Rigidbody>();
+            }
         }
     }
     

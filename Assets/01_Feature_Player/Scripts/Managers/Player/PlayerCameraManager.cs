@@ -2,6 +2,7 @@ using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -117,5 +118,10 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
     {
         virtualCamera.m_Lens.FieldOfView = metricsManager.CurrentMetrics.CameraData.TransitionBaseTransportFOV.Evaluate(time);
         currentFOV = virtualCamera.m_Lens.FieldOfView;
+    }
+
+    private void WallRunRotate(float zTilt)
+    {
+        Camera.main.transform.DOLocalRotate(new Vector3(0, 0, zTilt), 0.25f);
     }
 }

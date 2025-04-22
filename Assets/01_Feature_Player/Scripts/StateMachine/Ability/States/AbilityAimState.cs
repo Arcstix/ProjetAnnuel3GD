@@ -46,18 +46,18 @@ public class AbilityAimState : AbilityState
         
         if (reusableData.RightInput)
         {
-            if (rightShootRecall.WasReleasedThisFrame())
+            if (rightShootThrow.WasReleasedThisFrame())
             {
-                HandleRightShootRecall();
+                HandleRightShootThrow();
                 return;
             }
         }
         
         if (reusableData.LeftInput)
         {
-            if (leftShootRecall.WasReleasedThisFrame())
+            if (leftShootThrow.WasReleasedThisFrame())
             {
-                HandleLeftShootRecall();
+                HandleLeftShootThrow();
                 return;
             }
         }
@@ -107,7 +107,7 @@ public class AbilityAimState : AbilityState
     private void ShowAiming()
     {
         // Tir un Raycast d'une certaine longueur
-        Ray aimRay = new Ray(rigidbody.transform.position, Camera.main.transform.forward);
+        Ray aimRay = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         RaycastHit aimHit;
         Vector3 aimEndPosition = aimRay.origin + aimRay.direction * metricsManager.CurrentMetrics.AbilityData.AimDistance;
         float smoothSpeed = metricsManager.CurrentMetrics.AbilityData.AimSpeed;
