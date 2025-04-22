@@ -20,23 +20,23 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.002922058
-        value: 0.08291626
-        inSlope: 9.803572
-        outSlope: 9.803572
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.14070284
+        outWeight: 0
       - serializedVersion: 3
-        time: 0.5
-        value: 2
-        inSlope: 0.008678868
-        outSlope: 0.008678868
+        time: 0.7201476
+        value: 1.0638285
+        inSlope: 2
+        outSlope: 2
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.41577697
-        outWeight: 0.5608474
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -107,8 +107,8 @@ MonoBehaviour:
       <SpeedModifier>k__BackingField: 1.5
   <JumpData>k__BackingField:
     <SpeedModifier>k__BackingField: 1.5
-    <JumpHeight>k__BackingField: 1
-    <JumpTimer>k__BackingField: 0.2
+    <JumpHeight>k__BackingField: 1.5
+    <JumpTimer>k__BackingField: 0.3
     MaxAirJumps: 1
     DetectionRange: 15
     CorrectionForce: 60
@@ -117,8 +117,8 @@ MonoBehaviour:
     MaxDetectionAngle: 80
     SpeedReductionFactor: 0.5
   <FallingData>k__BackingField:
-    <SpeedModifier>k__BackingField: 0.5
-    <GravityModifier>k__BackingField: 3
+    <SpeedModifier>k__BackingField: 2
+    <GravityModifier>k__BackingField: 1
     <MaxFallingSpeed>k__BackingField: 50
   <WallData>k__BackingField:
     WallLayer:
