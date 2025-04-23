@@ -16,26 +16,30 @@ public class AlertEnemyState : EnemyState
     
     #endregion
     
-    public override void Enter(GameObject gameObject)
+    public override void Enter()
     {
-        healthPlayer = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<HealthPlayer>();
-        //healthPlayer = playerTransfrm.GetComponentInChildren<HealthPlayer>();
+        healthPlayer = playerTransform.GetComponent<HealthPlayer>();
+        healthPlayer.enemyAlerted = true;
+        
         isPatrolling = false;
-        _navMeshAgent.speed = 0f;
+        if (_navMeshAgent)
+        {
+            _navMeshAgent.speed = 0f;
+        }
+        
         lightManager.EnableSpotLightRed();
         //Debug.Log("AlertState");
-        healthPlayer.enemyAlerted = true;
     }
 
-    public override void Exit(GameObject gameObject)
+    public override void Exit()
     {
         GetComponent<SearchEnemyState>().PositionGoTo = lastSeenPosition;
         healthPlayer.enemyAlerted = false;
     }
 
-    public override void Tick(GameObject gameObject)
+    public override void Tick()
     {
-        base.Tick(gameObject);
+        base.Tick();
         //fonction damage
         if (PlayerIsDetected())
         {
@@ -45,14 +49,14 @@ public class AlertEnemyState : EnemyState
         {
             CapturePlayerPosition();
             if (GetComponent<StateMachineEnemy>().patrol)
-             {
+            {
                  PatrolTrue();
-             }
-             else
-             {
+            }
+            else
+            {
                  PatrolFalse();
-             }
-         }
+            }
+        }
     }
 
     #region Idle or Search
@@ -77,7 +81,7 @@ public class AlertEnemyState : EnemyState
         Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
 
         // Appliquer la rotation à l'ennemi (en douceur ou instantanément)
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        stateMachine.headTransform.rotation = Quaternion.Slerp(stateMachine.headTransform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
     }
     #endregion
 

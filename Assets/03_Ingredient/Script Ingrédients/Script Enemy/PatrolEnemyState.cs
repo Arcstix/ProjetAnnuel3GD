@@ -27,21 +27,21 @@ public class PatrolEnemyState : EnemyState
     
     #endregion
     
-    public override void Enter(GameObject gameObject)
+    public override void Enter()
     {
         isPatrolling = true;
         lightManager.EnableSpotLightWhite();
         //Debug.Log("PatrolState");
     }
 
-    public override void Exit(GameObject gameObject)
+    public override void Exit()
     {
         isPatrolling = false;
     }
 
-    public override void Tick(GameObject gameObject)
+    public override void Tick()
     {
-        base.Tick(gameObject);
+        base.Tick();
         if (!PlayerIsDetected())
         {
             Patrol();
@@ -127,12 +127,12 @@ public class PatrolEnemyState : EnemyState
     // la tête de l'ennemi tourne de gauche à droite
     private void MobileHead()
     {
-        if (headTransform == null) return; // Vérification de la tête
+        if (stateMachine.headTransform == null) return; // Vérification de la tête
 
         idleTime += Time.deltaTime; // Incrémente le temps écoulé
 
         float rotationY = Mathf.Sin(idleTime * EnemyRotationSpeed * Mathf.Deg2Rad) * EnemyRotationAngle;
-        headTransform.localRotation = Quaternion.Euler(0, rotationY, 0);
+        stateMachine.headTransform.localRotation = Quaternion.Euler(0, rotationY, 0);
     }
     #endregion
 }

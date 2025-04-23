@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class DeadState : EnemyState
 {
-    public override void Enter(GameObject gameObject)
+    public override void Enter()
     {
         
     }
-    public override void Tick(GameObject gameObject)
+    public override void Tick()
     {
         
     }
-    public override void Exit(GameObject gameObject)
+    public override void Exit()
     {
         
     }

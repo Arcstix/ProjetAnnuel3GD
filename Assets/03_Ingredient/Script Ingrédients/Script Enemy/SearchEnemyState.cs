@@ -12,20 +12,20 @@ public class SearchEnemyState : EnemyState
     
     #endregion
     
-    public override void Enter(GameObject gameObject)
+    public override void Enter()
     {
         Debug.Log("SearchState");
         _navMeshAgent.SetDestination(PositionGoTo);
     }
 
-    public override void Exit(GameObject gameObject)
+    public override void Exit()
     {
         
     }
 
-    public override void Tick(GameObject gameObject)
+    public override void Tick()
     {
-        base.Tick(gameObject);
+        base.Tick();
         if (!PlayerIsDetected())
         {
             Search();
