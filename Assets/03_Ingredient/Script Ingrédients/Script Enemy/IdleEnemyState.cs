@@ -7,35 +7,36 @@ using UnityEngine.Serialization;
 public class IdleEnemyState : EnemyState
 {
     #region Variables visible
-    [Header("MoveHead")]
-    [Tooltip("Vitesse de rotation de la tête")]
-    [SerializeField] private float EnemyRotationSpeed; 
-    [Tooltip("Angle maximal de rotation")]
-    [SerializeField] private float EnemyRotationAngle;
     private float idleTime = 0f;
     
     [Header("GoToPatrol")]
     [Tooltip("Temps que dure l'état idle avant de passer en Patrol")]
     [SerializeField] private float idleTimeBeforePatrol;
-    private float timer = 0f;
+
+    private float timer;
+    
     #endregion
     
-    public override void Enter(GameObject gameObject)
+    public override void Enter()
     {
         isPatrolling = false;
         lightManager.EnableSpotLightWhite();
         //Debug.Log("IdleState");
     }
 
-    public override void Exit(GameObject gameObject)
+    public override void Exit()
     {
         idleTime = 0f;
+        if (stateMachine.HeadMovement != null)
+        {
+            stateMachine.HeadMovement.ResetValues();
+        }
     }
 
-    public override void Tick(GameObject gameObject)
+    public override void Tick()
     {
-        base.Tick(gameObject);
-        if (GetComponent<StateMachineEnemy>().patrol)
+        base.Tick();
+        if (stateMachine.patrol)
         {
             timer += Time.deltaTime;
             if (timer >= idleTimeBeforePatrol)
@@ -44,12 +45,12 @@ public class IdleEnemyState : EnemyState
                 GetComponent<StateMachineEnemy>().ChangeState(GetComponent<PatrolEnemyState>());
             }
         }
-        else if (GetComponent<StateMachineEnemy>().headMobile)
+        else if (stateMachine.headMobile)
         {
-            MobileHead();
+            stateMachine.HeadMovement.MoveHead();
         }
 
-        if (GetComponent<StateMachineEnemy>().flashLightOn)
+        if (stateMachine.flashLightOn)
         {
             lightManager.FlashLight();
         }
@@ -58,16 +59,4 @@ public class IdleEnemyState : EnemyState
             GetComponent<StateMachineEnemy>().ChangeState(GetComponent<AlertEnemyState>());
         }
     }
-    #region HeadMobile
-    // la tête de l'ennemi tourne de gauche à droite
-    private void MobileHead()
-    {
-        if (headTransform == null) return; // Vérification de la tête
-
-        idleTime += Time.deltaTime; // Incrémente le temps écoulé
-
-        float rotationY = Mathf.Sin(idleTime * EnemyRotationSpeed * Mathf.Deg2Rad) * EnemyRotationAngle;
-        headTransform.localRotation = Quaternion.Euler(0, rotationY, 0);
-    }
-    #endregion
 }

@@ -6,25 +6,14 @@ using UnityEngine.AI;
 
 public abstract class EnemyState : MonoBehaviour
 {
-    #region Variables visible
-    [Header("Zone de détection")]
-    [Tooltip("Range de la zone de détection")]
-    public float detectionRange;
-    [Tooltip("Angle de la zone de détection")]
-    public float detectionAngle;
-    [Header("Comportement Ennemis")]
-    [Tooltip("Référence à la zone mobile de l'ennemi")]
-    public Transform headTransform;
-    #endregion
-    
     #region Hidden Variables
     
-    [HideInInspector] public UnityEngine.AI.NavMeshAgent _navMeshAgent;
-    public Transform playerTransform;
-    [HideInInspector] public LightManager lightManager;
-    [HideInInspector] public bool isPatrolling = false;
-    public HealthPlayer healthPlayer;
-
+    protected NavMeshAgent _navMeshAgent;
+    protected LightManager lightManager;
+    protected bool isPatrolling = false;
+    protected HealthPlayer healthPlayer;
+    protected Transform playerTransform;
+    protected StateMachineEnemy stateMachine;
     
     #endregion
     
@@ -32,55 +21,59 @@ public abstract class EnemyState : MonoBehaviour
     private void Awake()
     {
         isPatrolling = false;
-        _navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        stateMachine = GetComponent<StateMachineEnemy>();
+        _navMeshAgent = GetComponent<NavMeshAgent>();
         playerTransform = GameObject.FindWithTag("Player").transform;
         healthPlayer = playerTransform.GetComponent<HealthPlayer>();
         lightManager = GetComponent<LightManager>();
-        //headTransform = GameObject.FindWithTag("Mobile").transform;
     }
 
 
-    public abstract void Enter(GameObject gameObject);
+    public virtual void Enter() {}
 
-    public virtual void Tick(GameObject gameObject)
+    public virtual void Tick()
     {
-        if (isPatrolling)
+        if (_navMeshAgent)
         {
-            _navMeshAgent.speed = 5f;
+            if (isPatrolling)
+            {
+                _navMeshAgent.speed = 5f;
+            }
+            if (!isPatrolling)
+            {
+                _navMeshAgent.speed = 0f;
+            }
         }
-        if (!isPatrolling)
-        {
-            _navMeshAgent.speed = 0f;
-
-        }
-        if (PlayerIsDetected())
+    }
+    
+    public virtual void FixedTick()
+    {
+        // Use Physics for Raycasting so we are in FixedUpdate
+        if (PlayerIsDetected() && stateMachine.currentState != GetComponent<AlertEnemyState>())
         {
             GetComponent<StateMachineEnemy>().ChangeState(GetComponent<AlertEnemyState>());
         }
     }
     
-    public abstract void Exit(GameObject gameObject);
+    public virtual void Exit() {}
 
     #region Detection du player
-    public bool PlayerIsDetected()
+    protected bool PlayerIsDetected()
     {
-        // Cible potentielle, probablement le joueur dans ce contexte
-        Transform target = playerTransform; 
-
         // 1. V�rifiez si le joueur est dans la plage de d�tection
-        if (Vector3.Distance(transform.position, target.position) <= detectionRange)
+        if (Vector3.Distance(transform.position, playerTransform.position) <= stateMachine.detectionRange)
         {
-            // 2. V�rifiez si le joueur est dans le bon angle
-            Vector3 directionToTarget = (target.position - transform.position).normalized;
-            if (Vector3.Angle(transform.forward, directionToTarget) <= detectionAngle) 
+            // 2. V�rifiez si le joueur est dans le bon angle par rapport à la tête de l'ennemie
+            Vector3 directionToPlayer = (playerTransform.position - stateMachine.headTransform.position).normalized;
+            if (Vector3.Angle(stateMachine.headTransform.forward, directionToPlayer) <= stateMachine.detectionAngle) 
             {
                 // 3. Raycast pour v�rifier les obstacles
                 RaycastHit hit;
-                //Debug.DrawLine(transform.forward, directionToTarget, Color.red);
-                if (Physics.Raycast(transform.position, directionToTarget, out hit, detectionRange))
+                
+                if (Physics.Raycast(stateMachine.headTransform.position, directionToPlayer, out hit, stateMachine.detectionRange, ~LayerMask.GetMask("Enemy")))
                 {
                     // 4. V�rifiez si le raycast a touch� le joueur sans obstacle entre les deux
-                    if (hit.transform == target)
+                    if (hit.transform == playerTransform)
                     {
                         return true;
                     }
@@ -90,6 +83,7 @@ public abstract class EnemyState : MonoBehaviour
         return false;
     }
     #endregion 
+    
     #region Detection du playerMort
     private void OnTriggerEnter(Collider other)
     {

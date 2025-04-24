@@ -19,7 +19,6 @@ public class HealthPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        healthSlider = FindObjectOfType<Slider>();
         currentHealth = maxHealth;
         UpdateHealthUI();
         timer = 0f;
@@ -78,8 +77,11 @@ public class HealthPlayer : MonoBehaviour
     }
 
     public void Respawn()
-    { 
-        playerTransform.position = spawner.transform.position; // Déplace le joueur
+    {
+        if (spawner)
+        {
+            playerTransform.position = spawner.transform.position; // Déplace le joueur
+        }
         ResetHealth(); // Remet la vie à 100%
     }
 
