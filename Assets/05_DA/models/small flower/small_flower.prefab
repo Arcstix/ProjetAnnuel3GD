@@ -89,7 +89,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 7.2e-43, y: 4.53e-43, z: 0, w: 3.0540666e-37}
+  m_BoundingSphereOverride: {x: NaN, y: 0, z: 1e-45, w: -3.3641543e+31}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -5005,6 +5005,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 31544129bc14cc444b94e15eca44e76c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 224634556339989851}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 31544129bc14cc444b94e15eca44e76c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5235088827987855933}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 31544129bc14cc444b94e15eca44e76c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3537785387549748018}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 31544129bc14cc444b94e15eca44e76c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8112045476858851508}
   m_SourcePrefab: {fileID: 100100000, guid: 31544129bc14cc444b94e15eca44e76c, type: 3}
 --- !u!1 &4922253588143533947 stripped
 GameObject:
@@ -5032,6 +5041,60 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5235088827987855933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4922253588143533947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a1d53107d7a4429ae71d67304a4377b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAvailable: 1
+  isReachable: 0
+  isRendered: 0
+  _currentType: 0
+  visualRenderer: {fileID: 0}
+--- !u!114 &3537785387549748018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4922253588143533947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306e95fe8ea2401198d0dd31fd546ae4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactorType: 0
+  detectedObjects: []
+  _isInteractive: 1
+  _onWall: 0
+--- !u!65 &8112045476858851508
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4922253588143533947}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.8519701, y: 1.8541147, z: 1.568023}
+  m_Center: {x: -0.039726317, y: -0.010046064, z: -0.34089193}
 --- !u!4 &5693828814516237761 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 31544129bc14cc444b94e15eca44e76c, type: 3}
