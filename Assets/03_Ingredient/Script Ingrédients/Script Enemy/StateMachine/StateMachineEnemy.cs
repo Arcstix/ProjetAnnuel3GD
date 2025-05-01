@@ -29,6 +29,7 @@ public class StateMachineEnemy : MonoBehaviour
     [Header("State Machine Information")]
     [SerializeField] private EnemyState defaultState;
     public EnemyState currentState;
+    public bool isDead = false;
     
     [Space(10)]
     

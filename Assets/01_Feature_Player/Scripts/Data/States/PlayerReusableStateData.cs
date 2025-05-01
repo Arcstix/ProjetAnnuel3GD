@@ -20,7 +20,7 @@ public class PlayerReusableStateData
     public bool LeftActivation { get; set; } = false;
     public bool RightThrow { get; set; } = false;
     public bool LeftThrow { get; set; } = false;
-    public GameObject ObjectAutoAimed { get; set; }
+    public InteractiveTarget ObjectAutoAimed { get; set; }
     public GameObject ObjectAimed { get; set; }
     public GameObject RightParent { get; set; }
     public GameObject LeftParent { get; set; }

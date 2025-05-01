@@ -6,7 +6,15 @@ using UnityEngine;
 public class InteractiveTarget : MonoBehaviour
 {
     private PlayerTargetSystem player;
-
+    
+    [Header("Visible Renderer")]
+    [Tooltip("Si le renderer n'est pas sur le parent alors il faut définir ce qui doit être visible sinon on met rien")]
+    public CheckVisibleRenderer checkVisibleRenderer;
+    
+    [Header("UI Target")]
+    [Tooltip("Sert à placé l'auto target ou l'on souhaite si c'est null il prendra l'origine de l'objet")]
+    public Transform targetTranform;
+    
     [Header("Booleans")]
     public bool isAvailable = true;
     public bool isReachable = false;
@@ -27,12 +35,12 @@ public class InteractiveTarget : MonoBehaviour
     {
         if (!isAvailable) return;
         
-        Vector3 playerToObject = (transform.position - player.transform.position).normalized;
+        Vector3 playerToObject = (visualRenderer.transform.position - player.transform.position).normalized;
         float dot = Vector3.Dot(Camera.main.transform.forward, playerToObject);
         float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
         bool inVisionRange = angle < player.visionAngle;
 
-        if (Vector3.Distance(transform.position, player.transform.position) < player.maxReachDistance && inVisionRange && !isReachable)
+        if (Vector3.Distance(visualRenderer.transform.position, player.transform.position) < player.maxReachDistance && inVisionRange && !isReachable)
         {
             if (player.targets.Contains(this))
             {
@@ -41,7 +49,7 @@ public class InteractiveTarget : MonoBehaviour
             }
         }
 
-        if ((Vector3.Distance(transform.position, player.transform.position) > player.maxReachDistance || !inVisionRange) && isReachable)
+        if ((Vector3.Distance(visualRenderer.transform.position, player.transform.position) > player.maxReachDistance || !inVisionRange) && isReachable)
         {
             isReachable = false;
             if (player.reachableTargets.Contains(this))
@@ -77,14 +85,22 @@ public class InteractiveTarget : MonoBehaviour
             }
         }
     }
-    
+
+    private void LateUpdate()
+    {
+        if (checkVisibleRenderer != null)
+        {
+            isRendered = checkVisibleRenderer.GetRendererStatus();
+        }
+    }
+
     private bool IsVisibleFrom(Transform target)
     {
-        Vector3 direction = (transform.position - target.transform.position).normalized;
+        Vector3 direction = (visualRenderer.transform.position - target.transform.position).normalized;
         Ray ray = new Ray(target.transform.position, direction);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, Vector3.Distance(transform.position, target.position), ~LayerMask.GetMask("Player", "Interactable")))
+        if (Physics.Raycast(ray, out hit, Vector3.Distance(visualRenderer.transform.position, target.position), ~LayerMask.GetMask("Player", "Interactable")))
         {
             // Si le premier objet touché est bien la cible, elle est visible
             return hit.transform == transform;

@@ -120,9 +120,20 @@ public class PlayerTargetSystem : MonoBehaviour, I_Initializer
         
         //User Interface
         rectImage.gameObject.SetActive(true);
-        rectImage.transform.position = ClampedScreenPosition(currentTarget.transform.position);
-        float distanceFromTarget = Vector3.Distance(currentTarget.transform.position, transform.position);
-        rectImage.sizeDelta = new Vector2(Mathf.Clamp(115 - (distanceFromTarget - rectSizeMultiplier),100,150), Mathf.Clamp(115 - (distanceFromTarget - rectSizeMultiplier),100,150));
+        if (currentTarget.targetTranform != null)
+        {
+            rectImage.transform.position = ClampedScreenPosition(currentTarget.targetTranform.position);
+            float distanceFromTarget = Vector3.Distance(currentTarget.targetTranform.position, transform.position);
+            rectImage.sizeDelta = new Vector2(Mathf.Clamp(115 - (distanceFromTarget - rectSizeMultiplier),100,150), 
+                Mathf.Clamp(115 - (distanceFromTarget - rectSizeMultiplier),100,150));
+        }
+        else
+        {
+            rectImage.transform.position = ClampedScreenPosition(currentTarget.transform.position);
+            float distanceFromTarget = Vector3.Distance(currentTarget.transform.position, transform.position);
+            rectImage.sizeDelta = new Vector2(Mathf.Clamp(115 - (distanceFromTarget - rectSizeMultiplier),100,150), 
+                Mathf.Clamp(115 - (distanceFromTarget - rectSizeMultiplier),100,150));
+        }
     }
 
     Vector3 ClampedScreenPosition(Vector3 targetPos)
@@ -179,7 +190,7 @@ public class PlayerTargetSystem : MonoBehaviour, I_Initializer
         }
         
         if (reusableData != null)
-            reusableData.ObjectAutoAimed = storedTarget.gameObject;
+            reusableData.ObjectAutoAimed = storedTarget;
     }
 
     Vector2 MiddleOfScreen()

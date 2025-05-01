@@ -21,13 +21,22 @@ public class AbilityShootState : AbilityState
         
         if (reusableData.InstancePosition != Vector3.zero)
         {
+            // Case when we were in AbilityAimState
             aimEndPosition = reusableData.InstancePosition;
         }
         else
         {
             if (reusableData.ObjectAutoAimed != null)
             {
-                aimEndPosition = reusableData.ObjectAutoAimed.transform.position;
+                // Case we have an object auto aimed
+                if (reusableData.ObjectAutoAimed.targetTranform != null)
+                {
+                    aimEndPosition = reusableData.ObjectAutoAimed.targetTranform.position;
+                }
+                else
+                {
+                    aimEndPosition = reusableData.ObjectAutoAimed.transform.position;
+                }
             }
             else
             {
@@ -42,9 +51,9 @@ public class AbilityShootState : AbilityState
             if (reusableData.ObjectAutoAimed != null)
             {
                 // Case Auto Aimed something
-                reusableData.LeftParent = reusableData.ObjectAutoAimed;
+                reusableData.LeftParent = reusableData.ObjectAutoAimed.gameObject;
                 reusableData.LeftObject = InstantiateBall(reusableData.LeftObject, metricsManager.CurrentMetrics.AbilityData.LeftTool, leftLauncher.position);
-                reusableData.LeftObject.InitializeBall(metricsManager.CurrentMetrics.AbilityData.ShootSpeed, metricsManager.CurrentMetrics.AbilityData.TransportObjectSpeed, aimEndPosition, leftProjectileLauncher,reusableData.LeftParent, reusableData.ObjectAutoAimed);
+                reusableData.LeftObject.InitializeBall(metricsManager.CurrentMetrics.AbilityData.ShootSpeed, metricsManager.CurrentMetrics.AbilityData.TransportObjectSpeed, aimEndPosition, leftProjectileLauncher,reusableData.LeftParent, reusableData.ObjectAutoAimed.gameObject);
                 targetSystem.leftTargetLaunch = reusableData.ObjectAutoAimed.GetComponent<InteractiveTarget>();
             }
             else
@@ -62,9 +71,9 @@ public class AbilityShootState : AbilityState
             rightLauncher.GetComponent<MeshRenderer>().enabled = false;
             if (reusableData.ObjectAutoAimed != null)
             {
-                reusableData.RightParent = reusableData.ObjectAutoAimed;
+                reusableData.RightParent = reusableData.ObjectAutoAimed.gameObject;
                 reusableData.RightObject = InstantiateBall(reusableData.RightObject, metricsManager.CurrentMetrics.AbilityData.RightTool, rightLauncher.position);
-                reusableData.RightObject.InitializeBall(metricsManager.CurrentMetrics.AbilityData.ShootSpeed, metricsManager.CurrentMetrics.AbilityData.TransportObjectSpeed, aimEndPosition, rightProjectileLauncher, reusableData.RightParent, reusableData.ObjectAutoAimed);
+                reusableData.RightObject.InitializeBall(metricsManager.CurrentMetrics.AbilityData.ShootSpeed, metricsManager.CurrentMetrics.AbilityData.TransportObjectSpeed, aimEndPosition, rightProjectileLauncher, reusableData.RightParent, reusableData.ObjectAutoAimed.gameObject);
                 targetSystem.rightTargetLaunch = reusableData.ObjectAutoAimed.GetComponent<InteractiveTarget>();
             }
             else

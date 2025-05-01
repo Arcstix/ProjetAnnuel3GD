@@ -85,11 +85,16 @@ public abstract class EnemyState : MonoBehaviour
     #endregion 
     
     #region Detection du playerMort
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Player") || other.CompareTag("Projectile"))
+        if (stateMachine.isDead)
         {
-            gameObject.SetActive(false);
+            return;
+        }
+        
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Projectile"))
+        {
+            stateMachine.ChangeState(stateMachine.GetComponent<EnemyDeadState>());
         }
     }
     #endregion
