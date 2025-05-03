@@ -7,7 +7,7 @@ public class StaminaData
     
     [field : SerializeField] public int MaxNumberOfChargePerObject { get; set; } = 1;
     
-    [field : SerializeField] public int MinimumStamina { get; set; } = 20;
-    [field : SerializeField] public int ConsumptionRate { get; set; } = 5;
-    [field : SerializeField] public int RecoveryRate { get; set; } = 5;
+    [field : SerializeField] public float MinimumStamina { get; set; } = 20;
+    [field : SerializeField] public float ConsumptionRate { get; set; } = 5;
+    [field : SerializeField] public float RecoveryRate { get; set; } = 5;
 }

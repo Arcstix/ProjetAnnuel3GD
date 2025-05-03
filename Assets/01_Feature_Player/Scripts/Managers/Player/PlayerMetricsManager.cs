@@ -14,21 +14,21 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
     public PlayerSO CurrentMetrics { get => currentMetrics; set => currentMetrics = value; }
     
     public float ExternForce => currentExternForce;
-    public int StaminaRight
+    public float StaminaRight
     {
         get => staminaRight;
         set => staminaRight = value;
     }
-    public int StaminaLeft
+    public float StaminaLeft
     {
         get => staminaLeft;
         set => staminaLeft = value;
     }
     
-    private int staminaRight = 0;
-    private int staminaLeft = 0;
-    private int currentChargeRight;
-    private int currentChargeLeft;
+    private float staminaRight = 0;
+    private float staminaLeft = 0;
+    private float currentChargeRight;
+    private float currentChargeLeft;
 
     private Rigidbody playerRb;
     private PlayerSO currentMetrics;
@@ -102,7 +102,7 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
         {
             if (reusableData.LeftParent == null)
             {
-                UpdateLeftStamina(Mathf.Max(0, Mathf.RoundToInt(staminaLeft - Time.deltaTime * currentMetrics.StaminaData.ConsumptionRate)));
+                UpdateLeftStamina(Mathf.Max(0, staminaLeft - Time.deltaTime * currentMetrics.StaminaData.ConsumptionRate));
             }
         }
 
@@ -110,7 +110,7 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
         {
             if (reusableData.RightParent == null)
             {
-                UpdateRightStamina(Mathf.Max(0, Mathf.RoundToInt(staminaRight - Time.deltaTime * currentMetrics.StaminaData.ConsumptionRate)));
+                UpdateRightStamina(Mathf.Max(0, staminaRight - Time.deltaTime * currentMetrics.StaminaData.ConsumptionRate));
             }
         }
     }
@@ -121,25 +121,27 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
         {
             if (reusableData.RightParent == null)
             {
-                UpdateRightCharge(currentChargeRight - metricsPlayer.StaminaData.MaxStamina / metricsPlayer.StaminaData.MaxNumberOfChargePerObject);
+                float numberOfCharge = (float)metricsPlayer.StaminaData.MaxNumberOfChargePerObject;
+                UpdateRightCharge(currentChargeRight - metricsPlayer.StaminaData.MaxStamina / numberOfCharge);
             }
         }
         else
         {
             if (reusableData.LeftParent == null)
             {
-                UpdateLeftCharge(currentChargeLeft - metricsPlayer.StaminaData.MaxStamina / metricsPlayer.StaminaData.MaxNumberOfChargePerObject);
+                float numberOfCharge = (float)metricsPlayer.StaminaData.MaxNumberOfChargePerObject;
+                UpdateLeftCharge(currentChargeLeft - metricsPlayer.StaminaData.MaxStamina / numberOfCharge);
             }
         }
     }
     
-    private void UpdateRightCharge(int amount)
+    private void UpdateRightCharge(float amount)
     {
         currentChargeRight = amount;
         OnRightChargeSet?.Invoke(currentChargeRight, metricsPlayer.StaminaData.MaxStamina);
     }
 
-    private void UpdateLeftCharge(int amount)
+    private void UpdateLeftCharge(float amount)
     {
         currentChargeLeft = amount;
         OnLeftChargeSet?.Invoke(currentChargeLeft, metricsPlayer.StaminaData.MaxStamina);
@@ -173,13 +175,13 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
         }
     }
 
-    private void UpdateRightStamina(int stamina)
+    private void UpdateRightStamina(float stamina)
     {
         staminaRight = stamina;
         OnRightStaminaSet?.Invoke(staminaRight, currentMetrics.StaminaData.MaxStamina);
     }
 
-    private void UpdateLeftStamina(int stamina)
+    private void UpdateLeftStamina(float stamina)
     {
         staminaLeft = stamina;
         OnLeftStaminaSet?.Invoke(staminaLeft, currentMetrics.StaminaData.MaxStamina);
