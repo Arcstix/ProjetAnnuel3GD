@@ -151,12 +151,12 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
     {
         if (staminaLeft < currentMetrics.StaminaData.MaxStamina)
         {
-            UpdateLeftStamina(Mathf.Min(metricsPlayer.StaminaData.MaxStamina, Mathf.RoundToInt(staminaLeft + Time.deltaTime * currentMetrics.StaminaData.RecoveryRate)));
+            UpdateLeftStamina(Mathf.Min(metricsPlayer.StaminaData.MaxStamina, staminaLeft + Time.deltaTime * currentMetrics.StaminaData.RecoveryRate));
         }
 
         if (staminaRight < currentMetrics.StaminaData.MaxStamina)
         {
-            UpdateRightStamina(Mathf.Min(metricsPlayer.StaminaData.MaxStamina, Mathf.RoundToInt(staminaRight + Time.deltaTime * currentMetrics.StaminaData.RecoveryRate)));
+            UpdateRightStamina(Mathf.Min(metricsPlayer.StaminaData.MaxStamina, staminaRight + Time.deltaTime * currentMetrics.StaminaData.RecoveryRate));
         }
     }
     
@@ -165,13 +165,13 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
         if (currentChargeLeft < currentMetrics.StaminaData.MaxStamina)
         {
             UpdateLeftCharge(Mathf.Min(metricsPlayer.StaminaData.MaxStamina,
-                Mathf.RoundToInt(currentChargeLeft + Time.deltaTime * currentMetrics.StaminaData.RecoveryRate)));
+                currentChargeLeft + Time.deltaTime * currentMetrics.StaminaData.RecoveryRate));
         }
 
         if (currentChargeRight < currentMetrics.StaminaData.MaxStamina)
         {
             UpdateRightCharge(Mathf.Min(metricsPlayer.StaminaData.MaxStamina,
-                Mathf.RoundToInt(currentChargeRight + Time.deltaTime * currentMetrics.StaminaData.RecoveryRate)));
+                currentChargeRight + Time.deltaTime * currentMetrics.StaminaData.RecoveryRate));
         }
     }
 
@@ -199,7 +199,8 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
 
     public bool HasLeftCharge()
     {
-        if (currentChargeLeft >= currentMetrics.StaminaData.MaxStamina / metricsPlayer.StaminaData.MaxNumberOfChargePerObject)
+        float numberOfCharge = (float)metricsPlayer.StaminaData.MaxNumberOfChargePerObject;
+        if (currentChargeLeft >= currentMetrics.StaminaData.MaxStamina / numberOfCharge)
         {
             return true;
         }
@@ -209,7 +210,8 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
     
     public bool HasRightCharge()
     {
-        if (currentChargeRight >= currentMetrics.StaminaData.MaxStamina / metricsPlayer.StaminaData.MaxNumberOfChargePerObject)
+        float numberOfCharge = (float)metricsPlayer.StaminaData.MaxNumberOfChargePerObject;
+        if (currentChargeRight >= currentMetrics.StaminaData.MaxStamina / numberOfCharge)
         {
             return true;
         }
