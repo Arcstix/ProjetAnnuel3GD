@@ -7,6 +7,8 @@ public class PlayerInteraction : InteractionSystem
     public event Action OnPlatformInteract;
     public event Action OnToolInteract;
     
+    public float boostSpeedEndTransportation = 0.2f;
+    
     public override void Interact(InteractionSystem otherSystem)
     {
         base.Interact(otherSystem);
@@ -51,7 +53,7 @@ public class PlayerInteraction : InteractionSystem
         {
             // In case the Player trigger into the tool // DESTROY TOOL
             OnToolInteract?.Invoke();
-            GetComponent<PlayerMetricsManager>().AddExternForce(1f);
+            GetComponent<PlayerMetricsManager>().AddExternForce(boostSpeedEndTransportation);
             PlayerReusableStateData reusableData = GetComponent<PlayerAbilityManager>().ReusableData;
 
             if (reusableData.LeftActivation)
