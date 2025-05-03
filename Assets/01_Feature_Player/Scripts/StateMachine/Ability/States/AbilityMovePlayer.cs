@@ -25,11 +25,19 @@ public class AbilityMovePlayer : AbilityTransportState
         {
             reusableData.RightObject.GetComponent<InteractionSystem>().Interactable(true);
             reusableData.RightActivation = true;
+            if (_stateMachine.AbilityManager.Metrics.useCharge)
+            {
+                _stateMachine.AbilityManager.Metrics.ConsumeCharge(true);
+            }
         }
         else
         {
             reusableData.LeftObject.GetComponent<InteractionSystem>().Interactable(true);
             reusableData.LeftActivation = true;
+            if (_stateMachine.AbilityManager.Metrics.useCharge)
+            {
+                _stateMachine.AbilityManager.Metrics.ConsumeCharge(false);
+            }
         }
         
         EnterDash?.Invoke();
@@ -41,8 +49,10 @@ public class AbilityMovePlayer : AbilityTransportState
     {
         base.Tick();
         
-        if (reusableData.RightObject != null && reusableData.LeftObject != null)
+        if (reusableData.RightObject == null && reusableData.LeftObject == null)
         {
+            reusableData.RightParent = null;
+            reusableData.LeftParent = null;
             _stateMachine.ChangeState(_stateMachine.IdleState);
             return;
         }
@@ -53,7 +63,10 @@ public class AbilityMovePlayer : AbilityTransportState
             {
                 if (reusableData.LeftParent == null)
                 {
-                    CheckStamina();
+                    if (!metricsManager.useCharge)
+                    {
+                        CheckStamina();
+                    }
                 }
             }
 
@@ -61,7 +74,10 @@ public class AbilityMovePlayer : AbilityTransportState
             {
                 if (reusableData.RightParent == null)
                 {
-                    CheckStamina();
+                    if (!metricsManager.useCharge)
+                    {
+                        CheckStamina();
+                    }
                 }
             }
         }

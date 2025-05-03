@@ -42,8 +42,6 @@ public class AbilityRecallState : AbilityState
                 targetSystem.rightTargetLaunch = null;
             }
         }
-        
-        Debug.Log("Enter recall");
     }
     
     public override void Tick()
@@ -52,7 +50,6 @@ public class AbilityRecallState : AbilityState
         
         if (reusableData.LeftInput && reusableData.RightInput)
         {
-            Debug.Log("tick recall");
             if (reusableData.LeftObject)
             {
                 reusableData.LeftObject.SetNewInfo(leftLauncher.position, metricsManager.CurrentMetrics.AbilityData.RecallSpeed, null);
@@ -149,6 +146,8 @@ public class AbilityRecallState : AbilityState
             rightLauncher.GetComponent<MeshRenderer>().enabled = true;
         }
         
+        reusableData.LeftParent = null;
+        reusableData.RightParent = null;
         reusableData.LeftInput = false;
         reusableData.RightInput = false;
     }

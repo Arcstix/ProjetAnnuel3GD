@@ -12,30 +12,56 @@ public class UIHandleFilled : MonoBehaviour
     {
         if (isRight)
         {
-            metricsManager.OnRightStaminaSet += HandleFilled;
+            if (metricsManager.useCharge)
+            {
+                metricsManager.OnRightChargeSet += HandleFilled;
+            }
+            else
+            {
+                metricsManager.OnRightStaminaSet += HandleFilled;
+            }
         }
         else
         {
-            metricsManager.OnLeftStaminaSet += HandleFilled;
+            if (metricsManager.useCharge)
+            {
+                metricsManager.OnLeftChargeSet += HandleFilled;
+            }
+            else
+            {
+                metricsManager.OnLeftStaminaSet += HandleFilled;
+            }
         }
-        
     }
 
     private void OnDisable()
     {
         if (isRight)
         {
-            metricsManager.OnRightStaminaSet -= HandleFilled;
+            if (metricsManager.useCharge)
+            {
+                metricsManager.OnRightChargeSet -= HandleFilled;
+            }
+            else
+            {
+                metricsManager.OnRightStaminaSet -= HandleFilled;
+            }
         }
         else
         {
-            metricsManager.OnLeftStaminaSet -= HandleFilled;
+            if (metricsManager.useCharge)
+            {
+                metricsManager.OnLeftChargeSet -= HandleFilled;
+            }
+            else
+            {
+                metricsManager.OnLeftStaminaSet -= HandleFilled;
+            }
         }
     }
 
     private void HandleFilled(float fillAmount, float maxFillAmount)
     {
-        Debug.Log("Filled or not");
         filledImage.fillAmount = fillAmount/maxFillAmount;
     }
 }

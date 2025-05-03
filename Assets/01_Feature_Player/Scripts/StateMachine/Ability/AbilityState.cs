@@ -279,7 +279,21 @@ public class AbilityState : IState
                     }
                     else
                     {
-                        _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                        if (metricsManager.useCharge)
+                        {
+                            if (metricsManager.HasRightCharge())
+                            {
+                                _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                            }
+                            else
+                            {
+                                _stateMachine.ChangeState(_stateMachine.RecallState);
+                            }
+                        }
+                        else
+                        {
+                            _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                        }
                     }
                 }
                 else
@@ -359,7 +373,21 @@ public class AbilityState : IState
                     }
                     else
                     {
-                        _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                        if (metricsManager.useCharge)
+                        {
+                            if (metricsManager.HasLeftCharge())
+                            {
+                                _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                            }
+                            else
+                            {
+                                _stateMachine.ChangeState(_stateMachine.RecallState);
+                            }
+                        }
+                        else
+                        {
+                            _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                        }
                     }
                 }
                 else
