@@ -15,22 +15,22 @@ MonoBehaviour:
   <Drag>k__BackingField: 1
   <GroundedData>k__BackingField:
     <BaseSpeed>k__BackingField: 5
-    <GravityMultiplier>k__BackingField: 3
+    <GravityMultiplier>k__BackingField: 5
     <GravityModifier>k__BackingField:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
+        value: 1
+        inSlope: 0.30575925
+        outSlope: 0.30575925
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.0688592
       - serializedVersion: 3
         time: 0.7201476
-        value: 1.0638285
+        value: 2
         inSlope: 2
         outSlope: 2
         tangentMode: 0
@@ -118,7 +118,7 @@ MonoBehaviour:
     SpeedReductionFactor: 0.5
   <FallingData>k__BackingField:
     <SpeedModifier>k__BackingField: 2
-    <GravityModifier>k__BackingField: 1
+    <GravityModifier>k__BackingField: 3
     <MaxFallingSpeed>k__BackingField: 50
   <WallData>k__BackingField:
     WallLayer:
@@ -149,21 +149,39 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
-        inSlope: 1.3301748
-        outSlope: 1.3301748
+        value: 0.1
+        inSlope: 26.390152
+        outSlope: 26.390152
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.03238914
+        outWeight: 0.061175328
+      - serializedVersion: 3
+        time: 0.050400212
+        value: 0.99376225
+        inSlope: 0.055555146
+        outSlope: 0.055555146
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.1847686
+      - serializedVersion: 3
+        time: 0.9496367
+        value: 1.0001242
+        inSlope: -0.003999431
+        outSlope: -0.003999431
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
+        value: 1.2004852
+        inSlope: 6.942399
+        outSlope: 6.942399
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.20406742
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -171,7 +189,7 @@ MonoBehaviour:
     <ThrowSpeed>k__BackingField: 50000
   <StaminaData>k__BackingField:
     <MaxStamina>k__BackingField: 50
-    <MaxNumberOfCharge>k__BackingField: 1
+    <MaxNumberOfChargePerObject>k__BackingField: 1
     <MinimumStamina>k__BackingField: 0
     <ConsumptionRate>k__BackingField: 150
     <RecoveryRate>k__BackingField: 50

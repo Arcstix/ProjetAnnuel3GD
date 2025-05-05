@@ -118,7 +118,7 @@ MonoBehaviour:
     <SpeedModifier>k__BackingField: 1.5
     <JumpHeight>k__BackingField: 1.5
     <JumpTimer>k__BackingField: 0.3
-    MaxAirJumps: 0
+    MaxAirJumps: 1
     DetectionRange: 5
     CorrectionForce: 2
     MagnetThreshold: 1
@@ -132,14 +132,14 @@ MonoBehaviour:
   <WallData>k__BackingField:
     WallLayer:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 2048
     WallRunForce: 0
     Inclinaison: 5
     SmoothInclinaison: 0.5
     WallCheckDistance: 0
     MaxAngle: 0
   <AbilityData>k__BackingField:
-    <AimDistance>k__BackingField: 5
+    <AimDistance>k__BackingField: 10
     <AimBallOffset>k__BackingField: {x: 0, y: 0, z: 0.2}
     <AimBall>k__BackingField: {fileID: 0}
     <AimSpeed>k__BackingField: 50
