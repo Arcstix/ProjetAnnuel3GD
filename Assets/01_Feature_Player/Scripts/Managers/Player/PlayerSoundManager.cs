@@ -105,4 +105,51 @@ public class PlayerSoundManager : MonoBehaviour
         // Son qui s'active lorsque le joueur touche le sol. 
         FMODUnity.RuntimeManager.PlayOneShot("event:/Player/player collision");
     }
+
+
+    // --------------------------------------------  NOUVEAU ------------------------------------------------
+
+    public void StaminaReady()
+    {
+        // Son qui s'active lorsqu'une charge de stamina est pleine. 
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/No Stamina");
+    }
+
+    public void NoStamina()
+    {
+        // Son qui s'active lorsque le joueur veut s'attirer à un outil mais qu'il n'a pas encore récupéré sa stamina. 
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/UI - stamina ready");
+    }
+
+    public void Jump()
+    {
+        // Son qui s'active lorsque le joueur veut s'attirer à un outil mais qu'il n'a pas encore récupéré sa stamina. 
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/UI - stamina ready");
+    }
+
+    public void DoubleJump()
+    {
+        // Son qui s'active lorsque le joueur veut s'attirer à un outil mais qu'il n'a pas encore récupéré sa stamina. 
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/UI - stamina ready");
+    }
+
+    public void BruitPasRoche()
+    {
+        // Son qui s'active lorsque le joueur veut s'attirer à un outil mais qu'il n'a pas encore récupéré sa stamina. 
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/UI - stamina ready");
+    }
+
+    public void BruitPasSable()
+    {
+        // Son qui s'active lorsque le joueur veut s'attirer à un outil mais qu'il n'a pas encore récupéré sa stamina. 
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/UI - stamina ready");
+    }
+
+    public void WallRun()
+    {
+        // Son qui s'active lorsque le joueur veut s'attirer à un outil mais qu'il n'a pas encore récupéré sa stamina. 
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/UI - stamina ready");
+    }
+
+
 }

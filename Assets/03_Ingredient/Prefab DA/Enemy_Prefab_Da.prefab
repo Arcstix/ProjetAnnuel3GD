@@ -962,6 +962,7 @@ GameObject:
   - component: {fileID: 5198983161515364481}
   - component: {fileID: 3230476859420655707}
   - component: {fileID: 559557975923909410}
+  - component: {fileID: 920454690536564843}
   m_Layer: 12
   m_Name: Enemy_Prefab_Da
   m_TagString: Untagged
@@ -979,7 +980,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -90.86857, y: 6.5, z: -40.33}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 16, y: 16, z: 16}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4632959360986473136}
@@ -1300,6 +1301,37 @@ MonoBehaviour:
   detectedObjects: []
   _isInteractive: 0
   _onWall: 0
+--- !u!114 &920454690536564843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4527097802850966739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 2001550879
+      Data2: 1152307435
+      Data3: -1935506255
+      Data4: 1494352019
+    Path: event:/Ennemies/Ennemies Idle
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &5959517098841768864
 GameObject:
   m_ObjectHideFlags: 0
