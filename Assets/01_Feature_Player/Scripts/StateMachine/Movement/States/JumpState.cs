@@ -31,7 +31,7 @@ public class JumpState : AirState
         gravity = Mathf.Sqrt(-2f * Physics.gravity.y * jumpData.JumpHeight);
         currentGravity = gravity;
         initialJumpVelocity = (2 * jumpData.JumpHeight) / jumpData.JumpTimer;
-        stateMachine.MovementManager.Rb.velocity = new Vector3(rigidbody.velocity.x, initialJumpVelocity, rigidbody.velocity.z);
+        stateMachine.MovementManager.Rb.velocity = new Vector3(rigidbody.velocity.x, currentGravity, rigidbody.velocity.z);
         
         timer = 0;
     }

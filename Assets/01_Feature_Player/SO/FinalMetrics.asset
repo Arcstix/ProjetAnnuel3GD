@@ -15,40 +15,6 @@ MonoBehaviour:
   <Drag>k__BackingField: 1
   <GroundedData>k__BackingField:
     <BaseSpeed>k__BackingField: 7
-    <GravityMultiplier>k__BackingField: 5
-    <GravityModifier>k__BackingField:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 0.098474346
-        value: 0.0071114413
-        inSlope: 0.100572914
-        outSlope: 0.100572914
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.6192978
-        outWeight: 0.07848319
-      - serializedVersion: 3
-        time: 0.75
-        value: 1
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
     <SlopeSpeedAngle>k__BackingField:
       serializedVersion: 2
       m_Curve:
@@ -119,16 +85,49 @@ MonoBehaviour:
     <JumpHeight>k__BackingField: 1.5
     <JumpTimer>k__BackingField: 0.3
     MaxAirJumps: 1
-    DetectionRange: 5
-    CorrectionForce: 2
-    MagnetThreshold: 1
-    DetectionRadius: 2
-    MaxDetectionAngle: 45
+    DetectionRange: 15
+    CorrectionForce: 60
+    MagnetThreshold: 0.5
+    DetectionRadius: 10
+    MaxDetectionAngle: 30
     SpeedReductionFactor: 0.5
   <FallingData>k__BackingField:
-    <SpeedModifier>k__BackingField: 1
-    <GravityModifier>k__BackingField: 4
-    <MaxFallingSpeed>k__BackingField: 52
+    <SpeedModifier>k__BackingField: 2
+    <GravityMultiplier>k__BackingField: 4
+    <GravityModifier>k__BackingField:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: -0.00497818
+        value: -0.0004272461
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.048300605
+        value: 1.0013368
+        inSlope: -0.0020629442
+        outSlope: -0.0020629442
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    <MaxFallingSpeed>k__BackingField: 100
   <WallData>k__BackingField:
     WallLayer:
       serializedVersion: 2
