@@ -150,46 +150,55 @@ MonoBehaviour:
     <AimDistance>k__BackingField: 10
     <AimBallOffset>k__BackingField: {x: 0, y: 0, z: 0.3}
     <AimBall>k__BackingField: {fileID: 3528749689593508597, guid: e502b963a1b09bb488a269b0e1cff83f, type: 3}
-    <AimSpeed>k__BackingField: 22
+    <AimSpeed>k__BackingField: 20
     <SlowTime>k__BackingField: 0.02
     <SlowLerpTime>k__BackingField: 0.2
     <DefaultLerpTime>k__BackingField: 0.2
-    <ShootSpeed>k__BackingField: 12
+    <ShootSpeed>k__BackingField: 15
     <RightTool>k__BackingField: {fileID: 6414293944630104308, guid: d4266097bb5598149947c81bfeac1dac, type: 3}
     <LeftTool>k__BackingField: {fileID: 8985292475141258581, guid: 5edd0d58c6fb4214989ea10faea7db68, type: 3}
     <RecallSpeed>k__BackingField: 50
-    <DistanceToEndRecall>k__BackingField: 0.5
-    <TransportPlayerSpeed>k__BackingField: 18
-    <TransportObjectSpeed>k__BackingField: 30
+    <DistanceToEndRecall>k__BackingField: 0.93
+    <TransportPlayerSpeed>k__BackingField: 20
+    <TransportObjectSpeed>k__BackingField: 40
     <TransportCurve>k__BackingField:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
+        inSlope: 17.949675
+        outSlope: 17.949675
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.15469816
       - serializedVersion: 3
-        time: 0.019902982
-        value: 0.9887154
-        inSlope: -0.0021096491
-        outSlope: -0.0021096491
+        time: 0.019035246
+        value: 0.5847925
+        inSlope: 5.638732
+        outSlope: 5.638732
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0.20239267
         outWeight: 0.067085825
       - serializedVersion: 3
-        time: 0.73924667
-        value: 0.99793226
-        inSlope: 0.014152535
-        outSlope: 0.014152535
+        time: 0.112222865
+        value: 0.8677482
+        inSlope: 1.5558759
+        outSlope: 1.5558759
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
+        outWeight: 0.08379441
+      - serializedVersion: 3
+        time: 0.7401475
+        value: 0.9614567
+        inSlope: 0.39483225
+        outSlope: 0.39483225
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.11015998
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.9862671
@@ -203,7 +212,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    <ThrowSpeed>k__BackingField: 50000
+    <ThrowSpeed>k__BackingField: 75000
   <StaminaData>k__BackingField:
     <MaxStamina>k__BackingField: 50
     <MaxNumberOfChargePerObject>k__BackingField: 1
@@ -212,27 +221,36 @@ MonoBehaviour:
     <RecoveryRate>k__BackingField: 50
   <CameraData>k__BackingField:
     BaseFOV: 90
-    SmoothingFactorBaseFOV: 0.5
+    SmoothingFactorBaseFOV: 0.03
     TransitionBaseTransportFOV:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
         value: 90
-        inSlope: 0
-        outSlope: 0
+        inSlope: -4.523865
+        outSlope: -4.523865
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.3699684
       - serializedVersion: 3
-        time: 0.5
-        value: 110
-        inSlope: 0
-        outSlope: 0
+        time: 0.11309903
+        value: 97.40217
+        inSlope: 69.872856
+        outSlope: 69.872856
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.116428405
+        outWeight: 0.042285983
+      - serializedVersion: 3
+        time: 0.50298065
+        value: 105.05838
+        inSlope: 2.4736872
+        outSlope: 2.4736872
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.10178642
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
