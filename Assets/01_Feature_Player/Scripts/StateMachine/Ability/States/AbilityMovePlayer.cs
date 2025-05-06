@@ -5,6 +5,9 @@ public class AbilityMovePlayer : AbilityTransportState
 {
     private Vector3 refVelocity;
     private Vector3 startPosition;
+
+    // Selon ce vers quoi tu te dirige l'origine peut être au pied du joueur ou au niveau de la tête
+    private Vector3 relativeOrigin;
     
     public event Action<float> SpeedModifierEvent;
 
@@ -23,8 +26,26 @@ public class AbilityMovePlayer : AbilityTransportState
 
         if (reusableData.RightObject)
         {
-            reusableData.RightObject.GetComponent<InteractionSystem>().Interactable(true);
+            if (reusableData.RightParent)
+            {
+                rightInteraction = reusableData.RightParent.GetComponent<InteractionSystem>();
+            }
+            else
+            {
+                rightInteraction = reusableData.RightObject.GetComponent<InteractionSystem>();
+            }
+            
+            rightInteraction.Interactable(true);
             reusableData.RightActivation = true;
+            if (rightInteraction.interactorType == InteractorType.Enemy)
+            {
+                relativeOrigin = _stateMachine.AbilityManager.AimTransform.position;
+            }
+            else
+            {
+                relativeOrigin = _stateMachine.AbilityManager.transform.position;
+            }
+            
             if (_stateMachine.AbilityManager.Metrics.useCharge)
             {
                 _stateMachine.AbilityManager.Metrics.ConsumeCharge(true);
@@ -32,8 +53,26 @@ public class AbilityMovePlayer : AbilityTransportState
         }
         else
         {
-            reusableData.LeftObject.GetComponent<InteractionSystem>().Interactable(true);
+            if (reusableData.LeftParent)
+            {
+                leftInteraction = reusableData.LeftParent.GetComponent<InteractionSystem>();
+            }
+            else
+            {
+                leftInteraction = reusableData.LeftObject.GetComponent<InteractionSystem>();
+            }
+            
+            leftInteraction.Interactable(true);
             reusableData.LeftActivation = true;
+            if (leftInteraction.interactorType == InteractorType.Enemy)
+            {
+                relativeOrigin = _stateMachine.AbilityManager.AimTransform.position;
+            }
+            else
+            {
+                relativeOrigin = _stateMachine.AbilityManager.transform.position;
+            }
+            
             if (_stateMachine.AbilityManager.Metrics.useCharge)
             {
                 _stateMachine.AbilityManager.Metrics.ConsumeCharge(false);
@@ -96,6 +135,8 @@ public class AbilityMovePlayer : AbilityTransportState
         playerInteraction.Interactable(false);
         ExitDash?.Invoke();
         reusableData.OnTransportation = false;
+        leftInteraction = null;
+        rightInteraction = null;
         reusableData.LeftActivation = false;
         reusableData.RightActivation = false;
     }
@@ -112,7 +153,7 @@ public class AbilityMovePlayer : AbilityTransportState
             if (reusableData.RightObject != null)
             {
                 Vector3 direction = (reusableData.RightObject.transform.position -
-                                     _stateMachine.AbilityManager.transform.position).normalized;
+                                     relativeOrigin).normalized;
             
 
                 float currentSpeed = CalculateSpeed(reusableData.RightObject.transform.position);
@@ -128,7 +169,7 @@ public class AbilityMovePlayer : AbilityTransportState
             if (reusableData.LeftObject != null)
             {
                 Vector3 direction = (reusableData.LeftObject.transform.position -
-                                     _stateMachine.AbilityManager.transform.position).normalized;
+                                     relativeOrigin).normalized;
 
                 float currentSpeed = CalculateSpeed(reusableData.LeftObject.transform.position);
             

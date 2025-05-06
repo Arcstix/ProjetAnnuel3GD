@@ -10501,6 +10501,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7526978189584964790}
+  - component: {fileID: 5232308444521518081}
   m_Layer: 0
   m_Name: Antenne_Oryn
   m_TagString: Untagged
@@ -10535,6 +10536,27 @@ Transform:
   - {fileID: 8944792333873068878}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -88.687, z: 0}
+--- !u!95 &5232308444521518081
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7235056975918555164}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e6fc1717f05fcb04db84f9bda39deda8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7519297979182040693
 GameObject:
   m_ObjectHideFlags: 0

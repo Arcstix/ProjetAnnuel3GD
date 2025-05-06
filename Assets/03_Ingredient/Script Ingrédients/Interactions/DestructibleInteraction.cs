@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DestructibleInteraction : InteractionSystem
 {
-    public event Action OnEnemyInteract;
+    public event Action OnPlayerInteract;
     public event Action OnPlatformInteract;
     public event Action OnToolInteract;
 
@@ -11,10 +11,10 @@ public class DestructibleInteraction : InteractionSystem
     {
         base.Interact(otherSystem);
         
-        if (otherSystem.interactorType == InteractorType.Enemy)
+        if (otherSystem.interactorType == InteractorType.Player)
         {
             // In case the destructible object is coming into the enemy // Destroy object
-            OnEnemyInteract?.Invoke();
+            OnPlayerInteract?.Invoke();
             Destroy(this.gameObject);
             return;
         }
@@ -23,15 +23,6 @@ public class DestructibleInteraction : InteractionSystem
         {
             // In case a destructible object is coming into the platform // Destroy object
             OnPlatformInteract?.Invoke();
-            Destroy(this.gameObject);
-            return;
-        }
-
-        if (otherSystem.interactorType == InteractorType.Tool)
-        {
-            // In case the destructible object trigger into the tool // DESTROY object
-            OnToolInteract?.Invoke();
-            Destroy(otherSystem.gameObject);
             Destroy(this.gameObject);
             return;
         }

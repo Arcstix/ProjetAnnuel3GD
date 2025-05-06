@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Drag>k__BackingField: 1
   <GroundedData>k__BackingField:
-    <BaseSpeed>k__BackingField: 5
+    <BaseSpeed>k__BackingField: 7
     <SlopeSpeedAngle>k__BackingField:
       serializedVersion: 2
       m_Curve:
@@ -88,8 +88,8 @@ MonoBehaviour:
     DetectionRange: 15
     CorrectionForce: 60
     MagnetThreshold: 0.5
-    DetectionRadius: 20
-    MaxDetectionAngle: 80
+    DetectionRadius: 10
+    MaxDetectionAngle: 30
     SpeedReductionFactor: 0.5
   <FallingData>k__BackingField:
     <SpeedModifier>k__BackingField: 2
@@ -138,7 +138,7 @@ MonoBehaviour:
     WallCheckDistance: 5
     MaxAngle: 179
   <AbilityData>k__BackingField:
-    <AimDistance>k__BackingField: 7.5
+    <AimDistance>k__BackingField: 10
     <AimBallOffset>k__BackingField: {x: 0, y: -0.3, z: 0}
     <AimBall>k__BackingField: {fileID: 3528749689593508597, guid: e502b963a1b09bb488a269b0e1cff83f, type: 3}
     <AimSpeed>k__BackingField: 20

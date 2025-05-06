@@ -5,10 +5,22 @@ public class PlayerInteraction : InteractionSystem
 {
     public event Action OnEnemyInteract;
     public event Action OnPlatformInteract;
+    public event Action OnDestructibleInteract;
     public event Action OnToolInteract;
+
+    private PlayerAbilityManager abilityManager;
+    private PlayerMovementManager movementManager;
+    private PlayerMetricsManager metricsManager;
     
     public float boostSpeedEndTransportation = 0.2f;
-    
+
+    private void Awake()
+    {
+        abilityManager = GetComponent<PlayerAbilityManager>();
+        movementManager = GetComponent<PlayerMovementManager>();
+        metricsManager = GetComponent<PlayerMetricsManager>();
+    }
+
     public override void Interact(InteractionSystem otherSystem)
     {
         base.Interact(otherSystem);
@@ -17,13 +29,16 @@ public class PlayerInteraction : InteractionSystem
         {
             // In case the Player is coming into the enemy // LOOSE GAME
             OnEnemyInteract?.Invoke();
+            abilityManager.AbilityStateMachine?.ChangeState(abilityManager.AbilityStateMachine.RecallState);
+            metricsManager.RecoverFullCharge();
+            movementManager.StateMachine?.ChangeState(movementManager.StateMachine.JumpState);
             return;
         }
 
         if (otherSystem.interactorType == InteractorType.Anchor)
         {
             // In case a Player is coming into an Anchor
-            PlayerReusableStateData reusableData = GetComponent<PlayerAbilityManager>().ReusableData;
+            PlayerReusableStateData reusableData = abilityManager.ReusableData;
             if (reusableData.LeftActivation)
             {
                 reusableData.RightInput = true;
@@ -33,9 +48,7 @@ public class PlayerInteraction : InteractionSystem
                 reusableData.LeftInput = true;
             }
             // Recall Tool 
-            AbilityStateMachine abilityStateMachine = GetComponent<PlayerAbilityManager>().AbilityStateMachine;
-            abilityStateMachine.ChangeState(abilityStateMachine.RecallState);
-            MovementStateMachine stateMachine = GetComponent<PlayerMovementManager>().StateMachine;
+            abilityManager.AbilityStateMachine?.ChangeState(abilityManager.AbilityStateMachine?.RecallState);
             if (otherSystem._onWall)
             {
                 Debug.Log("Interaction Wall");
@@ -44,7 +57,7 @@ public class PlayerInteraction : InteractionSystem
             }
             else
             {
-                stateMachine.ChangeState(stateMachine.JumpState);
+                movementManager.StateMachine?.ChangeState(movementManager.StateMachine?.JumpState);
             }
             return;
         }
@@ -53,8 +66,8 @@ public class PlayerInteraction : InteractionSystem
         {
             // In case the Player trigger into the tool // DESTROY TOOL
             OnToolInteract?.Invoke();
-            GetComponent<PlayerMetricsManager>().AddExternForce(boostSpeedEndTransportation);
-            PlayerReusableStateData reusableData = GetComponent<PlayerAbilityManager>().ReusableData;
+            metricsManager.AddExternForce(boostSpeedEndTransportation);
+            PlayerReusableStateData reusableData = abilityManager.ReusableData;
 
             if (reusableData.LeftActivation)
             {
@@ -71,6 +84,12 @@ public class PlayerInteraction : InteractionSystem
                 }
             }
             return;
+        }
+
+        if (otherSystem.interactorType == InteractorType.InstantDestructible)
+        {
+            OnDestructibleInteract?.Invoke();
+            metricsManager.RecoverFullCharge();
         }
     }
 }

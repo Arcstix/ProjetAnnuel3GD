@@ -37,12 +37,6 @@ public class ToolInteraction : InteractionSystem
                     Destroy(this.gameObject);
                 }
                 return;
-            case InteractorType.InstantDestructible:
-                // In case a tool object trigger into an instant destructible
-                OnInstantDestruction?.Invoke();
-                Destroy(otherSystem.gameObject);
-                Destroy(this.gameObject);
-                return;
             case InteractorType.Projectile:
                 GetComponent<ToolManager>().SetLaunch(true);
                 canInteractWithPlayer = false;

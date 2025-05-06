@@ -175,6 +175,12 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
         }
     }
 
+    public void RecoverFullCharge()
+    {
+        UpdateLeftCharge(currentMetrics.StaminaData.MaxStamina);
+        UpdateRightCharge(currentMetrics.StaminaData.MaxStamina);
+    }
+
     private void UpdateRightStamina(float stamina)
     {
         staminaRight = stamina;
