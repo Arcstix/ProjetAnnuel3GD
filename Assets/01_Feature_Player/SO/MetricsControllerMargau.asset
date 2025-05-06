@@ -81,60 +81,69 @@ MonoBehaviour:
     <RunData>k__BackingField:
       <SpeedModifier>k__BackingField: 1.5
   <JumpData>k__BackingField:
-    <SpeedModifier>k__BackingField: 2
-    <JumpHeight>k__BackingField: 1
-    <JumpTimer>k__BackingField: 0.3
+    <SpeedModifier>k__BackingField: 1
+    <JumpHeight>k__BackingField: 2
+    <JumpTimer>k__BackingField: 0.1
     MaxAirJumps: 1
-    DetectionRange: 5
+    DetectionRange: 15
     CorrectionForce: 60
     MagnetThreshold: 0.5
-    DetectionRadius: 18.6
-    MaxDetectionAngle: 22.4
+    DetectionRadius: 10
+    MaxDetectionAngle: 30
     SpeedReductionFactor: 0.5
   <FallingData>k__BackingField:
-    <SpeedModifier>k__BackingField: 0.5
-    <GravityMultiplier>k__BackingField: 4
+    <SpeedModifier>k__BackingField: 2
+    <GravityMultiplier>k__BackingField: 2.3
     <GravityModifier>k__BackingField:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
+        inSlope: -0.05513978
+        outSlope: -0.05513978
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.3905763
       - serializedVersion: 3
-        time: 0.07423578
-        value: 0.990134
-        inSlope: -0.0038563744
-        outSlope: -0.0038563744
+        time: 0.46715677
+        value: 0.4140861
+        inSlope: 2.929608
+        outSlope: 2.929608
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.044551976
+        outWeight: 0.474173
+      - serializedVersion: 3
+        time: 0.53550005
+        value: 0.8422685
+        inSlope: 1.6437029
+        outSlope: 1.6437029
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.08188826
+        outWeight: 0.08997312
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 0
-        outSlope: 0
+        inSlope: 0.2116236
+        outSlope: 0.2116236
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.24739814
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    <MaxFallingSpeed>k__BackingField: 52
+    <MaxFallingSpeed>k__BackingField: 100
   <WallData>k__BackingField:
     WallLayer:
       serializedVersion: 2
       m_Bits: 2048
     WallRunForce: 20
     Inclinaison: 10
-    SmoothInclinaison: 0.5
+    SmoothInclinaison: 0.1
     WallCheckDistance: 5
     MaxAngle: 180
   <AbilityData>k__BackingField:
@@ -142,7 +151,7 @@ MonoBehaviour:
     <AimBallOffset>k__BackingField: {x: 0, y: 0, z: 0.3}
     <AimBall>k__BackingField: {fileID: 3528749689593508597, guid: e502b963a1b09bb488a269b0e1cff83f, type: 3}
     <AimSpeed>k__BackingField: 22
-    <SlowTime>k__BackingField: 2
+    <SlowTime>k__BackingField: 0.02
     <SlowLerpTime>k__BackingField: 0.2
     <DefaultLerpTime>k__BackingField: 0.2
     <ShootSpeed>k__BackingField: 12
