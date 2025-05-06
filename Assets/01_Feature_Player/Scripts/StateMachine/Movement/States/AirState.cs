@@ -12,6 +12,7 @@ public class AirState : MovementState
     protected CapsuleColliderUtility capsuleColliderUtility;
     protected GroundedData groundedData;
     protected JumpData jumpData;
+    protected FallingData fallingData;
     protected float timer;
     protected Transform targetLandingPoint;
     
@@ -23,6 +24,7 @@ public class AirState : MovementState
         capsuleColliderUtility = base.stateMachine.MovementManager.CapsuleUtility;
         groundedData = base.stateMachine.MovementManager.Metrics.CurrentMetrics.GroundedData;
         jumpData = base.stateMachine.MovementManager.Metrics.CurrentMetrics.JumpData;
+        fallingData = base.stateMachine.MovementManager.Metrics.CurrentMetrics.FallingData;
     }
 
     public override void FixedTick()
@@ -105,12 +107,5 @@ public class AirState : MovementState
         {
             rigidbody.velocity = new Vector3(rigidbody.velocity.x * jumpData.SpeedReductionFactor, rigidbody.velocity.y, rigidbody.velocity.z * jumpData.SpeedReductionFactor);
         }
-    }
-
-
-    public void SlowDown()
-    {
-        //ajouter une force pour ralentir le joueur avec une animation curve
-        rigidbody.AddForce(Physics.gravity * (groundedData.GravityMultiplier * groundedData.GravityModifier.Evaluate(timer)) - GetCurrentVerticalVelocity(), ForceMode.Acceleration);
     }
 }

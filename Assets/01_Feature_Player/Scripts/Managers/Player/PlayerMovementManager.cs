@@ -60,8 +60,6 @@ public class PlayerMovementManager : PlayerManager, I_Initializer
         stateMachine?.HandleInput();
 
         stateMachine?.Tick();
-        
-        Debug.Log("In Air : " + reusableData.InAir);
     }
 
     private void FixedUpdate()

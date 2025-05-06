@@ -3151,14 +3151,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 4909550474293704821}
-  visionAngle: 45
+  visionAngle: 25
   targets: []
   reachableTargets: []
   currentTarget: {fileID: 0}
   storedTarget: {fileID: 0}
   leftTargetLaunch: {fileID: 0}
   rightTargetLaunch: {fileID: 0}
-  screenDistanceWeight: 20
+  screenDistanceWeight: 10
   positionDistanceWeight: 20
   maxReachDistance: 15
   rectImage: {fileID: 1611460212793299200}
@@ -3182,6 +3182,7 @@ MonoBehaviour:
   detectedObjects: []
   _isInteractive: 0
   _onWall: 0
+  boostSpeedEndTransportation: 0.2
 --- !u!114 &5047690165572324359
 MonoBehaviour:
   m_ObjectHideFlags: 0
