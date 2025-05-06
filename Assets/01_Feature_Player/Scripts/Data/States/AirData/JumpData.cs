@@ -8,6 +8,7 @@ public class JumpData
     [field: SerializeField] public float JumpHeight { get; private set; } = 5f;
     [field: SerializeField] public float JumpTimer { get; private set; } = 0.5f;
     [field: SerializeField, Range(0, 5)] public int MaxAirJumps = 0;
+    //[field: SerializeField] public AnimationCurve JumpHeightCurve { get; private set; } = new AnimationCurve();
     
     [Header("Assistance Settings")]
     [Tooltip("Distance max pour détecter une plateforme")]

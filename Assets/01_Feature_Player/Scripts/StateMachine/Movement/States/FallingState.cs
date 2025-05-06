@@ -18,10 +18,14 @@ public class FallingState : AirState
         base.Enter();
         OnFalling?.Invoke();
         timer = 0;
-        verticalVelocity = Physics.gravity.y * metricsManager.CurrentMetrics.FallingData.GravityModifier;
+        verticalVelocity = Physics.gravity.y * fallingData.GravityMultiplier;
+        if (!reusableData.HadJump)
+        {
+            stateMachine.MovementManager.Rb.velocity = new Vector3(stateMachine.MovementManager.Rb.velocity.x, 0, stateMachine.MovementManager.Rb.velocity.z);
+        }
         reusableData.InAir = true;
         reusableData.ShouldSlowDown = !reusableData.HadJump;
-        reusableData.MovementSpeedModifier = metricsManager.CurrentMetrics.FallingData.SpeedModifier;
+        reusableData.MovementSpeedModifier = fallingData.SpeedModifier;
     }
 
     public override void Exit()
@@ -29,6 +33,7 @@ public class FallingState : AirState
         ResetSlowDown();
         base.Exit();
         reusableData.HadJump = false;
+        timer = 0;
     }
 
     public override void Tick()
@@ -40,12 +45,12 @@ public class FallingState : AirState
         timer += Time.deltaTime;
         
         // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
-        if (Mathf.Abs(verticalVelocity) < metricsManager.CurrentMetrics.FallingData.MaxFallingSpeed)
+        if (Mathf.Abs(verticalVelocity) < fallingData.MaxFallingSpeed)
         {
-            verticalVelocity += Physics.gravity.y * metricsManager.CurrentMetrics.FallingData.GravityModifier * Time.deltaTime;
+            verticalVelocity += Physics.gravity.y * fallingData.GravityMultiplier * Time.deltaTime;
         }
         
-        if (timer <= groundedData.GravityModifier.keys[groundedData.GravityModifier.length - 1].time && reusableData.ShouldSlowDown)
+        if (timer <= fallingData.GravityModifier.keys[fallingData.GravityModifier.length - 1].time && reusableData.ShouldSlowDown)
         {
             SlowDown();
         }
@@ -63,7 +68,7 @@ public class FallingState : AirState
             stateMachine.ChangeState(stateMachine.IdleState);
         }
 
-        if (jump.WasPressedThisFrame() && reusableData.InAir && reusableData.NumberOfJump < metricsManager.CurrentMetrics.JumpData.MaxAirJumps)
+        if (jump.WasPressedThisFrame() && reusableData.InAir && reusableData.NumberOfJump < jumpData.MaxAirJumps)
         {
             reusableData.NumberOfJump++;
             stateMachine.ChangeState(stateMachine.JumpState);
@@ -74,6 +79,12 @@ public class FallingState : AirState
             reusableData.NumberOfJump = 0;
             stateMachine.ChangeState(stateMachine.LandingState);
         }
+    }
+    
+    public void SlowDown()
+    {
+        //ajouter une force pour ralentir le joueur avec une animation curve
+        rigidbody.AddForce(Physics.gravity * (fallingData.GravityMultiplier * fallingData.GravityModifier.Evaluate(timer)) - GetCurrentVerticalVelocity(), ForceMode.Acceleration);
     }
 
     /// <summary>

@@ -9,6 +9,8 @@ public class JumpState : AirState
     private float initialJumpVelocity;
     private float currentGravity;
     private float gravity;
+    private Vector3 startPosition;
+    private Vector3 endPosition;
     
     public event Action OnJump;
     
@@ -23,11 +25,12 @@ public class JumpState : AirState
         jumpData = stateMachine.MovementManager.Metrics.CurrentMetrics.JumpData;
         reusableData.MovementSpeedModifier = jumpData.SpeedModifier;
         reusableData.HadJump = true;
-
-        timeToApex = jumpData.JumpTimer / 2;
+        // startPosition = stateMachine.MovementManager.transform.position;
+        // endPosition = new Vector3(startPosition.x, startPosition.y + jumpData.JumpHeight, startPosition.z);
+        
         gravity = Mathf.Sqrt(-2f * Physics.gravity.y * jumpData.JumpHeight);
         currentGravity = gravity;
-        initialJumpVelocity = (2 * jumpData.JumpHeight) / timeToApex;
+        initialJumpVelocity = (2 * jumpData.JumpHeight) / jumpData.JumpTimer;
         stateMachine.MovementManager.Rb.velocity = new Vector3(rigidbody.velocity.x, initialJumpVelocity, rigidbody.velocity.z);
         
         timer = 0;
@@ -50,7 +53,7 @@ public class JumpState : AirState
     {
         base.FixedTick();
         
-        currentGravity += gravity * Time.deltaTime;
+        currentGravity += gravity * Time.fixedDeltaTime;
         
         stateMachine.MovementManager.Rb.velocity = new Vector3(rigidbody.velocity.x, currentGravity, rigidbody.velocity.z);
     }
