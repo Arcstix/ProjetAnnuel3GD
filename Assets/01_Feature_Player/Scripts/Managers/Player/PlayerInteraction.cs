@@ -68,7 +68,7 @@ public class PlayerInteraction : InteractionSystem
             OnToolInteract?.Invoke();
             metricsManager.AddExternForce(boostSpeedEndTransportation);
             PlayerReusableStateData reusableData = abilityManager.ReusableData;
-
+            abilityManager.AbilityStateMachine?.ChangeState(abilityManager.AbilityStateMachine?.RecallState);
             if (reusableData.LeftActivation)
             {
                 if (reusableData.LeftParent != null)
@@ -89,6 +89,7 @@ public class PlayerInteraction : InteractionSystem
         if (otherSystem.interactorType == InteractorType.InstantDestructible)
         {
             OnDestructibleInteract?.Invoke();
+            abilityManager.AbilityStateMachine?.ChangeState(abilityManager.AbilityStateMachine?.RecallState);
             metricsManager.RecoverFullCharge();
         }
     }
