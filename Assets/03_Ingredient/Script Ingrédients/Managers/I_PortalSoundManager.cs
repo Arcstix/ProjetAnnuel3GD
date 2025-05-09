@@ -14,10 +14,13 @@ public class I_PortalSoundManager : MonoBehaviour
 
     private void OnEnable()
     {
-        destroyDestructible.OnDestroyed += PortalDestroySound;
+        if (destroyDestructible)
+        {
+            destroyDestructible.OnDestroyed += PortalDestroySound;
+        }
     }
 
-    private void PortalDestroySound()
+    public void PortalDestroySound()
     {
         //  Son lorsqu'on casse l'igr�dient portail
         FMODUnity.RuntimeManager.PlayOneShot("event:/Ingredients/Bloc cassable (portal)", transform.position);

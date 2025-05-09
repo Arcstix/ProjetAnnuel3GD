@@ -81,9 +81,9 @@ MonoBehaviour:
     <RunData>k__BackingField:
       <SpeedModifier>k__BackingField: 1.5
   <JumpData>k__BackingField:
-    <SpeedModifier>k__BackingField: 1.5
-    <JumpHeight>k__BackingField: 1.5
-    <JumpTimer>k__BackingField: 0.3
+    <SpeedModifier>k__BackingField: 1
+    <JumpHeight>k__BackingField: 2
+    <JumpTimer>k__BackingField: 0.1
     MaxAirJumps: 1
     DetectionRange: 15
     CorrectionForce: 60
@@ -93,28 +93,37 @@ MonoBehaviour:
     SpeedReductionFactor: 0.5
   <FallingData>k__BackingField:
     <SpeedModifier>k__BackingField: 2
-    <GravityMultiplier>k__BackingField: 4
+    <GravityMultiplier>k__BackingField: 2.3
     <GravityModifier>k__BackingField:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: -0.006011963
         value: -0.0018920898
-        inSlope: 9.09627
-        outSlope: 9.09627
+        inSlope: 0.568536
+        outSlope: 0.568536
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.045168854
+        outWeight: 0.1859914
       - serializedVersion: 3
-        time: 0.2
-        value: 0.8
-        inSlope: 0.6232929
-        outSlope: 0.6232929
+        time: 0.42630148
+        value: 0.3299495
+        inSlope: 1.0983405
+        outSlope: 1.0983405
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.28231505
+        inWeight: 0.10026633
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.51635987
+        value: 0.82169205
+        inSlope: 1.0935276
+        outSlope: 1.0935276
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.55371594
+        outWeight: 0.12483086
       - serializedVersion: 3
         time: 1
         value: 1
@@ -132,9 +141,9 @@ MonoBehaviour:
     WallLayer:
       serializedVersion: 2
       m_Bits: 2048
-    WallRunForce: 10
+    WallRunForce: 20
     Inclinaison: 10
-    SmoothInclinaison: 0.5
+    SmoothInclinaison: 0.1
     WallCheckDistance: 5
     MaxAngle: 179
   <AbilityData>k__BackingField:
@@ -145,13 +154,13 @@ MonoBehaviour:
     <SlowTime>k__BackingField: 0.02
     <SlowLerpTime>k__BackingField: 0.2
     <DefaultLerpTime>k__BackingField: 0.2
-    <ShootSpeed>k__BackingField: 10
+    <ShootSpeed>k__BackingField: 15
     <RightTool>k__BackingField: {fileID: 6414293944630104308, guid: d4266097bb5598149947c81bfeac1dac, type: 3}
     <LeftTool>k__BackingField: {fileID: 8985292475141258581, guid: 5edd0d58c6fb4214989ea10faea7db68, type: 3}
     <RecallSpeed>k__BackingField: 40
     <DistanceToEndRecall>k__BackingField: 0.5
     <TransportPlayerSpeed>k__BackingField: 20
-    <TransportObjectSpeed>k__BackingField: 15
+    <TransportObjectSpeed>k__BackingField: 40
     <TransportCurve>k__BackingField:
       serializedVersion: 2
       m_Curve:
@@ -194,7 +203,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    <ThrowSpeed>k__BackingField: 50000
+    <ThrowSpeed>k__BackingField: 75000
   <StaminaData>k__BackingField:
     <MaxStamina>k__BackingField: 50
     <MaxNumberOfChargePerObject>k__BackingField: 1
