@@ -8,7 +8,7 @@ public class GameManagerFSM : MonoBehaviour
     private SceneReference currentActiveScene;
     private SceneReference nextActiveScene;
 
-    private GameState currentState;
+    [SerializeField] private GameState currentState;
 
     public List<SceneReference> chunkList = new List<SceneReference>();
 

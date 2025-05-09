@@ -4,6 +4,7 @@ public abstract class GameState : MonoBehaviour
 {
     protected GameManagerFSM fsm;
     
+    
     //Called on FSM Start
     public virtual void Initialize(GameManagerFSM fsm)
     {

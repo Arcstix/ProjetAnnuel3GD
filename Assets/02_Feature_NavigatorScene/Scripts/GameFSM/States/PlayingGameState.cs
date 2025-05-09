@@ -2,6 +2,8 @@
 
 public class PlayingGameState : GameState
 {
+    public bool RightCheck = false;
+    public bool LeftCheck = false;
     public override void Enter()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -15,6 +17,11 @@ public class PlayingGameState : GameState
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             fsm.ChangeState(GetComponent<PauseGameState>());
+        }
+
+        if (RightCheck && LeftCheck)
+        {
+            fsm.ChangeState(GetComponent<EndLevelState>());
         }
     }
 }
