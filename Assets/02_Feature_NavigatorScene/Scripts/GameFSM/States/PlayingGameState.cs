@@ -4,10 +4,11 @@ public class PlayingGameState : GameState
 {
     public bool RightCheck = false;
     public bool LeftCheck = false;
+    
     public override void Enter()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible   = false;
+        Cursor.visible = false;
     }
 
     public override void Tick()

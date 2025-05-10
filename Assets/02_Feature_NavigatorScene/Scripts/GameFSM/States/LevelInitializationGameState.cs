@@ -4,33 +4,32 @@ using UnityEngine.Serialization;
 
 public class LevelInitializationGameState : GameState
 {
-    [SerializeField] private GameObject _controllerPrefab;
-    [SerializeField] private GameObject _clavierPrefab;
-
-    private bool _isController = false;
+    [SerializeField] private GameObject _playerPrefab;
     
     public override void Enter()
     {
         InitPlayer();
         fsm.ChangeState(GetComponent<PlayingGameState>());
     }
-
-    public void SetInfo(bool isController)
-    {
-        _isController = isController;
-    }
     
     private void InitPlayer()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player != null)
+        {
+            return;
+        }
+        
         GameObject spawn = GameObject.FindGameObjectWithTag("Spawn");
 
-        if (_isController)
+        if (spawn != null)
         {
-            Instantiate(_controllerPrefab, spawn.transform.position, Quaternion.identity);
+            Instantiate(_playerPrefab, spawn.transform.position, Quaternion.identity);
         }
         else
         {
-            Instantiate(_clavierPrefab, spawn.transform.position, Quaternion.identity);
+            Debug.LogError("Spawner with tag Spawn not found");
         }
     }
 }
