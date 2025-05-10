@@ -14,6 +14,7 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
     private PlayerMetricsManager metricsManager;
     private PlayerAbilityManager abilityManager;
     private PlayerMovementManager movementManager;
+    private PlayerUIManager uiManager;
     private PlayerInput playerInput;
     private CinemachineFramingTransposer framingTransposer;
     private float currentTargetDistance;
@@ -29,6 +30,7 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        uiManager = GetComponent<PlayerUIManager>();
     }
 
     public void Init(PlayerReusableStateData reusableStateData)
@@ -40,6 +42,7 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
         abilityManager.AbilityStateMachine.MovePlayer.ExitDash += SetBaseFOV;
         movementManager.StateMachine.WallRunState.OnWallRun += WallRunRotate;
         movementManager.StateMachine.WallRunState.ExitWallRun += ExitWallRun;
+        uiManager.OnLevelSelection += ChangePOV;
 
         cameraData = metricsManager.CurrentMetrics.CameraData;
         targetFOV = cameraData.BaseFOV;
@@ -50,6 +53,13 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
         {
             freeLookAction.performed += OnFreeLookPerformed;
         }
+    }
+
+    private void ChangePOV(bool value)
+    {
+        //TODO : Faire en sorte de changer de point de vue quand on aura un personnage
+        //TODO : La caméra ne doit plus pouvoir être bougé
+        virtualCamera.gameObject.GetComponent<CinemachineInputProvider>().enabled = !value;
     }
 
     private void Update()
