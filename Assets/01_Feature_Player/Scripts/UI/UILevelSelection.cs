@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -21,6 +22,20 @@ public class UILevelSelection : MonoBehaviour
     {
         //TODO : Animation Apparition UI
         levelSelection.SetActive(value);
+        StartCoroutine(SelectDefaultNextFrame());
+    }
+
+    private IEnumerator SelectDefaultNextFrame()
+    {
+        yield return null; // attendre une frame
+        EventSystem.current.SetSelectedGameObject(null);
+        
+        yield return null;
         EventSystem.current.SetSelectedGameObject(defaultSelection.gameObject);
+    }
+
+    public void OnLevelSelection()
+    {
+        Debug.Log("Level Selected");
     }
 }

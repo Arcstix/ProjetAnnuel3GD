@@ -137,7 +137,7 @@ public class AbilityAimState : AbilityState
         else
         {
             aimObject.GetComponent<MeshRenderer>().material.color = Color.grey;
-            aimObject.transform.position = Vector3.Lerp(aimObject.transform.position, aimEndPosition, Time.unscaledDeltaTime * smoothSpeed);
+            aimObject.transform.position = Vector3.Lerp(aimObject.transform.position, aimEndPosition,Time.unscaledDeltaTime * smoothSpeed);
             reusableData.ObjectAimed = null;
         }
         
