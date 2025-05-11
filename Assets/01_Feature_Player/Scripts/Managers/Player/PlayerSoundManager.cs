@@ -96,7 +96,7 @@ public class PlayerSoundManager : MonoBehaviour
     
     public void QuitGravityFreeze()
     {
-        //  Son qui s'active � la fin du gravity freeze
+        //  Son qui s'active � la fin du gravity freeze (Chute)
         FMODUnity.RuntimeManager.PlayOneShot("event:/Player/Chute");
     }
 
@@ -109,47 +109,83 @@ public class PlayerSoundManager : MonoBehaviour
 
     // --------------------------------------------  NOUVEAU ------------------------------------------------
 
-    public void StaminaReady()
+    public void StaminaReadyDroite()
     {
-        // Son qui s'active lorsqu'une charge de stamina est pleine. 
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/No Stamina");
+        // Son qui s'active lorsque la charge de stamina droite est pleine. 
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/UI - stamina ready D");
+    }
+
+    public void StaminaReadyGauche()
+    {
+        // Son qui s'active lorsque la charge de stamina gauche est pleine. 
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/UI - stamina ready G");
     }
 
     public void NoStamina()
     {
         // Son qui s'active lorsque le joueur veut s'attirer à un outil mais qu'il n'a pas encore récupéré sa stamina. 
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/UI - stamina ready");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/No Stamina");
     }
 
     public void Jump()
     {
-        // Son qui s'active lorsque le joueur veut s'attirer à un outil mais qu'il n'a pas encore récupéré sa stamina. 
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/UI - stamina ready");
+        // Son qui s'active lorsque le joueur saute. 
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player sounds/Jump");
     }
 
     public void DoubleJump()
     {
-        // Son qui s'active lorsque le joueur veut s'attirer à un outil mais qu'il n'a pas encore récupéré sa stamina. 
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/UI - stamina ready");
+        // Son qui s'active lorsque le joueur utilise son deuxieme saut. 
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player sounds/Double jump");
     }
 
     public void BruitPasRoche()
     {
-        // Son qui s'active lorsque le joueur veut s'attirer à un outil mais qu'il n'a pas encore récupéré sa stamina. 
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/UI - stamina ready");
+        // !!!!!!!! ON VERRA !!!!!!!! Son qui s'active lorsque le joueur marche au sol dans la zone grotte 
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player sounds/Marche roche");
     }
 
     public void BruitPasSable()
     {
-        // Son qui s'active lorsque le joueur veut s'attirer à un outil mais qu'il n'a pas encore récupéré sa stamina. 
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/UI - stamina ready");
+        // Son qui s'active lorsque le joueur marche au sol ... 
+        // EN GROS il faudrait que tu crées une vriable walkSpeed qui puisse se modifier (0.5 par exemple), et cette fonction BruitPasSable
+        // est appelée (tous les 0.5 secondes dans ce cas) quand le joueur est en etat "walk", pour simuler des bruits de marche
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player sounds/Marche sable");
     }
 
     public void WallRun()
     {
-        // Son qui s'active lorsque le joueur veut s'attirer à un outil mais qu'il n'a pas encore récupéré sa stamina. 
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/UI - stamina ready");
+        // Son qui s'active lorsque le joueur se déplace sur un wall run (est en état wall run) 
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player sounds/Wall Run");
     }
 
+    public void CollisionSolFaible()
+    {
+        // Son qui s'active lorsque le joueur collisionne le sol
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player sounds/player collision sol faible");
+    }
 
+    public void CollisionSolForte()
+    {
+        // !!!!!!! ON VERRA !!!!!!!!! Son qui s'active lorsque le joueur collisionne le sol avec une vitesse et hauteur importante 
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player sounds/player collision sol fort");
+    }
+
+    public void SonEssouflement()
+    {
+        // !!!! PEUT ETRE LONG !!!!!!!!! Son qui s'active lorsque le joueur atterri sur un sol avec ses deux charges vides 
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player sounds/Essouflement");
+    }
+
+    public void SonEffort()
+    {
+        // !!!! PEUT ETRE LONG !!!!!!!!!  Son qui s'active lorsque le joueur enchaine plus de 3 transportations sans avoir touché le sol 
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player sounds/huh (effort)");
+    }
+
+    public void SonDouleur()
+    {
+        // !!!! PEUT ETRE LONG !!!!!!!!! Son qui s'active lorsque la barre de vie du joueur ( la jauge de vision ennemis ) atteint 30%
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player sounds/ah (degats)");
+    }
 }
