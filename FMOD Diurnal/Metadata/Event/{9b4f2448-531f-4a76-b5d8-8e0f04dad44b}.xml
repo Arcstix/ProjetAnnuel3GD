@@ -8,7 +8,7 @@
 			<value>player collision sol faible</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{878c1174-17bd-46e8-a2cc-88ac482e8795}</destination>
@@ -62,11 +62,18 @@
 	<object class="EventAutomatableProperties" id="{8085d374-11af-4f9b-bf07-98c14282d4a5}" />
 	<object class="MarkerTrack" id="{9f70e9c5-78f1-4253-9ff3-cf20fbcbd7ed}" />
 	<object class="GroupTrack" id="{e8ba0864-2ec4-4e5e-a153-d40fd316d8c8}">
+		<relationship name="modules">
+			<destination>{76b4a466-98e2-440a-92c3-da0bf0864fee}</destination>
+		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{d1299d84-0e89-43e6-a3ca-18a4d3f6f6a5}</destination>
 		</relationship>
 	</object>
-	<object class="Timeline" id="{4c22b91b-543b-46eb-87f4-b6e4d92dbbf8}" />
+	<object class="Timeline" id="{4c22b91b-543b-46eb-87f4-b6e4d92dbbf8}">
+		<relationship name="modules">
+			<destination>{76b4a466-98e2-440a-92c3-da0bf0864fee}</destination>
+		</relationship>
+	</object>
 	<object class="EventMixerMaster" id="{7dd4a64d-e3ab-43c3-b99e-5901db5082e1}">
 		<relationship name="effectChain">
 			<destination>{d23b5696-76df-47aa-9a3a-aa2d3e6aa1bc}</destination>
@@ -84,10 +91,15 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{e5539160-4956-43fb-9f2d-0b7ae4c7d89e}" />
-	<object class="EventMixerGroup" id="{d1299d84-0e89-43e6-a3ca-18a4d3f6f6a5}">
-		<property name="volume">
-			<value>-80</value>
+	<object class="SingleSound" id="{76b4a466-98e2-440a-92c3-da0bf0864fee}">
+		<property name="length">
+			<value>0.88602083333333337</value>
 		</property>
+		<relationship name="audioFile">
+			<destination>{8e6829e6-f0a8-48cb-bcfb-ce81c81ba182}</destination>
+		</relationship>
+	</object>
+	<object class="EventMixerGroup" id="{d1299d84-0e89-43e6-a3ca-18a4d3f6f6a5}">
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
