@@ -1,58 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
 using UnityEngine;
 
 public class Ambiane_music : MonoBehaviour
 {
+    public string selectsoundMusiqueDeBase;
+    FMOD.Studio.EventInstance soundeventMusiqueDeBase;
+    
+    private EventInstance SonAccordWallrun;
+    private EventInstance SonAccordDash;
+    
+    public KeyCode pressToPlayDynamiquePhaseSound;
+    
     void Awake()
     {
-        // Cette fonction est appelée dès que le script est initialisé, même avant Start
+        // Cette fonction est appelï¿½e dï¿½s que le script est initialisï¿½, mï¿½me avant Start
         Debug.Log("Awake: Le jeu vient de se lancer.");
         //MaFonction();
     }
 
     void Start()
     {
-        // Cette fonction est appelée au début du premier frame actif
-        Debug.Log("Start: Début du jeu.");
+        // Cette fonction est appelï¿½e au dï¿½but du premier frame actif
+        Debug.Log("Start: Dï¿½but du jeu.");
+        soundeventMusiqueDeBase = FMODUnity.RuntimeManager.CreateInstance(selectsoundMusiqueDeBase);
 
-        //Son qui se joue toute la zone dans le désert
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Ambiance/Vent"); // CA FAUT LAISSER !
+        SonAccordWallrun = FMODUnity.RuntimeManager.CreateInstance("event:/Musique/Accords wall run");
+        SonAccordDash = FMODUnity.RuntimeManager.CreateInstance("event:/Musique/Accords dash");
     }
-
-    public void MusiqueDeBase()
+    
+    void Update()
     {
-        public string selectsoundMusiqueDeBase;
-        FMOD.Studio.EventInstance soundeventMusiqueDeBase;
-
-        void start()
+        PlaysoundMusiqueDeBase();
+    }
+    
+    void PlaysoundMusiqueDeBase()
+    {
+        FMOD.Studio.PLAYBACK_STATE fmodPbState;
+        soundeventMusiqueDeBase.getPlaybackState(out fmodPbState);
+        if (fmodPbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
         {
-            soundeventMusiqueDeBase = FMODUnity.RuntimeManager.CreateInstance(selectsoundMusiqueDeBase);
+            soundeventMusiqueDeBase.start();
         }
 
-        void Update()
+        if (Input.GetKeyUp(pressToPlayDynamiquePhaseSound)) // lorse que le joueur entre dans un triggerBox (avec le tag 'PhaseDynamique')
         {
-            PlaysoundMusiqueDeBase();
+            soundeventMusiqueDeBase.setParameterByName("Phase dynamique", 1f);
         }
 
-        void PlaysoundMusiqueDeBase()
+        if (Input.GetKeyUp(pressToPlayDynamiquePhaseSound)) // lorse que le joueur SORS de la triggerBox 
         {
-            FMOD.Studio.PLAYBACK_STATE fmodPbState;
-            soundeventMusiqueDeBase.getPlaybackState(out fmodPbState);
-            if (fmodPbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-            {
-                soundeventMusiqueDeBase.start();
-            }
-
-            if (Input.GetKeyUp(presstoplaysound)) // lorse que le joueur entre dans un triggerBox (avec le tag 'PhaseDynamique')
-            {
-                soundeventMusiqueDeBase.setParameterByName("Phase dynamique", 1f);
-            }
-
-            if (Input.GetKeyUp(presstoplaysound)) // lorse que le joueur SORS de la triggerBox 
-            {
-                soundeventMusiqueDeBase.setParameterByName("Phase dynamique", 0f);
-            }
+            soundeventMusiqueDeBase.setParameterByName("Phase dynamique", 0f);
         }
     }
 
@@ -60,11 +59,6 @@ public class Ambiane_music : MonoBehaviour
 
     public void AccordDash()
     {
-        void Start()
-        {
-            SonAccordDash = FMODUnity.RuntimeManager.CreateInstance("event:/Musique/Accords dash");
-        }
-
         SonAccordDash.setParameterByName("NB dash", 0f); // lancer ca quauand on a fait 2 transportations sans toucher le sol
         SonAccordDash.start();
 
@@ -77,11 +71,6 @@ public class Ambiane_music : MonoBehaviour
 
     public void AccordWallRun()
     {
-        void Start()
-        {
-            SonAccordWallrun = FMODUnity.RuntimeManager.CreateInstance("event:/Musique/Accords wall run");
-        }
-
         SonAccordWallrun.setParameterByName("NB wallrun", 0f); // lancer ca quauand on a fait 2 wallruns sans toucher le sol
         SonAccordWallrun.start();
 

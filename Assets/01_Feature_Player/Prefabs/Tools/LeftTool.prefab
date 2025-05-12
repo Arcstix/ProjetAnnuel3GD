@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8985292475141258581}
   - component: {fileID: 4950928553113127872}
   - component: {fileID: 6995310939044338697}
+  - component: {fileID: 4443265245364860261}
   m_Layer: 3
   m_Name: LeftTool
   m_TagString: Untagged
@@ -99,6 +100,34 @@ MonoBehaviour:
   _isInteractive: 0
   _onWall: 0
   canInteractWithPlayer: 1
+--- !u!114 &4443265245364860261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5848676084974391276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5724881792a53744881fe0e23752df9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectIdleSound:
+    Guid:
+      Data1: 1094518947
+      Data2: 1140229322
+      Data3: 1308672183
+      Data4: 1349858770
+    Path: event:/Player/Idle Balle gauche
+  pressToplayIdleSound: 0
+  selectActivationSound:
+    Guid:
+      Data1: 1494494021
+      Data2: 1148804778
+      Data3: 1832079794
+      Data4: 609708531
+    Path: event:/Player/activation gauche
+  pressToplayActivationSound: 0
 --- !u!1001 &3990679861233631217
 PrefabInstance:
   m_ObjectHideFlags: 0

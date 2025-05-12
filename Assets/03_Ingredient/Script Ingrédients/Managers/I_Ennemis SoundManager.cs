@@ -1,170 +1,122 @@
-//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
+using UnityEngine;
+using FMODUnity;
+using FMOD.Studio;
 
-//public class I_EnnemisSoundManager : MonoBehaviour
-//{
-//    public void IdleEnnemi()
-//    {
-//        //  Son qui s'activee lorseque l'ennemi est en etat idle
+public class I_EnnemisSoundManager : MonoBehaviour
+{
+    public EventReference selectIdleSound;
 
-//        [FMODUnity.EventRef]
-//        public string selectsound;
+    public KeyCode pressToPlayIdleSound;
+    
+    private EventInstance soundIdleEvent;
+    
+    public EventReference selectAttackSound;
 
-//        public KeyCode presstoplaysound;
+    public KeyCode pressToPlayAttackSound;
+    
+    private EventInstance soundAttackEvent;
+    
+    public EventReference selectDeathSound;
 
-//        void Start()
-//        {
-//            soundevent = FMODUnity.RuntimeManager.CreateInstance(selectsound);
-//        }
+    public KeyCode pressToPlayDeathSound;
+    
+    private EventInstance soundDeathEvent;
+    
+    public EventReference selectDetectionSound;
 
-//        void Update()
-//        {
-//            FMODUnity.RuntimeManager.AttachInstanceToGameObject(soundevent, GetComponent<Transform>(), GetComponent<Rigidbody>());
-//            Playsound();
-//        }
+    public KeyCode pressToPlayDetectionSound;
+    
+    private EventInstance soundDetectionEvent;
 
-//        void Playsound()
-//        {
-//            if (Input.GetKeyDown(pressplaysound)) // la condition ici ce serait quand l'ennemi est en etat IDLE
-//            {
-//                FMOD.Studio.PLAYBACK_STATE fmodPbState;
-//                soundevent.getPlaybackState(out fmodPbState);
-//                if (fmodPbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-//                {
-//                    soundevent.setParameterByName("Etat Idle", 0f);
-//                    soundevent.start();
-//                }
-//            }
-//            if (Input.GetKeyUp(presstoplaysound)) // Ici la condiiton est s'il sort de l'etat idle
-//            {
-//                soundevent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-//                soundevent.setParameterByName("Etat Idle", 1f);
-//        }
-//        }
+    void Start()
+    {
+        soundIdleEvent = RuntimeManager.CreateInstance(selectIdleSound);
+        RuntimeManager.AttachInstanceToGameObject(soundIdleEvent, GetComponent<Transform>(), GetComponent<Rigidbody>());
+        soundDetectionEvent = RuntimeManager.CreateInstance(selectDetectionSound);
+        RuntimeManager.AttachInstanceToGameObject(soundDetectionEvent, GetComponent<Transform>(), GetComponent<Rigidbody>());
+        soundAttackEvent = RuntimeManager.CreateInstance(selectAttackSound);
+        RuntimeManager.AttachInstanceToGameObject(soundAttackEvent, GetComponent<Transform>(), GetComponent<Rigidbody>());
+        soundDeathEvent = RuntimeManager.CreateInstance(selectDeathSound);
+        RuntimeManager.AttachInstanceToGameObject(soundDeathEvent, GetComponent<Transform>(), GetComponent<Rigidbody>());
+    }
 
-//    FMODUnity.RuntimeManager.PlayOneShot("event:/Ennemies/Ennemies Idle");
-//    }
-
-//    public void EnnemiDeath()
-//    {
-//        //  Son qui s'activee lorseque l'ennemi meurt
-
-//        [FMODUnity.EventRef]
-//        public string selectsound;
-
-//        public KeyCode presstoplaysound;
-
-//        void Start()
-//        {
-//            soundevent = FMODUnity.RuntimeManager.CreateInstance(selectsound);
-//        }
-
-//        void Update()
-//        {
-//            FMODUnity.RuntimeManager.AttachInstanceToGameObject(soundevent, GetComponent<Transform>(), GetComponent<Rigidbody>());
-//            Playsound();
-//        }
-
-//        void Playsound()
-//        {
-//            if (Input.GetKeyDown(pressplaysound)) // La condition ici serait quand l'ennemi meurt
-//            {
-//                FMOD.Studio.PLAYBACK_STATE fmodPbState;
-//                soundevent.getPlaybackState(out fmodPbState);
-//                if (fmodPbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-//                {
-//                    soundevent.start();
-//                }
-//            }
-//            if (Input.GetKeyUp(presstoplaysound)) // 
-//            {
-//                soundevent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-//            }
-//        }
-
-//    FMODUnity.RuntimeManager.PlayOneShot("event:/Ennemies/Ennemies death");
-//    }
-
-//    public void EnnemiDetection()
-//    {
-//    //  Son qui s'activee lorseque l'ennemi nous detecte
-
-//        [FMODUnity.EventRef]
-//        public string selectsound;
-
-//        public KeyCode presstoplaysound;
-
-//    void Start()
-//    {
-//        soundevent = FMODUnity.RuntimeManager.CreateInstance(selectsound);
-//    }
-
-//    void Update()
-//    {
-//        FMODUnity.RuntimeManager.AttachInstanceToGameObject(soundevent, GetComponent<Transform>(), GetComponent<Rigidbody>());
-//        Playsound();
-//    }
-
-//    void Playsound()
-//    {
-//        if (Input.GetKeyDown(pressplaysound)) // La condition ici serait quand l'ennemi detecte le joueur 
-//        {
-//            FMOD.Studio.PLAYBACK_STATE fmodPbState;
-//            soundevent.getPlaybackState(out fmodPbState);
-//            if (fmodPbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-//            {
-//                soundevent.start();
-//            }
-//        }
-//        if (Input.GetKeyUp(presstoplaysound)) // 
-//        {
-//            soundevent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-//        }
-//    }
-
-//    FMODUnity.RuntimeManager.PlayOneShot("event:/Ennemies/Ennemies détection");
-//    }
-
-//    public void EnnemiAttaque()
-//    {
-//    //  Son qui s'activee lorseque l'ennemi nous brule
-
-//        [FMODUnity.EventRef]
-//        public string selectsound;
-
-//        public KeyCode presstoplaysound;
-
-//    void Start()
-//    {
-//        soundevent = FMODUnity.RuntimeManager.CreateInstance(selectsound);
-//    }
-
-//    void Update()
-//    {
-//        FMODUnity.RuntimeManager.AttachInstanceToGameObject(soundevent, GetComponent<Transform>(), GetComponent<Rigidbody>());
-//        Playsound();
-//    }
-
-//    void Playsound()
-//    {
-//        if (Input.GetKeyDown(pressplaysound)) // La condition ici serait quand l'ennemi est en etat "attaque" (nous brule) 
-//        {
-//            FMOD.Studio.PLAYBACK_STATE fmodPbState;
-//            soundevent.getPlaybackState(out fmodPbState);
-//            if (fmodPbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-//            {
-//                soundevent.setParameterByName("Etat attaque", 0f);
-//                soundevent.start();
-//            }
-//        }
-//        if (Input.GetKeyUp(presstoplaysound)) // 
-//        {
-//            soundevent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-//            soundevent.setParameterByName("Etat attaque", 1f);
-//    }
-//    }
-
-//        FMODUnity.RuntimeManager.PlayOneShot("event:/Ennemies/Ennemies charge attaque");
-//    }
-//}
+    void Update()
+    {
+        PlayIdleSound();
+        PlayDetectionSound();
+        PlayAttackSound();
+        PlayDeathSound();
+    }
+    
+    void PlayIdleSound()
+    {
+        if (Input.GetKeyDown(pressToPlayIdleSound)) // la condition ici ce serait quand l'ennemi est en etat IDLE
+        {
+            PLAYBACK_STATE fmodPbState;
+            soundIdleEvent.getPlaybackState(out fmodPbState);
+            if (fmodPbState != PLAYBACK_STATE.PLAYING)
+            {
+                soundIdleEvent.setParameterByName("Etat Idle", 0f);
+                soundIdleEvent.start();
+            }
+        }
+        if (Input.GetKeyUp(pressToPlayIdleSound)) // Ici la condiiton est s'il sort de l'etat idle
+        {
+            soundIdleEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            soundIdleEvent.setParameterByName("Etat Idle", 1f);
+        }
+    }
+    
+    void PlayDetectionSound()
+    {
+        if (Input.GetKeyDown(pressToPlayDetectionSound)) // La condition ici serait quand l'ennemi detecte le joueur 
+        {
+            PLAYBACK_STATE fmodPbState;
+            soundDetectionEvent.getPlaybackState(out fmodPbState);
+            if (fmodPbState != PLAYBACK_STATE.PLAYING)
+            {
+                soundDetectionEvent.start();
+            }
+        }
+        if (Input.GetKeyUp(pressToPlayDetectionSound)) // 
+        {
+            soundDetectionEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+    }
+    
+    void PlayAttackSound()
+    {
+        if (Input.GetKeyDown(pressToPlayAttackSound)) // La condition ici serait quand l'ennemi est en etat "attaque" (nous brule) 
+        {
+            PLAYBACK_STATE fmodPbState;
+            soundAttackEvent.getPlaybackState(out fmodPbState);
+            if (fmodPbState != PLAYBACK_STATE.PLAYING)
+            {
+                soundAttackEvent.setParameterByName("Etat attaque", 0f);
+                soundAttackEvent.start();
+            }
+        }
+        if (Input.GetKeyUp(pressToPlayAttackSound)) // 
+        {
+            soundAttackEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            soundAttackEvent.setParameterByName("Etat attaque", 1f);
+        }
+    }
+    
+    void PlayDeathSound()
+    {
+        if (Input.GetKeyDown(pressToPlayDeathSound)) // La condition ici serait quand l'ennemi meurt
+        {
+            PLAYBACK_STATE fmodPbState;
+            soundDeathEvent.getPlaybackState(out fmodPbState);
+            if (fmodPbState != PLAYBACK_STATE.PLAYING)
+            {
+                soundDeathEvent.start();
+            }
+        }
+        if (Input.GetKeyUp(pressToPlayDeathSound)) // 
+        {
+            soundDeathEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+    }
+}
