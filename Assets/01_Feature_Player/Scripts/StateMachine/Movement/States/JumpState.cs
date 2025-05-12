@@ -13,6 +13,7 @@ public class JumpState : AirState
     private Vector3 endPosition;
     
     public event Action OnJump;
+    public event Action OnDoubleJump;
     
     public JumpState(MovementStateMachine stateMachine) : base(stateMachine)
     {
@@ -21,7 +22,15 @@ public class JumpState : AirState
     public override void Enter()
     {
         base.Enter();
-        OnJump?.Invoke();
+
+        if (reusableData.NumberOfJump > 0)
+        {
+            OnDoubleJump?.Invoke();
+        }
+        else
+        {
+            OnJump?.Invoke();
+        }
         jumpData = stateMachine.MovementManager.Metrics.CurrentMetrics.JumpData;
         reusableData.MovementSpeedModifier = jumpData.SpeedModifier;
         reusableData.HadJump = true;

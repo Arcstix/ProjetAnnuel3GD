@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class BallSoundManager : MonoBehaviour
+public class RightCatalyserSound : MonoBehaviour
 {
     private ToolManager toolManager;
 

@@ -18,7 +18,8 @@ public class MovementStateMachine : StateMachine
 
     public FallingState FallingState { get; }
 
-    public LandingState LandingState { get; }
+    public SoftLandingState SoftLandingState { get; }
+    public HardLandingState HardLandingState { get; }
     public OnPlatformState OnPlatformState { get; }
     
     public WallRunState WallRunState { get; }
@@ -37,7 +38,8 @@ public class MovementStateMachine : StateMachine
         WalkState = new WalkState(this);
         JumpState = new JumpState(this);
         FallingState = new FallingState(this);
-        LandingState = new LandingState(this);
+        SoftLandingState = new SoftLandingState(this);
+        HardLandingState = new HardLandingState(this);
         OnPlatformState = new OnPlatformState(this);
         WallRunState = new WallRunState(this);
         WallJumpState = new WallJumpState(this);

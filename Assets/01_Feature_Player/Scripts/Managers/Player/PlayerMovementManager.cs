@@ -16,12 +16,15 @@ public class PlayerMovementManager : PlayerManager, I_Initializer
 
     private MovementStateMachine stateMachine;
     private PlayerReusableStateData reusableData;
+    private GroundCheck groundChecker;
 
     public event Action OnMovementStarted;
     
     public PlayerReusableStateData ReusableData { get => reusableData; set => reusableData = value; }
 
     public MovementStateMachine StateMachine => stateMachine;
+    
+    public GroundCheck GroundChecker => groundChecker;
     
     public void Init(PlayerReusableStateData reusableStateData)
     {

@@ -1,41 +1,19 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Timers;
+﻿using System;
 using UnityEngine;
 
 public class LandingState : AirState
 {
-    public event Action OnLanding; 
+    public event Action OnNoStaminaLanding;
     
     public LandingState(MovementStateMachine stateMachine) : base(stateMachine)
     {
     }
 
-    public override void Enter()
+    public void CheckChargeRemaining()
     {
-        base.Enter();
-        OnLanding?.Invoke();
-    }
-
-    public override void Tick()
-    {
-        base.Tick();
-        
-        timer += Time.deltaTime;
-
-        if (timer >= 0.2f)
+        if (!metricsManager.HasRightCharge() && !metricsManager.HasLeftCharge())
         {
-            if (reusableData.OnLandingPlatform)
-            {
-                lastLandingPoint = targetLandingPoint;
-                stateMachine.ChangeState(stateMachine.OnPlatformState);
-            }
-            else
-            {
-                lastLandingPoint = null;
-                stateMachine.ChangeState(stateMachine.IdleState);
-            }
+            OnNoStaminaLanding?.Invoke();
         }
     }
 }

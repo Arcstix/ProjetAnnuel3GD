@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ToolManager : MonoBehaviour
 {
+    private CatalyserSound catalyserSound;
+    
     public float _maxSpeed = 10f;
     
     private float _ballSpeed;
@@ -18,7 +20,12 @@ public class ToolManager : MonoBehaviour
     private Rigidbody _parentRb;
 
     public event Action OnCollision;
-    
+
+    private void Start()
+    {
+        catalyserSound = GetComponent<CatalyserSound>();
+    }
+
     public void InitializeBall(float ballSpeed, float transportObjectSpeed, Vector3 endPos, Transform launcherTransform, GameObject futurParent,
         GameObject autoAimed = null)
     {
@@ -91,6 +98,7 @@ public class ToolManager : MonoBehaviour
             if (!_canBeActivate)
             {
                 transform.position = _endPos;
+                catalyserSound.PlayIdleSound();
                 _canBeActivate = true;
                 if (objectAutoAimed != null)
                 {
@@ -167,6 +175,11 @@ public class ToolManager : MonoBehaviour
             {
                 interaction.ExitInteraction(GetComponent<InteractionSystem>());
             }
+        }
+
+        if (catalyserSound)
+        {
+            catalyserSound.StopAllSound();
         }
     }
 

@@ -14,6 +14,7 @@ public class WallRunState : WallState
     {
     }
 
+
     public override void Enter()
     {
         base.Enter();

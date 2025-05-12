@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class RunningState : GroundedState
 {
     public event Action OnRunning;
+    public event Action OnStopRunning;
     
     public RunningState(MovementStateMachine stateMachine) : base(stateMachine)
     {
@@ -33,6 +34,13 @@ public class RunningState : GroundedState
         {
             stateMachine.ChangeState(stateMachine.IdleState);
         }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        
+        OnStopRunning?.Invoke();
     }
 
     protected override void OnSlowStarted(InputAction.CallbackContext context)

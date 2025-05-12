@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,10 @@ public class HealthPlayer : MonoBehaviour
     public bool enemyAlerted = false; // Booléen indiquant si un ennemi est en alerte
     [SerializeField] private GameObject spawner;
     private Transform playerTransform;
+    private bool inDanger = false;
+
+    public event Action OnDanger;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -60,6 +65,12 @@ public class HealthPlayer : MonoBehaviour
             currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
             UpdateHealthUI();
         }
+
+        if (currentHealth < maxHealth / 3 && !inDanger)
+        {
+            inDanger = true;
+            OnDanger?.Invoke();
+        }
     }
     void IncreaseHealthOverTime()
     {
@@ -68,6 +79,11 @@ public class HealthPlayer : MonoBehaviour
             currentHealth += increaseTimer * Time.deltaTime; // Augmente la vie progressivement
             currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // S'assure que la vie reste dans les limites
             UpdateHealthUI(); // Met à jour l'affichage de la barre de vie
+        }
+
+        if (currentHealth > maxHealth / 3)
+        {
+            inDanger = false;
         }
     }
     

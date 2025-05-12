@@ -56,19 +56,17 @@ public class MovementState : IState
 
     public virtual void Enter()
     {
-        SubscribeInputAction();          
     }
 
 
     public virtual void Exit()
     {
-        UnsubscribeInputAction();
     }
 
     public virtual void Tick()
     {
         if (jump.WasPressedThisFrame() && stateMachine.currentState != stateMachine.FallingState &&
-            stateMachine.currentState != stateMachine.LandingState && stateMachine.currentState != stateMachine.JumpState)
+            stateMachine.currentState != stateMachine.SoftLandingState && stateMachine.currentState != stateMachine.JumpState)
         {
             stateMachine.ChangeState(stateMachine.JumpState);
         }

@@ -77,7 +77,15 @@ public class FallingState : AirState
         if(!stateMachine.ReusableData.InAir || reusableData.OnLandingPlatform)
         {
             reusableData.NumberOfJump = 0;
-            stateMachine.ChangeState(stateMachine.LandingState);
+
+            if (Mathf.Approximately(Mathf.Abs(verticalVelocity), fallingData.MaxFallingSpeed))
+            {
+                stateMachine.ChangeState(stateMachine.HardLandingState);
+            }
+            else
+            {
+                stateMachine.ChangeState(stateMachine.SoftLandingState);
+            }
         }
     }
     

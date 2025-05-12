@@ -5,6 +5,9 @@ public class ToolInteraction : InteractionSystem
 {
     public event Action OnPlayerInteract;
     public event Action OnInstantDestruction;
+    
+    public event Action OnInteractionStart;
+    public event Action OnInteractionEnd;
 
     public bool canInteractWithPlayer = true;
 
@@ -13,6 +16,14 @@ public class ToolInteraction : InteractionSystem
         base.Interactable(isInteractable);
         
         canInteractWithPlayer = isInteractable;
+        if (isInteractable)
+        {
+            OnInteractionStart?.Invoke();
+        }
+        else
+        {
+            OnInteractionEnd?.Invoke();
+        }
     }
 
     public override void Interact(InteractionSystem otherSystem)

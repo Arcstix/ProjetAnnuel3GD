@@ -42,6 +42,10 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
     
     public event Action<float, float> OnRightChargeSet;
     public event Action<float, float> OnLeftChargeSet;
+
+    public event Action OnRightStaminaReady;
+    public event Action OnLeftStaminaReady;
+    public event Action OnNoCharge;
     
     public void Init(PlayerReusableStateData reusableStateData)
     {
@@ -138,12 +142,22 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
     private void UpdateRightCharge(float amount)
     {
         currentChargeRight = amount;
+        int staminaForACharge = metricsPlayer.StaminaData.MaxStamina / metricsPlayer.StaminaData.MaxNumberOfChargePerObject;
+        if (Mathf.Approximately(currentChargeRight, staminaForACharge))
+        {
+            OnRightStaminaReady?.Invoke();
+        }
         OnRightChargeSet?.Invoke(currentChargeRight, metricsPlayer.StaminaData.MaxStamina);
     }
 
     private void UpdateLeftCharge(float amount)
     {
         currentChargeLeft = amount;
+        int staminaForACharge = metricsPlayer.StaminaData.MaxStamina / metricsPlayer.StaminaData.MaxNumberOfChargePerObject;
+        if (Mathf.Approximately(currentChargeLeft, staminaForACharge))
+        {
+            OnLeftStaminaReady?.Invoke();
+        }
         OnLeftChargeSet?.Invoke(currentChargeLeft, metricsPlayer.StaminaData.MaxStamina);
     }
 
@@ -222,6 +236,7 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
             return true;
         }
         
+        OnNoCharge?.Invoke();
         return false;
     }
 }

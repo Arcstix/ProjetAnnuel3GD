@@ -13,6 +13,8 @@ public class AbilityMovePlayer : AbilityTransportState
 
     public event Action EnterDash;
     public event Action ExitDash;
+
+    public event Action OnFlyingDance;
     
     public AbilityMovePlayer(AbilityStateMachine abilityStateMachine) : base(abilityStateMachine)
     {
@@ -21,6 +23,13 @@ public class AbilityMovePlayer : AbilityTransportState
     public override void Enter()
     {
         base.Enter();
+
+        reusableData.NumberOfConsecutiveTransportation++;
+
+        if (reusableData.NumberOfConsecutiveTransportation > 2)
+        {
+            OnFlyingDance?.Invoke();
+        }
 
         playerInteraction = _stateMachine.AbilityManager.GetComponent<PlayerInteraction>();
 

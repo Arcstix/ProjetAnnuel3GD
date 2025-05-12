@@ -74,7 +74,7 @@ public class PlayerAnimationManager : MonoBehaviour
         movementManager.StateMachine.RunningState.OnRunning += Run;
         movementManager.StateMachine.FallingState.OnFalling += Fall;
         movementManager.StateMachine.JumpState.OnJump += Jump;
-        movementManager.StateMachine.LandingState.OnLanding += Land;
+        movementManager.StateMachine.SoftLandingState.OnSoftLanding += Land;
         movementManager.StateMachine.OnPlatformState.OnPlatform += Idle;
     }
 
@@ -85,7 +85,7 @@ public class PlayerAnimationManager : MonoBehaviour
         movementManager.StateMachine.RunningState.OnRunning -= Run;
         movementManager.StateMachine.FallingState.OnFalling -= Fall;
         movementManager.StateMachine.JumpState.OnJump -= Jump;
-        movementManager.StateMachine.LandingState.OnLanding -= Land;
+        movementManager.StateMachine.SoftLandingState.OnSoftLanding -= Land;
         movementManager.StateMachine.OnPlatformState.OnPlatform -= Idle;
     }
     

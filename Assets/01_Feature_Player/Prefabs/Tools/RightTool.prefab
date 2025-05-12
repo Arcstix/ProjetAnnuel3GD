@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1812199043799653753}
   - component: {fileID: 6413757213772197155}
   - component: {fileID: 6414293944630104308}
-  - component: {fileID: 8673710803928062818}
   - component: {fileID: 7572017268560070987}
+  - component: {fileID: 1780423184587121409}
   m_Layer: 3
   m_Name: RightTool
   m_TagString: Untagged
@@ -70,18 +70,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxSpeed: 10
---- !u!114 &8673710803928062818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2206688002523721225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 617bbe4023db474f95af481d18d47935, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7572017268560070987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,6 +87,34 @@ MonoBehaviour:
   _isInteractive: 0
   _onWall: 0
   canInteractWithPlayer: 1
+--- !u!114 &1780423184587121409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2206688002523721225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5724881792a53744881fe0e23752df9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleSound:
+    Guid:
+      Data1: 446010667
+      Data2: 1164944251
+      Data3: -6742862
+      Data4: -1619558846
+    Path: event:/Player/Idle Balle droit
+  activationSound:
+    Guid:
+      Data1: -565989361
+      Data2: 1225838987
+      Data3: 1364713395
+      Data4: 794944992
+    Path: event:/Player/activation droit
+  pressToplayIdleSound: 275
+  pressToplayActivationSound: 276
 --- !u!1001 &2377713476958687523
 PrefabInstance:
   m_ObjectHideFlags: 0
