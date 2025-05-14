@@ -48,7 +48,7 @@ public class Ambiane_music : MonoBehaviour
         {
             soundeventMusiqueDeBase.setParameterByName("Phase dynamique", 1f);
         }
-
+            
         if (Input.GetKeyUp(pressToPlayDynamiquePhaseSound)) // lorse que le joueur SORS de la triggerBox 
         {
             soundeventMusiqueDeBase.setParameterByName("Phase dynamique", 0f);

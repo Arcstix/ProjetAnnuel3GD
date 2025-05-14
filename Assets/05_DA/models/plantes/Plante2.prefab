@@ -1,5 +1,58 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8593878452384153457
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8875698116756776655}
+  - component: {fileID: 1007416769744072911}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: HerbeCollision
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8875698116756776655
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8593878452384153457}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.4889799, y: -0.41395772, z: -0.47604793, w: 0.6024251}
+  m_LocalPosition: {x: -0.279, y: 0.186, z: -0.31}
+  m_LocalScale: {x: 1.9538941, y: 1.6201288, z: 0.8013024}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2849812480185021662}
+  m_LocalEulerAnglesHint: {x: -79.506, y: -10.504, z: -67.889}
+--- !u!65 &1007416769744072911
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8593878452384153457}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2307576008978092853
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58,6 +111,77 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0b22ca26c4012cc41858e55786be1659, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8875698116756776655}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0b22ca26c4012cc41858e55786be1659, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7271685336181715934}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0b22ca26c4012cc41858e55786be1659, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 240716269894987164}
   m_SourcePrefab: {fileID: 100100000, guid: 0b22ca26c4012cc41858e55786be1659, type: 3}
+--- !u!4 &2849812480185021662 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0b22ca26c4012cc41858e55786be1659, type: 3}
+  m_PrefabInstance: {fileID: 2307576008978092853}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3226620185391099492 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0b22ca26c4012cc41858e55786be1659, type: 3}
+  m_PrefabInstance: {fileID: 2307576008978092853}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7271685336181715934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3226620185391099492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: Player
+  EventReference:
+    Guid:
+      Data1: 361550463
+      Data2: 1127123580
+      Data3: -903858299
+      Data4: 1015961970
+    Path: event:/Ambiance/contact herbe
+  Event: 
+  PlayEvent: 3
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!65 &240716269894987164
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3226620185391099492}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 0.5, z: 1}
+  m_Center: {x: -0.000010251323, y: 0.029756563, z: -0.000029919765}
