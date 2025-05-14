@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
-using UnityEngine.Serialization;
 
 public class PlayerSpatializedSound : MonoBehaviour
 {
@@ -20,9 +16,7 @@ public class PlayerSpatializedSound : MonoBehaviour
     FMOD.Studio.EventInstance soundRappelEvent;
 
     private ToolInteraction toolInteraction;
-
-
-
+    
     void Start()
     {
         soundTirEvent = RuntimeManager.CreateInstance(tirSound);
