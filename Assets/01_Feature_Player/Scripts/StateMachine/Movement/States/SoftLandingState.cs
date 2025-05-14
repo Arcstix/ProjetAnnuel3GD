@@ -17,6 +17,8 @@ public class SoftLandingState : LandingState
         base.Enter();
         OnSoftLanding?.Invoke();
         CheckChargeRemaining();
+        reusableData.NumberOfConsecutiveTransportation = 0;
+        reusableData.NumberOfConsecutiveWallRun = 0;
     }
 
     public override void Tick()
@@ -38,12 +40,5 @@ public class SoftLandingState : LandingState
                 stateMachine.ChangeState(stateMachine.IdleState);
             }
         }
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-
-        reusableData.NumberOfConsecutiveTransportation = 0;
     }
 }

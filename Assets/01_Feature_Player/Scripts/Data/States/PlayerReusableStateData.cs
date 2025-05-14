@@ -14,6 +14,7 @@ public class PlayerReusableStateData
     public bool HadJump {get; set;} = false;
     public int NumberOfJump { get; set; } = 0;
     public int NumberOfConsecutiveTransportation { get; set; } = 0;
+    public int NumberOfConsecutiveWallRun { get; set; } = 0;
     public Vector3 InstancePosition { get; set; }
     public bool RightInput { get; set; } = false;
     public bool LeftInput { get; set; } = false;

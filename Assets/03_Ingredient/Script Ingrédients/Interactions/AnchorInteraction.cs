@@ -4,6 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(InteractiveTarget))]
 public class AnchorInteraction : InteractionSystem
 {
+    public event Action OnToolInteraction;
+    
     private InteractiveTarget _target;
     
     private void Start()
@@ -25,6 +27,11 @@ public class AnchorInteraction : InteractionSystem
         {
             _onWall = true;
         }
+
+        if (otherSystem.interactorType == InteractorType.Tool)
+        {
+            OnToolInteraction?.Invoke();
+        }
     }
 
     public override void ExitInteraction(InteractionSystem otherSystem)
@@ -39,6 +46,7 @@ public class AnchorInteraction : InteractionSystem
 
         if (otherSystem.interactorType == InteractorType.Tool)
         {
+            // TODO : Propagation Liane + Sound
             GetComponent<InteractiveTarget>().EnableInteraction();
         }
     }

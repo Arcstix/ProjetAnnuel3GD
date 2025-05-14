@@ -10499,7 +10499,7 @@ GameObject:
   - component: {fileID: 2948474422824748038}
   - component: {fileID: 2304732861498224600}
   - component: {fileID: 7489702784458573452}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Head
   m_TagString: Ragdoll
   m_Icon: {fileID: 0}
@@ -15562,7 +15562,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4632959360986473136
 Transform:
   m_ObjectHideFlags: 0
@@ -15602,7 +15602,7 @@ GameObject:
   - component: {fileID: 5198983161515364481}
   - component: {fileID: 3230476859420655707}
   - component: {fileID: 559557975923909410}
-  - component: {fileID: 920454690536564843}
+  - component: {fileID: 4161835246717027406}
   m_Layer: 12
   m_Name: Enemy_Prefab_Da
   m_TagString: Untagged
@@ -15649,7 +15649,7 @@ CapsuleCollider:
   m_Radius: 0.4
   m_Height: 2.5
   m_Direction: 1
-  m_Center: {x: 0, y: 1.2, z: 0}
+  m_Center: {x: 0, y: 1.3, z: 0}
 --- !u!114 &4666474798451885720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15864,6 +15864,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4364610511969728585}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5590881044499777296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15923,7 +15935,6 @@ MonoBehaviour:
   isReachable: 0
   isRendered: 0
   _currentType: 4
-  visualRenderer: {fileID: 3982715417796156339}
 --- !u!114 &559557975923909410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15940,7 +15951,7 @@ MonoBehaviour:
   detectedObjects: []
   _isInteractive: 0
   _onWall: 0
---- !u!114 &920454690536564843
+--- !u!114 &4161835246717027406
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15949,28 +15960,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 4527097802850966739}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b7fea3b2b02cc741882cb4468188876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
+  pressToPlayIdleSound: 0
+  pressToPlayAttackSound: 0
+  pressToPlayDeathSound: 0
+  pressToPlayDetectionSound: 0
+  selectIdleSound:
     Guid:
       Data1: 2001550879
       Data2: 1152307435
       Data3: -1935506255
       Data4: 1494352019
     Path: event:/Ennemies/Ennemies Idle
-  Event: 
-  PlayEvent: 1
-  StopEvent: 2
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 1
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
+  selectAttackSound:
+    Guid:
+      Data1: 2124739516
+      Data2: 1183670436
+      Data3: -1802739556
+      Data4: -2126405677
+    Path: event:/Ennemies/Ennemies charge attaque
+  selectDeathSound:
+    Guid:
+      Data1: 1316396789
+      Data2: 1097631903
+      Data3: 1740452508
+      Data4: -914019471
+    Path: event:/Ennemies/Ennemies death
+  selectDetectionSound:
+    Guid:
+      Data1: -238076453
+      Data2: 1082669275
+      Data3: 32059810
+      Data4: 1559160439
+    Path: "event:/Ennemies/Ennemies d\xE9tection"
 --- !u!1 &5959129221716271191
 GameObject:
   m_ObjectHideFlags: 0

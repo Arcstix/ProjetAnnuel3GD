@@ -13,6 +13,8 @@ public class AbilityMovePlayer : AbilityTransportState
 
     public event Action EnterDash;
     public event Action ExitDash;
+    
+    public event Action<int> OnConsecutiveDashes;
 
     public event Action OnFlyingDance;
     
@@ -25,6 +27,7 @@ public class AbilityMovePlayer : AbilityTransportState
         base.Enter();
 
         reusableData.NumberOfConsecutiveTransportation++;
+        OnConsecutiveDashes?.Invoke(reusableData.NumberOfConsecutiveTransportation);
 
         if (reusableData.NumberOfConsecutiveTransportation > 2)
         {

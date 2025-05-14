@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class EnemyDeadState : EnemyState
 {
     
     public UnityEvent onDeath;
+
+    public event Action OnEnterDeath;
     
     public override void Enter()
     {

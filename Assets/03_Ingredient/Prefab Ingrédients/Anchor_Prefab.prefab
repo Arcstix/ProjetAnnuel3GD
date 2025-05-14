@@ -105,7 +105,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 7, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7416667403146053431
 MonoBehaviour:
@@ -119,11 +119,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a1d53107d7a4429ae71d67304a4377b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkVisibleRenderer: {fileID: 0}
+  targetTranform: {fileID: 6596541429174262430}
   isAvailable: 1
   isReachable: 0
   isRendered: 0
   _currentType: 0
-  visualRenderer: {fileID: 3236914943883324244}
 --- !u!114 &5929917347670954758
 MonoBehaviour:
   m_ObjectHideFlags: 0

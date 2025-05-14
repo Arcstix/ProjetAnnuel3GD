@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Ambiane_music : MonoBehaviour
 {
-    public string selectsoundMusiqueDeBase;
-    FMOD.Studio.EventInstance soundeventMusiqueDeBase;
+    public EventReference baseMusic;
+    private EventInstance BaseMusicEvent;
     
     private EventInstance SonAccordWallrun;
     private EventInstance SonAccordDash;
@@ -24,10 +26,10 @@ public class Ambiane_music : MonoBehaviour
     {
         // Cette fonction est appel�e au d�but du premier frame actif
         Debug.Log("Start: D�but du jeu.");
-        soundeventMusiqueDeBase = FMODUnity.RuntimeManager.CreateInstance(selectsoundMusiqueDeBase);
+        BaseMusicEvent = RuntimeManager.CreateInstance(baseMusic);
 
-        SonAccordWallrun = FMODUnity.RuntimeManager.CreateInstance("event:/Musique/Accords wall run");
-        SonAccordDash = FMODUnity.RuntimeManager.CreateInstance("event:/Musique/Accords dash");
+        SonAccordWallrun = RuntimeManager.CreateInstance("event:/Musique/Accords wall run");
+        SonAccordDash = RuntimeManager.CreateInstance("event:/Musique/Accords dash");
     }
     
     void Update()
@@ -37,21 +39,20 @@ public class Ambiane_music : MonoBehaviour
     
     void PlaysoundMusiqueDeBase()
     {
-        FMOD.Studio.PLAYBACK_STATE fmodPbState;
-        soundeventMusiqueDeBase.getPlaybackState(out fmodPbState);
-        if (fmodPbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+        BaseMusicEvent.getPlaybackState(out var fmodPbState);
+        if (fmodPbState != PLAYBACK_STATE.PLAYING)
         {
-            soundeventMusiqueDeBase.start();
+            BaseMusicEvent.start();
         }
 
         if (Input.GetKeyUp(pressToPlayDynamiquePhaseSound)) // lorse que le joueur entre dans un triggerBox (avec le tag 'PhaseDynamique')
         {
-            soundeventMusiqueDeBase.setParameterByName("Phase dynamique", 1f);
+            BaseMusicEvent.setParameterByName("Phase dynamique", 1f);
         }
             
         if (Input.GetKeyUp(pressToPlayDynamiquePhaseSound)) // lorse que le joueur SORS de la triggerBox 
         {
-            soundeventMusiqueDeBase.setParameterByName("Phase dynamique", 0f);
+            BaseMusicEvent.setParameterByName("Phase dynamique", 0f);
         }
     }
 

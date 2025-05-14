@@ -10,6 +10,8 @@ public class WallRunState : WallState
     public event Action<float> OnWallRun;
     public event Action ExitWallRun;
     
+    public event Action<int> EnterWallRun;
+    
     public WallRunState(MovementStateMachine stateMachine) : base(stateMachine)
     {
     }
@@ -18,6 +20,9 @@ public class WallRunState : WallState
     public override void Enter()
     {
         base.Enter();
+
+        reusableData.NumberOfConsecutiveWallRun++;
+        EnterWallRun?.Invoke(reusableData.NumberOfConsecutiveWallRun);
         
         Debug.Log("Enter WallRunState");
         rigidbody.useGravity = false;

@@ -7,6 +7,7 @@ public class ProjectileInteraction : InteractionSystem
 {
     public event Action OnPlatformInteract;
     public event Action OnToolInteract;
+    public event Action OnExitToolInteract;
 
     private Rigidbody rb;
     private InteractiveTarget _target;
@@ -53,7 +54,7 @@ public class ProjectileInteraction : InteractionSystem
         if (otherSystem.interactorType == InteractorType.Tool)
         {
             // the projectile is no more targetable
-            OnToolInteract?.Invoke();
+            OnExitToolInteract?.Invoke();
             GetComponent<InteractiveTarget>().EnableInteraction();
             _isInteractive = true;
         }

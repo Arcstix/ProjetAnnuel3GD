@@ -66,7 +66,7 @@ public class HealthPlayer : MonoBehaviour
             UpdateHealthUI();
         }
 
-        if (currentHealth < maxHealth / 3 && !inDanger)
+        if (currentHealth < maxHealth / 2 && !inDanger)
         {
             inDanger = true;
             OnDanger?.Invoke();
@@ -81,7 +81,7 @@ public class HealthPlayer : MonoBehaviour
             UpdateHealthUI(); // Met à jour l'affichage de la barre de vie
         }
 
-        if (currentHealth > maxHealth / 3)
+        if (currentHealth > maxHealth / 2)
         {
             inDanger = false;
         }

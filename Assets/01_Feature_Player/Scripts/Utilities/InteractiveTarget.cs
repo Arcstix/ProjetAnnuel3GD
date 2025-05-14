@@ -23,9 +23,6 @@ public class InteractiveTarget : MonoBehaviour
     [Header("Interaction Type")]
     public InteractorType _currentType = InteractorType.None;
     
-    [Header("Connections")]
-    [SerializeField] Renderer visualRenderer;
-    
     private void Start()
     {
         player = FindObjectOfType<PlayerTargetSystem>();
@@ -35,12 +32,12 @@ public class InteractiveTarget : MonoBehaviour
     {
         if (!isAvailable) return;
         
-        Vector3 playerToObject = (visualRenderer.transform.position - player.transform.position).normalized;
+        Vector3 playerToObject = (targetTranform.position - player.transform.position).normalized;
         float dot = Vector3.Dot(Camera.main.transform.forward, playerToObject);
         float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
         bool inVisionRange = angle < player.visionAngle;
 
-        if (Vector3.Distance(visualRenderer.transform.position, player.transform.position) < player.maxReachDistance && inVisionRange && !isReachable)
+        if (Vector3.Distance(targetTranform.position, player.transform.position) < player.maxReachDistance && inVisionRange && !isReachable)
         {
             if (player.targets.Contains(this))
             {
@@ -49,7 +46,7 @@ public class InteractiveTarget : MonoBehaviour
             }
         }
 
-        if ((Vector3.Distance(visualRenderer.transform.position, player.transform.position) > player.maxReachDistance || !inVisionRange) && isReachable)
+        if ((Vector3.Distance(targetTranform.position, player.transform.position) > player.maxReachDistance || !inVisionRange) && isReachable)
         {
             isReachable = false;
             if (player.reachableTargets.Contains(this))
@@ -96,11 +93,12 @@ public class InteractiveTarget : MonoBehaviour
 
     private bool IsVisibleFrom(Transform target)
     {
-        Vector3 direction = (visualRenderer.transform.position - target.transform.position).normalized;
+        Vector3 direction = (targetTranform.position - target.transform.position).normalized;
         Ray ray = new Ray(target.transform.position, direction);
         RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, Vector3.Distance(visualRenderer.transform.position, target.position), ~LayerMask.GetMask("Player", "Interactable")))
+        
+        // Raycast qui touche tout sauf les layers "Player" et "Interactable"
+        if (Physics.Raycast(ray, out hit, Vector3.Distance(targetTranform.position, target.position), ~LayerMask.GetMask("Player", "Interactable")))
         {
             // Si le premier objet touché est bien la cible, elle est visible
             return hit.transform == transform;

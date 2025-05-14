@@ -43,8 +43,8 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
     public event Action<float, float> OnRightChargeSet;
     public event Action<float, float> OnLeftChargeSet;
 
-    public event Action OnRightStaminaReady;
-    public event Action OnLeftStaminaReady;
+    public event Action OnRightChargeReady;
+    public event Action OnLeftChargeReady;
     public event Action OnNoCharge;
     
     public void Init(PlayerReusableStateData reusableStateData)
@@ -57,8 +57,8 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
         OnMetricsSet?.Invoke();
         if (useCharge)
         {
-            UpdateLeftCharge(currentMetrics.StaminaData.MaxStamina);
-            UpdateRightCharge(currentMetrics.StaminaData.MaxStamina);
+            UpdateLeftCharge(currentMetrics.StaminaData.MaxStamina, true);
+            UpdateRightCharge(currentMetrics.StaminaData.MaxStamina, true);
         }
         else
         {
@@ -139,24 +139,30 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
         }
     }
     
-    private void UpdateRightCharge(float amount)
+    private void UpdateRightCharge(float amount, bool init = false)
     {
         currentChargeRight = amount;
         int staminaForACharge = metricsPlayer.StaminaData.MaxStamina / metricsPlayer.StaminaData.MaxNumberOfChargePerObject;
         if (Mathf.Approximately(currentChargeRight, staminaForACharge))
         {
-            OnRightStaminaReady?.Invoke();
+            if (!init)
+            {
+                OnRightChargeReady?.Invoke();
+            }
         }
         OnRightChargeSet?.Invoke(currentChargeRight, metricsPlayer.StaminaData.MaxStamina);
     }
 
-    private void UpdateLeftCharge(float amount)
+    private void UpdateLeftCharge(float amount, bool init = false)
     {
         currentChargeLeft = amount;
         int staminaForACharge = metricsPlayer.StaminaData.MaxStamina / metricsPlayer.StaminaData.MaxNumberOfChargePerObject;
         if (Mathf.Approximately(currentChargeLeft, staminaForACharge))
         {
-            OnLeftStaminaReady?.Invoke();
+            if (!init)
+            {
+                OnLeftChargeReady?.Invoke();
+            }
         }
         OnLeftChargeSet?.Invoke(currentChargeLeft, metricsPlayer.StaminaData.MaxStamina);
     }
@@ -225,6 +231,7 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
             return true;
         }
         
+        OnNoCharge?.Invoke();
         return false;
     }
     

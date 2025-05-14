@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -16,12 +17,16 @@ public class IdleEnemyState : EnemyState
     private float timer;
     
     #endregion
+
+    public event Action OnEnterIdle;
+    public event Action OnExitIdle;
     
     public override void Enter()
     {
         isPatrolling = false;
         lightManager.EnableSpotLightWhite();
         //Debug.Log("IdleState");
+        OnEnterIdle?.Invoke();
     }
 
     public override void Exit()
@@ -31,6 +36,7 @@ public class IdleEnemyState : EnemyState
         {
             stateMachine.HeadMovement.ResetValues();
         }
+        OnExitIdle?.Invoke();
     }
 
     public override void Tick()

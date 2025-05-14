@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,9 @@ public class AlertEnemyState : EnemyState
     
     #endregion
     
+    public event Action OnEnterAlert;
+    public event Action OnExitAlert;
+    
     public override void Enter()
     {
         healthPlayer = playerTransform.GetComponent<HealthPlayer>();
@@ -29,12 +33,14 @@ public class AlertEnemyState : EnemyState
         
         lightManager.EnableSpotLightRed();
         //Debug.Log("AlertState");
+        OnEnterAlert?.Invoke();
     }
 
     public override void Exit()
     {
         GetComponent<SearchEnemyState>().PositionGoTo = lastSeenPosition;
         healthPlayer.enemyAlerted = false;
+        OnExitAlert?.Invoke();
     }
 
     public override void Tick()

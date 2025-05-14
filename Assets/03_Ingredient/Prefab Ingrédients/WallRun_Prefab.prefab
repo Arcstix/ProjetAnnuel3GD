@@ -136,6 +136,8 @@ GameObject:
   - component: {fileID: 2227550037450980230}
   - component: {fileID: 7934767916011200430}
   - component: {fileID: 8213946705730857200}
+  - component: {fileID: 819427631334518706}
+  - component: {fileID: 8546301366384219219}
   m_Layer: 0
   m_Name: Anchor_1
   m_TagString: Untagged
@@ -241,6 +243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a1d53107d7a4429ae71d67304a4377b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkVisibleRenderer: {fileID: 0}
+  targetTranform: {fileID: 103683607509602685}
   isAvailable: 1
   isReachable: 0
   isRendered: 0
@@ -262,6 +266,53 @@ MonoBehaviour:
   detectedObjects: []
   _isInteractive: 1
   _onWall: 1
+--- !u!114 &819427631334518706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838501584168781964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4304d79b59a43c34fb32ddb113880e15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallLianeSound:
+    Guid:
+      Data1: -1741624589
+      Data2: 1137189108
+      Data3: 1424046524
+      Data4: 1717216797
+    Path: event:/Ingredients/Lianes wall run
+  pressToPlayWallLianeSound: 0
+--- !u!54 &8546301366384219219
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838501584168781964}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7972689166660514331
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,6 +327,8 @@ GameObject:
   - component: {fileID: 3010109433699178740}
   - component: {fileID: 6100485822619956649}
   - component: {fileID: 3979700211670738154}
+  - component: {fileID: 3328970097865752911}
+  - component: {fileID: 513522811541557984}
   m_Layer: 0
   m_Name: Anchor_2
   m_TagString: Untagged
@@ -381,6 +434,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a1d53107d7a4429ae71d67304a4377b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkVisibleRenderer: {fileID: 0}
+  targetTranform: {fileID: 5543351323867071917}
   isAvailable: 1
   isReachable: 0
   isRendered: 0
@@ -402,6 +457,53 @@ MonoBehaviour:
   detectedObjects: []
   _isInteractive: 1
   _onWall: 1
+--- !u!114 &3328970097865752911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7972689166660514331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4304d79b59a43c34fb32ddb113880e15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallLianeSound:
+    Guid:
+      Data1: -1741624589
+      Data2: 1137189108
+      Data3: 1424046524
+      Data4: 1717216797
+    Path: event:/Ingredients/Lianes wall run
+  pressToPlayWallLianeSound: 0
+--- !u!54 &513522811541557984
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7972689166660514331}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8585978404999380696
 GameObject:
   m_ObjectHideFlags: 0
