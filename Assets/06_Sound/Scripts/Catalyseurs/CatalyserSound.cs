@@ -40,6 +40,12 @@ public class CatalyserSound : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        soundIdleEvent.set3DAttributes(RuntimeUtils.To3DAttributes(transform));
+        soundActivationEvent.set3DAttributes(RuntimeUtils.To3DAttributes(transform));
+    }
+
     public void PlayIdleSound()
     { 
         StopActivationSound();

@@ -12,6 +12,8 @@ public class I_FleurAnchorSoundManager : MonoBehaviour
     private void Awake()
     {
         projectileInteraction = GetComponent<ProjectileInteraction>();
+        flowerSoundEvent = RuntimeManager.CreateInstance("event:/Ingredients/Fleur saisie");
+        RuntimeManager.AttachInstanceToGameObject(flowerSoundEvent, GetComponent<Transform>(), GetComponent<Rigidbody>());
     }
 
     private void Start()
@@ -20,10 +22,13 @@ public class I_FleurAnchorSoundManager : MonoBehaviour
         projectileInteraction.OnPlatformInteract += OpenFlower;
         projectileInteraction.OnExitToolInteract += ExitFlowerSaisie;
         projectileInteraction.OnExitToolInteract += ThrowFlower;
-        flowerSoundEvent = RuntimeManager.CreateInstance("event:/Ingredients/Fleur saisie");
-        RuntimeManager.AttachInstanceToGameObject(flowerSoundEvent, GetComponent<Transform>(), GetComponent<Rigidbody>());
     }
-    
+
+    private void Update()
+    {
+        flowerSoundEvent.set3DAttributes(RuntimeUtils.To3DAttributes(transform));
+    }
+
     public void EnterFlowerSaisie()
     {
         flowerSoundEvent.setParameterByName("FinSaisie", 0f); // lancer ca quand on a saisi le bourgeon avec notre outil
