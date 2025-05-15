@@ -18,7 +18,7 @@ public class AbilityTransportState : AbilityState
     {
         base.Tick();
 
-        if (rightAttraction.IsPressed() && leftAttraction.IsPressed())
+        if (rightAttractionThrow.IsPressed() && leftAttractionThrow.IsPressed())
         {
             if (reusableData.RightObject != null && reusableData.LeftObject != null)
             {
@@ -44,12 +44,12 @@ public class AbilityTransportState : AbilityState
             return;
         }
         
-        if (leftAttraction.WasReleasedThisFrame() && !rightAttraction.IsPressed())
+        if (leftAttractionThrow.WasReleasedThisFrame() && !rightAttractionThrow.IsPressed())
         {
             _stateMachine.ChangeState(_stateMachine.IdleState);
         }
 
-        if (rightAttraction.WasReleasedThisFrame() && !leftAttraction.IsPressed())
+        if (rightAttractionThrow.WasReleasedThisFrame() && !leftAttractionThrow.IsPressed())
         {
             _stateMachine.ChangeState(_stateMachine.IdleState);
         }
@@ -62,7 +62,7 @@ public class AbilityTransportState : AbilityState
             if (metricsManager.StaminaRight <= 0)
             {
                 reusableData.RightInput = true;
-                _stateMachine.ChangeState(_stateMachine.RecallState);
+                _stateMachine.ChangeState(_stateMachine.RecallAllState);
                 return;
             }
         }
@@ -72,7 +72,7 @@ public class AbilityTransportState : AbilityState
             if (metricsManager.StaminaLeft <= 0)
             {
                 reusableData.LeftInput = true;
-                _stateMachine.ChangeState(_stateMachine.RecallState);
+                _stateMachine.ChangeState(_stateMachine.RecallAllState);
                 return;
             }
         }
@@ -81,18 +81,26 @@ public class AbilityTransportState : AbilityState
     protected void MoveLeftObjectToLaunch()
     {
         leftInteraction.Interactable(false);
-        if (targetSystem.leftTargetLaunch.GetCurrentType() == InteractorType.Projectile)
+        if (targetSystem.leftTargetLaunch)
         {
-            reusableData.LeftObject.SetLaunch(true);
+            if (targetSystem.leftTargetLaunch.GetCurrentType() == InteractorType.PulseProjectile || 
+                targetSystem.leftTargetLaunch.GetCurrentType() == InteractorType.BrightProjectile)
+            {
+                reusableData.LeftObject.SetLaunch(true);
+            }
         }
     }
     
     protected void MoveRightObjectToLaunch()
     {
         rightInteraction.Interactable(false);
-        if (targetSystem.rightTargetLaunch.GetCurrentType() == InteractorType.Projectile)
+        if (targetSystem.rightTargetLaunch)
         {
-            reusableData.RightObject.SetLaunch(true);
+            if (targetSystem.rightTargetLaunch.GetCurrentType() == InteractorType.PulseProjectile || 
+                targetSystem.rightTargetLaunch.GetCurrentType() == InteractorType.BrightProjectile)
+            {
+                reusableData.RightObject.SetLaunch(true);
+            }
         }
     }
 

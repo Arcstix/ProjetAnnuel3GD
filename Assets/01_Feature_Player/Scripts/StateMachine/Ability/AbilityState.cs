@@ -25,13 +25,15 @@ public class AbilityState : IState
 
     protected InputAction rightShootRecall;
     protected InputAction leftShootRecall;
-    protected InputAction rightShootThrow;
-    protected InputAction leftShootThrow;
-    protected InputAction rightThrow;
-    protected InputAction leftThrow;
-    protected InputAction leftAttraction;
-    protected InputAction rightAttraction;
-    protected InputAction recall;
+    //protected InputAction rightShootThrow;
+    //protected InputAction leftShootThrow;
+    protected InputAction rightAttractionThrow;
+    protected InputAction leftAttractionThrow;
+    //protected InputAction rightThrow;
+    //protected InputAction leftThrow;
+    //protected InputAction leftAttraction;
+    //protected InputAction rightAttraction;
+    protected InputAction recallAll;
     
     // Sert � la cr�ation de raccourcie.
     // ATTENTION AUX SCRIPTABLES OBJECTS QUI PEUVENT TOTALEMENT CHANGER COMME LE PLAYERSO !
@@ -52,13 +54,15 @@ public class AbilityState : IState
 
         rightShootRecall = input.actions["ShootRecallRight"];
         leftShootRecall = input.actions["ShootRecallLeft"];
-        rightShootThrow = input.actions["ShootThrowRight"];
-        leftShootThrow = input.actions["ShootThrowLeft"];
-        rightThrow = input.actions["ThrowRight"];
-        leftThrow = input.actions["ThrowLeft"];
-        leftAttraction = input.actions["AttractionLeft"];
-        rightAttraction = input.actions["AttractionRight"];
-        recall = input.actions["Recall"];
+        //rightShootThrow = input.actions["ShootThrowRight"];
+        //leftShootThrow = input.actions["ShootThrowLeft"];
+        rightAttractionThrow = input.actions["AttractionThrowRight"];
+        leftAttractionThrow = input.actions["AttractionThrowLeft"];
+        //rightThrow = input.actions["ThrowRight"];
+        //leftThrow = input.actions["ThrowLeft"];
+        //leftAttraction = input.actions["AttractionLeft"];
+        //rightAttraction = input.actions["AttractionRight"];
+        recallAll = input.actions["Recall"];
     }
 
     #region State Methods
@@ -119,7 +123,7 @@ public class AbilityState : IState
         reusableData.RightInput = true;
         if (reusableData.RightObject == null)
         {
-            if (!_stateMachine.AbilityManager.kinichMode || targetSystem.currentTarget != null)
+            if (_stateMachine.AbilityManager.kinichMode || targetSystem.currentTarget != null)
             {
                 _stateMachine.ChangeState(_stateMachine.ShootState);
             }
@@ -135,14 +139,14 @@ public class AbilityState : IState
         reusableData.LeftInput = true;
         if (reusableData.LeftObject == null)
         {
-            if (!_stateMachine.AbilityManager.kinichMode || targetSystem.currentTarget != null)
+            if (_stateMachine.AbilityManager.kinichMode || targetSystem.currentTarget != null)
             {
                 _stateMachine.ChangeState(_stateMachine.ShootState);
             }
         }
         else
         {
-            _stateMachine.ChangeState(_stateMachine.RecallState);
+            _stateMachine.ChangeState(_stateMachine.RecallAllState);
         }
     }
     
@@ -168,7 +172,7 @@ public class AbilityState : IState
         {
             if (targetSystem.rightTargetLaunch != null)
             {
-                if (targetSystem.rightTargetLaunch.GetCurrentType() == InteractorType.Projectile)
+                if (targetSystem.rightTargetLaunch.GetCurrentType() == InteractorType.PulseProjectile)
                 {
                     reusableData.RightThrow = true;
                     _stateMachine.ChangeState(_stateMachine.ThrowState);
@@ -196,7 +200,7 @@ public class AbilityState : IState
         {
             if (targetSystem.leftTargetLaunch != null)
             {
-                if (targetSystem.leftTargetLaunch.GetCurrentType() == InteractorType.Projectile)
+                if (targetSystem.leftTargetLaunch.GetCurrentType() == InteractorType.PulseProjectile)
                 {
                     reusableData.LeftThrow = true;
                     _stateMachine.ChangeState(_stateMachine.ThrowState);
@@ -272,7 +276,8 @@ public class AbilityState : IState
                     if (reusableData.RightParent != null)
                     {
                         if (reusableData.RightParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
-                            InteractorType.Projectile)
+                            InteractorType.PulseProjectile && reusableData.RightParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
+                            InteractorType.BrightProjectile)
                         {
                             _stateMachine.ChangeState(_stateMachine.MovePlayer);
                         }
@@ -287,7 +292,7 @@ public class AbilityState : IState
                             }
                             else
                             {
-                                _stateMachine.ChangeState(_stateMachine.RecallState);
+                                _stateMachine.ChangeState(_stateMachine.RecallAllState);
                             }
                         }
                         else
@@ -299,7 +304,8 @@ public class AbilityState : IState
                 else
                 {
                     if (reusableData.RightParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
-                        InteractorType.Projectile)
+                        InteractorType.PulseProjectile && reusableData.RightParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
+                        InteractorType.BrightProjectile)
                     {
                         _stateMachine.ChangeState(_stateMachine.MovePlayer);
                     }
@@ -366,7 +372,8 @@ public class AbilityState : IState
                     if (reusableData.LeftParent != null)
                     {
                         if (reusableData.LeftParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
-                            InteractorType.Projectile)
+                            InteractorType.PulseProjectile && reusableData.RightParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
+                            InteractorType.BrightProjectile)
                         {
                             _stateMachine.ChangeState(_stateMachine.MovePlayer);
                         }
@@ -381,7 +388,7 @@ public class AbilityState : IState
                             }
                             else
                             {
-                                _stateMachine.ChangeState(_stateMachine.RecallState);
+                                _stateMachine.ChangeState(_stateMachine.RecallAllState);
                             }
                         }
                         else
@@ -393,7 +400,8 @@ public class AbilityState : IState
                 else
                 {
                     if (reusableData.LeftParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
-                        InteractorType.Projectile)
+                        InteractorType.PulseProjectile && reusableData.RightParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
+                        InteractorType.BrightProjectile)
                     {
                         _stateMachine.ChangeState(_stateMachine.MovePlayer);
                     }
@@ -405,13 +413,193 @@ public class AbilityState : IState
     }
     
     #endregion
+    
+    #region Attraction / Throw State
+    protected void HandleRightAttractionThrow()
+    {
+        if (reusableData.LeftObject == null && reusableData.RightObject == null)
+        {
+            return;
+        }
+        else
+        {
+            if (reusableData.RightObject != null && reusableData.LeftObject != null)
+            {
+                if (reusableData.RightParent != null)
+                {
+                    if (reusableData.RightParent.GetComponent<InteractiveTarget>().GetCurrentType() ==
+                        InteractorType.PulseProjectile)
+                    {
+                        if (reusableData.LeftParent)
+                        {
+                            _stateMachine.ChangeState(_stateMachine.MoveLeftObject);
+                            return;
+                        }
+                    }
+                    else if (reusableData.RightParent.GetComponent<InteractiveTarget>().GetCurrentType() ==
+                             InteractorType.BrightProjectile)
+                    {
+                        reusableData.RightThrow = true;
+                        _stateMachine.ChangeState(_stateMachine.ThrowState);
+                        return;
+                    }
+                }
+                else
+                {
+                    if (reusableData.LeftParent)
+                    {
+                        _stateMachine.ChangeState(_stateMachine.MoveLeftObject);
+                        return;
+                    }
+                }
+            }
+            
+            // Si on arrive ici c'est que l'un des 2 est null
+            
+            // Case : RightObject == null && LeftObject != null --> Il n'y a rien qui se passe car RightObject ne doit pas être null
+            
+            // Case : RightObject != null && LeftObject == null --> Attraction du Player vers la cible
+            if (reusableData.LeftObject == null)
+            {
+                if (reusableData.RightParent != null)
+                {
+                    if (reusableData.RightParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
+                        InteractorType.PulseProjectile && reusableData.RightParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
+                        InteractorType.BrightProjectile)
+                    {
+                        _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                        return;
+                    }
+
+                    if (reusableData.RightParent.GetComponent<InteractiveTarget>().GetCurrentType() ==
+                        InteractorType.PulseProjectile)
+                    {
+                        _stateMachine.ChangeState(_stateMachine.MoveRightObject);
+                        return;
+                    }
+
+                    reusableData.RightThrow = true;
+                    _stateMachine.ChangeState(_stateMachine.ThrowState);
+                }
+                else
+                {
+                    if (metricsManager.useCharge)
+                    {
+                        if (metricsManager.HasRightCharge())
+                        {
+                            _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                        }
+                        else
+                        {
+                            _stateMachine.ChangeState(_stateMachine.RecallAllState);
+                        }
+                    }
+                    else
+                    {
+                        _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                    }
+                }
+            }
+        }
+    }
+    
+    protected void HandleLeftAttractionThrow()
+    {
+        if (reusableData.LeftObject == null && reusableData.RightObject == null)
+        {
+            return;
+        }
+        else
+        {
+            if (reusableData.RightObject != null && reusableData.LeftObject != null)
+            {
+                if (reusableData.LeftParent != null)
+                {
+                    if (reusableData.LeftParent.GetComponent<InteractiveTarget>().GetCurrentType() ==
+                        InteractorType.PulseProjectile)
+                    {
+                        if (reusableData.RightParent)
+                        {
+                            _stateMachine.ChangeState(_stateMachine.MoveRightObject);
+                            return;
+                        }
+                    }
+                    else if (reusableData.LeftParent.GetComponent<InteractiveTarget>().GetCurrentType() ==
+                             InteractorType.BrightProjectile)
+                    {
+                        reusableData.LeftThrow = true;
+                        _stateMachine.ChangeState(_stateMachine.ThrowState);
+                        return;
+                    }
+                }
+                else
+                {
+                    if (reusableData.RightParent)
+                    {
+                        _stateMachine.ChangeState(_stateMachine.MoveLeftObject);
+                        return;
+                    }
+                }
+            }
+            
+            // Si on arrive ici c'est que l'un des 2 est null
+            
+            // Case : RightObject == null && LeftObject != null --> Il n'y a rien qui se passe car RightObject ne doit pas être null
+            
+            // Case : RightObject != null && LeftObject == null --> Attraction du Player vers la cible
+            if (reusableData.RightObject == null)
+            {
+                if (reusableData.LeftParent != null)
+                {
+                    if (reusableData.LeftParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
+                        InteractorType.PulseProjectile && reusableData.LeftParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
+                        InteractorType.BrightProjectile)
+                    {
+                        _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                        return;
+                    }
+
+                    if (reusableData.LeftParent.GetComponent<InteractiveTarget>().GetCurrentType() ==
+                        InteractorType.PulseProjectile)
+                    {
+                        _stateMachine.ChangeState(_stateMachine.MoveLeftObject);
+                        return;
+                    }
+
+                    reusableData.LeftThrow = true;
+                    _stateMachine.ChangeState(_stateMachine.ThrowState);
+                }
+                else
+                {
+                    if (metricsManager.useCharge)
+                    {
+                        if (metricsManager.HasLeftCharge())
+                        {
+                            _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                        }
+                        else
+                        {
+                            _stateMachine.ChangeState(_stateMachine.RecallAllState);
+                        }
+                    }
+                    else
+                    {
+                        _stateMachine.ChangeState(_stateMachine.MovePlayer);
+                    }
+                }
+            }
+        }
+    }
+
+    
+    #endregion
 
     protected void HandleRecall()
     {
         reusableData.RightInput = true;
         reusableData.LeftInput = true;
         
-        _stateMachine.ChangeState(_stateMachine.RecallState);
+        _stateMachine.ChangeState(_stateMachine.RecallAllState);
     }
     
     #endregion

@@ -20,7 +20,7 @@ public class DestructibleWallInteraction : InteractionSystem
             return;
         }
 
-        if (otherSystem.interactorType == InteractorType.Projectile)
+        if (otherSystem.interactorType == InteractorType.PulseProjectile)
         {
             OnWallDestroy?.Invoke();
             Destroy(this.gameObject);

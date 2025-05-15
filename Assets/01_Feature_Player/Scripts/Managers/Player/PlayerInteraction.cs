@@ -29,7 +29,7 @@ public class PlayerInteraction : InteractionSystem
         {
             // In case the Player is coming into the enemy // LOOSE GAME
             OnEnemyInteract?.Invoke();
-            abilityManager.AbilityStateMachine?.ChangeState(abilityManager.AbilityStateMachine.RecallState);
+            abilityManager.AbilityStateMachine?.ChangeState(abilityManager.AbilityStateMachine.RecallAllState);
             metricsManager.RecoverFullCharge();
             movementManager.StateMachine?.ChangeState(movementManager.StateMachine.JumpState);
             return;
@@ -48,7 +48,7 @@ public class PlayerInteraction : InteractionSystem
                 reusableData.LeftInput = true;
             }
             // Recall Tool 
-            abilityManager.AbilityStateMachine?.ChangeState(abilityManager.AbilityStateMachine?.RecallState);
+            abilityManager.AbilityStateMachine?.ChangeState(abilityManager.AbilityStateMachine?.RecallAllState);
             if (otherSystem._onWall)
             {
                 Debug.Log("Interaction Wall");
@@ -68,7 +68,7 @@ public class PlayerInteraction : InteractionSystem
             OnToolInteract?.Invoke();
             metricsManager.AddExternForce(boostSpeedEndTransportation);
             PlayerReusableStateData reusableData = abilityManager.ReusableData;
-            abilityManager.AbilityStateMachine?.ChangeState(abilityManager.AbilityStateMachine?.RecallState);
+            abilityManager.AbilityStateMachine?.ChangeState(abilityManager.AbilityStateMachine?.RecallAllState);
             if (reusableData.LeftActivation)
             {
                 if (reusableData.LeftParent != null)
@@ -89,7 +89,7 @@ public class PlayerInteraction : InteractionSystem
         if (otherSystem.interactorType == InteractorType.InstantDestructible)
         {
             OnDestructibleInteract?.Invoke();
-            abilityManager.AbilityStateMachine?.ChangeState(abilityManager.AbilityStateMachine?.RecallState);
+            abilityManager.AbilityStateMachine?.ChangeState(abilityManager.AbilityStateMachine?.RecallAllState);
             metricsManager.RecoverFullCharge();
         }
     }

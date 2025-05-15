@@ -19,7 +19,7 @@ public class DestructibleInteraction : InteractionSystem
             return;
         }
 
-        if (otherSystem.interactorType == InteractorType.Projectile)
+        if (otherSystem.interactorType == InteractorType.PulseProjectile)
         {
             // In case a destructible object is coming into the platform // Destroy object
             OnPlatformInteract?.Invoke();

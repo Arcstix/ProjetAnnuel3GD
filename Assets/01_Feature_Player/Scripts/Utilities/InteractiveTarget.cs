@@ -161,4 +161,9 @@ public class InteractiveTarget : MonoBehaviour
     {
         return _currentType;
     }
+
+    public GameObject GetPlayer()
+    {
+        return player.gameObject;
+    }
 }

@@ -152,6 +152,24 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AttractionThrowRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""f85cadde-4e42-4861-9d49-c4d78fae1fbf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AttractionThrowLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""3a754724-20ba-48b5-93d3-1fafd0c6482c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -506,6 +524,50 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""Interaction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0d20b84c-b736-4beb-94bc-e26b6ab642a4"",
+                    ""path"": ""<Keyboard>/#(E)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttractionThrowRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""337607a8-3018-4a5f-a38b-4de194daec17"",
+                    ""path"": ""<Keyboard>/#(A)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttractionThrowLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bb3d81ea-97c1-417f-8f40-925ffceba1eb"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttractionThrowLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9f292fa5-5c26-48a6-bab0-fe419d33e655"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttractionThrowRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -853,6 +915,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player_ThrowLeft = m_Player.FindAction("ThrowLeft", throwIfNotFound: true);
         m_Player_Recall = m_Player.FindAction("Recall", throwIfNotFound: true);
         m_Player_Interaction = m_Player.FindAction("Interaction", throwIfNotFound: true);
+        m_Player_AttractionThrowRight = m_Player.FindAction("AttractionThrowRight", throwIfNotFound: true);
+        m_Player_AttractionThrowLeft = m_Player.FindAction("AttractionThrowLeft", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigation = m_UI.FindAction("Navigation", throwIfNotFound: true);
@@ -934,6 +998,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ThrowLeft;
     private readonly InputAction m_Player_Recall;
     private readonly InputAction m_Player_Interaction;
+    private readonly InputAction m_Player_AttractionThrowRight;
+    private readonly InputAction m_Player_AttractionThrowLeft;
     public struct PlayerActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -952,6 +1018,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @ThrowLeft => m_Wrapper.m_Player_ThrowLeft;
         public InputAction @Recall => m_Wrapper.m_Player_Recall;
         public InputAction @Interaction => m_Wrapper.m_Player_Interaction;
+        public InputAction @AttractionThrowRight => m_Wrapper.m_Player_AttractionThrowRight;
+        public InputAction @AttractionThrowLeft => m_Wrapper.m_Player_AttractionThrowLeft;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1003,6 +1071,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Interaction.started += instance.OnInteraction;
             @Interaction.performed += instance.OnInteraction;
             @Interaction.canceled += instance.OnInteraction;
+            @AttractionThrowRight.started += instance.OnAttractionThrowRight;
+            @AttractionThrowRight.performed += instance.OnAttractionThrowRight;
+            @AttractionThrowRight.canceled += instance.OnAttractionThrowRight;
+            @AttractionThrowLeft.started += instance.OnAttractionThrowLeft;
+            @AttractionThrowLeft.performed += instance.OnAttractionThrowLeft;
+            @AttractionThrowLeft.canceled += instance.OnAttractionThrowLeft;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1049,6 +1123,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Interaction.started -= instance.OnInteraction;
             @Interaction.performed -= instance.OnInteraction;
             @Interaction.canceled -= instance.OnInteraction;
+            @AttractionThrowRight.started -= instance.OnAttractionThrowRight;
+            @AttractionThrowRight.performed -= instance.OnAttractionThrowRight;
+            @AttractionThrowRight.canceled -= instance.OnAttractionThrowRight;
+            @AttractionThrowLeft.started -= instance.OnAttractionThrowLeft;
+            @AttractionThrowLeft.performed -= instance.OnAttractionThrowLeft;
+            @AttractionThrowLeft.canceled -= instance.OnAttractionThrowLeft;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1170,6 +1250,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnThrowLeft(InputAction.CallbackContext context);
         void OnRecall(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
+        void OnAttractionThrowRight(InputAction.CallbackContext context);
+        void OnAttractionThrowLeft(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

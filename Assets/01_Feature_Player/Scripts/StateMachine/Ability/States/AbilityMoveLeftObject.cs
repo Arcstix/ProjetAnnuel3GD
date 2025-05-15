@@ -14,7 +14,7 @@ public class AbilityMoveLeftObject : AbilityTransportState
         base.Enter();
         
         OnRightActivation?.Invoke();
-        
+
         leftInteraction = reusableData.LeftParent.GetComponent<InteractionSystem>();
         
         reusableData.OnTransportation = false;
@@ -39,13 +39,21 @@ public class AbilityMoveLeftObject : AbilityTransportState
 
     private void MoveLeftObject()
     {
-        if (reusableData.RightParent != null)
+        if (reusableData.RightObject != null)
         {
             leftInteraction.Interactable(true);
-                
-            // Move LeftParent to RightParent
-            reusableData.LeftObject.Move(reusableData.LeftParent, reusableData.RightParent);
+            if (reusableData.RightParent != null)
+            {
+                // Move LeftParent to RightParent
+                reusableData.LeftObject.Move(reusableData.LeftParent, reusableData.RightParent);
+            }
+            else
+            {
+                // Move LeftParent to RightObject
+                reusableData.LeftObject.Move(reusableData.LeftParent, reusableData.RightObject.gameObject);
+            }
         }
+        
         else
         {
             // Move LeftParent to cover Player

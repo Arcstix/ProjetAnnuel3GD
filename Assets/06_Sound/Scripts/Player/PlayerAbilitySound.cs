@@ -30,8 +30,8 @@ public class PlayerAbilitySound : MonoBehaviour
     {
         abilityManager.AbilityStateMachine.ShootState.OnRightShoot += RightShoot;
         abilityManager.AbilityStateMachine.ShootState.OnLeftShoot += LeftShoot;
-        abilityManager.AbilityStateMachine.RecallState.OnRightRecall += RightRecall;
-        abilityManager.AbilityStateMachine.RecallState.OnLeftRecall += LeftRecall;
+        abilityManager.AbilityStateMachine.RecallAllState.OnRightRecall += RightRecallAll;
+        abilityManager.AbilityStateMachine.RecallAllState.OnLeftRecall += LeftRecallAll;
         abilityManager.AbilityStateMachine.MovePlayer.EnterDash += Dash;
         abilityManager.AbilityStateMachine.AimState.OnAirAim += EnterGravityFreeze;
         abilityManager.AbilityStateMachine.AimState.OnExitAim += QuitGravityFreeze;
@@ -43,8 +43,8 @@ public class PlayerAbilitySound : MonoBehaviour
     {
         abilityManager.AbilityStateMachine.ShootState.OnRightShoot -= RightShoot;
         abilityManager.AbilityStateMachine.ShootState.OnLeftShoot -= LeftShoot;
-        abilityManager.AbilityStateMachine.RecallState.OnRightRecall -= RightRecall;
-        abilityManager.AbilityStateMachine.RecallState.OnLeftRecall -= LeftRecall;
+        abilityManager.AbilityStateMachine.RecallAllState.OnRightRecall -= RightRecallAll;
+        abilityManager.AbilityStateMachine.RecallAllState.OnLeftRecall -= LeftRecallAll;
         abilityManager.AbilityStateMachine.MovePlayer.EnterDash -= Dash;
         abilityManager.AbilityStateMachine.MovePlayer.OnFlyingDance -= FlyingDance;
     }
@@ -87,13 +87,13 @@ public class PlayerAbilitySound : MonoBehaviour
         RuntimeManager.PlayOneShot("event:/Player/Tir gauche");
     }
     
-    private void RightRecall()
+    private void RightRecallAll()
     {
         //Son qui se d�clenche lorsqu'on rappelle la balle droite
         RuntimeManager.PlayOneShot("event:/Player/rappel droit");
     }
     
-    private void LeftRecall()
+    private void LeftRecallAll()
     {
         //Son qui se d�clenche lorsqu'on rappelle la balle gauche
         RuntimeManager.PlayOneShot("event:/Player/rappel gauche");

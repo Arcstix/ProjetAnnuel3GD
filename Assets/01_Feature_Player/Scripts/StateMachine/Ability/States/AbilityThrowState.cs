@@ -40,7 +40,7 @@ public class AbilityThrowState : AbilityState
         
         AimThrow();
         
-        _stateMachine.ChangeState(_stateMachine.RecallState);
+        _stateMachine.ChangeState(_stateMachine.RecallAllState);
     }
 
     private void AimBotThrow()

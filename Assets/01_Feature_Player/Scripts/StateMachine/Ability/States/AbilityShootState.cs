@@ -101,22 +101,8 @@ public class AbilityShootState : AbilityState
         Ray aimRay = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         RaycastHit aimHit;
         aimEndPosition = aimRay.origin + aimRay.direction * metricsManager.CurrentMetrics.AbilityData.AimDistance;
-        
-        // if (Physics.Raycast(aimRay, out aimHit, metricsManager.CurrentMetrics.AbilityData.AimDistance, LayerMask.GetMask("Interactable"), 
-        //         QueryTriggerInteraction.Ignore))
-        // {
-        //     aimEndPosition = aimHit.point;
-        //     if (reusableData.LeftInput)
-        //     {
-        //         reusableData.LeftParent = aimHit.transform.gameObject;
-        //     }
-        //     else
-        //     {
-        //         reusableData.RightParent = aimHit.transform.gameObject;
-        //     }
-        // }
-        
-        if (Physics.Raycast(aimRay, out aimHit, metricsManager.CurrentMetrics.AbilityData.AimDistance, ~LayerMask.GetMask("Player")))
+
+        if (Physics.Raycast(aimRay, out aimHit, metricsManager.CurrentMetrics.AbilityData.AimDistance, ~LayerMask.GetMask("Player"), QueryTriggerInteraction.Ignore))
         {
             aimEndPosition = aimHit.point + aimHit.normal * 0.25f;
         }

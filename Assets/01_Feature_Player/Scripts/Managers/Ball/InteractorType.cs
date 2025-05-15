@@ -8,8 +8,8 @@ public enum InteractorType
     InstantDestructible,
     Enemy,
     Platform,
-    Projectile,
-    DestructibleWall,
+    PulseProjectile,
+    BrightProjectile,
     Anchor,
     Wall
 }

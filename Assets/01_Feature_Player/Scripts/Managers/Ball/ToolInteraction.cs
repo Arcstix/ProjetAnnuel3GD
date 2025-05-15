@@ -48,7 +48,11 @@ public class ToolInteraction : InteractionSystem
                     Destroy(this.gameObject);
                 }
                 return;
-            case InteractorType.Projectile:
+            case InteractorType.PulseProjectile:
+                GetComponent<ToolManager>().SetLaunch(true);
+                canInteractWithPlayer = false;
+                return;
+            case InteractorType.BrightProjectile:
                 GetComponent<ToolManager>().SetLaunch(true);
                 canInteractWithPlayer = false;
                 return;

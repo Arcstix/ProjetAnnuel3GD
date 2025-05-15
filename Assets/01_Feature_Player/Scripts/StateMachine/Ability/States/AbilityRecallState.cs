@@ -47,71 +47,40 @@ public class AbilityRecallState : AbilityState
     public override void Tick()
     {
         base.Tick();
-        
-        if (reusableData.LeftInput && reusableData.RightInput)
+
+        if (reusableData.LeftInput)
         {
             if (reusableData.LeftObject)
             {
                 reusableData.LeftObject.SetNewInfo(leftLauncher.position, metricsManager.CurrentMetrics.AbilityData.RecallSpeed, null);
-                
-                if (Vector3.Distance(reusableData.LeftObject.transform.position, leftLauncher.position) < metricsManager.CurrentMetrics.AbilityData.DistanceToEndRecall)
-                {
-                    GameObject.Destroy(reusableData.LeftObject.gameObject);
-                }
+            }
+            else
+            {
+                _stateMachine.ChangeState(_stateMachine.IdleState);
+                return;
             }
             
-            if (reusableData.RightObject)
-            {
-                reusableData.RightObject.SetNewInfo(rightLauncher.position, metricsManager.CurrentMetrics.AbilityData.RecallSpeed, null);
-                
-                if (Vector3.Distance(reusableData.RightObject.transform.position, rightLauncher.position) < metricsManager.CurrentMetrics.AbilityData.DistanceToEndRecall)
-                {
-                    GameObject.Destroy(reusableData.RightObject.gameObject);
-                }
-            }
-
-            if (reusableData.LeftObject == null && reusableData.RightObject == null)
+            if (Vector3.Distance(reusableData.LeftObject.transform.position, leftLauncher.position) < metricsManager.CurrentMetrics.AbilityData.DistanceToEndRecall)
             {
                 _stateMachine.ChangeState(_stateMachine.IdleState);
             }
         }
-
-        if (!reusableData.RightInput || !reusableData.LeftInput)
-        {
-            if (reusableData.LeftInput)
-            {
-                if (reusableData.LeftObject)
-                {
-                    reusableData.LeftObject.SetNewInfo(leftLauncher.position, metricsManager.CurrentMetrics.AbilityData.RecallSpeed, null);
-                }
-                else
-                {
-                    _stateMachine.ChangeState(_stateMachine.IdleState);
-                    return;
-                }
-            
-                if (Vector3.Distance(reusableData.LeftObject.transform.position, leftLauncher.position) < metricsManager.CurrentMetrics.AbilityData.DistanceToEndRecall)
-                {
-                    _stateMachine.ChangeState(_stateMachine.IdleState);
-                }
-            }
         
-            if (reusableData.RightInput)
+        if (reusableData.RightInput)
+        {
+            if (reusableData.RightObject)
             {
-                if (reusableData.RightObject)
-                {
-                    reusableData.RightObject.SetNewInfo(rightLauncher.position, metricsManager.CurrentMetrics.AbilityData.RecallSpeed, null);
-                }
-                else
-                {
-                    _stateMachine.ChangeState(_stateMachine.IdleState);
-                    return;
-                }
+                reusableData.RightObject.SetNewInfo(rightLauncher.position, metricsManager.CurrentMetrics.AbilityData.RecallSpeed, null);
+            }
+            else
+            {
+                _stateMachine.ChangeState(_stateMachine.IdleState);
+                return;
+            }
             
-                if (Vector3.Distance(reusableData.RightObject.transform.position, rightLauncher.position) < metricsManager.CurrentMetrics.AbilityData.DistanceToEndRecall)
-                {
-                    _stateMachine.ChangeState(_stateMachine.IdleState);
-                }
+            if (Vector3.Distance(reusableData.RightObject.transform.position, rightLauncher.position) < metricsManager.CurrentMetrics.AbilityData.DistanceToEndRecall)
+            {
+                _stateMachine.ChangeState(_stateMachine.IdleState);
             }
         }
     }
@@ -145,10 +114,5 @@ public class AbilityRecallState : AbilityState
             targetSystem.rightTargetLaunch = null;
             rightLauncher.GetComponent<MeshRenderer>().enabled = true;
         }
-        
-        reusableData.LeftParent = null;
-        reusableData.RightParent = null;
-        reusableData.LeftInput = false;
-        reusableData.RightInput = false;
     }
 }

@@ -37,13 +37,13 @@ public class AbilityIdleState : AbilityState
         if (_stateMachine.AbilityManager.kinichMode)
         {
             // Aim State active just in 1st person
-            if (rightShootThrow.WasPerformedThisFrame() && reusableData.RightObject == null)
+            if (rightShootRecall.WasPerformedThisFrame() && reusableData.RightObject == null)
             {
                 HandleRightAimState();
                 return;
             }
 
-            if (leftShootThrow.WasPerformedThisFrame() && reusableData.LeftObject == null)
+            if (leftShootRecall.WasPerformedThisFrame() && reusableData.LeftObject == null)
             {
                 HandleLeftAimState();
                 return;
@@ -54,46 +54,46 @@ public class AbilityIdleState : AbilityState
         if (!_stateMachine.AbilityManager.kinichMode)
         {
             // Pressed this frame
-            if (rightShootThrow.WasPressedThisFrame())
+            if (rightShootRecall.WasPressedThisFrame())
             {
-                HandleRightShootThrow();
+                HandleRightShootRecall();
                 return;
             }
             
-            if (leftShootThrow.WasPressedThisFrame())
+            if (leftShootRecall.WasPressedThisFrame())
             {
-                HandleLeftShootThrow();
+                HandleLeftShootRecall();
                 return;
             }
         }
         else
         {
             // Released this frame 
-            if (rightShootThrow.WasReleasedThisFrame())
+            if (rightShootRecall.WasReleasedThisFrame())
             {
-                HandleRightShootThrow();
+                HandleRightShootRecall();
                 return;
             }
             
-            if (leftShootThrow.WasReleasedThisFrame())
+            if (leftShootRecall.WasReleasedThisFrame())
             {
-                HandleLeftShootThrow();
+                HandleLeftShootRecall();
                 return;
             }
         }
         
         //Attraction State
-        if (rightAttraction.WasPerformedThisFrame())
+        if (rightAttractionThrow.WasPerformedThisFrame())
         {
-            HandleRightAttraction();
+            HandleRightAttractionThrow();
         }
 
-        if (leftAttraction.WasPerformedThisFrame())
+        if (leftAttractionThrow.WasPerformedThisFrame())
         {
-            HandleLeftAttraction();
+            HandleLeftAttractionThrow();
         }
 
-        if (recall.WasPressedThisFrame())
+        if (recallAll.WasPressedThisFrame())
         {
             HandleRecall();
         }

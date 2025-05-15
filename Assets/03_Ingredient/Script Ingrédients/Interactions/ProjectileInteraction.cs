@@ -35,6 +35,12 @@ public class ProjectileInteraction : InteractionSystem
             rb.constraints = RigidbodyConstraints.FreezeAll;
             GetComponent<AnchorInteraction>().enabled = true;
             GetComponent<LandingPlatform>().SetAvailableState(true);
+            if (!GetComponent<InteractiveTarget>().isAvailable)
+            {
+                PlayerAbilityManager abilityManager = _target.GetPlayer().GetComponent<PlayerAbilityManager>();
+                abilityManager.AbilityStateMachine?.ChangeState(abilityManager.AbilityStateMachine.RecallAllState);
+            }
+            
             this.enabled = false;
             return;
         }

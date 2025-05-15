@@ -39,11 +39,19 @@ public class AbilityMoveRightObject : AbilityTransportState
 
     private void MoveRightObject()
     {
-        if (reusableData.LeftParent != null)
+        if (reusableData.LeftObject)
         {
             rightInteraction.Interactable(true);
-            // Move RightParent to LeftParent
-            reusableData.RightObject.Move(reusableData.RightParent, reusableData.LeftParent);
+            if (reusableData.LeftParent != null)
+            {
+                // Move RightParent to LeftParent
+                reusableData.RightObject.Move(reusableData.RightParent, reusableData.LeftParent);
+            }
+            else
+            {
+                // Move RightParent to LeftObject
+                reusableData.RightObject.Move(reusableData.RightParent, reusableData.LeftObject.gameObject);
+            }
         }
         else
         {
