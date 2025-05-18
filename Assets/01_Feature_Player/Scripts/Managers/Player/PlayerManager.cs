@@ -11,7 +11,7 @@ public class PlayerManager : MonoBehaviour
 
     public Rigidbody Rb { get; private set; }
 
-    public Camera Cam { get; private set; }
+    public Camera Cam;
 
     public PlayerInput Input { get; private set; }
 
@@ -24,8 +24,6 @@ public class PlayerManager : MonoBehaviour
         Metrics = GetComponent<PlayerMetricsManager>();
 
         Input = GetComponent<PlayerInput>();
-
-        Cam = Camera.main;
 
         Rb = GetComponent<Rigidbody>();
 

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,6 +11,10 @@ public class MenuPanel : MonoBehaviour
     private void Awake()
     {
         gameObject.SetActive(activeOnAwake);
+    }
+
+    private void OnEnable()
+    {
         if (defaultButton)
         {
             EventSystem.current.SetSelectedGameObject(defaultButton.gameObject);

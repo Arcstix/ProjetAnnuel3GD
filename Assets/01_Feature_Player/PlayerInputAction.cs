@@ -595,7 +595,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Exit"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""25fffba7-c69f-4486-9dcb-16705aba6fdc"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -604,7 +604,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Validate"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""9dcc5fdf-f047-4036-bc87-264b07a0026a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",

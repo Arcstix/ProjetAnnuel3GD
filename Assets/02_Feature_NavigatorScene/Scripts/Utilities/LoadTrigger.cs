@@ -9,11 +9,11 @@ public class LoadTrigger : MonoBehaviour
 {
     [SerializeField] private SceneReference sceneToLoad;
 
-    private GameManagerFSM gameManager;
+    private GameManagerSM gameManager;
 
     private void Awake()
     {
-        gameManager = FindObjectOfType<GameManagerFSM>();
+        gameManager = FindObjectOfType<GameManagerSM>();
     }
 
     private void OnTriggerEnter(Collider other)

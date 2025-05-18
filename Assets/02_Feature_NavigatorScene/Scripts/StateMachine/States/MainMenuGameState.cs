@@ -13,8 +13,8 @@ public class MainMenuGameState : GameState
 
     public void TransitionToGame(DataScene dataScene)
     {
-        fsm.NextActiveScene = dataScene.scene;
-        fsm.ChangeState(GetComponent<LoadingLevelGameState>());
+        gameManager.NextActiveScene = dataScene.scene;
+        gameManager.ChangeState(GetComponent<LoadingLevelGameState>());
     }
 
     public override void Exit()

@@ -11,5 +11,6 @@ public enum InteractorType
     PulseProjectile,
     BrightProjectile,
     Anchor,
-    Wall
+    Wall,
+    Antenne
 }

@@ -56,6 +56,9 @@ public class ToolInteraction : InteractionSystem
                 GetComponent<ToolManager>().SetLaunch(true);
                 canInteractWithPlayer = false;
                 return;
+            case InteractorType.Antenne:
+                //Debug.Log("Interaction Tool to Antenne");
+                return;
         }
     }
 }

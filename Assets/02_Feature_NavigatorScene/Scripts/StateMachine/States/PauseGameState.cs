@@ -9,35 +9,31 @@ public class PauseGameState : GameState
     {
         pauseMenuPanel.SetActive(true);
         Time.timeScale = 0f;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
         DisableInputPlayer();
     }
 
     private void EnableInputPlayer()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        player.GetComponent<PlayerInput>().enabled = true;
+        gameManager.PlayerRef.GetComponent<PlayerInput>().enabled = true;
     }
     
     private void DisableInputPlayer()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        player.GetComponent<PlayerInput>().enabled = false;
+        gameManager.PlayerRef.GetComponent<PlayerInput>().enabled = false;
     }
 
     //todo Return to game
     public void ReturnToGame()
     {
         EnableInputPlayer();
-        fsm.ChangeState(GetComponent<PlayingGameState>());
+        gameManager.ChangeState(GetComponent<PlayingGameState>());
     }
 
     //todo Return to menu
     public void ReturnToMenu(DataScene dataScene)
     {
-        fsm.NextActiveScene = dataScene.scene;
-        fsm.ChangeState(GetComponent<ReturnToMenuGameState>());
+        gameManager.NextActiveScene = dataScene.scene;
+        gameManager.ChangeState(GetComponent<ReturnToMenuGameState>());
     }
     
     public override void Exit()

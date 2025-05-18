@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class InputActionMapManager : MonoBehaviour
 {
+    public InputActionAsset actionAsset;
+    
     private PlayerInput playerInput;
 
     [Header("Optional Events")]
@@ -14,6 +17,8 @@ public class InputActionMapManager : MonoBehaviour
     {
         if (playerInput == null)
             playerInput = GetComponent<PlayerInput>();
+
+        playerInput.actions = actionAsset;
     }
 
     private void SwitchToActionMap(string mapName)

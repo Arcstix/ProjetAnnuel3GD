@@ -2,13 +2,13 @@
 
 public abstract class GameState : MonoBehaviour
 {
-    protected GameManagerFSM fsm;
+    protected GameManagerSM gameManager;
     
     
     //Called on FSM Start
-    public virtual void Initialize(GameManagerFSM fsm)
+    public virtual void Initialize(GameManagerSM sm)
     {
-        this.fsm = fsm;
+        this.gameManager = sm;
     }
 
     public virtual void Enter(){}

@@ -2655,7 +2655,7 @@ Transform:
   m_GameObject: {fileID: 5751149547048598389}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.1589999, y: 1.93, z: -5.478}
+  m_LocalPosition: {x: -1.6589999, y: 1.4899999, z: -11.478001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2683,7 +2683,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 3009149502111032493}
   m_Lens:
-    FieldOfView: 70
+    FieldOfView: 90
     OrthographicSize: 10
     NearClipPlane: 0.12
     FarClipPlane: 5000
@@ -3197,7 +3197,7 @@ Transform:
   m_GameObject: {fileID: 6090733447672573452}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.5, z: -1}
+  m_LocalPosition: {x: 0, y: 0.06, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3359,6 +3359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 271fb0a440ec7e9498f02e914dc10e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cam: {fileID: 4909550474293704821}
   hasExternalForces: 0
   <CapsuleUtility>k__BackingField:
     <DefaultColliderData>k__BackingField:
@@ -3387,6 +3388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab5976a3cfd31a4c8f24f37e288d2a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cam: {fileID: 4909550474293704821}
   rightLauncherTransform: {fileID: 5818837436705552040}
   leftLauncherTransform: {fileID: 683757962102109204}
   rightProjectileLauncherTransform: {fileID: 92127151240292240}
@@ -3536,6 +3538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b454e6c2cf7040a58e1c3a47f6ddb429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionAsset: {fileID: -944628639613478452, guid: cbdec881f31544a4c819486b6d7f5a27, type: 3}
   onSwitchToPlayer:
     m_PersistentCalls:
       m_Calls: []
@@ -3587,6 +3590,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pressToPlaySonAccordDashSound: 0
+  level1DashAccord: 2
+  level2DashAccord: 3
+  level3DashAccord: 4
 --- !u!114 &5718521746437387147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5218,7 +5224,7 @@ Transform:
   m_GameObject: {fileID: 8710874834890188578}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1590005, y: 1.9300003, z: -5.4780006}
+  m_LocalPosition: {x: -1.6589999, y: 1.4899999, z: -11.478001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5265,7 +5271,7 @@ Camera:
     height: 1
   near clip plane: 0.12
   far clip plane: 5000
-  field of view: 90.0004
+  field of view: 90
   orthographic: 0
   orthographic size: 10
   m_Depth: -1

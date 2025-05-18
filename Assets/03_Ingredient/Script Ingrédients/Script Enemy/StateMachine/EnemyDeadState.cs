@@ -14,6 +14,7 @@ public class EnemyDeadState : EnemyState
     public override void Enter()
     {
         onDeath.Invoke();
+        OnEnterDeath?.Invoke();
     }
     public override void Tick()
     {
