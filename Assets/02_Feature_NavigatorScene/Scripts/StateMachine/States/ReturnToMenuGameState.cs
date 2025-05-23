@@ -50,13 +50,13 @@ public class ReturnToMenuGameState : GameState
             if (asyncUnload.isDone && Time.time >= minTransitionTime)
             {
                 isUnloading = false;
-                gameManager.ChangeState(GetComponent<LevelInitializationGameState>());
+                gameManager.ChangeState(GetComponent<MainMenuGameState>());
             }
         }
 
         if (asyncLoad.isDone && isReloading && Time.time >= minTransitionTime)
         {
-            gameManager.ChangeState(GetComponent<LevelInitializationGameState>());
+            gameManager.ChangeState(GetComponent<MainMenuGameState>());
         }
 
         if (asyncUnload != null)

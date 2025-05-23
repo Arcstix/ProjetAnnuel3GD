@@ -13,11 +13,12 @@ public class GameManagerSM : MonoBehaviour
     private LevelInitializationGameState initializationGameState;
     
     private GameObject playerRef;
+    private GameState lastGameState;
     
     [SerializeField] private SceneReference currentScene;
     [SerializeField] private GameState defaultGameState;
     [SerializeField] private GameState currentState;
-
+    
     public List<SceneReference> chunkList = new List<SceneReference>();
     
     public SceneReference LastActiveScene { get => lastActiveScene; set => lastActiveScene = value; }
@@ -25,6 +26,8 @@ public class GameManagerSM : MonoBehaviour
     public SceneReference NextActiveScene { get => nextActiveScene; set => nextActiveScene = value; }
     
     public GameObject PlayerRef { get => playerRef; set => playerRef = value; }
+    
+    public GameState LastGameState { get => lastGameState; set => lastGameState = value; }
     
     public static GameManagerSM Instance { get; private set; }
 
@@ -89,6 +92,7 @@ public class GameManagerSM : MonoBehaviour
     public void ChangeState(GameState newState)
     {
         currentState.Exit();
+        lastGameState = currentState;
         currentState = newState;
         currentState.Enter();
     }

@@ -7,17 +7,18 @@ public class MenuPanel : MonoBehaviour
 {
     [SerializeField] private bool activeOnAwake;
     [SerializeField] private Button defaultButton;
-
-    private void Awake()
-    {
-        gameObject.SetActive(activeOnAwake);
-    }
-
+    [SerializeField] private Slider defaultSlider;
+    
     private void OnEnable()
     {
         if (defaultButton)
         {
             EventSystem.current.SetSelectedGameObject(defaultButton.gameObject);
+        }
+
+        if (defaultSlider)
+        {
+            EventSystem.current.SetSelectedGameObject(defaultSlider.gameObject);
         }
     }
 }

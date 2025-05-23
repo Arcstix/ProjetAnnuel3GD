@@ -1,34 +1,67 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PauseGameState : GameState
 {
     public GameObject pauseMenuPanel;
     
+    private PlayerInput playerInput;
+    private PlayerUIManager uiManager;
+    private InputActionMapManager actionMapManager;
+    private InputAction exitAction;
+    
     public override void Enter()
     {
         pauseMenuPanel.SetActive(true);
         Time.timeScale = 0f;
-        DisableInputPlayer();
+        
+        uiManager = gameManager.PlayerRef.GetComponent<PlayerUIManager>();
+        playerInput = gameManager.PlayerRef.GetComponent<PlayerInput>();
+        actionMapManager = playerInput.GetComponent<InputActionMapManager>();
+        
+        uiManager.DisableGameCanvas();
+        uiManager.DisableHubCanvas();
+        SwitchToUIInput();
+        exitAction = playerInput.actions["Exit"];
     }
 
-    private void EnableInputPlayer()
+    public override void Tick()
     {
-        gameManager.PlayerRef.GetComponent<PlayerInput>().enabled = true;
+        if (exitAction.WasPressedThisFrame())
+        {
+            ReturnToGame();
+        }
+    }
+
+    private void SwitchToPlayerInput()
+    {
+        actionMapManager.SwitchToPlayer();
     }
     
-    private void DisableInputPlayer()
+    private void SwitchToUIInput()
     {
-        gameManager.PlayerRef.GetComponent<PlayerInput>().enabled = false;
+        actionMapManager.SwitchToUI();
+    }
+
+    public void TransitionToSettings()
+    {
+        gameManager.ChangeState(GetComponent<SettingsGameState>());
     }
 
     //todo Return to game
     public void ReturnToGame()
     {
-        EnableInputPlayer();
+        SwitchToPlayerInput();
         gameManager.ChangeState(GetComponent<PlayingGameState>());
     }
 
+    public void ReturnToHub(DataScene dataScene)
+    {
+        gameManager.NextActiveScene = dataScene.scene;
+        gameManager.ChangeState(GetComponent<LoadingLevelGameState>());
+    }
+    
     //todo Return to menu
     public void ReturnToMenu(DataScene dataScene)
     {
@@ -41,5 +74,14 @@ public class PauseGameState : GameState
         pauseMenuPanel.SetActive(false);
         //Mettre le jeu en pause = responsabilité de PauseState.
         Time.timeScale = 1f; 
+        
+        if (SceneManager.GetActiveScene().name == "Hub")
+        {
+            uiManager.EnableHubCanvas();
+        }
+        else
+        {
+            uiManager.EnableGameCanvas();
+        }
     }
 }

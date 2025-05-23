@@ -10,6 +10,7 @@ public class LevelInitializationGameState : GameState
 {
     [SerializeField] private GameObject _playerPrefab;
     [SerializeField] private InputSystemUIInputModule inputModule;
+    [SerializeField] private SettingsManager settingsManager;
 
     private GameObject player;
     public event Action<GameObject> OnPlayerInitialized;
@@ -20,6 +21,9 @@ public class LevelInitializationGameState : GameState
         OnPlayerInitialized?.Invoke(player);
         player.GetComponent<InputActionMapManager>().SwitchToPlayer();
         inputModule.actionsAsset = player.GetComponent<PlayerInput>().actions;
+        settingsManager.SetCameraManager(player.GetComponent<PlayerCameraManager>());
+        
+        
         gameManager.ChangeState(GetComponent<PlayingGameState>());
     }
     

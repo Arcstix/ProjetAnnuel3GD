@@ -170,6 +170,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""403c398b-8203-4aea-8c34-e4e4419cf0c1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -568,6 +577,28 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""AttractionThrowRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2fd69f94-a7b6-44ff-8314-eb67790bed85"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9addccbd-e4f9-4633-b472-5c8a84fe2232"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -917,6 +948,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player_Interaction = m_Player.FindAction("Interaction", throwIfNotFound: true);
         m_Player_AttractionThrowRight = m_Player.FindAction("AttractionThrowRight", throwIfNotFound: true);
         m_Player_AttractionThrowLeft = m_Player.FindAction("AttractionThrowLeft", throwIfNotFound: true);
+        m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigation = m_UI.FindAction("Navigation", throwIfNotFound: true);
@@ -1000,6 +1032,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Interaction;
     private readonly InputAction m_Player_AttractionThrowRight;
     private readonly InputAction m_Player_AttractionThrowLeft;
+    private readonly InputAction m_Player_Menu;
     public struct PlayerActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -1020,6 +1053,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Interaction => m_Wrapper.m_Player_Interaction;
         public InputAction @AttractionThrowRight => m_Wrapper.m_Player_AttractionThrowRight;
         public InputAction @AttractionThrowLeft => m_Wrapper.m_Player_AttractionThrowLeft;
+        public InputAction @Menu => m_Wrapper.m_Player_Menu;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1077,6 +1111,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @AttractionThrowLeft.started += instance.OnAttractionThrowLeft;
             @AttractionThrowLeft.performed += instance.OnAttractionThrowLeft;
             @AttractionThrowLeft.canceled += instance.OnAttractionThrowLeft;
+            @Menu.started += instance.OnMenu;
+            @Menu.performed += instance.OnMenu;
+            @Menu.canceled += instance.OnMenu;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1129,6 +1166,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @AttractionThrowLeft.started -= instance.OnAttractionThrowLeft;
             @AttractionThrowLeft.performed -= instance.OnAttractionThrowLeft;
             @AttractionThrowLeft.canceled -= instance.OnAttractionThrowLeft;
+            @Menu.started -= instance.OnMenu;
+            @Menu.performed -= instance.OnMenu;
+            @Menu.canceled -= instance.OnMenu;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1252,6 +1292,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnInteraction(InputAction.CallbackContext context);
         void OnAttractionThrowRight(InputAction.CallbackContext context);
         void OnAttractionThrowLeft(InputAction.CallbackContext context);
+        void OnMenu(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

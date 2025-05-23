@@ -9,6 +9,9 @@ using UnityEngine.UI;
 // Envoie les infos aux UI pour l'instant
 public class PlayerUIManager : MonoBehaviour
 {
+    [SerializeField] private GameObject gameCanvas;
+    [SerializeField] private GameObject hubCanvas;
+    
     private InputActionMapManager inputManager;
     private PlayerInput playerInput;
     private bool canInteract = false;
@@ -20,6 +23,26 @@ public class PlayerUIManager : MonoBehaviour
     {
         canInteract = value;
         OnInteract?.Invoke(value);
+    }
+
+    public void EnableGameCanvas()
+    {
+        gameCanvas.SetActive(true);
+    }
+
+    public void DisableGameCanvas()
+    {
+        gameCanvas.SetActive(false);
+    }
+
+    public void EnableHubCanvas()
+    {
+        hubCanvas.SetActive(true);
+    }
+
+    public void DisableHubCanvas()
+    {
+        hubCanvas.SetActive(false);
     }
     
     private void Update()

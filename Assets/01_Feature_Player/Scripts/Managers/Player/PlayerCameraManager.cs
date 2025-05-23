@@ -10,6 +10,8 @@ using UnityEngine.InputSystem;
 public class PlayerCameraManager : MonoBehaviour, I_Initializer
 {
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
+    [SerializeField] [Range(0,20)] private float controllerSpeed;
+    [SerializeField] [Range(0,20)] private float mouseSpeed;
 
     private PlayerMetricsManager metricsManager;
     private PlayerAbilityManager abilityManager;
@@ -51,8 +53,18 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
         freeLookAction = playerInput.actions["FreeLook"];
         if (freeLookAction != null)
         {
-            freeLookAction.performed += OnFreeLookPerformed;
+            SubscribeFreeLookAction();
         }
+    }
+
+    public void SubscribeFreeLookAction()
+    {
+        freeLookAction.performed += OnFreeLookPerformed;
+    }
+
+    public void UnsubscribeFreeLookAction()
+    {
+        freeLookAction.performed -= OnFreeLookPerformed;
     }
 
     private void ChangePOV(bool value)
@@ -98,7 +110,7 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
 
     private void ApplySpeed(string deviceType)
     {
-        float speed = deviceType == "Gamepad" ? cameraData.ControllerSpeed : cameraData.MouseSpeed / 10;
+        float speed = deviceType == "Gamepad" ? controllerSpeed : mouseSpeed / 10;
 
         if (virtualCamera != null)
         {
@@ -153,5 +165,29 @@ public class PlayerCameraManager : MonoBehaviour, I_Initializer
     private void ExitWallRun()
     {
         targetDutch = 0;
+    }
+
+    public void SetControllerSpeed(float newValue)
+    {
+        controllerSpeed = newValue;
+        virtualCamera.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.m_MaxSpeed = controllerSpeed;
+        virtualCamera.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxSpeed = controllerSpeed;
+    }
+    
+    public void SetMouseSpeed(float newValue)
+    {
+        mouseSpeed = newValue;
+        virtualCamera.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.m_MaxSpeed = mouseSpeed/10;
+        virtualCamera.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxSpeed = mouseSpeed/10;
+    }
+    
+    public float GetControllerSpeed()
+    {
+        return controllerSpeed;
+    }
+    
+    public float GetMouseSpeed()
+    {
+        return mouseSpeed;
     }
 }
