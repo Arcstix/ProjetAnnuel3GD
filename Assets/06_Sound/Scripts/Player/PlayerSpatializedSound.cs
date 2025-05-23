@@ -84,7 +84,7 @@ public class PlayerSpatializedSound : MonoBehaviour
     public void StopAllSound()
     {
         StopTirSound();
-        StopRappelSound();
+        StopRappelSound(); 
     }
 
     private void OnDestroy()

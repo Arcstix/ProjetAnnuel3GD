@@ -43,7 +43,7 @@ public class I_FleurAnchorSoundManager : MonoBehaviour
     public void ThrowFlower()
     {
         //  Son qui s'active lorsqu'on lance le bourgeon
-        RuntimeManager.PlayOneShot("event:/Ingredients/Fleur lanc�e");
+        RuntimeManager.PlayOneShot("event:/Ingredients/Fleur lancée");
     }
 
     public void OpenFlower()
