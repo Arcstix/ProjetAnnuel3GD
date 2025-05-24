@@ -839,6 +839,7 @@ MonoBehaviour:
   detectedObjects: []
   _isInteractive: 0
   _onWall: 0
+  boostSpeedEndTransportation: 0.2
 --- !u!114 &6853947441784969740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -877,6 +878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 271fb0a440ec7e9498f02e914dc10e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cam: {fileID: 0}
   hasExternalForces: 0
   <CapsuleUtility>k__BackingField:
     <DefaultColliderData>k__BackingField:
@@ -905,6 +907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab5976a3cfd31a4c8f24f37e288d2a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cam: {fileID: 0}
   rightLauncherTransform: {fileID: 5628527283030631887}
   leftLauncherTransform: {fileID: 5649106523831277134}
   rightProjectileLauncherTransform: {fileID: 4056269489602856331}
@@ -912,9 +915,7 @@ MonoBehaviour:
   rightCloseLauncherTransform: {fileID: 6071579075492142621}
   leftCloseLauncherTransform: {fileID: 9141342067242679389}
   aimTransform: {fileID: 5902569726978289424}
-  aimBotMode: 1
-  thirdPersonMode: 1
-  useStamina: 0
+  kinichMode: 0
 --- !u!114 &3390054086931496672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -928,6 +929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   metricsPlayer: {fileID: 11400000, guid: 3b5ad5f66e777f847b9e58da2f8daa80, type: 2}
+  useCharge: 1
 --- !u!114 &8608706955153301980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -941,6 +943,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 5695835314643884536}
+  controllerSpeed: 0
+  mouseSpeed: 0
 --- !u!114 &1514048884484430222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -953,11 +957,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e668096d2f14d7a4abcc080b392a5452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedText: {fileID: 0}
-  rightChargeObject: {fileID: 0}
-  leftChargeObject: {fileID: 0}
-  rightCharge: {fileID: 0}
-  leftCharge: {fileID: 0}
+  gameCanvas: {fileID: 0}
+  hubCanvas: {fileID: 0}
 --- !u!114 &8764761297445644063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -970,6 +971,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff55e7d58069f424795236f18a382adb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pressToPlaySonAccordDashSound: 0
+  level1DashAccord: 2
+  level2DashAccord: 3
+  level3DashAccord: 4
 --- !u!114 &6452900145228080616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2056,6 +2061,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7059891527452742299, guid: 7529754dc97c4854fb37515470ac761b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a2e8035aeadf2fc4b8200c8f638c85de, type: 2}
     - target: {fileID: 7178865769458726067, guid: 7529754dc97c4854fb37515470ac761b, type: 3}
       propertyPath: m_Name
       value: Magnet_Model
@@ -2208,6 +2217,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7059891527452742299, guid: 7529754dc97c4854fb37515470ac761b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a2e8035aeadf2fc4b8200c8f638c85de, type: 2}
     - target: {fileID: 7178865769458726067, guid: 7529754dc97c4854fb37515470ac761b, type: 3}
       propertyPath: m_Name
       value: Magnet_Model
@@ -2286,6 +2299,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6769851927254865439, guid: 4b3bdb9d314942d4eb38b1bb37d3ef47, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31f71b1776652b84686ffb008d0a9144, type: 2}
     - target: {fileID: 7601927108000379572, guid: 4b3bdb9d314942d4eb38b1bb37d3ef47, type: 3}
       propertyPath: m_Name
       value: Weapon_Model
@@ -2457,6 +2474,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6769851927254865439, guid: 4b3bdb9d314942d4eb38b1bb37d3ef47, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a2e8035aeadf2fc4b8200c8f638c85de, type: 2}
     - target: {fileID: 7601927108000379572, guid: 4b3bdb9d314942d4eb38b1bb37d3ef47, type: 3}
       propertyPath: m_Name
       value: Weapon_Model
