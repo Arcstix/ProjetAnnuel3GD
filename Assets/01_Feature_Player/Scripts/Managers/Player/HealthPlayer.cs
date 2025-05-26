@@ -20,6 +20,7 @@ public class HealthPlayer : MonoBehaviour
     private bool inDanger = false;
 
     public event Action OnDanger;
+    public event Action OnDeath;
     
     // Start is called before the first frame update
     void Start()
@@ -54,7 +55,7 @@ public class HealthPlayer : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Respawn();
+            Death();
         }
     }
     void DecreaseHealthOverTime()
@@ -92,12 +93,14 @@ public class HealthPlayer : MonoBehaviour
         healthSlider.value = Mathf.Lerp(healthSlider.value, currentHealth / maxHealth, Time.deltaTime * 5);
     }
 
-    public void Respawn()
+    private void Death()
     {
         if (spawner)
         {
             playerTransform.position = spawner.transform.position; // Déplace le joueur
         }
+        OnDeath?.Invoke();
+        LevelManager.Instance.IncrementDeath();
         ResetHealth(); // Remet la vie à 100%
     }
 
@@ -110,7 +113,7 @@ public class HealthPlayer : MonoBehaviour
     {
         if (other.CompareTag("DeathZone")) // Vérifie si on touche la DeathZone
         {
-            Respawn();
+            Death();
         }
     }
 }

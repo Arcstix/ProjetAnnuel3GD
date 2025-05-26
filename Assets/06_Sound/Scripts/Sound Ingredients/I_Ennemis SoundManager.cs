@@ -52,6 +52,8 @@ public class I_EnnemisSoundManager : MonoBehaviour
         alertState.OnExitAlert += ExitDetectionSound;
         alertState.OnExitAlert += ExitAttackSound;
         deadState.OnEnterDeath += PlayDeathSound;
+        
+        EnterIdleSound();
     }
 
     private void OnDisable()

@@ -23,7 +23,6 @@ public class LevelInitializationGameState : GameState
         inputModule.actionsAsset = player.GetComponent<PlayerInput>().actions;
         settingsManager.SetCameraManager(player.GetComponent<PlayerCameraManager>());
         
-        
         gameManager.ChangeState(GetComponent<PlayingGameState>());
     }
     
