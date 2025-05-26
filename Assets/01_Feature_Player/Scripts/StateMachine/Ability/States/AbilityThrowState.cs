@@ -37,15 +37,47 @@ public class AbilityThrowState : AbilityState
     public override void FixedTick()
     {
         base.FixedTick();
+
+        if (targetSystem.currentTarget != null)
+        {
+            if (targetSystem.currentTarget.GetCurrentType() == InteractorType.Enemy)
+            {
+                AimTargetThrow();
+            }
+            else
+            {
+                AimThrow();
+            }
+        }
+        else
+        {
+            AimThrow();
+        }
         
-        AimThrow();
         
         _stateMachine.ChangeState(_stateMachine.RecallAllState);
     }
 
-    private void AimBotThrow()
+    private void AimTargetThrow()
     {
-        
+        if (reusableData.LeftThrow)
+        {
+            Vector3 leftPos = leftProjectileLauncher.transform.position;
+            
+            direction = (targetSystem.currentTarget.targetTranform.position - leftPos).normalized;
+            // We Throw Left Projectile
+            reusableData.LeftObject.ThrowProjectile(direction, metricsManager.CurrentMetrics.AbilityData.ThrowSpeed);
+            targetSystem.leftTargetLaunch = null;
+        }
+        else
+        {
+            Vector3 rightPos = rightProjectileLauncher.transform.position;
+            
+            direction = (targetSystem.currentTarget.targetTranform.position - rightPos).normalized;
+            // We Throw Right Projectile
+            reusableData.RightObject.ThrowProjectile(direction, metricsManager.CurrentMetrics.AbilityData.ThrowSpeed);
+            targetSystem.rightTargetLaunch = null;
+        }
     }
 
     private void AimThrow()
