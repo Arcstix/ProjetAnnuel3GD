@@ -12,8 +12,8 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private SettingSection musicSection;
     [SerializeField] private SettingSection sfxSection;
 
-    private float controllerSpeed = 4;
-    private float mouseSpeed = 4;
+    public float controllerSpeed = 4;
+    public float mouseSpeed = 4;
 
     public void SetCameraManager(PlayerCameraManager manager)
     {

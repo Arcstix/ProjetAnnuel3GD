@@ -1,14 +1,26 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 public class EndLevelState : GameState
 {
+    [SerializeField] private GameObject levelPanel;
     public GameObject endLevelUI;
+    
+    private LevelManager levelManager;
+
+    private void Awake()
+    {
+        levelManager = GetComponent<LevelManager>();
+    }
 
     public override void Enter()
     {
+        levelManager.EndLevel();
+        levelPanel.SetActive(false);
         endLevelUI.SetActive(true);
+        gameManager.PlayerRef.GetComponent<PlayerUIManager>().DisableGameCanvas();
         InputActionMapManager mapManager = GameManagerSM.Instance.PlayerRef.GetComponent<InputActionMapManager>();
         mapManager.SwitchToUI();
     }

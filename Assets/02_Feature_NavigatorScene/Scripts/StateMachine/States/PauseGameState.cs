@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class PauseGameState : GameState
 {
     public GameObject pauseMenuPanel;
+    public GameObject levelPanel;
     
     private PlayerInput playerInput;
     private PlayerUIManager uiManager;
@@ -13,6 +14,7 @@ public class PauseGameState : GameState
     
     public override void Enter()
     {
+        levelPanel.SetActive(false);
         pauseMenuPanel.SetActive(true);
         Time.timeScale = 0f;
         
