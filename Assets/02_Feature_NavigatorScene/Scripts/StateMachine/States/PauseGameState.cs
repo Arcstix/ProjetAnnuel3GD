@@ -16,6 +16,7 @@ public class PauseGameState : GameState
     {
         levelPanel.SetActive(false);
         pauseMenuPanel.SetActive(true);
+
         Time.timeScale = 0f;
         
         uiManager = gameManager.PlayerRef.GetComponent<PlayerUIManager>();
