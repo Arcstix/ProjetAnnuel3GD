@@ -30,7 +30,7 @@ public class DraftPushObject : MonoBehaviour
            
             float distanceToBase = Vector3.Distance(transform.position, other.transform.position);
            
-            rb.AddForce(Vector3.up * propulsionCurve.Evaluate(distanceToBase / maxDist) * propulsionForce);
+            rb.AddForce(transform.up * propulsionCurve.Evaluate(distanceToBase / maxDist) * propulsionForce);
         }
     }
 }
