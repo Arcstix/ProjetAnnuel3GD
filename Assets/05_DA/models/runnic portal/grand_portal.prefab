@@ -176,6 +176,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7521727581144002880}
   - component: {fileID: 6923869131871231126}
+  - component: {fileID: 5410021634462735432}
+  - component: {fileID: 3153669395649550586}
+  - component: {fileID: 8449563205469740317}
   m_Layer: 0
   m_Name: grand_portal
   m_TagString: Untagged
@@ -221,3 +224,82 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5410021634462735432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7145343226300918778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9535844a2dcd4b98848d5956567e6184, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnBoosterDetected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: BoosterAnimation, Assembly-CSharp
+        m_MethodName: OnBoosterDetection
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnBoosterExited:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: BoosterAnimation, Assembly-CSharp
+        m_MethodName: OnBoosterRelease
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3153669395649550586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7145343226300918778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a67fb0a46b6448d5adb4baf0776876ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boosterAnimator: {fileID: 6923869131871231126}
+  speedTransition: 3
+  defaultBoosterSpeed: 0.3
+  detectionBoosterSpeed: 3
+--- !u!65 &8449563205469740317
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7145343226300918778}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 24.8285, y: 6.30075, z: 6.5411634}
+  m_Center: {x: 0.4575119, y: -0.03489852, z: 0.0805186}

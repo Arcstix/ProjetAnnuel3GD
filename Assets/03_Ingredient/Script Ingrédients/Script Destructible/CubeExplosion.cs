@@ -8,17 +8,28 @@ public class CubeExplosion : MonoBehaviour
     public ParticleSystem briseVitre;
     
     private IdleDestructible idleDestructible;
+    private BoosterDetection boosterDetection;
     
     private void Awake()
     {
         idleDestructible = GetComponent<IdleDestructible>();
+        boosterDetection = GetComponent<BoosterDetection>();
     }
 
     private void OnEnable()
     {
-        idleDestructible.DestructionEvent += Explode;
+        if (idleDestructible)
+        {
+            idleDestructible.DestructionEvent += Explode;
+        }
     }
 
+    public void EmitParticule(GameObject refPlayer)
+    {
+        Vector3 direction = refPlayer.GetComponent<Rigidbody>().velocity.normalized;
+        
+        Explode(direction);
+    }
 
     /// <summary>
     /// D�clenche l'explosion, g�n�re les mini-cubes.
@@ -27,4 +38,6 @@ public class CubeExplosion : MonoBehaviour
     {
         Instantiate(briseVitre, transform.position, Quaternion.LookRotation(direction));
     }
+    
+    
 }

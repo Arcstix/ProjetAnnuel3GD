@@ -4841,7 +4841,8 @@ GameObject:
   - component: {fileID: 8146574276678264922}
   - component: {fileID: 6119734013951856107}
   - component: {fileID: 8201807784948967142}
-  - component: {fileID: 6787828360257259806}
+  - component: {fileID: 940470363189664453}
+  - component: {fileID: 1835161910357791194}
   m_Layer: 0
   m_Name: Booster
   m_TagString: Destructible
@@ -4914,7 +4915,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 6787828360257259806}
+      - m_Target: {fileID: 940470363189664453}
+        m_TargetAssemblyTypeName: CubeExplosion, Assembly-CSharp
+        m_MethodName: EmitParticule
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1835161910357791194}
         m_TargetAssemblyTypeName: I_PortalSoundManager, Assembly-CSharp
         m_MethodName: PortalDestroySound
         m_Mode: 1
@@ -4929,7 +4942,20 @@ MonoBehaviour:
   OnBoosterExited:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6787828360257259806
+--- !u!114 &940470363189664453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4899865981568809732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49f7e1745ae7f3d4b80d8e5700dc4edc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  briseVitre: {fileID: 1430366059747337389, guid: 9bb4fedec43f1734b806f8a0d737389b, type: 3}
+--- !u!114 &1835161910357791194
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4957,6 +4983,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 20a8979b268684245a6b88575421a0f4, type: 2}
+    - target: {fileID: 5410021634462735432, guid: f8c0763f45cc9484387dc9ba417db12f, type: 3}
+      propertyPath: OnBoosterExited.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6255446240357885472}
+    - target: {fileID: 5410021634462735432, guid: f8c0763f45cc9484387dc9ba417db12f, type: 3}
+      propertyPath: OnBoosterDetected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6255446240357885472}
     - target: {fileID: 7145343226300918778, guid: f8c0763f45cc9484387dc9ba417db12f, type: 3}
       propertyPath: m_Name
       value: grand_portal
@@ -5004,108 +5038,21 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7145343226300918778, guid: f8c0763f45cc9484387dc9ba417db12f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3900003677229261458}
-    - targetCorrespondingSourceObject: {fileID: 7145343226300918778, guid: f8c0763f45cc9484387dc9ba417db12f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6255446240357885472}
-    - targetCorrespondingSourceObject: {fileID: 7145343226300918778, guid: f8c0763f45cc9484387dc9ba417db12f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 597072586100171719}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8c0763f45cc9484387dc9ba417db12f, type: 3}
 --- !u!4 &1542854297488412570 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7521727581144002880, guid: f8c0763f45cc9484387dc9ba417db12f, type: 3}
   m_PrefabInstance: {fileID: 9010535917099941594}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &2097935151632343628 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 6923869131871231126, guid: f8c0763f45cc9484387dc9ba417db12f, type: 3}
+--- !u!114 &6255446240357885472 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3153669395649550586, guid: f8c0763f45cc9484387dc9ba417db12f, type: 3}
   m_PrefabInstance: {fileID: 9010535917099941594}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2171440235757114656 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7145343226300918778, guid: f8c0763f45cc9484387dc9ba417db12f, type: 3}
-  m_PrefabInstance: {fileID: 9010535917099941594}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3900003677229261458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2171440235757114656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9535844a2dcd4b98848d5956567e6184, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnBoosterDetected:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6255446240357885472}
-        m_TargetAssemblyTypeName: BoosterAnimation, Assembly-CSharp
-        m_MethodName: OnBoosterDetection
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnBoosterExited:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6255446240357885472}
-        m_TargetAssemblyTypeName: BoosterAnimation, Assembly-CSharp
-        m_MethodName: OnBoosterRelease
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &6255446240357885472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2171440235757114656}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a67fb0a46b6448d5adb4baf0776876ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boosterAnimator: {fileID: 2097935151632343628}
-  speedTransition: 3
-  defaultBoosterSpeed: 0.3
-  detectionBoosterSpeed: 3
---- !u!65 &597072586100171719
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2171440235757114656}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 24.8285, y: 6.30075, z: 6.5411634}
-  m_Center: {x: 0.4575119, y: -0.03489852, z: 0.0805186}
