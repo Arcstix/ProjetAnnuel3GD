@@ -4,6 +4,8 @@ using UnityEngine.Events;
 
 public class BoosterDetection : MonoBehaviour
 {
+    [SerializeField] private float boosterSpeed = 0.2f;
+    
     [Header("Enter Detection")]
     public UnityEvent<GameObject> OnBoosterDetected;
     
@@ -28,6 +30,6 @@ public class BoosterDetection : MonoBehaviour
 
     public void BoostPlayer(GameObject player)
     {
-        player.GetComponent<PlayerMetricsManager>().AddExternForce(1);
+        player.GetComponent<PlayerMetricsManager>().AddExternForce(boosterSpeed);
     }
 }
