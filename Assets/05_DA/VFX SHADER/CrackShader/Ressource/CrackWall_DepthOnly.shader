@@ -11,6 +11,13 @@ Shader "Custom/CrackWall_DepthOnly"
 
         Pass
         {
+            Stencil
+            {
+                Ref 1
+                Comp always
+                Pass replace
+            }
+            
             ColorMask 0 // Ne rend rien à l’écran
 
             CGPROGRAM
