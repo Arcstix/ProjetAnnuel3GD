@@ -66,7 +66,8 @@ public class PlayerInteraction : InteractionSystem
         {
             // In case the Player trigger into the tool // DESTROY TOOL
             OnToolInteract?.Invoke();
-            metricsManager.AddExternForce(boostSpeedEndTransportation);
+            Rigidbody rb = GetComponent<Rigidbody>();
+            rb.AddForce(rb.velocity * boostSpeedEndTransportation, ForceMode.Impulse);
             PlayerReusableStateData reusableData = abilityManager.ReusableData;
             abilityManager.AbilityStateMachine?.ChangeState(abilityManager.AbilityStateMachine?.RecallAllState);
             if (reusableData.LeftActivation)

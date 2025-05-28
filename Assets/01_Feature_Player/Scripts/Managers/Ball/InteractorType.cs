@@ -12,5 +12,6 @@ public enum InteractorType
     BrightProjectile,
     Anchor,
     Wall,
-    Antenne
+    Antenne,
+    MobilePlatform,
 }

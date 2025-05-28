@@ -24,9 +24,14 @@ public class AbilityMoveRightObject : AbilityTransportState
     {
         base.FixedTick();
 
-        if (rightInteraction.interactorType != InteractorType.Anchor)
+        if (rightInteraction.interactorType != InteractorType.Anchor && leftInteraction.interactorType != InteractorType.MobilePlatform)
         {
             MoveRightObject();
+        }
+        
+        if (rightInteraction.interactorType == InteractorType.MobilePlatform)
+        {
+            rightInteraction.GetComponent<MobilePlatformInteraction>().MovePlatform();
         }
     }
     

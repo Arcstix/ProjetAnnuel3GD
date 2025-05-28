@@ -93,22 +93,22 @@ MonoBehaviour:
     SpeedReductionFactor: 0.5
   <FallingData>k__BackingField:
     <SpeedModifier>k__BackingField: 2
-    <GravityMultiplier>k__BackingField: 2.3
+    <GravityMultiplier>k__BackingField: 4
     <GravityModifier>k__BackingField:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: -0.006011963
-        value: -0.0018920898
-        inSlope: 0.568536
-        outSlope: 0.568536
+        time: 0.0043034106
+        value: 0.5997213
+        inSlope: -0.010066507
+        outSlope: -0.010066507
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.1859914
+        outWeight: 0.16178711
       - serializedVersion: 3
-        time: 0.42630148
-        value: 0.3299495
+        time: 0.4591384
+        value: 0.72411454
         inSlope: 1.0983405
         outSlope: 1.0983405
         tangentMode: 0
@@ -237,5 +237,3 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    ControllerSpeed: 10
-    MouseSpeed: 10

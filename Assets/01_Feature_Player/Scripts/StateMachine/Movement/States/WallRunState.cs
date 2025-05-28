@@ -22,6 +22,7 @@ public class WallRunState : WallState
         base.Enter();
 
         reusableData.NumberOfConsecutiveWallRun++;
+        reusableData.IsWallRunning = true;
         EnterWallRun?.Invoke(reusableData.NumberOfConsecutiveWallRun);
         
         Debug.Log("Enter WallRunState");
@@ -62,6 +63,7 @@ public class WallRunState : WallState
 
         // forward force
         rigidbody.AddForce(slideDirection * wallData.WallRunForce - GetCurrentHorizontalVelocity(), ForceMode.VelocityChange);
+        reusableData.IsWallRunning = false;
         ExitWallRun?.Invoke();
     }
 

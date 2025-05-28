@@ -7,18 +7,26 @@ using UnityEngine.UI;
 
 public class HealthPlayer : MonoBehaviour
 {
-    [SerializeField] private Slider healthSlider; // La jauge de vie (Slider UI)
+    [SerializeField] private GameObject healthBar;
+    [SerializeField] private Image healthFill; // La jauge de vie (Slider UI)
     [SerializeField] private float maxHealth = 10f;
     [SerializeField] private float currentHealth;
     [SerializeField] private float decreaseTimer = 1f; // Vitesse de diminution de la vie
     [SerializeField] private float increaseTimer = 1f; // Vitesse d'augmentation de la vie
     [SerializeField] private float timerBeforeIncrease = 0f;
     private float timer;
-    public bool enemyAlerted = false; // Booléen indiquant si un ennemi est en alerte
+    private bool enemyAlerted = false; // Booléen indiquant si un ennemi est en alerte
+
+    public bool EnemyAlerted
+    {
+        get => enemyAlerted;
+        set => enemyAlerted = value;
+    }
+
     [SerializeField] private GameObject spawner;
     private Transform playerTransform;
     private bool inDanger = false;
-
+    
     public event Action OnDanger;
     public event Action OnDeath;
     
@@ -35,21 +43,16 @@ public class HealthPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemyAlerted)
-        {
-            healthSlider.gameObject.SetActive(true);
-            DecreaseHealthOverTime();
-        }
-        if (!enemyAlerted)
+        if (!EnemyAlerted)
         {
             timer += Time.deltaTime;
             if (timer >= timerBeforeIncrease)
             {
                  IncreaseHealthOverTime();
             }
-            if (currentHealth == maxHealth)
+            if (Mathf.Approximately(currentHealth, maxHealth))
             {
-                healthSlider.gameObject.SetActive(false);
+                healthBar.SetActive(false);
             }
         }
 
@@ -58,8 +61,10 @@ public class HealthPlayer : MonoBehaviour
             Death();
         }
     }
-    void DecreaseHealthOverTime()
+    
+    public void DecreaseHealthOverTime()
     {
+        healthBar.SetActive(true);
         if (currentHealth > 0)
         {
             currentHealth -= decreaseTimer * Time.deltaTime;
@@ -90,7 +95,7 @@ public class HealthPlayer : MonoBehaviour
     
     void UpdateHealthUI()
     {
-        healthSlider.value = Mathf.Lerp(healthSlider.value, currentHealth / maxHealth, Time.deltaTime * 5);
+        healthFill.fillAmount = Mathf.Lerp(healthFill.fillAmount, currentHealth / maxHealth, Time.deltaTime * 5);
     }
 
     private void Death()
@@ -100,7 +105,10 @@ public class HealthPlayer : MonoBehaviour
             playerTransform.position = spawner.transform.position; // Déplace le joueur
         }
         OnDeath?.Invoke();
-        LevelManager.Instance.IncrementDeath();
+        if (LevelManager.Instance != null)
+        {
+            LevelManager.Instance.IncrementDeath();
+        }
         ResetHealth(); // Remet la vie à 100%
     }
 

@@ -23,7 +23,6 @@ public class AlertEnemyState : EnemyState
     public override void Enter()
     {
         healthPlayer = playerTransform.GetComponent<HealthPlayer>();
-        healthPlayer.enemyAlerted = true;
         
         isPatrolling = false;
         if (_navMeshAgent)
@@ -39,7 +38,7 @@ public class AlertEnemyState : EnemyState
     public override void Exit()
     {
         GetComponent<SearchEnemyState>().PositionGoTo = lastSeenPosition;
-        healthPlayer.enemyAlerted = false;
+        healthPlayer.EnemyAlerted = false;
         OnExitAlert?.Invoke();
     }
 
@@ -49,6 +48,7 @@ public class AlertEnemyState : EnemyState
         //fonction damage
         if (PlayerIsDetected())
         {
+            DoDamageToPlayer();
             LookAtPlayer();
         }
         if (!PlayerIsDetected())
@@ -63,6 +63,12 @@ public class AlertEnemyState : EnemyState
                  PatrolFalse();
             }
         }
+    }
+
+    private void DoDamageToPlayer()
+    {
+        healthPlayer.EnemyAlerted = true;
+        healthPlayer.DecreaseHealthOverTime();
     }
 
     #region Idle or Search

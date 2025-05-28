@@ -1,9 +1,5 @@
-using Cinemachine;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlayerMetricsManager : MonoBehaviour, I_Initializer
 {
@@ -79,7 +75,7 @@ public class PlayerMetricsManager : MonoBehaviour, I_Initializer
             currentExternForce = Mathf.Lerp(currentExternForce, 1, Time.deltaTime);
         }
 
-        if (reusableData is { InAir: false, OnTransportation: false })
+        if (reusableData is { InAir: false, OnTransportation: false } or {IsWallRunning: true} or {OnLandingPlatform: true})
         {
             if (useCharge)
             {

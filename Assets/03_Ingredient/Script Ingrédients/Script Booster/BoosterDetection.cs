@@ -30,6 +30,7 @@ public class BoosterDetection : MonoBehaviour
 
     public void BoostPlayer(GameObject player)
     {
-        player.GetComponent<PlayerMetricsManager>().AddExternForce(boosterSpeed);
+        Rigidbody rb = player.GetComponent<Rigidbody>();
+        rb.AddForce(rb.velocity * boosterSpeed, ForceMode.Impulse);
     }
 }

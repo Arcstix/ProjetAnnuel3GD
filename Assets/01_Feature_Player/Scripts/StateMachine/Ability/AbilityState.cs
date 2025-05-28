@@ -427,8 +427,8 @@ public class AbilityState : IState
             {
                 if (reusableData.RightParent != null)
                 {
-                    if (reusableData.RightParent.GetComponent<InteractiveTarget>().GetCurrentType() ==
-                        InteractorType.PulseProjectile)
+                    InteractorType rightParentType = reusableData.RightParent.GetComponent<InteractiveTarget>().GetCurrentType();
+                    if (rightParentType is InteractorType.PulseProjectile or InteractorType.MobilePlatform)
                     {
                         if (reusableData.LeftParent)
                         {
@@ -463,16 +463,14 @@ public class AbilityState : IState
             {
                 if (reusableData.RightParent != null)
                 {
-                    if (reusableData.RightParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
-                        InteractorType.PulseProjectile && reusableData.RightParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
-                        InteractorType.BrightProjectile)
+                    InteractorType rightParentType = reusableData.RightParent.GetComponent<InteractiveTarget>().GetCurrentType();
+                    if (rightParentType != InteractorType.PulseProjectile && rightParentType != InteractorType.BrightProjectile && rightParentType != InteractorType.MobilePlatform)
                     {
                         _stateMachine.ChangeState(_stateMachine.MovePlayer);
                         return;
                     }
 
-                    if (reusableData.RightParent.GetComponent<InteractiveTarget>().GetCurrentType() ==
-                        InteractorType.PulseProjectile)
+                    if (rightParentType is InteractorType.PulseProjectile or InteractorType.MobilePlatform)
                     {
                         _stateMachine.ChangeState(_stateMachine.MoveRightObject);
                         return;
@@ -515,8 +513,8 @@ public class AbilityState : IState
             {
                 if (reusableData.LeftParent != null)
                 {
-                    if (reusableData.LeftParent.GetComponent<InteractiveTarget>().GetCurrentType() ==
-                        InteractorType.PulseProjectile)
+                    InteractorType leftParentType = reusableData.LeftParent.GetComponent<InteractiveTarget>().GetCurrentType();
+                    if (leftParentType is InteractorType.PulseProjectile or InteractorType.MobilePlatform)
                     {
                         if (reusableData.RightParent)
                         {
@@ -524,8 +522,7 @@ public class AbilityState : IState
                             return;
                         }
                     }
-                    else if (reusableData.LeftParent.GetComponent<InteractiveTarget>().GetCurrentType() ==
-                             InteractorType.BrightProjectile)
+                    else if (leftParentType == InteractorType.BrightProjectile)
                     {
                         reusableData.LeftThrow = true;
                         _stateMachine.ChangeState(_stateMachine.ThrowState);
@@ -536,7 +533,7 @@ public class AbilityState : IState
                 {
                     if (reusableData.RightParent)
                     {
-                        _stateMachine.ChangeState(_stateMachine.MoveLeftObject);
+                        _stateMachine.ChangeState(_stateMachine.MoveRightObject);
                         return;
                     }
                 }
@@ -551,16 +548,14 @@ public class AbilityState : IState
             {
                 if (reusableData.LeftParent != null)
                 {
-                    if (reusableData.LeftParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
-                        InteractorType.PulseProjectile && reusableData.LeftParent.GetComponent<InteractiveTarget>().GetCurrentType() !=
-                        InteractorType.BrightProjectile)
+                    InteractorType leftParentType = reusableData.LeftParent.GetComponent<InteractiveTarget>().GetCurrentType();
+                    if (leftParentType != InteractorType.PulseProjectile && leftParentType != InteractorType.BrightProjectile && leftParentType != InteractorType.MobilePlatform)
                     {
                         _stateMachine.ChangeState(_stateMachine.MovePlayer);
                         return;
                     }
 
-                    if (reusableData.LeftParent.GetComponent<InteractiveTarget>().GetCurrentType() ==
-                        InteractorType.PulseProjectile)
+                    if (leftParentType is InteractorType.PulseProjectile or InteractorType.MobilePlatform)
                     {
                         _stateMachine.ChangeState(_stateMachine.MoveLeftObject);
                         return;
