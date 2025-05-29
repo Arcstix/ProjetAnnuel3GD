@@ -6,26 +6,37 @@ using UnityEngine;
 public class PlayerEffectManager : MonoBehaviour
 {
     [SerializeField] private ParticleSystem speedEffect;
-    [SerializeField] private float speedForEffect = 10f;
     
-    private Rigidbody rb;
+    private PlayerMovementManager movementManager;
+    
+    private PlayerReusableStateData reusableData;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        movementManager = GetComponent<PlayerMovementManager>();
+
+        movementManager.OnMovementStarted += GetReusableData;
+    }
+
+    private void GetReusableData()
+    {
+        reusableData = movementManager.ReusableData;
     }
 
     private void Update()
     {
         if (speedEffect == null) return;
-        
-        if (rb.velocity.magnitude > speedForEffect)
+
+        if (reusableData != null)
         {
-            speedEffect.Play();
-        }
-        else
-        {
-            speedEffect.Stop();
+            if (reusableData.OnTransportation || reusableData.IsWallRunning)
+            {
+                speedEffect.Play();
+            }
+            else
+            {
+                speedEffect.Stop();
+            }
         }
     }
 }

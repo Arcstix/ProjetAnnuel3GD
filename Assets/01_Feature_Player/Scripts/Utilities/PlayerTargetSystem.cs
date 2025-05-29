@@ -120,19 +120,23 @@ public class PlayerTargetSystem : MonoBehaviour, I_Initializer
         
         //User Interface
         rectImage.gameObject.SetActive(true);
-        if (currentTarget.targetTranform != null)
+
+        if (currentTarget != null)
         {
-            rectImage.transform.position = ClampedScreenPosition(currentTarget.targetTranform.position);
-            float distanceFromTarget = Vector3.Distance(currentTarget.targetTranform.position, transform.position);
-            rectImage.sizeDelta = new Vector2(Mathf.Clamp(115 - (distanceFromTarget - rectSizeMultiplier),100,150), 
-                Mathf.Clamp(115 - (distanceFromTarget - rectSizeMultiplier),100,150));
-        }
-        else
-        {
-            rectImage.transform.position = ClampedScreenPosition(currentTarget.transform.position);
-            float distanceFromTarget = Vector3.Distance(currentTarget.transform.position, transform.position);
-            rectImage.sizeDelta = new Vector2(Mathf.Clamp(115 - (distanceFromTarget - rectSizeMultiplier),100,150), 
-                Mathf.Clamp(115 - (distanceFromTarget - rectSizeMultiplier),100,150));
+            if (currentTarget.targetTranform != null)
+            {
+                rectImage.transform.position = ClampedScreenPosition(currentTarget.targetTranform.position);
+                float distanceFromTarget = Vector3.Distance(currentTarget.targetTranform.position, transform.position);
+                rectImage.sizeDelta = new Vector2(Mathf.Clamp(115 - (distanceFromTarget - rectSizeMultiplier),100,150), 
+                    Mathf.Clamp(115 - (distanceFromTarget - rectSizeMultiplier),100,150));
+            }
+            else
+            {
+                rectImage.transform.position = ClampedScreenPosition(currentTarget.transform.position);
+                float distanceFromTarget = Vector3.Distance(currentTarget.transform.position, transform.position);
+                rectImage.sizeDelta = new Vector2(Mathf.Clamp(115 - (distanceFromTarget - rectSizeMultiplier),100,150), 
+                    Mathf.Clamp(115 - (distanceFromTarget - rectSizeMultiplier),100,150));
+            }
         }
     }
 
@@ -152,10 +156,17 @@ public class PlayerTargetSystem : MonoBehaviour, I_Initializer
         //Populates the distances array with the sum of the Target distance from the screen center and the Target distance from the player
         for (int i = 0; i < reachableTargets.Count; i++)
         {
-            distances[i] =
-                (Vector2.Distance(playerCamera.WorldToScreenPoint(reachableTargets[i].transform.position), MiddleOfScreen()) * screenDistanceWeight)
-                +
-                (Vector3.Distance(transform.position, reachableTargets[i].transform.position) * positionDistanceWeight);
+            if (reachableTargets[i] != null)
+            {
+                distances[i] =
+                    (Vector2.Distance(playerCamera.WorldToScreenPoint(reachableTargets[i].transform.position), MiddleOfScreen()) * screenDistanceWeight)
+                    +
+                    (Vector3.Distance(transform.position, reachableTargets[i].transform.position) * positionDistanceWeight);
+            }
+            else
+            {
+                distances[i] = Mathf.Infinity;
+            }
         }
 
         //Finds the smallest of the distances
