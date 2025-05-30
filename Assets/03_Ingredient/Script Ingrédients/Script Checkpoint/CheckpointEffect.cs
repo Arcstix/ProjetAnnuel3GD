@@ -5,6 +5,7 @@ public class CheckpointEffect : MonoBehaviour
 {
     [SerializeField] private ParticleSystem activationParticle;
     [SerializeField] private ParticleSystem checkpointParticle;
+    [SerializeField] private ParticleSystem checkpointArea;
     
     private CheckpointDetection checkpointDetection;
     
@@ -23,6 +24,7 @@ public class CheckpointEffect : MonoBehaviour
         {
             isActivated = true;
             activationParticle.Play();
+            checkpointArea.Play();
         }
 
         if (!checkpointParticle.isPlaying)
