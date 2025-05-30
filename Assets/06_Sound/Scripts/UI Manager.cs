@@ -22,4 +22,19 @@ public class UIManager : MonoBehaviour
         // Son qui s'active lorsque le joueur utilise son deuxieme saut. 
         RuntimeManager.PlayOneShot("event:/Menu/bouton3");
     }
+
+    public void ambiance_hub()
+    {
+        // Son qui s'active lorsque le joueur utilise son deuxieme saut. 
+        RuntimeManager.PlayOneShot("event:/Musique/Musique Hub");
+    }
+
+    public void ambiance_menu()
+    {
+        // Son qui s'active lorsque le joueur utilise son deuxieme saut. 
+        RuntimeManager.PlayOneShot("event:/Menu/Musique Menu");
+    }
 }
+
+
+    

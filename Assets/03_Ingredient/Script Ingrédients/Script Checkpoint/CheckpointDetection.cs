@@ -10,8 +10,11 @@ public class CheckpointDetection : MonoBehaviour
 
     private void Start()
     {
-        SpawnerManager spawnerManager = GameManagerSM.Instance.GetComponent<SpawnerManager>();
-        spawnerManager.RegisterCheckpoint(spawner, order);
+        if (GameManagerSM.Instance != null)
+        {
+            SpawnerManager spawnerManager = GameManagerSM.Instance.GetComponent<SpawnerManager>();
+            spawnerManager.RegisterCheckpoint(spawner, order);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
