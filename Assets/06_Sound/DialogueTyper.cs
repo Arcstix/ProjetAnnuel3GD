@@ -6,19 +6,19 @@ using TMPro;
 public class DialogueTyper : MonoBehaviour
 {
     public TextMeshProUGUI dialogueText; // Référence au composant TextMeshProUGUI
-    public GameObject dialogueCanvas; // Référence au Canvas contenant le texte
-    public CanvasGroup fadeCanvasGroup; // Référence au CanvasGroup de l'image noire
+    public GameObject dialogueCanvas;    // Référence au Canvas contenant le texte
+    public CanvasGroup fadeCanvasGroup;  // Référence au CanvasGroup de l'image noire
     public float charactersPerSecond = 30f; // Vitesse d'affichage des caractères
-    public int maxLines = 4; // Nombre maximum de lignes affichées simultanément
-    public float fadeDuration = 1f; // Durée du fondu en secondes
+    public int maxLines = 4;             // Nombre maximum de lignes affichées simultanément
+    public float fadeDuration = 1f;      // Durée du fondu en secondes
 
     private Queue<string> dialogueLines = new Queue<string>(); // File des lignes de dialogue
     private List<string> currentDisplayLines = new List<string>(); // Lignes actuellement affichées
     private Coroutine typingCoroutine;
 
-    void Start()
+    // Méthode publique sans paramètres pour être appelée via un Signal
+    public void TriggerDialogue()
     {
-        // Exemple de lignes de dialogue
         string[] lines = new string[]
         {
             "Bienvenue dans notre jeu d'aventure.",
