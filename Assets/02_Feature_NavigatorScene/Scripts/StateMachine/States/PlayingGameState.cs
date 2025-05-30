@@ -14,6 +14,8 @@ public class PlayingGameState : GameState
     private PlayerMovementManager playerMovement;
     private InputActionMapManager actionMapManager;
     private InputAction menuAction;
+    private InputAction nextSpawner;
+    private InputAction previousSpawner;
 
     private void Awake()
     {
@@ -29,6 +31,8 @@ public class PlayingGameState : GameState
         playerMovement = playerInput.GetComponent<PlayerMovementManager>();
         actionMapManager = playerInput.GetComponent<InputActionMapManager>();
         menuAction = playerInput.actions["Menu"];
+        nextSpawner = playerInput.actions["NextSpawner"];
+        previousSpawner = playerInput.actions["PreviousSpawner"];
         gameManager.PlayerRef.GetComponent<PlayerUIManager>().EnableGameCanvas();
 
         if (SceneManager.GetActiveScene().name != "Hub")
@@ -54,5 +58,20 @@ public class PlayingGameState : GameState
                 gameManager.ChangeState(GetComponent<PauseGameState>());
             }
         }
+
+        if (nextSpawner.WasPerformedThisFrame())
+        {
+            GetComponent<SpawnerManager>().TeleportToNextCheckpoint(gameManager.PlayerRef);
+        }
+
+        if (previousSpawner.WasPerformedThisFrame())
+        {
+            GetComponent<SpawnerManager>().TeleportToPreviousCheckpoint(gameManager.PlayerRef);
+        }
+    }
+
+    public void ReloadLevel()
+    {
+        gameManager.ChangeState(GetComponent<ReloadingLevelGameState>());
     }
 }

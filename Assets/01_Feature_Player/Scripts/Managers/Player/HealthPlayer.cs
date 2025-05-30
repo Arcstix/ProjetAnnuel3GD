@@ -16,6 +16,7 @@ public class HealthPlayer : MonoBehaviour
     [SerializeField] private float timerBeforeIncrease = 0f;
     private float timer;
     private bool enemyAlerted = false; // Booléen indiquant si un ennemi est en alerte
+    private bool isDead = false;
 
     public bool EnemyAlerted
     {
@@ -108,6 +109,7 @@ public class HealthPlayer : MonoBehaviour
         if (LevelManager.Instance != null)
         {
             LevelManager.Instance.IncrementDeath();
+            GameManagerSM.Instance.GetComponent<PlayingGameState>().ReloadLevel();
         }
         ResetHealth(); // Remet la vie à 100%
     }
@@ -119,8 +121,9 @@ public class HealthPlayer : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("DeathZone")) // Vérifie si on touche la DeathZone
+        if (other.CompareTag("DeathZone") && !isDead) // Vérifie si on touche la DeathZone
         {
+            isDead = true;
             Death();
         }
     }

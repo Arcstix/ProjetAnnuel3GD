@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -13,8 +14,17 @@ public class LevelInitializationGameState : GameState
     [SerializeField] private SettingsManager settingsManager;
 
     private GameObject player;
-    public event Action<GameObject> OnPlayerInitialized;
+
+
+    private SpawnerManager spawnerManager;
     
+    public event Action<GameObject> OnPlayerInitialized;
+
+    private void Awake()
+    {
+        spawnerManager = GetComponent<SpawnerManager>();
+    }
+
     public override void Enter()
     {
         InitPlayer();
@@ -29,25 +39,18 @@ public class LevelInitializationGameState : GameState
     private void InitPlayer()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        
-        GameObject spawn = GameObject.FindGameObjectWithTag("Spawn");
 
-        if (spawn != null && player != null)
+        Transform currentSpawner = spawnerManager.GetCurrentSpawnerPosition();
+
+        if (currentSpawner != null && player != null)
         {
-            player.transform.position = spawn.transform.position;
+            player.transform.position = currentSpawner.position;
             return;
         }
         
-        if (spawn != null && player == null)
+        if (currentSpawner != null && player == null)
         {
-            player = Instantiate(_playerPrefab, spawn.transform.position, Quaternion.identity);
-            return;
-        }
-        
-        
-        if(spawn == null && player == null)
-        {
-            Debug.LogError("Spawner with tag Spawn not found");
+            player = Instantiate(_playerPrefab, currentSpawner.position, Quaternion.identity);
         }
     }
 }

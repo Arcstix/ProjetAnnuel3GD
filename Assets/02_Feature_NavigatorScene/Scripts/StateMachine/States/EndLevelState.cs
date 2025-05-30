@@ -9,10 +9,12 @@ public class EndLevelState : GameState
     public GameObject endLevelUI;
     
     private LevelManager levelManager;
+    private SpawnerManager spawnerManager;
 
     private void Awake()
     {
         levelManager = GetComponent<LevelManager>();
+        spawnerManager = GetComponent<SpawnerManager>();
     }
 
     public override void Enter()
@@ -20,6 +22,7 @@ public class EndLevelState : GameState
         levelManager.EndLevel();
         levelPanel.SetActive(false);
         endLevelUI.SetActive(true);
+        spawnerManager.ClearCheckpoints();
         gameManager.PlayerRef.GetComponent<PlayerUIManager>().DisableGameCanvas();
         InputActionMapManager mapManager = GameManagerSM.Instance.PlayerRef.GetComponent<InputActionMapManager>();
         mapManager.SwitchToUI();

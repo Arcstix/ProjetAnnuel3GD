@@ -19,6 +19,8 @@ GameObject:
   - component: {fileID: 4629862376232969351}
   - component: {fileID: 1822189658977244239}
   - component: {fileID: 6961623518730199003}
+  - component: {fileID: 5817527970936021230}
+  - component: {fileID: 2345721980817289356}
   m_Layer: 0
   m_Name: GameManagerScene
   m_TagString: Untagged
@@ -160,7 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelPanel: {fileID: 2762040263918385539}
-  endLevelUI: {fileID: 4202071058497922865}
+  endLevelUI: {fileID: 6969655371590551813}
 --- !u!114 &1822189658977244239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,6 +190,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebb888c17c444d4c849df43611a17d6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5817527970936021230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7590589099960518051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf9bb3c7bd2d46b89e957e31aee6d75a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2345721980817289356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7590589099960518051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b94f686d6c43af8bd447b475f304f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingMenuGO: {fileID: 1277148190762853235}
+  loadingScrollbar: {fileID: 2045145879270032492}
+  minLoadingTime: 0.5
 --- !u!1001 &4041617894352723897
 PrefabInstance:
   m_ObjectHideFlags: 0

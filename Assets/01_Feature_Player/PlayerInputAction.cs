@@ -179,6 +179,24 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextSpawner"",
+                    ""type"": ""Button"",
+                    ""id"": ""02284354-a8f3-46f5-8ecf-c96e72e620f8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PreviousSpawner"",
+                    ""type"": ""Button"",
+                    ""id"": ""456fb326-e001-4e3d-a6e3-f7b2efca6695"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -599,6 +617,28 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe4d1033-9bf0-4441-b785-5bc87047623b"",
+                    ""path"": ""<Keyboard>/#(P)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""NextSpawner"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""45928bfc-7ca6-409a-8be1-2ecc5e1e4aac"",
+                    ""path"": ""<Keyboard>/#(O)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""PreviousSpawner"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -949,6 +989,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player_AttractionThrowRight = m_Player.FindAction("AttractionThrowRight", throwIfNotFound: true);
         m_Player_AttractionThrowLeft = m_Player.FindAction("AttractionThrowLeft", throwIfNotFound: true);
         m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
+        m_Player_NextSpawner = m_Player.FindAction("NextSpawner", throwIfNotFound: true);
+        m_Player_PreviousSpawner = m_Player.FindAction("PreviousSpawner", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigation = m_UI.FindAction("Navigation", throwIfNotFound: true);
@@ -1033,6 +1075,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_AttractionThrowRight;
     private readonly InputAction m_Player_AttractionThrowLeft;
     private readonly InputAction m_Player_Menu;
+    private readonly InputAction m_Player_NextSpawner;
+    private readonly InputAction m_Player_PreviousSpawner;
     public struct PlayerActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -1054,6 +1098,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @AttractionThrowRight => m_Wrapper.m_Player_AttractionThrowRight;
         public InputAction @AttractionThrowLeft => m_Wrapper.m_Player_AttractionThrowLeft;
         public InputAction @Menu => m_Wrapper.m_Player_Menu;
+        public InputAction @NextSpawner => m_Wrapper.m_Player_NextSpawner;
+        public InputAction @PreviousSpawner => m_Wrapper.m_Player_PreviousSpawner;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1114,6 +1160,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Menu.started += instance.OnMenu;
             @Menu.performed += instance.OnMenu;
             @Menu.canceled += instance.OnMenu;
+            @NextSpawner.started += instance.OnNextSpawner;
+            @NextSpawner.performed += instance.OnNextSpawner;
+            @NextSpawner.canceled += instance.OnNextSpawner;
+            @PreviousSpawner.started += instance.OnPreviousSpawner;
+            @PreviousSpawner.performed += instance.OnPreviousSpawner;
+            @PreviousSpawner.canceled += instance.OnPreviousSpawner;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1169,6 +1221,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Menu.started -= instance.OnMenu;
             @Menu.performed -= instance.OnMenu;
             @Menu.canceled -= instance.OnMenu;
+            @NextSpawner.started -= instance.OnNextSpawner;
+            @NextSpawner.performed -= instance.OnNextSpawner;
+            @NextSpawner.canceled -= instance.OnNextSpawner;
+            @PreviousSpawner.started -= instance.OnPreviousSpawner;
+            @PreviousSpawner.performed -= instance.OnPreviousSpawner;
+            @PreviousSpawner.canceled -= instance.OnPreviousSpawner;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1293,6 +1351,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnAttractionThrowRight(InputAction.CallbackContext context);
         void OnAttractionThrowLeft(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
+        void OnNextSpawner(InputAction.CallbackContext context);
+        void OnPreviousSpawner(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

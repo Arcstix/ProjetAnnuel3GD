@@ -21,7 +21,7 @@ public class LevelCanvas : MonoBehaviour
 
     private void UpdateDeathDisplay(int value)
     {
-        levelDeath.text = value.ToString();
+        levelDeath.text = "X " + value.ToString("D3");
     }
 
     private void UpdateTimeDisplay(float value)
