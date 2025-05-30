@@ -4,8 +4,12 @@ using UnityEngine.UI;
 
 public class UIHandleFilled : MonoBehaviour
 {
+    private static readonly int IsAvailable = Animator.StringToHash("isAvailable");
+    
     public PlayerMetricsManager metricsManager;
     public Image filledImage;
+    public Animator pastilleAnimator;
+    public ParticleSystem pastilleParticles;
     public bool isRight;
 
     private void OnEnable()
@@ -63,5 +67,22 @@ public class UIHandleFilled : MonoBehaviour
     private void HandleFilled(float fillAmount, float maxFillAmount)
     {
         filledImage.fillAmount = fillAmount/maxFillAmount;
+
+        if (Mathf.Approximately(fillAmount, maxFillAmount))
+        {
+            pastilleAnimator.SetBool(IsAvailable, true);
+            if (!pastilleParticles.isPlaying)
+            {
+                pastilleParticles.Play();
+            }
+        }
+        else
+        {
+            pastilleAnimator.SetBool(IsAvailable, false);
+            if (!pastilleParticles.isStopped)
+            {
+                pastilleParticles.Stop();
+            }
+        }
     }
 }

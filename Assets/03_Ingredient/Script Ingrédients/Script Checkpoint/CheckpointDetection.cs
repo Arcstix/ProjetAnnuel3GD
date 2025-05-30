@@ -21,8 +21,14 @@ public class CheckpointDetection : MonoBehaviour
             OnCheckpointActivated?.Invoke();
             // TODO : Spécifie qu'il est le nouveau checkpoint actif
 
-            SpawnerManager spawnerManager = GameManagerSM.Instance.GetComponent<SpawnerManager>();
-            spawnerManager.SetNewSpawnerPosition(spawner);
+            if (GameManagerSM.Instance != null)
+            {
+                SpawnerManager spawnerManager = GameManagerSM.Instance.GetComponent<SpawnerManager>();
+                if (spawnerManager)
+                {
+                    spawnerManager.SetNewSpawnerPosition(spawner);
+                }
+            }
         }
     }
 }
