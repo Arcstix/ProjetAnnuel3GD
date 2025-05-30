@@ -15,6 +15,20 @@ public class PlayerAbilitySound : MonoBehaviour
 
     private int counter = 0;
 
+    public EventReference tirSound;
+    public EventReference rappelSound;
+    public EventReference tirGaucheSound;
+
+    [Header("Debug Inputs")]
+    public KeyCode pressToplayTirSound;
+    public KeyCode pressToplayRappelSound;
+    public KeyCode pressToplayTirGaucheSound;
+
+
+    FMOD.Studio.EventInstance soundTirEvent;
+    FMOD.Studio.EventInstance soundTirGaucheEvent;
+    FMOD.Studio.EventInstance soundRappelEvent;
+
     private void Awake()
     {
         abilityManager = GetComponent<PlayerAbilityManager>();
@@ -24,7 +38,15 @@ public class PlayerAbilitySound : MonoBehaviour
     private void Start()
     {
         SonAccordDash = RuntimeManager.CreateInstance("event:/Musique/Accords dash");
+
+        soundTirGaucheEvent = RuntimeManager.CreateInstance(tirGaucheSound);
+        RuntimeManager.AttachInstanceToGameObject(soundTirGaucheEvent, GetComponent<Transform>());
+        soundTirEvent = RuntimeManager.CreateInstance(tirSound);
+        RuntimeManager.AttachInstanceToGameObject(soundTirEvent, GetComponent<Transform>());
+        soundRappelEvent = RuntimeManager.CreateInstance(rappelSound);
+        RuntimeManager.AttachInstanceToGameObject(soundRappelEvent, GetComponent<Transform>());
     }
+
 
     private void InitAbility()
     {
@@ -51,6 +73,9 @@ public class PlayerAbilitySound : MonoBehaviour
 
     private void Update()
     {
+        soundTirEvent.set3DAttributes(RuntimeUtils.To3DAttributes(transform));
+        soundTirGaucheEvent.set3DAttributes(RuntimeUtils.To3DAttributes(transform));
+
         if (Input.GetKeyDown(pressToPlaySonAccordDashSound))
         {
             if (counter == 0)
@@ -78,19 +103,70 @@ public class PlayerAbilitySound : MonoBehaviour
     private void RightShoot()
     {
         //Son qui se d�clenche lorsqu'on tire la balle droite
-        RuntimeManager.PlayOneShot("event:/Player/TIr droit");
+        //RuntimeManager.PlayOneShot("event:/Player/TIr droit");
+
+        Debug.Log("Bonjour!");
+      //  StopTirSound();
+        soundTirEvent.getPlaybackState(out var fmodPbState);
+        if (fmodPbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+        {
+            Debug.Log("ALLOOO!");
+            soundTirEvent.start();
+        }
+
+        if (Input.GetKeyDown(pressToplayTirSound)) // Debug in case the sound doesn't play
+        {
+            if (fmodPbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+            {
+                soundTirEvent.start();
+            }
+        }
     }
 
     private void LeftShoot()
     {
         //Son qui se d�clenche lorsqu'on tire la balle gauche
         RuntimeManager.PlayOneShot("event:/Player/Tir gauche");
+
+        Debug.Log("Bonjour!");
+        //  StopTirSound();
+        soundTirGaucheEvent.getPlaybackState(out var fmodPbState);
+        if (fmodPbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+        {
+            Debug.Log("ALLOOO!");
+            soundTirGaucheEvent.start();
+        }
+
+        if (Input.GetKeyDown(pressToplayTirGaucheSound)) // Debug in case the sound doesn't play
+        {
+            if (fmodPbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+            {
+                soundTirGaucheEvent.start();
+            }
+        }
     }
     
     private void RightRecallAll()
     {
         //Son qui se d�clenche lorsqu'on rappelle la balle droite
         RuntimeManager.PlayOneShot("event:/Player/rappel droit");
+
+        Debug.Log("coucou!");
+        //  StopTirSound();
+        soundRappelEvent.getPlaybackState(out var fmodPbState);
+        if (fmodPbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+        {
+            Debug.Log("oki!");
+            soundRappelEvent.start();
+        }
+
+        if (Input.GetKeyDown(pressToplayTirSound)) // Debug in case the sound doesn't play
+        {
+            if (fmodPbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+            {
+                soundRappelEvent.start();
+            }
+        }
     }
     
     private void LeftRecallAll()

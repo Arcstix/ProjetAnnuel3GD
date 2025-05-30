@@ -16,7 +16,8 @@ public class PlayerSpatializedSound : MonoBehaviour
     FMOD.Studio.EventInstance soundRappelEvent;
 
     private ToolInteraction toolInteraction;
-    
+
+
     void Start()
     {
         soundTirEvent = RuntimeManager.CreateInstance(tirSound);
@@ -25,8 +26,13 @@ public class PlayerSpatializedSound : MonoBehaviour
         RuntimeManager.AttachInstanceToGameObject(soundRappelEvent, GetComponent<Transform>());
     }
 
-    public void PlayTirSound()
+    private void Update()
     {
+        soundTirEvent.set3DAttributes(RuntimeUtils.To3DAttributes(transform));
+    }
+    public void RightShoot()
+    {
+        Debug.Log("Bonjour!");
         StopTirSound();
         soundTirEvent.getPlaybackState(out var fmodPbState);
         if (fmodPbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
@@ -53,8 +59,9 @@ public class PlayerSpatializedSound : MonoBehaviour
         }
     }
 
-    private void PlayRappelSound()
+    private void RightRecallAll()
     {
+        Debug.Log("Bonjour!");
         StopTirSound();
         soundRappelEvent.getPlaybackState(out var fmodPbState);
         if (Input.GetKeyDown(pressToplayRappelSound)) // Debug in case the sound doesn't play 
