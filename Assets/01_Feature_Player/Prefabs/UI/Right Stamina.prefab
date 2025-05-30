@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.47058824}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.47058824}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -67,7 +67,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: e9766382fd3ec1542913814e72e847fe, type: 3}
   m_Type: 0
-  m_PreserveAspect: 1
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -128,8 +128,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   metricsManager: {fileID: 0}
   filledImage: {fileID: 8693285394064710641}
-  pastilleAnimator: {fileID: 0}
-  pastilleParticles: {fileID: 0}
+  pastilleAnimator: {fileID: 8611337150886890489}
+  pastilleParticles: {fileID: 4301648765411241567}
   isRight: 1
 --- !u!1 &3748452687837657541
 GameObject:
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 3
-  m_FillAmount: 0
+  m_FillAmount: 1
   m_FillClockwise: 0
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -310,5 +310,15 @@ PrefabInstance:
 --- !u!224 &2835503578015257526 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2608050734942116468, guid: 3db3a127a56dac340a8648bfc18c05ba, type: 3}
+  m_PrefabInstance: {fileID: 245467243999726018}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4301648765411241567 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4096751646393804701, guid: 3db3a127a56dac340a8648bfc18c05ba, type: 3}
+  m_PrefabInstance: {fileID: 245467243999726018}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8611337150886890489 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8424421446908232251, guid: 3db3a127a56dac340a8648bfc18c05ba, type: 3}
   m_PrefabInstance: {fileID: 245467243999726018}
   m_PrefabAsset: {fileID: 0}

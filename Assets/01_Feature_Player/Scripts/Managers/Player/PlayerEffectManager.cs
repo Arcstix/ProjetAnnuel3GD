@@ -7,22 +7,31 @@ public class PlayerEffectManager : MonoBehaviour
 {
     [SerializeField] private ParticleSystem speedEffect;
     [SerializeField] private ParticleSystem GroundFall;
-    [SerializeField] private ParticleSystem Dash;
     
     private PlayerMovementManager movementManager;
     
     private PlayerReusableStateData reusableData;
+    private GroundCheck groundCheck;
 
     private void Awake()
     {
         movementManager = GetComponent<PlayerMovementManager>();
-
         movementManager.OnMovementStarted += GetReusableData;
+        groundCheck = GetComponent<GroundCheck>();
     }
 
     private void GetReusableData()
     {
         reusableData = movementManager.ReusableData;
+        movementManager.StateMachine.HardLandingState.OnHardLanding += PlayGroundFall;
+    }
+
+    private void PlayGroundFall()
+    {
+        if(groundCheck.DetectSurface()!= GroundTypeEnum.None)
+        { 
+            GroundFall.Play();  
+        }
     }
 
     private void Update()
@@ -38,15 +47,6 @@ public class PlayerEffectManager : MonoBehaviour
             else
             {
                 speedEffect.Stop();
-            }
-
-            if (reusableData.OnLandingPlatform)
-            {
-                GroundFall.Play();
-            }
-            else
-            {
-                GroundFall.Stop();
             }
             
         }
