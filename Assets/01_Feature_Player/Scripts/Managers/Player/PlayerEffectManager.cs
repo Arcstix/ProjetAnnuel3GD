@@ -6,6 +6,8 @@ using UnityEngine;
 public class PlayerEffectManager : MonoBehaviour
 {
     [SerializeField] private ParticleSystem speedEffect;
+    [SerializeField] private ParticleSystem GroundFall;
+    [SerializeField] private ParticleSystem Dash;
     
     private PlayerMovementManager movementManager;
     
@@ -37,6 +39,16 @@ public class PlayerEffectManager : MonoBehaviour
             {
                 speedEffect.Stop();
             }
+
+            if (reusableData.OnLandingPlatform)
+            {
+                GroundFall.Play();
+            }
+            else
+            {
+                GroundFall.Stop();
+            }
+            
         }
     }
 }
