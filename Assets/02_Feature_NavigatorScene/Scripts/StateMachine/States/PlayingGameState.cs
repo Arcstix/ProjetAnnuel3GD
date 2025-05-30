@@ -33,15 +33,24 @@ public class PlayingGameState : GameState
         menuAction = playerInput.actions["Menu"];
         nextSpawner = playerInput.actions["NextSpawner"];
         previousSpawner = playerInput.actions["PreviousSpawner"];
-        gameManager.PlayerRef.GetComponent<PlayerUIManager>().EnableGameCanvas();
 
+        PlayerUIManager playerUI = gameManager.PlayerRef.GetComponent<PlayerUIManager>();
+        
         if (SceneManager.GetActiveScene().name != "Hub")
         {
+            playerUI.EnableGameCanvas();
+            playerUI.DisableHubCanvas();
+            
             levelPanel.SetActive(true);
             if (!levelManager.GetStartedState())
             {
                 levelManager.StartLevel();
             }
+        }
+        else
+        {
+            playerUI.DisableGameCanvas();
+            playerUI.EnableHubCanvas();
         }
     }
 
