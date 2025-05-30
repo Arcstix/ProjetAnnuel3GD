@@ -5,9 +5,492 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f475a8ed-4584-4315-bac6-7eac2e1d8d9b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/01_Feature_Player/Scripts/UI/UIInteractionManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/01_Feature_Player/Scripts/UI/UIInteractionManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetAnnuel3GD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetAnnuel3GD/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/01_Feature_Player/Prefabs/Player For Game/Player Controller 1er Person.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/01_Feature_Player/Prefabs/Player For Game/Player Controller 1er Person.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/02_Feature_NavigatorScene/Scripts/StateMachine/States/PlayingGameState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/02_Feature_NavigatorScene/Scripts/StateMachine/States/PlayingGameState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/04_Scenes/SceneGymLouis.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/04_Scenes/SceneGymLouis.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/04_Scenes/Storyboard/Hub.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/04_Scenes/Storyboard/Hub.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/FMOD/Resources/FMODStudioSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/FMOD/Resources/FMODStudioSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/FMOD/Resources/FMODStudioSettings.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/FMOD/Resources/FMODStudioSettings.asset.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/Accordion.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/Accordion/Accordion.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/Accordion/Accordion.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CHANGELOG.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CHANGELOG.md.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/2D Card Expanding.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/2D Card Expanding.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/2D Card Popup.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/2D Card Popup.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/2D Card Stack.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/2D Card Stack.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/3D Card Expanding.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/3D Card Expanding.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Shadow.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Shadow/SE 16R S.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Shadow/SE 16R S.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Shadow/SE 24R S.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Shadow/SE 24R S.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Shadow/SE 32R S.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Shadow/SE 32R S.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Shadow/SE 48R S.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Shadow/SE 48R S.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Shadow/SE 56R S.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Shadow/SE 56R S.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Shadow/SE 64R S.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Shadow/SE 64R S.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Solid.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Solid/SE 16R.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Solid/SE 16R.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Solid/SE 24R.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Solid/SE 24R.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Solid/SE 32R.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Solid/SE 32R.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Solid/SE 48R.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Solid/SE 48R.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Solid/SE 56R.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Solid/SE 56R.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Solid/SE 64R.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Images/Super Ellipses/Solid/SE 64R.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Materials.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Materials/Background Material.mat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Materials/Background Material.mat.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Materials/Card Material.mat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Materials/Card Material.mat.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Superellipse Playground.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CardUI/Superellipse Playground.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/ColorPicker.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/ColorPicker/Picker 2.0.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/ColorPicker/Picker 2.0.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/ColorPicker/PickerTest.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/ColorPicker/PickerTest.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/ColorPicker/sampler_ring.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/ColorPicker/sampler_ring.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/ComboBox.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/ComboBox/AddComboBoxItems.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/ComboBox/AddComboBoxItems.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/ComboBox/ComboBox.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/ComboBox/ComboBox.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/ComboBox/ComboBoxChanged.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/ComboBox/ComboBoxChanged.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/ComboBox/WarmUpComboboxes.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/ComboBox/WarmUpComboboxes.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/Cooldown.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/Cooldown/CooldownEffect_Image.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/Cooldown/CooldownEffect_Image.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/Cooldown/CooldownEffect_SAUIM.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/Cooldown/CooldownEffect_SAUIM.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/Cooldown/CooldownExamples.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/Cooldown/CooldownExamples.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/Cooldown/box.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/Cooldown/box.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/Cooldown/fadeUp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/Cooldown/fadeUp.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/Cooldown/sphere.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/Cooldown/sphere.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/Cooldown/swipe.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/Cooldown/swipe.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CurlyUI.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CurlyUI/CurlyUIDemo.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/CurlyUI/CurlyUIDemo.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/01_Basic.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/01_Basic.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/02_FocusOn.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/02_FocusOn.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/03_InfiniteScroll.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/03_InfiniteScroll.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/04_Metaball.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/04_Metaball.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/05_Voronoi.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/05_Voronoi.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/06_LoopTabBar.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/06_LoopTabBar.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/07_ScrollRect.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/07_ScrollRect.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/08_GridView.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/08_GridView.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/09_LoadTexture.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/09_LoadTexture.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/01_Basic.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/01_Basic/Cell.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/01_Basic/Cell.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/01_Basic/Cell.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/01_Basic/Cell.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/01_Basic/CellScroll.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/01_Basic/CellScroll.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/01_Basic/CellScroll.controller" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/01_Basic/CellScroll.controller.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/01_Basic/Example01.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/01_Basic/Example01.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/01_Basic/ItemData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/01_Basic/ItemData.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/01_Basic/ScrollView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/01_Basic/ScrollView.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/02_FocusOn.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/02_FocusOn/Cell.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/02_FocusOn/Cell.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/02_FocusOn/Cell.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/02_FocusOn/Cell.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/02_FocusOn/CellScroll.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/02_FocusOn/CellScroll.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/02_FocusOn/CellScroll.controller" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/02_FocusOn/CellScroll.controller.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/02_FocusOn/Context.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/02_FocusOn/Context.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/02_FocusOn/Example02.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/02_FocusOn/Example02.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/02_FocusOn/ItemData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/02_FocusOn/ItemData.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/02_FocusOn/ScrollView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/02_FocusOn/ScrollView.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/03_InfiniteScroll.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/03_InfiniteScroll/Cell.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/03_InfiniteScroll/Cell.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/03_InfiniteScroll/Cell.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/03_InfiniteScroll/Cell.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/03_InfiniteScroll/CellScroll.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/03_InfiniteScroll/CellScroll.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/03_InfiniteScroll/CellScroll.controller" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/03_InfiniteScroll/CellScroll.controller.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/03_InfiniteScroll/Context.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/03_InfiniteScroll/Context.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/03_InfiniteScroll/Example03.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/03_InfiniteScroll/Example03.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/03_InfiniteScroll/ItemData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/03_InfiniteScroll/ItemData.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/03_InfiniteScroll/ScrollView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/03_InfiniteScroll/ScrollView.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/Background.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/Background.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/Cell.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/Cell.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/Cell.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/Cell.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/CellScroll.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/CellScroll.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/CellScroll.controller" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/CellScroll.controller.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/Context.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/Context.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/Example04.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/Example04.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/ItemData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/ItemData.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/Metaball.hlsl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/Metaball.hlsl.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/Metaball.mat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/Metaball.mat.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/Metaball.shader" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/Metaball.shader.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/ScrollView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/04_Metaball/ScrollView.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/Background.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/Background.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/Cell.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/Cell.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/Cell.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/Cell.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/CellScroll.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/CellScroll.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/CellScroll.controller" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/CellScroll.controller.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/Context.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/Context.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/Example05.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/Example05.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/ItemData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/ItemData.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/ScrollView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/ScrollView.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/Voronoi.hlsl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/Voronoi.hlsl.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/Voronoi.mat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/Voronoi.mat.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/Voronoi.shader" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/05_Voronoi/Voronoi.shader.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/06_LoopTabBar.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/06_LoopTabBar/Context.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/06_LoopTabBar/Context.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/06_LoopTabBar/Example06.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/06_LoopTabBar/Example06.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/06_LoopTabBar/ItemData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/06_LoopTabBar/ItemData.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/06_LoopTabBar/ScrollView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/06_LoopTabBar/ScrollView.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/06_LoopTabBar/SlideScreenTransition.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/06_LoopTabBar/SlideScreenTransition.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/06_LoopTabBar/Tab.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/06_LoopTabBar/Tab.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/06_LoopTabBar/Tab.controller" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/06_LoopTabBar/Tab.controller.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/06_LoopTabBar/Tab.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/06_LoopTabBar/Tab.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/06_LoopTabBar/Tab.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/06_LoopTabBar/Tab.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/06_LoopTabBar/Window.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/06_LoopTabBar/Window.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/06_LoopTabBar/Window.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/06_LoopTabBar/Window.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/07_ScrollRect.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/07_ScrollRect/Alignment.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/07_ScrollRect/Alignment.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/07_ScrollRect/Cell.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/07_ScrollRect/Cell.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/07_ScrollRect/Cell.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/07_ScrollRect/Cell.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/07_ScrollRect/Context.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/07_ScrollRect/Context.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/07_ScrollRect/Example07.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/07_ScrollRect/Example07.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/07_ScrollRect/Input Item.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/07_ScrollRect/Input Item.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/07_ScrollRect/ItemData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/07_ScrollRect/ItemData.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/07_ScrollRect/ScrollView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/07_ScrollRect/ScrollView.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/08_GridView.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/08_GridView/Alignment.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/08_GridView/Alignment.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/08_GridView/Cell.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/08_GridView/Cell.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/08_GridView/Cell.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/08_GridView/Cell.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/08_GridView/Context.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/08_GridView/Context.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/08_GridView/Example08.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/08_GridView/Example08.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/08_GridView/GridView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/08_GridView/GridView.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/08_GridView/Input Item.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/08_GridView/Input Item.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/08_GridView/ItemData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/08_GridView/ItemData.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/09_LoadTexture.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/09_LoadTexture/Cell.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/09_LoadTexture/Cell.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/09_LoadTexture/Cell.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/09_LoadTexture/Cell.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/09_LoadTexture/Example09.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/09_LoadTexture/Example09.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/09_LoadTexture/ItemData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/09_LoadTexture/ItemData.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/09_LoadTexture/ScrollView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/09_LoadTexture/ScrollView.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/09_LoadTexture/TextureLoader.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/09_LoadTexture/TextureLoader.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/Common.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/Common/CellIn.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/Common/CellIn.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/Common/CellOut.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/Common/CellOut.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/Common/CellSelect.controller" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/Common/CellSelect.controller.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/Common/Common.cginc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/Common/Common.cginc.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/Common/Dropdown.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/Common/Dropdown.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/Common/ScenesDropdown.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/FancyScrollView/Sources/Common/ScenesDropdown.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/Content.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/Content/CreateDynamicScrollSnap.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/Content/CreateDynamicScrollSnap.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/Content/Dynamic Horizontal Scroll Snap.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/Content/Dynamic Horizontal Scroll Snap.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/Content/Dynamic Page.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/Content/Dynamic Page.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/Content/GameObject (1).prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/Content/GameObject (1).prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/Content/Horizontal Scroll Snap.controller" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/Content/Horizontal Scroll Snap.controller.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/Content/Horizontal_page_prefab.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/Content/Horizontal_page_prefab.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/Content/Image.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/Content/Image.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/Content/ItemAnimationClip.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/Content/ItemAnimationClip.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/Content/PaginationScript.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/Content/PaginationScript.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/Content/UpdateScrollSnap.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/Content/UpdateScrollSnap.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/Content/Vertical_Page_Prefab.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/Content/Vertical_Page_Prefab.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/ContentSnapScrollExample.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/ContentSnapScrollExample.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/FullScreenScrollSnap.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/FullScreenScrollSnap.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/InfiniteMagneticExample.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/InfiniteMagneticExample.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/InfiniteScrollSnapExamples.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/InfiniteScrollSnapExamples.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/PaginationManagerExample.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/PaginationManagerExample.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/ScrollSnapDynamic.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/ScrollSnapDynamic.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/ScrollSnapManagedTests.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/HSS-VSS-ScrollSnap/ScrollSnapManagedTests.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/InputFieldEnterSubmit.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/InputFieldEnterSubmit/InputFieldEnterSubmitDemo.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/InputFieldEnterSubmit/InputFieldEnterSubmitDemo.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/LICENSE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/LICENSE.md.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/MainScene.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/MainScene.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/MainSceneSettings.lighting" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/MainSceneSettings.lighting.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Prefabs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Prefabs/MenuSystem.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Prefabs/MenuSystem/MenuManager.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Prefabs/MenuSystem/MenuManager.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Prefabs/Menus.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Prefabs/Menus/AwesomeMenu.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Prefabs/Menus/AwesomeMenu.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Prefabs/Menus/GameMenu.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Prefabs/Menus/GameMenu.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Prefabs/Menus/MainMenu.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Prefabs/Menus/MainMenu.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Prefabs/Menus/OptionsMenu.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Prefabs/Menus/OptionsMenu.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Prefabs/Menus/PauseMenu.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Prefabs/Menus/PauseMenu.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Scripts.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Scripts/Menus.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Scripts/Menus/AwesomeMenu.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Scripts/Menus/AwesomeMenu.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Scripts/Menus/GameMenu.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Scripts/Menus/GameMenu.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Scripts/Menus/MainMenu.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Scripts/Menus/MainMenu.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Scripts/Menus/OptionsMenu.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Scripts/Menus/OptionsMenu.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Scripts/Menus/PauseMenu.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/MenuExample/Scripts/Menus/PauseMenu.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/README.md.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/RadialSlider.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/RadialSlider/ReportRadialTouch.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/RadialSlider/ReportRadialTouch.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/RadialSlider/UpdateRadialValue.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/RadialSlider/UpdateRadialValue.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/RadialSlider/radial_slider.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/RadialSlider/radial_slider.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/RadialSlider/radial_sprite.psd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/RadialSlider/radial_sprite.psd.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/ReorderableList.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/ReorderableList/ReorderableList.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/ReorderableList/ReorderableList.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/ScrollRectConflictManager.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/ScrollRectConflictManager/ScrollrectConflictManagerDemo.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/ScrollRectConflictManager/ScrollrectConflictManagerDemo.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/SelectionBox.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/SelectionBox/Selection Box Test.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/SelectionBox/Selection Box Test.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/TextEffects.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/TextEffects/AnimateEffects.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/TextEffects/AnimateEffects.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/TextEffects/TextEffects.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/TextEffects/TextEffects.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/TextEffects/swirl.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/TextEffects/swirl.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/TextEffects/testHref.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/TextEffects/testHref.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UICircleProgress.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UICircleProgress/UICircleChangeColor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UICircleProgress/UICircleChangeColor.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UICircleProgress/UICircleChangeDensity.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UICircleProgress/UICircleChangeDensity.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UICircleProgress/UICircleProgress.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UICircleProgress/UICircleProgress.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UICircleProgress/square.psd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UICircleProgress/square.psd.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIKnobExample.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIKnobExample/Knob Highlighted.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIKnobExample/Knob Highlighted.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIKnobExample/Knob.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIKnobExample/Knob.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIKnobExample/KnobManagement.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIKnobExample/KnobManagement.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIKnobExample/UIKnobExample.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIKnobExample/UIKnobExample.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIKnobExample/knob Background.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIKnobExample/knob Background.jpg.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UILineRenderer.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UILineRenderer/LineDrawing.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UILineRenderer/LineDrawing.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UILineRenderer/Scripts.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UILineRenderer/Scripts/DrawLine.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UILineRenderer/Scripts/DrawLine.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UILineRenderer/Scripts/LineRendererOrbit.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UILineRenderer/Scripts/LineRendererOrbit.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UILineRenderer/Scripts/LineRendererOrbitList.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UILineRenderer/Scripts/LineRendererOrbitList.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UILineRenderer/Scripts/TestAddingPoints.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UILineRenderer/Scripts/TestAddingPoints.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UILineRenderer/Scripts/TestAddingPointsList.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UILineRenderer/Scripts/TestAddingPointsList.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UILineRenderer/UILineRendererDemo.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UILineRenderer/UILineRendererDemo.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UILineRenderer/UILineRendererListDemo.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UILineRenderer/UILineRendererListDemo.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIParticleSystem.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIParticleSystem/ParticleSystemControllerWindow.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIParticleSystem/ParticleSystemControllerWindow.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIParticleSystem/UIParticleSystem.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIParticleSystem/UIParticleSystem.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIVerticalScrollerDemo.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIVerticalScrollerDemo/Prefabs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIVerticalScrollerDemo/Prefabs/DaysVertical.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIVerticalScrollerDemo/Prefabs/DaysVertical.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIVerticalScrollerDemo/Prefabs/MonthsVertical.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIVerticalScrollerDemo/Prefabs/MonthsVertical.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIVerticalScrollerDemo/Prefabs/YearsVertical.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIVerticalScrollerDemo/Prefabs/YearsVertical.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIVerticalScrollerDemo/Scenes.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIVerticalScrollerDemo/Scenes/VerticalCalendar.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIVerticalScrollerDemo/Scenes/VerticalCalendar.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIVerticalScrollerDemo/Scripts.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIVerticalScrollerDemo/Scripts/ScrollingCalendar.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIVerticalScrollerDemo/Scripts/ScrollingCalendar.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIVerticalScrollerDemo/Sprites.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIVerticalScrollerDemo/Sprites/MrsYakaYochaMedium.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UIVerticalScrollerDemo/Sprites/MrsYakaYochaMedium.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UnityUIExtensions.Examples.asmdef" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Samples/Unity UI Extensions/2.3.2/UI Extensions Samples/UnityUIExtensions.Examples.asmdef.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetAnnuel3GD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetAnnuel3GD/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/01_Feature_Player/Prefabs/Player For Game/Player Controller 1er Person.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/01_Feature_Player/Prefabs/Player For Game/Player Controller 1er Person.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/01_Feature_Player/Prefabs/UI/Right Stamina.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/01_Feature_Player/Prefabs/UI/Right Stamina.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/01_Feature_Player/SO/UI/UIHandleFilled.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/01_Feature_Player/SO/UI/UIHandleFilled.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/03_Ingredient/Script Ingrédients/Script Checkpoint/CheckpointDetection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/03_Ingredient/Script Ingrédients/Script Checkpoint/CheckpointDetection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/03_Ingredient/Script Ingrédients/Script Checkpoint/CheckpointEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/03_Ingredient/Script Ingrédients/Script Checkpoint/CheckpointEffect.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/04_Scenes/SceneGymLouis.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/04_Scenes/SceneGymLouis.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/04_Scenes/Storyboard/Level1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/04_Scenes/Storyboard/Level1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/05_DA/MurWallRun2 (1).prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/05_DA/MurWallRun2 (1).prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/05_DA/MurWallRun2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/05_DA/MurWallRun2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/05_DA/UI/AutoLockCursor.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/05_DA/UI/AutoLockCursor.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/05_DA/VFX SHADER/VineWall/VinesLeavesPurple.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/05_DA/VFX SHADER/VineWall/VinesLeavesPurple.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/05_DA/Végétation/Déco/DécoVine1.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/05_DA/Végétation/Déco/DécoVine1.fbx.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/05_DA/models/fleur/FlowerAnimator.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/05_DA/models/fleur/FlowerAnimator.controller" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/06_Sound/Particle System/MatEmission.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/06_Sound/Particle System/MatEmission.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/07_LD/LD_DA.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/07_LD/LD_DA.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/FMOD/Resources/FMODStudioSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/FMOD/Resources/FMODStudioSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -218,6 +701,7 @@
       <workItem from="1748535953589" duration="2560000" />
       <workItem from="1748555207618" duration="3907000" />
       <workItem from="1748618691403" duration="1321000" />
+      <workItem from="1748623673647" duration="5000" />
     </task>
     <servers />
   </component>

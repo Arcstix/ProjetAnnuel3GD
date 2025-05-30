@@ -183,42 +183,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 617bf694335e04c488ceefef68b6d9aa, type: 3}
---- !u!21 &238726932
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Height Fog Global
-  m_Shader: {fileID: 4800000, guid: 3a7ef1b66bafb7a448a880ef76d2e6e6, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3001
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Ints: []
-    m_Floats:
-    - _AdvancedCat: 1
-    - _Banner: 1
-    - _DirectionalCat: 1
-    - _FogAxisMode: 1
-    - _FogCat: 1
-    - _HeightFogGlobal: 1
-    - _IsHeightFogShader: 1
-    - _NoiseCat: 1
-    - _SkyboxCat: 1
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1001 &291760400
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -670,6 +634,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1484121964603669786, guid: 1867e00b48e85d941a04175e50b4f34b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 706.2622
+      objectReference: {fileID: 0}
+    - target: {fileID: 1484121964603669786, guid: 1867e00b48e85d941a04175e50b4f34b, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -781,6 +749,18 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0.3137255
       objectReference: {fileID: 0}
+    - target: {fileID: 1996127886930061156, guid: 1867e00b48e85d941a04175e50b4f34b, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1996127886930061156, guid: 1867e00b48e85d941a04175e50b4f34b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a4b646f1ee235a446b64146263def9ab, type: 3}
+    - target: {fileID: 1996127886930061156, guid: 1867e00b48e85d941a04175e50b4f34b, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2141624092609696303, guid: 1867e00b48e85d941a04175e50b4f34b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -867,7 +847,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2502529946675700214, guid: 1867e00b48e85d941a04175e50b4f34b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2637227474178664854, guid: 1867e00b48e85d941a04175e50b4f34b, type: 3}
       propertyPath: m_fontSize
@@ -1020,6 +1000,10 @@ PrefabInstance:
     - target: {fileID: 2876487157382854729, guid: 1867e00b48e85d941a04175e50b4f34b, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2876487157382854729, guid: 1867e00b48e85d941a04175e50b4f34b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 706.2622
       objectReference: {fileID: 0}
     - target: {fileID: 2876487157382854729, guid: 1867e00b48e85d941a04175e50b4f34b, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1176,6 +1160,10 @@ PrefabInstance:
     - target: {fileID: 3881338709292819174, guid: 1867e00b48e85d941a04175e50b4f34b, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881338709292819174, guid: 1867e00b48e85d941a04175e50b4f34b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 706.2622
       objectReference: {fileID: 0}
     - target: {fileID: 3881338709292819174, guid: 1867e00b48e85d941a04175e50b4f34b, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2467,7 +2455,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1143912199}
   m_CullTransparentMesh: 1
---- !u!21 &1239809412
+--- !u!1 &1402806338 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2836015380840643095, guid: 1867e00b48e85d941a04175e50b4f34b, type: 3}
+  m_PrefabInstance: {fileID: 489285585}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1402806342
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402806338}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 72afe405eeb5065438abd535a6626e85, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!21 &1467872522
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
@@ -2529,32 +2543,6 @@ Material:
     - _FogColorStart: {r: 0.4411765, g: 0.722515, b: 1, a: 1}
     - _NoiseSpeed: {r: 0.5, g: 0, b: 0.5, a: 0}
   m_BuildTextureStacks: []
---- !u!1 &1402806338 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2836015380840643095, guid: 1867e00b48e85d941a04175e50b4f34b, type: 3}
-  m_PrefabInstance: {fileID: 489285585}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1402806342
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1402806338}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 72afe405eeb5065438abd535a6626e85, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!850595691 &1578297065
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -2827,15 +2815,15 @@ PrefabInstance:
       objectReference: {fileID: 1589328944}
     - target: {fileID: 6767338320282092602, guid: 0f34675f7423caf40af03702b3e91cc2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0010000467
+      value: -37.699
       objectReference: {fileID: 0}
     - target: {fileID: 6767338320282092602, guid: 0f34675f7423caf40af03702b3e91cc2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.4899999
+      value: 7.74
       objectReference: {fileID: 0}
     - target: {fileID: 6767338320282092602, guid: 0f34675f7423caf40af03702b3e91cc2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.858
+      value: -31.378
       objectReference: {fileID: 0}
     - target: {fileID: 6767338320282092602, guid: 0f34675f7423caf40af03702b3e91cc2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2935,6 +2923,42 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 233921762f1ac7746bcac3e5d89e14bd, type: 3}
+--- !u!21 &1863808072
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Height Fog Global
+  m_Shader: {fileID: 4800000, guid: 3a7ef1b66bafb7a448a880ef76d2e6e6, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3001
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _AdvancedCat: 1
+    - _Banner: 1
+    - _DirectionalCat: 1
+    - _FogAxisMode: 1
+    - _FogCat: 1
+    - _HeightFogGlobal: 1
+    - _IsHeightFogShader: 1
+    - _NoiseCat: 1
+    - _SkyboxCat: 1
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

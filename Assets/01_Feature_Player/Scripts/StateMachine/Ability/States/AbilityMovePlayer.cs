@@ -12,6 +12,12 @@ public class AbilityMovePlayer : AbilityTransportState
     public event Action<float> SpeedModifierEvent;
 
     public event Action EnterDash;
+
+    public event Action EnterRightDash;
+    public event Action ExitRightDash;
+    public event Action EnterLeftDash;
+    public event Action ExitLeftDash;
+
     public event Action ExitDash;
     
     public event Action<int> OnConsecutiveDashes;
@@ -48,6 +54,7 @@ public class AbilityMovePlayer : AbilityTransportState
             }
             
             rightInteraction.Interactable(true);
+            EnterRightDash?.Invoke();
             reusableData.RightActivation = true;
             if (rightInteraction.interactorType == InteractorType.Enemy)
             {
@@ -75,6 +82,7 @@ public class AbilityMovePlayer : AbilityTransportState
             }
             
             leftInteraction.Interactable(true);
+            EnterLeftDash?.Invoke();
             reusableData.LeftActivation = true;
             if (leftInteraction.interactorType == InteractorType.Enemy)
             {
@@ -146,6 +154,8 @@ public class AbilityMovePlayer : AbilityTransportState
         base.Exit();
         playerInteraction.Interactable(false);
         ExitDash?.Invoke();
+        ExitRightDash?.Invoke();
+        ExitLeftDash?.Invoke();
         reusableData.OnTransportation = false;
         leftInteraction = null;
         rightInteraction = null;
