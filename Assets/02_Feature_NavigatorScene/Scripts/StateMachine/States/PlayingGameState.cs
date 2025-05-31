@@ -1,4 +1,5 @@
 ﻿using System;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -8,6 +9,8 @@ using UnityEngine.Serialization;
 public class PlayingGameState : GameState
 {
     [SerializeField] private GameObject levelPanel;
+    
+    private FMOD.Studio.EventInstance soundInstance;
     
     private LevelManager levelManager;
     private PlayerInput playerInput;
@@ -49,6 +52,8 @@ public class PlayingGameState : GameState
         }
         else
         {
+            soundInstance = RuntimeManager.CreateInstance("event:/Musique/Musique Hub");
+            soundInstance.start();
             playerUI.DisableGameCanvas();
             playerUI.EnableHubCanvas();
         }
@@ -82,5 +87,14 @@ public class PlayingGameState : GameState
     public void ReloadLevel()
     {
         gameManager.ChangeState(GetComponent<ReloadingLevelGameState>());
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        
+        // Stopper et libérer
+        soundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        soundInstance.release();
     }
 }

@@ -10,10 +10,4 @@ public class MenuSound : MonoBehaviour
     {
         RuntimeManager.PlayOneShot("event:/Menu/Musique Menu");
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
