@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
     public void UI_bouton()
     {
         // Son qui s'active lorsque le joueur saute.
-        RuntimeManager.PlayOneShot("event:/Menu/bouton1");
+            
     }
 
     public void UI_bouton1()
