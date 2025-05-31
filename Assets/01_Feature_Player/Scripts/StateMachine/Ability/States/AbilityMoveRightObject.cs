@@ -14,7 +14,7 @@ public class AbilityMoveRightObject : AbilityTransportState
         base.Enter();
         
         OnLeftActivation?.Invoke();
-
+        
         rightInteraction = reusableData.RightParent.GetComponent<InteractionSystem>();
         
         reusableData.OnTransportation = false;
