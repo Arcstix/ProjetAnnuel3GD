@@ -41,7 +41,7 @@ public class EndLevelState : GameState
     public void ReturnToMenu(DataScene dataScene)
     {
         gameManager.NextActiveScene = dataScene.scene;
-        gameManager.ChangeState(GetComponent<ReturnToMenuGameState>());
+        gameManager.ChangeState(GetComponent<LoadingLevelGameState>());
     }
     
     //j'ai mis l'état d'initialisation de la scène mais je sais pas si ça va recharger correctement la scène
