@@ -1,0 +1,19 @@
+using FMODUnity;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MenuSound : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        RuntimeManager.PlayOneShot("event:/Menu/Musique Menu");
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
