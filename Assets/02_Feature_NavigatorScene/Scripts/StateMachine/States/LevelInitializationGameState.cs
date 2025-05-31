@@ -39,18 +39,27 @@ public class LevelInitializationGameState : GameState
     private void InitPlayer()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-
-        Transform currentSpawner = spawnerManager.GetCurrentSpawnerPosition();
-
-        if (currentSpawner != null && player != null)
-        {
-            player.transform.position = currentSpawner.position;
-            return;
-        }
         
-        if (currentSpawner != null && player == null)
+        if (SceneManager.GetActiveScene().name != "Hub")
         {
-            player = Instantiate(_playerPrefab, currentSpawner.position, Quaternion.identity);
+            Vector3 currentSpawner = spawnerManager.GetCurrentSpawnerPosition();
+        
+            if (currentSpawner == Vector3.zero && player != null)
+            {
+                spawnerManager.TeleportToCurrentIndex(player);
+                return;
+            }
+        
+            if (currentSpawner != Vector3.zero && player != null)
+            {
+                player.transform.position = currentSpawner;
+                return;
+            }
+        
+            if (currentSpawner != Vector3.zero && player == null)
+            {
+                player = Instantiate(_playerPrefab, currentSpawner, Quaternion.identity);
+            }
         }
     }
 }

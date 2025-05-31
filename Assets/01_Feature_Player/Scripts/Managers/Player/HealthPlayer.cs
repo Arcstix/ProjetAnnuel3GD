@@ -23,8 +23,7 @@ public class HealthPlayer : MonoBehaviour
         get => enemyAlerted;
         set => enemyAlerted = value;
     }
-
-    [SerializeField] private GameObject spawner;
+    
     private Transform playerTransform;
     private bool inDanger = false;
     
@@ -37,7 +36,6 @@ public class HealthPlayer : MonoBehaviour
         currentHealth = maxHealth;
         UpdateHealthUI();
         timer = 0f;
-        spawner = GameObject.FindGameObjectWithTag("Spawner");
         playerTransform = this.transform;
     }
 
@@ -101,10 +99,6 @@ public class HealthPlayer : MonoBehaviour
 
     private void Death()
     {
-        if (spawner)
-        {
-            playerTransform.position = spawner.transform.position; // Déplace le joueur
-        }
         OnDeath?.Invoke();
         if (LevelManager.Instance != null)
         {

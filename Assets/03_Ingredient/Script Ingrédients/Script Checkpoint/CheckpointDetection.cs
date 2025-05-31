@@ -13,7 +13,7 @@ public class CheckpointDetection : MonoBehaviour
         if (GameManagerSM.Instance != null)
         {
             SpawnerManager spawnerManager = GameManagerSM.Instance.GetComponent<SpawnerManager>();
-            spawnerManager.RegisterCheckpoint(spawner, order);
+            spawnerManager.RegisterCheckpoint(spawner.position, order);
         }
     }
 
@@ -29,7 +29,7 @@ public class CheckpointDetection : MonoBehaviour
                 SpawnerManager spawnerManager = GameManagerSM.Instance.GetComponent<SpawnerManager>();
                 if (spawnerManager)
                 {
-                    spawnerManager.SetNewSpawnerPosition(spawner);
+                    spawnerManager.SetNewSpawnerPosition(spawner.position);
                 }
             }
         }
